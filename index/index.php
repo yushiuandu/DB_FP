@@ -27,6 +27,9 @@
 		</nav>
 		<!-- 導覽列end -->
 
+		<!-- container 要用一個div包起來，他們才會都照順序排-->
+		<div>
+
   		<!-- 左半部 -->
 		<div class=".col-3">
 
@@ -90,6 +93,9 @@
         
   		</div>
 		<!-- 右半部end -->
+
+		</div>
+		<!-- container end -->
 
 		<!-- Optional JavaScript -->
 		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
