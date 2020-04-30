@@ -16,7 +16,7 @@
 	<body>
 		<!-- 導覽列 -->
 		<nav class="navbar navbar-dark bg-info">
-			<a class="navbar-brand" href="#">
+			<a class="navbar-brand" href="index.php">
 				<img src="./image/title.png" width="32" high="32"> Tai-gun
 			</a>
 
