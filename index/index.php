@@ -26,49 +26,57 @@
   <!-- 左半部 -->
     <div class=".col-3">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav  flex-column">
         <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          	<a class="nav-link" href="#">所有看板</a>
+          	<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+				<a class="dropdown-item" href="#">美食版</a>
+				<a class="dropdown-item" href="#">美妝穿搭</a>
+				<a class="dropdown-item" href="#">旅遊版</a>
+				<a class="dropdown-item" href="#">新聞版</a>
+				<a class="dropdown-item" href="#">有趣版</a>
+				<a class="dropdown-item" href="#">感情版</a>
+				<a class="dropdown-item" href="#">其他版</a>
+          	</div>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Features</a>
+        	<a class="nav-link" href="#">訂閱看板</a>
+    		<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+        		<a class="dropdown-item" href="#">美食版</a>
+            	<a class="dropdown-item" href="#">美妝穿搭</a>
+            	<a class="dropdown-item" href="#">旅遊版</a>
+          	</div>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Pricing</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Dropdown link
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
+			<a class="nav-link" href="#">熱門看板</a>
+			<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+				<a class="dropdown-item" href="#">有趣版</a>
+				<a class="dropdown-item" href="#">感情版</a>
+				<a class="dropdown-item" href="#">其他版</a>
+			</div>
         </li>
       </ul>
     </div>
 </nav>
   </div>
-    
   
-    </div>
+  </div>
   <!-- 中間(文章區) -->
-    <div class="container .col-6">
+  <div class="container .col-6">
       
     
         
-    </div>
+  </div>
   <!-- 右半部 -->
-    <div class="container .col-3">
+  <div class="container .col-3">
       
     
         
-    </div>
+  </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
