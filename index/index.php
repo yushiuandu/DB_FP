@@ -93,11 +93,11 @@
 
   <!-- 文章區 -->
 	  <?php if($page == 'index'):?>
-      <?php include("article.php");?>
+      <?php include("../Article/Article.php");?>
   
   <!-- 註冊頁面 -->
 	  <?php elseif($page == 'login'):?>
-	  	<?php include("login.php");?>
+	  	<?php include("../member/login.php");?>
 
 	  <?php endif;?> 
   </div>

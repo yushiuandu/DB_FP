@@ -1,6 +1,6 @@
 div.link-head:hover > div.link-body /*停在hover上會有懸空的東西or連接*/
 {
-	display:block;/*區塊(會換行)*/
+  display:block;/*區塊(會換行)*/
 }
 .link-body{ /*保留空間，但先隱藏起來*/
 	display:none;
