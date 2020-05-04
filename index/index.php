@@ -95,7 +95,7 @@
 	  <?php if($page == 'index'):?>
       <?php include("../Article/Article.php");?>
   
-  <!-- 註冊頁面 -->
+  <!-- 註冊頁面 --> <!-- 如果按還不是會員 會跳轉到 member/login.php的頁面 -->
 	  <?php elseif($page == 'login'):?>
 	  	<?php include("../member/login.php");?>
 
@@ -142,7 +142,8 @@
 									<h5 class='mar'>帳號 <input type="account" placeholder="帳號" ></h5>
 									<h5 class='mar'>密碼 <input type="password" placeholder="密碼"></h5>
 									<button type="button" class="btn btn-secondary btn-sm mar"><a href='#'  style="color:white;">忘記密碼</button>
-									<button type="button" class="btn btn-secondary btn-sm mar"><a href="?page=login"  style="color:white;">還不是會員?</a></button>
+									<!-- 如果按還不是會員 會跳轉到 member/login.php的頁面 -->
+                  <button type="button" class="btn btn-secondary btn-sm mar"><a href="?page=login"  style="color:white;">還不是會員?</a></button>
             		</div>
 							</div>
               <!--登入尾-->
