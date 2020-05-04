@@ -1,3 +1,4 @@
+<!-- 如果按還不是會員 會跳轉到 member/login.php的頁面 -->
 <?php
   $page = "index";
   if(isset($_GET['page'])){
@@ -18,13 +19,17 @@
     <title>Tai-gun</title>
 </head>
   <body>
+  <!-- 註冊頁面 -->
     <div id='register' >
-    <div id='re1'>
+    <!-- 左半邊 -->
+      <div id='re1'>
         <img src='./image/test.png' id="test-pic">
         <div id="slogan">想要交到契合的朋友嗎?</div>
         <div id="slogan">來Tai-gun用心理測驗</div>
         <div id="slogan">交朋友吧!</div>
       </div>
+      <!-- 左半邊 end -->
+      <!-- 右半邊 -->
       <div id='re2'>
         <form>
         <div class="form-row ">
@@ -64,6 +69,7 @@
         <button type="submit" class="btn btn-info font-weight-bold">註冊</button>
       </form>
       </div>
+      <!-- 右半邊 end-->
     </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
