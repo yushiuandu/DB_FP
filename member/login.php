@@ -20,7 +20,7 @@
             header("Location:../index/index.php");
         }
     }else{
-        echo '帳號或密碼錯誤！'
+        echo '帳號或密碼錯誤！';
     }
     
 ?>
