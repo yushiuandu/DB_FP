@@ -1,3 +1,4 @@
+<?php session_start();?>
 <?php
   $page = "index";
   if(isset($_GET['page'])){
@@ -118,14 +119,21 @@
 		<div id="login">
 
 			<!-- 登入了 -->
-			<!-- <div id="user-pic">
+			<?php // 登入後
+				if(isset($_SESSION['user'])){
+			?>
+			<div id="user-pic">
 				<img src="./image/test-user.jpg" class="img-fluid rounded-circle" alt="Responsive image" >
 			</div>
 			<div>
 				<p id='user-name' class="font-weight-bold">賀琬茹</p>
 				<p id='user-nickname'>小賀</p>
-			</div> -->
+			</div>
       		<!-- 登入了end-->
+			<?php
+				}//end if
+				else{ //沒登入
+			?>
 
 			<!--沒有登入-->
 			<div id="user-pic">
@@ -175,6 +183,7 @@
 				<!--登入畫面end-->
 			</div>
 			<!--沒有登入end-->
+				<?php } //end else ?>
 		</div>
 		<!--右上半部 會員登入格子end-->
 

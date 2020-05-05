@@ -31,42 +31,50 @@
       <!-- 左半邊 end -->
       <!-- 右半邊 -->
       <div id='re2'>
-        <form>
-        <div class="form-row ">
-          <div class="form-group col-md-6 ">
-            <label>你的姓名</label>
-            <input type="name" class="form-control" placeholder="請輸入您的姓名" required>
-          </div>
-          <div class="form-group col-md-6">
-            <label for="exampleFormControlSelect1">你的性別</label>
-            <select class="form-control" id="exampleFormControlSelect1" type="gender" required>
-              <option selected>選擇你的性別...</option>
-              <option>我是男生</option>
-              <option>我是女生</option>
-            </select>
-          </div>
-          <div class="form-group col-md-6">
-            <label>取個綽號</label>
-            <input type="nickname" class="form-control" placeholder="請輸入您的綽號" required>
-          </div>
-          <div class="form-group col-md-6">
-            <label for="exampleFormControlSelect1">你的生日</label>
-            <input type="date" name="bday" class="form-control" required>
-          </div>
-        </div>
-        <div class="form-group">
-          <label>帳號</label>
-          <input type="account" class="form-control" placeholder="注意:長度為10個字元以內" maxlength="10" required>
-        </div>
-        <div class="form-group">
-          <label>密碼</label>
-          <input type="password" class="form-control" placeholder="注意:長度超過7個字，包含英文大小寫及數字" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{7,}">
-        </div>
-        <div class="form-group">
-          <label>信箱</label>
-          <input type="email" class="form-control" placeholder="@example.com">
-        </div>
-        <button type="submit" class="btn btn-info font-weight-bold">註冊</button>
+        <form method="post" action="../member/login.php" enctype="multipart/form-data">
+        	<div class="form-row ">
+				<!-- 姓名 -->
+				<div class="form-group col-md-6 ">
+					<label>你的姓名</label>
+					<input type="name" class="form-control" placeholder="請輸入您的姓名" name="Name" required>
+				</div>
+				<!-- 性別 -->
+				<div class="form-group col-md-6">
+					<label for="gender">你的性別</label>
+					<select class="form-control" id="gender" type="gender" required name="gender">
+					<option selected>選擇你的性別...
+					<option value="1">我是男生
+					<option value="2">我是女生
+					</select>
+				</div>
+				<!-- 綽號 -->
+				<div class="form-group col-md-6">
+					<label>取個綽號</label>
+					<input type="text" class="form-control" placeholder="請輸入您的綽號" name="nickname" required>
+				</div>
+				<!-- 生日 -->
+				<div class="form-group col-md-6">
+					<label for="exampleFormControlSelect1">你的生日</label>
+					<input type="date" class="form-control" name="birthdate" required>
+				</div>
+        	</div>   
+			<!-- row end -->
+			<!-- 帳號 -->
+			<div class="form-group">
+				<label>帳號</label>
+				<input type="text" class="form-control" placeholder="注意:長度為10個字元以內" maxlength="10" required name="Account">
+			</div>
+			<!-- 密碼 -->
+			<div class="form-group">
+				<label>密碼</label>
+				<input type="password" class="form-control" placeholder="注意:長度超過7個字，包含英文大小寫及數字" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{7,}" name="pass">
+			</div>
+			<!-- 信箱 -->
+			<div class="form-group">
+				<label>信箱</label>
+				<input type="text" class="form-control" placeholder="@example.com" name="email">
+			</div>
+        	<button type="submit" class="btn btn-info font-weight-bold">註冊</button>
       </form>
       </div>
       <!-- 右半邊 end-->
