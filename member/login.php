@@ -6,23 +6,21 @@
         if(!$link){
         echo "no connect!";
     }
-    $user = $_POST['Name'];
-    $pass = $_POST['pass'];
-    $gender = $_POST['gender'];
-    $nickname = $_POST['nickname'];
-    $birthdate = $_POST['birthdate'];
-    $email = $_POST['email'];
+
     $Account = $_POST['Account'];
-
     
-    // $sql = "SELECT * FROM `member`";
-    // $result = mysqli_query($link,$sql);
+    $sql = "SELECT * FROM `member` WHERE `Account` = '$Account'";
+    $result = mysqli_query($link,$sql);
 
-    $sql_add = "INSERT INTO `member`(`Name`, `Account`, `Gender`, `Password`, `Email`, `Birth_date`, `Nickname`) 
-    VALUES ('$user','$Account','$gender','$pass','$email','$birthdate','$nickname')";
+    if($result){
+        $row = mysqli_fetch_assoc($result);
+        if($row['pass'] == $pass){
+            $_SESSION['user'] = $row['Name'];
+            $_SESSION['nickname'] = $row['Nickname'];
+            header("Location:../index/index.php");
+        }
+    }else{
+        echo '帳號或密碼錯誤！'
+    }
     
-    if (!mysqli_query($link,$sql_add))
-        {die('Error: ' . mysqli_error());}
-    else{
-        header("Location:../index/index.php"); }
 ?>

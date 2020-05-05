@@ -126,8 +126,8 @@
 				<img src="./image/test-user.jpg" class="img-fluid rounded-circle" alt="Responsive image" >
 			</div>
 			<div>
-				<p id='user-name' class="font-weight-bold">賀琬茹</p>
-				<p id='user-nickname'>小賀</p>
+				<p id='user-name' class="font-weight-bold"><?php echo $_SESSION['user'];?></p>
+				<p id='user-nickname'><?php echo $_SESSION['nickname']; ?></p>
 			</div>
       		<!-- 登入了end-->
 			<?php
@@ -159,9 +159,10 @@
 							<!--登入內容-->
 							<div class="modal-body">
 								<div>
+								<form method="post" action="../member/login.php" enctype="multipart/form-data">
 									<img src='./image/hello.png' id='login-pic' class='mar'>
-									<h5 class='mar'>帳號 <input type="account" placeholder="帳號" ></h5>
-									<h5 class='mar'>密碼 <input type="password" placeholder="密碼"></h5>
+									<h5 class='mar'>帳號 <input type="account" placeholder="帳號" namme = 'Account'></h5>
+									<h5 class='mar'>密碼 <input type="password" placeholder="密碼" name = 'Password'></h5>
 									<button type="button" class="btn btn-secondary btn-sm mar">
 										<a href='#'  style="color:white;">忘記密碼
 									</button>
@@ -169,6 +170,7 @@
 									<button type="button" class="btn btn-secondary btn-sm mar">
 										<a href="?page=register"  style="color:white;">還不是會員?</a>
 									</button>
+								</from>
 								</div>
 							</div>
 							<!--登入尾-->

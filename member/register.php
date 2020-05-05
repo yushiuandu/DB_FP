@@ -31,7 +31,7 @@
       <!-- 左半邊 end -->
       <!-- 右半邊 -->
       <div id='re2'>
-        <form method="post" action="../member/login.php" enctype="multipart/form-data">
+        <form method="post" action="../member/register_s.php" enctype="multipart/form-data">
         	<div class="form-row ">
 				<!-- 姓名 -->
 				<div class="form-group col-md-6 ">
