@@ -229,7 +229,7 @@
 						</button>
 					</div>
 					<div class="row">
-						<button type="button"class="btn btn-outline-info font-weight-bold col-md-12">
+						<button type="button"class="btn btn-info font-weight-bold col-md-12">
 							<a href="?page=index">登出</a>
 						</button>
 					</div>
@@ -246,7 +246,7 @@
 				<img src="./image/user.png" class="img-fluid rounded-circle" id="user-pic" alt="Responsive image" >
 			</div>
 			<div>
-				<button type="button"class="btn btn-outline-info font-weight-bold" data-toggle="modal" data-target="#exampleModalCenter">
+				<button type="button"class="btn btn-info font-weight-bold" data-toggle="modal" data-target="#exampleModalCenter">
 					註冊/登入
 				</button>
 					
