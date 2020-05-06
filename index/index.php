@@ -25,7 +25,7 @@
   	<!-- 導覽列 -->
     <nav class="navbar navbar-default navbar-expend-lg head-nav">
       <a class="navbar-brand" href="?page=index">
-        <img src="./image/title.png" width="32" high="32"> Tai-gun
+        <img src="./image/Tai-gun.png" class="Tai-gun">
       </a>
       <form class="form-inline search col-md-0">
         <input class="form-control mr-sm-2" type="search" placeholder="搜尋...." aria-label="Search">
@@ -37,13 +37,16 @@
 	
   <div class="row">
     <!-- 左半部 -->
-    <div class="col-md-2 col-12" id="left">
+    <div class="col-md-2" id="left">
       	<nav class=" navbar-expand-lg navbar-default navbar-light" >
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarNavDropdown">
-				<ul class="navbar-nav  flex-column"">
+				<ul class="navbar-nav  flex-column">
+					<li class="nav-item dropdown">
+						<img src="./image/logo.png" width="auto" height="80">
+					</li>
 					<!-- 所有看板 -->
 					<li class="nav-item dropdown">
 						<div class='link-head' id="all">
@@ -122,8 +125,8 @@
 			<?php // 登入後
 				if(isset($_SESSION['user'])){
 			?>
-			<div id="user-pic">
-				<img src="./image/test-user.jpg" class="img-fluid rounded-circle" alt="Responsive image" >
+			<div>
+				<img src="./image/test-user.jpg" class="img-fluid rounded-circle" id="user-pic" alt="Responsive image" >
 			</div>
 			<div>
 				<p id='user-name' class="font-weight-bold"><?php echo $_SESSION['user'];?></p>
@@ -136,8 +139,8 @@
 			?>
 
 			<!--沒有登入-->
-			<div id="user-pic">
-				<img src="./image/user.png" class="img-fluid rounded-circle" alt="Responsive image" >
+			<div>
+				<img src="./image/user.png" class="img-fluid rounded-circle" id="user-pic" alt="Responsive image" >
 			</div>
 			<div>
 				<button type="button"class="btn btn-outline-info font-weight-bold" data-toggle="modal" data-target="#exampleModalCenter">
@@ -151,7 +154,7 @@
 
 							<!--登入頭-->
 							<div class="modal-header">
-								<h5 class="modal-title" id="exampleModalLongTitle">walcome Tai-gun!</h5>
+								<h5 class="modal-title" id="exampleModalLongTitle">walcome 抬槓!</h5>
 								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 									<span aria-hidden="true">&times;</span>
 								</button>

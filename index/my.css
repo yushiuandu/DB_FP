@@ -20,8 +20,9 @@ body{
 	padding:2%;
 	vertical-align:top;
   background-color: rgb(212, 186, 176);
-  position: relative;
-}
+  position:fixed;
+  left:0px;
+ }
 #middle{
   /* display:inline-block; */
    /*建立一堆區塊自動填滿瀏覽器*/
@@ -31,6 +32,8 @@ body{
 	vertical-align:top;
   background-color: rgb(166,180,179);
   position: relative;
+  height:1000px;
+  top:0px;
 }
 #right{
   /* display:inline-block; */
@@ -40,7 +43,9 @@ body{
 	padding:2%;
 	vertical-align:top;
   background-color: rgb(212,200,190);
-  position: relative;
+  position:relative;
+  top:0px;
+  right:0px;
 }
 .row{
   margin:0px;
@@ -56,15 +61,17 @@ body{
   position: relative;
 }
 #user-pic{
-  display:inline-block;
+  /* display:inline-block;
   border-radius:50%;
-  width:75%;
   padding:3%;
   min-height:125px;
   vertical-align:top;
   background-color: rgb(212,200,190);
-  position: relative;
-  margin-bottom: 15px;
+  position: relative; */
+  width:75%;
+  border:5px solid;
+  border-color:rgb(212,200,190);
+  margin-bottom:15px;
 }
 #register{
   display:inline-block;
@@ -76,7 +83,6 @@ body{
   background-color: rgb(193, 171, 173);
   position: relative;
 }
-
 #article{
   display:inline-block;
   border-radius:10px;
@@ -97,9 +103,24 @@ body{
 #re2{
   width:60%;
   height:500px;
-  padding:30px;
+  padding:0px 20px 0px 20px;
   float:left;
   font-size: 14px;
+  
+}
+#form{
+  position: absolute;
+  left:40%;
+  padding: 0px 20px 0px 20px;
+}
+.form-control{
+  font-size:0.8rem;
+}
+.form-group{
+  margin-bottom: 0.5rem;
+}
+label{
+  margin:0px;
 }
 #slogan{
   font-family:"標楷體";
@@ -158,6 +179,11 @@ button img{
   position:fixed; /*固定位置定位*/
   top:0; /*距離上方 0 像素*/
   z-index:1; /*重疊時會在其他元素之上*/
+}
+.Tai-gun{
+  width:auto;
+  height: 32px;
+  margin-left: 40px;
 }
 /* 導覽列的顏色 */
 .navbar {
