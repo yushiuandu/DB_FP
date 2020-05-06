@@ -102,10 +102,82 @@
   	</div>
 
 	<!-- 中間(文章區) -->
-	<div class="col-md-8 col-12" id="middle">
-  		<div>
-  			
+	<div class="col-md-8" id="middle">
+  		<!-- 上面的按鈕 -->
+  		<div class="row">
+		  	<div class="btn-group col-md-3 col-sm-4 col-6" role="group" aria-label="Button group with nested dropdown">
+				<button type="button" class="btn btn-sm btn-info active">全部文章</button>    <!--啟用狀態(active)-->
+				<button type="button" class="btn btn-sm btn-info">追蹤文章</button>
+			</div>
+			<div class="col-md-7 col-sm-6 col-3"></div>
+			<div class="btn-group col-md-2 col-sm-2 col-3" role="group">
+					<button id="btnGroupDrop1" type="button" class="btn btn-sm btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  						排序
+					</button>
+					<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+						<a class="dropdown-item" href="#">熱門</a>
+						<a class="dropdown-item" href="#">最新</a>
+					</div>
+				</div>
 		</div>
+		<!-- 上面的按鈕 end-->
+  	
+		<!-- 文章簡圖區 -->
+		<a href="#" style="color:black; text-decoration:none;">
+			<div class="art">
+				<!-- 簡圖內容(上) -->
+				<div class="row art-head" id='mid'>
+					<!-- 作者-->
+					<div class="col-md-9 col-sm-8 col-8">
+						<img src="./image/user.png" class="img-fluid rounded-circle" id="writer-pic">
+						<h7 style="display: inline;">淡江大學</h7>
+					</div>
+					<!-- 作者 end-->
+
+					<!-- 按讚數 --> 
+					<div class="col-md-3 col-sm-4 col-4">
+						<h7 style="display: inline;">707</h7>
+						<img src="./image/good-white.png" class="img-fluid" id="good-pic">
+					</div>
+					<!-- 按讚數 end-->
+				</div>
+				<!-- 簡圖內容(上) end-->
+				
+				<!-- 簡圖內容(中) -->
+				<div class="row art-body" id='mid'>
+					<!-- 標題 -->
+					<div class="col-md-9 col-sm-9 col-9 text-truncate">
+						<h5 class="font-weight-bold">每年母親節，我都覺得我像個智障</h5>
+						<h8 style="font-size:11pt; color:gray;">
+						不知道我是不是專門生下來氣我媽的
+						幾乎每年母親節禮物我都踢到鐵板
+						外加我媽又毛很多
+						每年禮物都被嫌的一無是處
+						每年被澆的冷水我不知道可以挑戰多少次ice bucket challenge 了
+						要加s</h8>
+					</div>
+					<!-- 標題 end -->
+
+					<!-- 圖檔 -->
+					<div class="col-md-3 col-sm-3 col-3" >
+						<img src="./image/article-pic.jpg" id="article-pic">
+					</div>
+					<!-- 圖檔 end -->
+				</div>
+				<!-- 簡圖內容(中) end-->
+				
+				<!-- 簡圖內容(下) -->
+				<div class="row art-fotter" id='mid'>
+					<!-- 看板 - 發文時間 -->
+					<div class="col-md-12 col-sm-12 col-12">
+						<p style="font-size:10pt; color:gray; ">有趣版 - 5月5日 20:35</p>
+					</div>
+					<!-- 看板 - 發文時間 end -->
+				</div>
+				<!-- 簡圖內容(下) end-->
+			</div>
+			<!-- 文章簡圖區 end-->
+		</a>
 		<!-- 文章區 -->
 		<?php if($page == 'index'):
 			include("../Article/Article.php"); ?>
@@ -114,6 +186,7 @@
 		<?php elseif($page == 'register'):
 			include("../member/register.php");
 		endif; ?> 
+	
 	</div>
 	<!-- 中間end -->
 

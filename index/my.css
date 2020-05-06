@@ -19,7 +19,7 @@ body{
 	/* width:10%; */
 	padding:2%;
 	vertical-align:top;
-  background-color: rgb(212, 186, 176);
+  background-color: rgb(199,199,187);
   position:relative;
  }
 #middle{
@@ -29,11 +29,49 @@ body{
 	/* width:10%; */
 	padding:2%;
 	vertical-align:top;
-  background-color: rgb(166,180,179);
+  background-color: rgb(234,230,223);
   position: relative;
   height:calc(100vh - 60px);
   top:0px;
   overflow-y:auto;
+}
+.art{
+  text-align: left;
+  background-color: #F2F2F2;
+  margin:0px;
+  border-radius: 10px;
+  width: 100%;
+  margin:15px 0px 0px 0px;
+}
+.art-head{
+  height:40px;
+  padding:10px;
+}
+.art-body{
+  padding-left: 10px;
+  height:80px;
+}
+.art-fotter{
+  height:30px;
+  padding:0px 10px 10px 10px;
+}
+#article-pic{
+  width: auto;
+  height: 70px;
+}
+#writer-pic{
+  width: auto;
+  height: 30px;
+  border: 2px solid gray;
+  margin: 1px;
+}
+#good-pic{
+  width: auto;
+  height: 25px;
+}
+#mid{
+  display:flex;
+  align-items: center;
 }
 #right{
   /* display:inline-block; */
@@ -42,7 +80,7 @@ body{
 	/* width:10%; */
 	padding:2%;
 	vertical-align:top;
-  background-color: rgb(212,200,190);
+  background-color: rgb(199,199,187);
   position:relative;
   top:0px;
   right:0px;
@@ -61,16 +99,9 @@ body{
   position: relative;
 }
 #user-pic{
-  /* display:inline-block;
-  border-radius:50%;
-  padding:3%;
-  min-height:125px;
-  vertical-align:top;
-  background-color: rgb(212,200,190);
-  position: relative; */
   width:75%;
   border:5px solid;
-  border-color:rgb(212,200,190);
+  border-color:#F2F2F2;
   margin-bottom:15px;
 }
 #register{
@@ -83,6 +114,7 @@ body{
   background-color: rgb(193, 171, 173);
   position: relative;
 }
+
 #article{
   display:inline-block;
   border-radius:10px;
@@ -128,10 +160,6 @@ label{
   font-size: 18px;
   margin:0px;
 }
-div img{
-  max-width:auto;
-  min-height:125px;
-}
 #test-pic{
   width:100%;
   height:auto;
@@ -169,7 +197,7 @@ button img{
 }
 #login-pic{
   width: auto;
-  height: 50px;
+  height: 125px;
 }
 .login-page{
   background-color: rgb(208, 192, 166);
@@ -179,153 +207,10 @@ button img{
   position:fixed; /*固定位置定位*/
   top:0; /*距離上方 0 像素*/
   z-index:1; /*重疊時會在其他元素之上*/
+  background-color: #90656f;
 }
 .Tai-gun{
   width:auto;
   height: 32px;
   margin-left: 40px;
 }
-/* 導覽列的顏色 */
-.navbar {
-  background-color: #b0b0b0;
-}
-.navbar .navbar-brand {
-  color: #6e7376;
-}
-.navbar .navbar-brand:hover,
-.navbar .navbar-brand:focus {
-  color: #9da2ae;
-}
-.navbar .navbar-text {
-  color: #6e7376;
-}
-.navbar .navbar-text a {
-  color: #9da2ae;
-}
-.navbar .navbar-text a:hover,
-.navbar .navbar-text a:focus {
-  color: #9da2ae; 
-}
-.navbar .navbar-nav .nav-link {
-  color: #6e7376;
-  border-radius: .25rem;
-  margin: 0 0.25em;
-}
-.navbar .navbar-nav .nav-link:not(.disabled):hover,
-.navbar .navbar-nav .nav-link:not(.disabled):focus {
-  color: #9da2ae;
-}
-.navbar .navbar-nav .dropdown-menu {
-  background-color: #b0b0b0;
-  border-color: #dbd4c1;
-}
-.navbar .navbar-nav .dropdown-menu .dropdown-item {
-  color: #6e7376;
-}
-.navbar .navbar-nav .dropdown-menu .dropdown-item:hover,
-.navbar .navbar-nav .dropdown-menu .dropdown-item:focus,
-.navbar .navbar-nav .dropdown-menu .dropdown-item.active {
-  color: #9da2ae;
-  background-color: #dbd4c1;
-}
-.navbar .navbar-nav .dropdown-menu .dropdown-divider {
-  border-top-color: #dbd4c1;
-}
-.navbar .navbar-nav .nav-item.active .nav-link,
-.navbar .navbar-nav .nav-item.active .nav-link:hover,
-.navbar .navbar-nav .nav-item.active .nav-link:focus,
-.navbar .navbar-nav .nav-item.show .nav-link,
-.navbar .navbar-nav .nav-item.show .nav-link:hover,
-.navbar .navbar-nav .nav-item.show .nav-link:focus {
-  color: #9da2ae;
-  background-color: #dbd4c1;
-}
-.navbar .navbar-toggle {
-  border-color: #dbd4c1;
-}
-.navbar .navbar-toggle:hover,
-.navbar .navbar-toggle:focus {
-  background-color: #dbd4c1;
-}
-.navbar .navbar-toggle .navbar-toggler-icon {
-  color: #6e7376;
-}
-.navbar .navbar-collapse,
-.navbar .navbar-form {
-  border-color: #6e7376;
-}
-.navbar .navbar-link {
-  color: #6e7376;
-}
-.navbar .navbar-link:hover {
-  color: #9da2ae;
-}
-
-@media (max-width: 575px) {
-  .navbar-expand-sm .navbar-nav .show .dropdown-menu .dropdown-item {
-    color: #6e7376;
-  }
-  .navbar-expand-sm .navbar-nav .show .dropdown-menu .dropdown-item:hover,
-  .navbar-expand-sm .navbar-nav .show .dropdown-menu .dropdown-item:focus {
-    color: #9da2ae;
-  }
-  .navbar-expand-sm .navbar-nav .show .dropdown-menu .dropdown-item.active {
-    color: #9da2ae;
-    background-color: #dbd4c1;
-  }
-}
-
-@media (max-width: 767px) {
-  .navbar-expand-md .navbar-nav .show .dropdown-menu .dropdown-item {
-    color: #6e7376;
-  }
-  .navbar-expand-md .navbar-nav .show .dropdown-menu .dropdown-item:hover,
-  .navbar-expand-md .navbar-nav .show .dropdown-menu .dropdown-item:focus {
-    color: #9da2ae;
-  }
-  .navbar-expand-md .navbar-nav .show .dropdown-menu .dropdown-item.active {
-    color: #9da2ae;
-    background-color: #dbd4c1;
-  }
-}
-
-@media (max-width: 991px) {
-  .navbar-expand-lg .navbar-nav .show .dropdown-menu .dropdown-item {
-    color: #6e7376;
-  }
-  .navbar-expand-lg .navbar-nav .show .dropdown-menu .dropdown-item:hover,
-  .navbar-expand-lg .navbar-nav .show .dropdown-menu .dropdown-item:focus {
-    color: #9da2ae;
-  }
-  .navbar-expand-lg .navbar-nav .show .dropdown-menu .dropdown-item.active {
-    color: #9da2ae;
-    background-color: #dbd4c1;
-  }
-}
-
-@media (max-width: 1199px) {
-  .navbar-expand-xl .navbar-nav .show .dropdown-menu .dropdown-item {
-    color: #6e7376;
-  }
-  .navbar-expand-xl .navbar-nav .show .dropdown-menu .dropdown-item:hover,
-  .navbar-expand-xl .navbar-nav .show .dropdown-menu .dropdown-item:focus {
-    color: #9da2ae;
-  }
-  .navbar-expand-xl .navbar-nav .show .dropdown-menu .dropdown-item.active {
-    color: #9da2ae;
-    background-color: #dbd4c1;
-  }
-}
-
-.navbar-expand .navbar-nav .show .dropdown-menu .dropdown-item {
-  color: #6e7376;
-}
-.navbar-expand .navbar-nav .show .dropdown-menu .dropdown-item:hover,
-.navbar-expand .navbar-nav .show .dropdown-menu .dropdown-item:focus {
-  color: #9da2ae;
-}
-.navbar-expand .navbar-nav .show .dropdown-menu .dropdown-item.active {
-  color: #9da2ae;
-  background-color: #dbd4c1;
-}
-/* 導覽列顏色 */
