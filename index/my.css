@@ -31,8 +31,9 @@ body{
 	vertical-align:top;
   background-color: rgb(166,180,179);
   position: relative;
-  height:1000px;
+  height:calc(100vh - 60px);
   top:0px;
+  overflow-y:auto;
 }
 #right{
   /* display:inline-block; */
@@ -150,7 +151,7 @@ div img{
   text-align: center;
   border-radius:10px;
   width:100%;
-  padding:25px 5px 0px 5px;
+  padding:25px 5px 20px 5px;
   /* min-height:200px; 最小高度*/ 
   background-color: rgb(239, 237, 231);
   position: relative;

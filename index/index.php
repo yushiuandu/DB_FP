@@ -103,7 +103,9 @@
 
 	<!-- 中間(文章區) -->
 	<div class="col-md-8 col-12" id="middle">
-
+  		<div>
+  			
+		</div>
 		<!-- 文章區 -->
 		<?php if($page == 'index'):
 			include("../Article/Article.php"); ?>
@@ -133,6 +135,34 @@
 				<p id='user-nickname'><?php echo $_SESSION['nickname']; ?></p>
 			</div>
       		<!-- 登入了end-->
+
+			<!--右下半部 分頁格子-->
+			<div id="other-page">
+					<div class="row">
+						<button type="button" class="btn col-md-6">
+							<a href="?page=pencil"  style="color:white;"><img src='./image/pencil.png'></a>
+						</button>
+
+						<button type="button" class="btn col-md-6">
+							<a href="?page=bell"  style="color:white;"><img src='./image/bell.png'></a>
+						</button>
+					</div>
+					<div class="row">
+						<button type="button" class="btn col-md-6">
+							<a href="?page=test"  style="color:white;"><img src='./image/test.png'></a>
+						</button>
+						<button type="button" class="btn col-md-6">
+							<a href="?page=friend"  style="color:white;"><img src='./image/friend.png'></a>
+						</button>
+					</div>
+					<div class="row">
+						<button type="button"class="btn btn-outline-info font-weight-bold col-md-12">
+							<a href="?page=index">登出</a>
+						</button>
+					</div>
+				</div>
+				
+		 		<!--右下半部 分頁格子 end-->
 			<?php
 				}//end if
 				else{ //沒登入
@@ -186,30 +216,12 @@
 					</div>
 				</div>
 				<!--登入畫面end-->
+
 			</div>
 			<!--沒有登入end-->
 				<?php } //end else ?>
 		</div>
 		<!--右上半部 會員登入格子end-->
-
-    	<!--右下半部 分頁格子-->
-		<div id="other-page">
-			<button type="button" class="btn">
-				<a href="?page=pencil"  style="color:white;"><img src='./image/pencil.png'></a>
-			</button>
-
-			<button type="button" class="btn">
-				<a href="?page=bell"  style="color:white;"><img src='./image/bell.png'></a>
-			</button>
-
-			<button type="button" class="btn">
-				<a href="?page=test"  style="color:white;"><img src='./image/test.png'></a>
-			</button>
-			<button type="button" class="btn">
-				<a href="?page=friend"  style="color:white;"><img src='./image/friend.png'></a>
-			</button>
-		</div>
-		 <!--右下半部 分頁格子 end-->
   	
 	</div>
   	<!-- 右半部 end -->

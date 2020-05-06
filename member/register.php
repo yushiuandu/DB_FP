@@ -74,6 +74,10 @@
 				<label>信箱</label>
 				<input type="text" class="form-control" placeholder="@example.com" name="email">
 			</div>
+			<div class="form-group">
+				<label>你的照片</label> <br>
+				<input Type="File" Name="YouFile">
+			</div>
         	<button type="submit" class="btn btn-info font-weight-bold">註冊</button>
       </form>
       </div>
