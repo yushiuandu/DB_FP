@@ -20,8 +20,7 @@ body{
 	padding:2%;
 	vertical-align:top;
   background-color: rgb(212, 186, 176);
-  position:fixed;
-  left:0px;
+  position:relative;
  }
 #middle{
   /* display:inline-block; */
