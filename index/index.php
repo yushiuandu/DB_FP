@@ -24,7 +24,7 @@
   <body>
   	<!-- 導覽列 -->
     <nav class="navbar navbar-default navbar-expend-lg head-nav">
-      <a class="navbar-brand" href="?page=index">
+      <a class="navbar-brand" href="index.php">
         <img src="./image/Tai-gun.png" class="Tai-gun">
       </a>
       <form class="form-inline search col-md-0">
@@ -103,6 +103,8 @@
 
 	<!-- 中間(文章區) -->
 	<div class="col-md-8" id="middle">
+		<?php 
+	  	if($page == 'index'){?>
   		<!-- 上面的按鈕 -->
   		<div class="row">
 		  	<div class="btn-group col-md-3 col-sm-4 col-6" role="group" aria-label="Button group with nested dropdown">
@@ -122,6 +124,7 @@
 		</div>
 		<!-- 上面的按鈕 end-->
   	
+		
 		<!-- 文章簡圖區 -->
 		<a href="#" style="color:black; text-decoration:none;">
 			<div class="art">
@@ -179,13 +182,15 @@
 			<!-- 文章簡圖區 end-->
 		</a>
 		<!-- 文章區 -->
-		<?php if($page == 'index'):
-			include("../Article/Article.php"); ?>
-	
-		<!-- 註冊頁面 --> <!-- 如果按還不是會員 會跳轉到 member/register.php的頁面 -->
-		<?php elseif($page == 'register'):
-			include("../member/register.php");
-		endif; ?> 
+		
+		
+		
+  		<?php
+		// 註冊頁面 如果按還不是會員 會跳轉到 member/register.php的頁面 
+		  }elseif($page == 'register'){
+			$page = 'index';
+			include("../member/register.php"); }
+		?> 
 	
 	</div>
 	<!-- 中間end -->
@@ -207,35 +212,38 @@
 				<p id='user-name' class="font-weight-bold"><?php echo $_SESSION['user'];?></p>
 				<p id='user-nickname'><?php echo $_SESSION['nickname']; ?></p>
 			</div>
+
+			<div>
+				<button type="button"class="btn btn-info font-weight-bold col-md-12">
+					<a href="../member/logout.php">登出</a>
+				</button>
+			</div>
+		</div>
+			
       		<!-- 登入了end-->
 
 			<!--右下半部 分頁格子-->
 			<div id="other-page">
-					<div class="row">
-						<button type="button" class="btn col-md-6">
-							<a href="?page=pencil"  style="color:white;"><img src='./image/pencil.png'></a>
-						</button>
-
-						<button type="button" class="btn col-md-6">
-							<a href="?page=bell"  style="color:white;"><img src='./image/bell.png'></a>
-						</button>
-					</div>
-					<div class="row">
-						<button type="button" class="btn col-md-6">
-							<a href="?page=test"  style="color:white;"><img src='./image/test.png'></a>
-						</button>
-						<button type="button" class="btn col-md-6">
-							<a href="?page=friend"  style="color:white;"><img src='./image/friend.png'></a>
-						</button>
-					</div>
-					<div class="row">
-						<button type="button"class="btn btn-info font-weight-bold col-md-12">
-							<a href="?page=index">登出</a>
-						</button>
-					</div>
-				</div>
 				
-		 		<!--右下半部 分頁格子 end-->
+				<div class="row">
+					<button type="button" class="btn col-md-6">
+						<a href="?page=pencil"  style="color:white;"><img src='./image/pencil.png'></a>
+					</button>
+
+					<button type="button" class="btn col-md-6">
+						<a href="?page=bell"  style="color:white;"><img src='./image/bell.png'></a>
+					</button>
+				</div>
+				<div class="row">
+					<button type="button" class="btn col-md-6">
+						<a href="?page=test"  style="color:white;"><img src='./image/test.png'></a>
+					</button>
+					<button type="button" class="btn col-md-6">
+						<a href="?page=friend"  style="color:white;"><img src='./image/friend.png'></a>
+					</button>
+				</div>
+			</div>
+			<!--右下半部 分頁格子 end-->
 			<?php
 				}//end if
 				else{ //沒登入
@@ -263,12 +271,14 @@
 								</button>
 							</div>
 							<!--登入內容-->
+							<form method="post" action="../member/login.php" enctype="multipart/form-data">
 							<div class="modal-body">
 								<div>
-								<form method="post" action="../member/login.php" enctype="multipart/form-data">
 									<img src='./image/hello.png' id='login-pic' class='mar'>
-									<h5 class='mar'>帳號 <input type="account" placeholder="帳號" namme = 'Account'></h5>
-									<h5 class='mar'>密碼 <input type="password" placeholder="密碼" name = 'Password'></h5>
+									<h5 class='mar'>帳號 
+										<input type="text" placeholder="帳號" name='Account'></h5>
+									<h5 class='mar'>密碼 
+										<input type="password" placeholder="密碼" name='Password'></h5>
 									<button type="button" class="btn btn-secondary btn-sm mar">
 										<a href='#'  style="color:white;">忘記密碼
 									</button>
@@ -276,7 +286,7 @@
 									<button type="button" class="btn btn-secondary btn-sm mar">
 										<a href="?page=register"  style="color:white;">還不是會員?</a>
 									</button>
-								</from>
+								
 								</div>
 							</div>
 							<!--登入尾-->
@@ -284,7 +294,7 @@
 								<button type="button" class="btn btn-secondary font-weight-bold" data-dismiss="modal">下次再說</button>
 								<button class="btn btn-info font-weight-bold" type="submit">送出</button>
 							</div>
-
+						</from>
 						</div>
 					</div>
 				</div>

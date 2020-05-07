@@ -6,21 +6,22 @@
         if(!$link){
         echo "no connect!";
     }
-
-    $Account = $_POST['Account'];
+    echo $_POST['Account'];
+    $account = $_POST['Account'];
+    $pass =$_POST['Password'];
     
-    $sql = "SELECT * FROM `member` WHERE `Account` = '$Account'";
+    $sql = "SELECT * FROM `member` WHERE `Account` = '$account'";
     $result = mysqli_query($link,$sql);
 
     if($result){
         $row = mysqli_fetch_assoc($result);
-        if($row['pass'] == $pass){
+        if($row['Password'] == $pass){
             $_SESSION['user'] = $row['Name'];
             $_SESSION['nickname'] = $row['Nickname'];
             header("Location:../index/index.php");
-        }
-    }else{
+        }else{
         echo '帳號或密碼錯誤！';
+        }
     }
     
 ?>
