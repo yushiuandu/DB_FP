@@ -16,7 +16,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="../index/my.css" rel="stylesheet" type="text/css">
-    <title>Tai-gun</title>
+    <title>抬槓</title>
 </head>
   <body>
   <!-- 註冊頁面 -->
@@ -25,7 +25,7 @@
       <div id='re1'>
         <img src='./image/test.png' id="test-pic">
         <div id="slogan">想要交到契合的朋友嗎?</div>
-        <div id="slogan">來Tai-gun用心理測驗</div>
+        <div id="slogan">來抬槓用心理測驗</div>
         <div id="slogan">交朋友吧!</div>
       </div>
       <!-- 左半邊 end -->

@@ -18,22 +18,28 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="./my.css" rel="stylesheet" type="text/css">
-    <title>Tai-gun</title>
+    <title>抬槓</title>
   </head>
 
   <body>
   	<!-- 導覽列 -->
-    <nav class="navbar navbar-default navbar-expend-lg head-nav">
-      <a class="navbar-brand" href="index.php">
-        <img src="./image/Tai-gun.png" class="Tai-gun">
-      </a>
-      <form class="form-inline search col-md-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="搜尋...." aria-label="Search">
-        <button type="button" class="btn btn-light" type="submit">搜尋</button>
-      </form>
-    </nav>
+    <div class="head-nav">
+      <div class="row" >
+		  <div class="col-md-9 col-sm-6 mr-auto">
+		  	<a class="navbar-brand" href="index.php">
+        		<img src="./image/Tai-gun.png" class="Tai-gun">
+      		</a>
+		  </div>
+		  <div class="">
+			<form class="form-inline">
+        		<input class="form-control mr-sm-2" type="search" placeholder="搜尋...." style="width:125px;">
+        		<button type="button" class="btn btn-light btn-sm" type="submit">搜尋</button>
+      		</form>
+		  </div>	
+	  </div>
+	</div>
 	<!-- 導覽列end -->
-
+	
 	
   <div class="row">
     <!-- 左半部 -->
@@ -126,14 +132,14 @@
   	
 		
 		<!-- 文章簡圖區 -->
-		<a href="#" style="color:black; text-decoration:none;">
+		<a href="?page=article" style="color:black; text-decoration:none;">
 			<div class="art">
 				<!-- 簡圖內容(上) -->
-				<div class="row art-head" id='mid'>
+				<div class="row art-head mid">
 					<!-- 作者-->
 					<div class="col-md-9 col-sm-8 col-8">
 						<img src="./image/user.png" class="img-fluid rounded-circle" id="writer-pic">
-						<h7 style="display: inline;">淡江大學</h7>
+						<p style="display: inline; font-size:2vmin; margin:0px;">淡江大學</p>
 					</div>
 					<!-- 作者 end-->
 
@@ -147,22 +153,22 @@
 				<!-- 簡圖內容(上) end-->
 				
 				<!-- 簡圖內容(中) -->
-				<div class="row art-body" id='mid'>
+				<div class="row art-body mid">
 					<!-- 標題 -->
-					<div class="col-md-9 col-sm-9 col-9 text-truncate">
-						<h5 class="font-weight-bold">每年母親節，我都覺得我像個智障</h5>
-						<h8 style="font-size:11pt; color:gray;">
+					<div class="col-md-9 col-sm-9 col-8 col-lg-9 text-truncate">
+						<p class="font-weight-bold" style='font-size:3vmin; margin:0px;'>每年母親節，我都覺得我像個智障</p>
+						<p style="color:gray; font-size:2vmin; margin:0px;">
 						不知道我是不是專門生下來氣我媽的
 						幾乎每年母親節禮物我都踢到鐵板
 						外加我媽又毛很多
 						每年禮物都被嫌的一無是處
 						每年被澆的冷水我不知道可以挑戰多少次ice bucket challenge 了
-						要加s</h8>
+						要加s</p>
 					</div>
 					<!-- 標題 end -->
 
 					<!-- 圖檔 -->
-					<div class="col-md-3 col-sm-3 col-3" >
+					<div class="col-md-3 col-sm-3 col-4 col-lg-3" >
 						<img src="./image/article-pic.jpg" id="article-pic">
 					</div>
 					<!-- 圖檔 end -->
@@ -170,10 +176,10 @@
 				<!-- 簡圖內容(中) end-->
 				
 				<!-- 簡圖內容(下) -->
-				<div class="row art-fotter" id='mid'>
+				<div class="row art-fotter mid">
 					<!-- 看板 - 發文時間 -->
 					<div class="col-md-12 col-sm-12 col-12">
-						<p style="font-size:10pt; color:gray; ">有趣版 - 5月5日 20:35</p>
+						<p style=' font-size:1.75vmin; margin:0px; color:gray;'>有趣版 - 5月5日 20:35</p>
 					</div>
 					<!-- 看板 - 發文時間 end -->
 				</div>
@@ -187,11 +193,16 @@
 		
   		<?php
 		// 註冊頁面 如果按還不是會員 會跳轉到 member/register.php的頁面 
-		  }elseif($page == 'register'){
+		  }if($page == 'register'){
 			$page = 'index';
 			include("../member/register.php"); }
 		?> 
-	
+
+		<?php //文章頁面
+			if($page == 'article'){
+			$page = 'index';
+			include("../Article/article.php"); }
+		?> 
 	</div>
 	<!-- 中間end -->
 

@@ -35,10 +35,10 @@ body{
   top:0px;
   overflow-y:auto;
 }
+/* 文章簡圖區 */
 .art{
   text-align: left;
   background-color: #F2F2F2;
-  margin:0px;
   border-radius: 10px;
   width: 100%;
   margin:15px 0px 0px 0px;
@@ -46,33 +46,30 @@ body{
 .art-head{
   height:40px;
   padding:10px;
-}
+} /* 文章簡圖區的上半部 */
 .art-body{
   padding-left: 10px;
-  height:80px;
-}
+  height:10vh;
+} /* 文章簡圖區的中半部 */
 .art-fotter{
-  height:30px;
-  padding:0px 10px 10px 10px;
-}
+  height:5vh;
+  padding:5px 10px 10px 10px;
+} /* 文章簡圖區的下半部 */
 #article-pic{
-  width: auto;
-  height: 70px;
-}
+  width:70%;
+  height: auto;
+} /* 文章簡圖區的圖 */
 #writer-pic{
   width: auto;
   height: 30px;
   border: 2px solid gray;
   margin: 1px;
-}
+} /* 文章簡圖區作者頭像 */
 #good-pic{
   width: auto;
   height: 25px;
 }
-#mid{
-  display:flex;
-  align-items: center;
-}
+
 #right{
   /* display:inline-block; */
    /*建立一堆區塊自動填滿瀏覽器*/
@@ -114,16 +111,47 @@ body{
   background-color: rgb(193, 171, 173);
   position: relative;
 }
-
-#article{
-  display:inline-block;
-  border-radius:10px;
-  width:95%;
-  margin:10px 20px 10px 20px;
-  padding:25px 5px 0px 5px;
-  /* min-height:200px; 最小高度 */
-  background-color: rgb(229,203, 193);
-  position: relative;
+/* article */
+.article{
+  text-align: left;
+  background-color: #F2F2F2;
+  border-radius: 10px;
+  width: 100%;
+  margin:15px 0px 0px 0px;
+}
+.article-head{
+  height:15vh;
+  padding:10px;
+  border-bottom: 1px black solid;
+} /* 文章上半部 */
+.article-body{
+  word-break:normal;
+} /* 文章中半部 */
+.article-fotter{
+  padding:20px;
+} /* 文章下半部 */
+/* hot-message */
+.hmes-head{ 
+  padding:10px;
+}
+.hmes-body{
+  background-color: rgb(234,230,223);
+  padding:10px;
+  border-radius: 10px;
+}
+.mes{
+  font-size:2vmin;
+  margin:0px;
+  font-weight:400;
+  font-family:"jf-openhuninn";
+  word-break: break-all;
+  word-wrap:break-word;
+  white-space:pre-wrap;
+}
+.pic{
+  width: auto;
+  height: 6vh;
+  margin: 1px;
 }
 #re1{
   width:40%;
@@ -208,9 +236,23 @@ button img{
   top:0; /*距離上方 0 像素*/
   z-index:1; /*重疊時會在其他元素之上*/
   background-color: #90656f;
+  padding: 10px;
+  text-align:left;
 }
 .Tai-gun{
   width:auto;
   height: 32px;
-  margin-left: 40px;
+}
+.mid{
+  display: flex;
+  align-items: center;
+  font-family: "微軟正黑體";
+}
+.bottom{
+  display: flex;
+  align-items: flex-end;
+}
+.right{
+  text-align: right;
+  margin:20px;
 }
