@@ -42,13 +42,12 @@
 		<div class="row article-body mid">
 			<div class="col-md-12 col-sm-12 col-12 col-lg-12">
   				<!-- 標題 -->
-                <p class="font-weight-bold" style='font-size:5vmin; margin:20px 10px 30px 10px; font-family: setofont; font-weight:400;'>
+                <p class="font-weight-bold" style='font-size:5vmin; margin:20px 10px 20px 10px; font-family: setofont; font-weight:400;'>
                     每年母親節，我都覺得我像個智障
 				</p>
 				<!-- 標題 end -->
 				<!-- 文章內容 -->
-<p class='article-word'>
-不知道我是不是專門生下來氣我媽的
+<p class='article-word'>不知道我是不是專門生下來氣我媽的
 幾乎每年母親節禮物我都踢到鐵板
 外加我媽又毛很多
 每年禮物都被嫌的一無是處
