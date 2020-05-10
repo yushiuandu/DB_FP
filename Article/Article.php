@@ -88,11 +88,12 @@ WTF
 				
 		<!-- 文章內容(下) -->
 		<div class="row article-fotter right">
-			<!-- 按鈕們 -->
+			<!-- 按鈕們-->
+			<!-- 再修 -->
 			<div class="col-md-12 col-sm-12 col-12">
-				<button type="button" class="btn btn-sm btn-secondary"><span class="glyphicon glyphicon-star" aria-hidden="true"></span></button>
-				<button type="button" class="btn btn-sm btn-secondary">討好媽媽</button>
-				<button type="button" class="btn btn-sm btn-secondary">討好媽媽</button>
+				<button type="button" class="btn btn-sm btn-secondary">星星</button>
+				<button type="button" class="btn btn-sm btn-secondary">收藏</button>
+				<button type="button" class="btn btn-sm btn-secondary">讚</button>
 			</div>
 			<!-- 按鈕們 end -->
 		</div>
