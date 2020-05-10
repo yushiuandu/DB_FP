@@ -139,11 +139,29 @@ body{
   padding:10px;
   border-radius: 10px;
 }
-.mes{
-  font-size:2vmin;
+.hmes{
+  font-size:2.5vmin;
   margin:0px;
   font-weight:400;
   font-family:"jf-openhuninn";
+  word-break: break-all;
+  word-wrap:break-word;
+  white-space:pre-wrap;
+}
+.mes{
+  border-bottom: 1px black solid;
+  padding:20px 0px 20px 0px;
+}
+.mes-head{
+  font-size:3vmin;
+  margin:20px 10px 5px 10px;
+  font-family:"jf-openhuninn";
+}
+.article-word{
+  font-size:2.5vmin;
+  margin:0px 30px 0px 30px;
+  font-family: setofont;
+  font-weight:600;
   word-break: break-all;
   word-wrap:break-word;
   white-space:pre-wrap;
@@ -255,4 +273,12 @@ button img{
 .right{
   text-align: right;
   margin:20px;
+}
+.w{
+  display: inline;
+  font-size:3vmin;
+  margin:0px;
+  font-weight:400;
+  font-family:"jf-openhuninn";
+  text-decoration:underline;
 }

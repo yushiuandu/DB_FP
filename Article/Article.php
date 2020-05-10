@@ -47,7 +47,7 @@
 				</p>
 				<!-- 標題 end -->
 				<!-- 文章內容 -->
-<pre style="font-size:2.5vmin; margin:0px 30px 0px 30px; font-family: setofont; font-weight:600">
+<p class='article-word'>
 不知道我是不是專門生下來氣我媽的
 幾乎每年母親節禮物我都踢到鐵板
 外加我媽又毛很多
@@ -74,7 +74,7 @@ but
 
 所以這莫名其妙貴到靠北的東西才在這呀
 WTF
-</pre>
+</p>
 <!-- 文章內容 end-->
   				<!-- 文章tag -->
 				<div style="margin:10px 10px 0px 10px; font-family: setofont; font-weight:600;">
@@ -101,33 +101,33 @@ WTF
 	</div>
 	<div class="article">
         <!-- 熱門排行榜(上) -->
-		<div class="row hmes-head mid">
-			<p style='font-size:3vmin; margin:20px;'>火辣辣排行榜</p>
+		<div class="row hmes-head mid" style='border-bottom: 1px black solid;'>
+			<p class='mes-head'>火辣辣排行榜</p>
 		</div>
 		<!-- 熱門排行榜(上) end-->
 				
 		<!-- 熱門排行榜(下) -->
 		<div class="row mid hmes-head">
 			<!-- 第一名 -->
-			<div class="col-md-2 col-sm-2 col-2">
+			<div class="col-md-2 col-sm-2 col-3">
 				<img src="./image/1.png" class="img-fluid rounded-circle" style="height:8vh; width:auto;">
 			</div>
 			<!-- 第一名 end-->
-			<div class="col-md-10 col-sm-10 col-10 hmes-body">
+			<div class="col-md-10 col-sm-10 col-9 hmes-body">
 				<div class="row mid">
 					<!-- 作者照片-->
-					<div class="col-md-1 col-sm-1 col-1" style="margin:0px; padding:0px;">
+					<div class="col-md-1 col-sm-1 col-2" style="margin:0px; padding:0px;">
 						<img src="./image/user.png" class="img-fluid rounded-circle" id="writer-pic">
 					</div>
 					<!-- 作者照片 end-->
 					<!-- 作者-->
-					<div class="col-md-8 col-sm-8 col-8" style="margin:0px; padding:0px;">
-						<p style="display: inline; font-size:3vmin; margin:0px; font-weight:400; font-family:jf-openhuninn;">淡江大學</p>
+					<div class="col-md-8 col-sm-8 col-5" style="margin:0px; padding:0px;">
+						<p class='w'>哎呦阿施</p>
 					</div>
 					<!-- 作者 end-->
 
 					<!-- 按讚數 --> 
-					<div class="col-md-3 col-sm-3 col-3">
+					<div class="col-md-3 col-sm-3 col-5">
 						<p style="display: inline; font-size:2.5vmin; font-weight:400; font-family:jf-openhuninn;">598</p>
 						<img src="./image/good-white.png" class="img-fluid" id="good-pic">
 					</div>
@@ -136,7 +136,7 @@ WTF
 					<div class="col-md-1 col-sm-1 col-1" style="margin:0px; padding:0px;"></div>
 					<!-- 留言內容-->
 					<div class="col-md-11 col-sm-11 col-11" style="margin:0px; padding:0px;">
-						<p class="mes">包紅包！！！！
+						<p class="hmes">包紅包！！！！
 沒得嫌了吧</p>
 					</div>
 					<!-- 留言內容 end-->
@@ -145,25 +145,25 @@ WTF
 		</div>
 		<div class="row mid hmes-head">
 			<!-- 第二名 -->
-			<div class="col-md-2 col-sm-2 col-2">
+			<div class="col-md-2 col-sm-2 col-3">
 				<img src="./image/2.png" class="img-fluid rounded-circle" style="height:8vh; width:auto;">
 			</div>
 			<!-- 第二名 end-->
-			<div class="col-md-10 col-sm-10 col-10 hmes-body">
+			<div class="col-md-10 col-sm-10 col-9 hmes-body">
 				<div class="row mid">
 					<!-- 作者照片-->
-					<div class="col-md-1 col-sm-1 col-1" style="margin:0px; padding:0px;">
+					<div class="col-md-1 col-sm-1 col-2" style="margin:0px; padding:0px;">
 						<img src="./image/user.png" class="img-fluid rounded-circle" id="writer-pic">
 					</div>
 					<!-- 作者照片 end-->
 					<!-- 作者-->
-					<div class="col-md-8 col-sm-8 col-8" style="margin:0px; padding:0px;">
-						<p style="display: inline; font-size:3vmin; margin:0px; font-weight:400; font-family:jf-openhuninn;">中原大學</p>
+					<div class="col-md-8 col-sm-8 col-5" style="margin:0px; padding:0px;">
+						<p class="w">中原大學</p>
 					</div>
 					<!-- 作者 end-->
 
 					<!-- 按讚數 --> 
-					<div class="col-md-3 col-sm-3 col-3">
+					<div class="col-md-3 col-sm-3 col-5">
 						<p style="display: inline; font-size:2.5vmin; font-weight:400; font-family:jf-openhuninn;">501</p>
 						<img src="./image/good-white.png" class="img-fluid" id="good-pic">
 					</div>
@@ -172,7 +172,7 @@ WTF
 					<div class="col-md-1 col-sm-1 col-1" style="margin:0px; padding:0px;"></div>
 					<!-- 留言內容-->
 					<div class="col-md-11 col-sm-11 col-11" style="margin:0px; padding:0px;">
-						<p class="mes">你好用心喔😂 但我覺得口紅同牌應該沒問題吧
+						<p class="hmes">你好用心喔😂 但我覺得口紅同牌應該沒問題吧
 如果你媽喜歡她現在自己用的那隻
 一樣的顏色 喔耶續命+1
 不一樣顏色 喔耶有不同顏色了</p>
@@ -183,25 +183,25 @@ WTF
 		</div>
 		<div class="row mid hmes-head">
 			<!-- 第三名 -->
-			<div class="col-md-2 col-sm-2 col-2">
+			<div class="col-md-2 col-sm-2 col-3">
 				<img src="./image/3.png" class="img-fluid rounded-circle" style="height:8vh; width:auto;">
 			</div>
 			<!-- 第三名 end-->
-			<div class="col-md-10 col-sm-10 col-10 hmes-body">
+			<div class="col-md-10 col-sm-10 col-9 hmes-body">
 				<div class="row mid">
 					<!-- 作者照片-->
-					<div class="col-md-1 col-sm-1 col-1" style="margin:0px; padding:0px;">
+					<div class="col-md-1 col-sm-1 col-2" style="margin:0px; padding:0px;">
 						<img src="./image/user.png" class="img-fluid rounded-circle" id="writer-pic">
 					</div>
 					<!-- 作者照片 end-->
 					<!-- 作者-->
-					<div class="col-md-8 col-sm-8 col-8" style="margin:0px; padding:0px;">
-						<p style="display: inline; font-size:3vmin; margin:0px; font-weight:400; font-family:jf-openhuninn;">嘉南藥理大學</p>
+					<div class="col-md-8 col-sm-8 col-5" style="margin:0px; padding:0px;">
+						<p class='w'>嘉南藥理大學</p>
 					</div>
 					<!-- 作者 end-->
 
 					<!-- 按讚數 --> 
-					<div class="col-md-3 col-sm-3 col-3">
+					<div class="col-md-3 col-sm-3 col-5">
 						<p style="display: inline; font-size:2.5vmin; font-weight:400; font-family:jf-openhuninn;">375</p>
 						<img src="./image/good-white.png" class="img-fluid" id="good-pic">
 					</div>
@@ -210,7 +210,7 @@ WTF
 					<div class="col-md-1 col-sm-1 col-1" style="margin:0px; padding:0px;"></div>
 					<!-- 留言內容-->
 					<div class="col-md-11 col-sm-11 col-11" style="margin:0px; padding:0px;">
-						<p class="mes">我已經被嫌到放棄了
+						<p class="hmes">我已經被嫌到放棄了
 日式嫌生，台式嫌沒心意，歐式嫌不對味，韓式嫌東西難吃，泰式越式嫌酸甜辣，烤肉嫌臭，火鍋嫌熱，壽喜燒嫌重口味，問想吃什麼又說隨便
 禮物送自己做的不對，送設計師品牌也不對，送專櫃還能被嫌敗家，然後又到處說我都不買禮物給他
 這幾年都乾脆帶他隨便吃一頓千元餐廳…</p>
@@ -220,7 +220,90 @@ WTF
 			</div>
 		</div>
 		<!-- 熱門排行榜(下) end-->
-    </div>
+	</div>
+	  
+	<div class="article">
+        <!-- 留言區(上) -->
+		<div class="row hmes-head mid" style='border-bottom: 1px black solid;'>
+			<p class='mes-head'>留言區</p>
+		</div>
+		<!-- 留言區(上) end-->
+				
+		<!-- 留言區(下) -->
+		<div class="row mid hmes-head">
+			<!-- 圖片 -->
+			<div class="col-md-2 col-sm-2 col-3">
+				<img src="./image/mes.png" class="img-fluid rounded-circle" style="height:8vh; width:auto;">
+			</div>
+			<!-- 圖片 end-->
+			<div class="col-md-10 col-sm-10 col-9 hmes-body">
+				<div class="row mid">
+					<!-- 作者照片-->
+					<div class="col-md-1 col-sm-1 col-2" style="margin:0px; padding:0px;">
+						<img src="./image/user.png" class="img-fluid rounded-circle" id="writer-pic">
+					</div>
+					<!-- 作者照片 end-->
+					<!-- 作者-->
+					<div class="col-md-8 col-sm-8 col-5" style="margin:0px; padding:0px;">
+						<p class='w'>哎呦阿施</p>
+					</div>
+					<!-- 作者 end-->
+
+					<!-- 按讚數 --> 
+					<div class="col-md-3 col-sm-3 col-5">
+						<p style="display: inline; font-size:2.5vmin; font-weight:400; font-family:jf-openhuninn;">598</p>
+						<img src="./image/good-white.png" class="img-fluid" id="good-pic">
+					</div>
+					<!-- 按讚數 end-->
+					
+					<div class="col-md-1 col-sm-1 col-1" style="margin:0px; padding:0px;"></div>
+					<!-- 留言內容-->
+					<div class="col-md-11 col-sm-11 col-11" style="margin:0px; padding:0px;">
+						<p class="hmes">包紅包！！！！
+沒得嫌了吧</p>
+					</div>
+					<!-- 留言內容 end-->
+				</div>
+			</div>
+		</div>
+		<div class="row mid hmes-head">
+			<!-- 圖片 -->
+			<div class="col-md-2 col-sm-2 col-3">
+				<img src="./image/mes.png" class="img-fluid rounded-circle" style="height:8vh; width:auto;">
+			</div>
+			<!-- 圖片 end-->
+			<div class="col-md-10 col-sm-10 col-9 hmes-body">
+				<div class="row mid">
+					<!-- 作者照片-->
+					<div class="col-md-1 col-sm-1 col-2" style="margin:0px; padding:0px;">
+						<img src="./image/user.png" class="img-fluid rounded-circle" id="writer-pic">
+					</div>
+					<!-- 作者照片 end-->
+					<!-- 作者-->
+					<div class="col-md-8 col-sm-8 col-5" style="margin:0px; padding:0px;">
+						<p class='w'>Ethan757</p>
+					</div>
+					<!-- 作者 end-->
+
+					<!-- 按讚數 --> 
+					<div class="col-md-3 col-sm-3 col-5">
+						<p style="display: inline; font-size:2.5vmin; font-weight:400; font-family:jf-openhuninn;">17</p>
+						<img src="./image/good-white.png" class="img-fluid" id="good-pic">
+					</div>
+					<!-- 按讚數 end-->
+					
+					<div class="col-md-1 col-sm-1 col-1" style="margin:0px; padding:0px;"></div>
+					<!-- 留言內容-->
+					<div class="col-md-11 col-sm-11 col-11" style="margin:0px; padding:0px;">
+						<p class="hmes">嫌太少</p>
+					</div>
+					<!-- 留言內容 end-->
+				</div>
+			</div>
+		</div>
+		<!-- 留言區(下) end-->
+	</div>
+	
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
