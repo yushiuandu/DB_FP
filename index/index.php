@@ -1,9 +1,27 @@
 <?php session_start();?>
 <?php
-  $page = "index";
-  if(isset($_GET['page'])){
-    $page = $_GET['page'];
-  }
+	$link = mysqli_connect("localhost","taigun","ELn3yv07F567MwOF","taigun");//連結伺服器//選擇資料庫
+	if(!$link){
+	echo "no connect!";
+	}
+	$page = "index";
+	if(isset($_GET['page'])){
+		$page = $_GET['page'];
+	}
+	if(isset($_GET['id'])){
+		$forum = $_GET['id'];
+	}
+	if(isset($_GET['hot'])){
+		$hot = $_GET['hot'];
+	}
+	if(isset($_GET['latest'])){
+		$latest = $_GET['latest'];
+	}
+	if($page = 'logout'){
+		$page = 'index';
+	}
+
+	
 ?>
 
 <!doctype html>
@@ -61,13 +79,13 @@
 							所有看板</a>
 						</div>
 						<div id="collapseOne" class="collapse link-body" aria-labelledby="headingOne" data-parent="#all">
-							<a class="dropdown-item" href="#">美食版</a>
-							<a class="dropdown-item" href="#">美妝穿搭</a>
-							<a class="dropdown-item" href="#">旅遊版</a>
-							<a class="dropdown-item" href="#">新聞版</a>
-							<a class="dropdown-item" href="#">有趣版</a>
-							<a class="dropdown-item" href="#">感情版</a>
-							<a class="dropdown-item" href="#">其他版</a>
+							<a class="dropdown-item" href="../index/index.php?id=food">美食版</a>
+							<a class="dropdown-item" href="../index/index.php?id=makeup">美妝穿搭</a>
+							<a class="dropdown-item" href="../index/index.php?id=travel">旅遊版</a>
+							<a class="dropdown-item" href="../index/index.php?id=trending">新聞版</a>
+							<a class="dropdown-item" href="../index/index.php?id=funny">有趣版</a>
+							<a class="dropdown-item" href="../index/index.php?id=relationship">感情版</a>
+							<a class="dropdown-item" href="../index/index.php?id=other">其他版</a>
 						</div>
 						</div>
 					</li><!-- 所有看板end -->
@@ -79,9 +97,9 @@
 							訂閱看板</a>
 						</div>
 							<div id="collapseTwo" class="collapse link-body" aria-labelledby="headingTwo" data-parent="#follow">
-								<a class="dropdown-item" href="#">美食版</a>
-								<a class="dropdown-item" href="#">美妝穿搭</a>
-								<a class="dropdown-item" href="#">旅遊版</a>
+								<a class="dropdown-item" href="../index/index.php?id=funny">美食版</a>
+								<a class="dropdown-item" href="../index/index.php?id=funny">美妝穿搭</a>
+								<a class="dropdown-item" href="../index/index.php?id=funny">旅遊版</a>
 							</div>
 						</div>
 					</li>
@@ -94,9 +112,9 @@
 							熱門看板</a>
 						</div>
 						<div id="collapseThree" class="collapse link-body" aria-labelledby="headingThree" data-parent="#hot">
-							<a class="dropdown-item" href="#">有趣版</a>
-							<a class="dropdown-item" href="#">感情版</a>
-							<a class="dropdown-item" href="#">其他版</a>
+							<a class="dropdown-item" href="../index.php?id=funny">有趣版</a>
+							<a class="dropdown-item" href="../index.php?id=relationship">感情版</a>
+							<a class="dropdown-item" href="../index.php?id=fun">其他版</a>
 						</div>
 						</div>
 					</li>
@@ -110,7 +128,9 @@
 	<!-- 中間(文章區) -->
 	<div class="col-md-8" id="middle">
 		<?php 
-	  	if($page == 'index'){?>
+	  	if($page == 'index'){
+
+		?>
   		<!-- 上面的按鈕 -->
   		<div class="row">
 		  	<div class="btn-group col-md-3 col-sm-4 col-6" role="group" aria-label="Button group with nested dropdown">
@@ -123,29 +143,54 @@
   						排序
 					</button>
 					<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-						<a class="dropdown-item" href="#">熱門</a>
-						<a class="dropdown-item" href="#">最新</a>
+						<a class="dropdown-item" href="../index/index.php?hot=true">熱門</a>
+						<a class="dropdown-item" href="../index/index.php?latest=true">最新</a>
 					</div>
 				</div>
 		</div>
 		<!-- 上面的按鈕 end-->
-  	
 		
+		<?php
+		// 最熱門排序
+			$sql = "SELECT * FROM `article` ORDER BY `agree` DESC";
+			$result = mysqli_query($link,$sql);
+		// 最新排序	
+			if($latest = 'true'){ 
+				$sql = "SELECT * FROM `article` ORDER BY `post_time` DESC";
+				$result = mysqli_query($link,$sql);
+			}else if($hot = 'true'){
+				$sql = "SELECT * FROM `article` ORDER BY `agree` DESC";
+				$result = mysqli_query($link,$sql);
+			}
+			
+
+			if($result){
+				while($row = mysqli_fetch_assoc($result)){
+					$id = $row['AId'];
+		?>
 		<!-- 文章簡圖區 -->
-		<a href="?page=article" style="color:black; text-decoration:none;">
+		<a href="../Article/Article.php?aid=<?php echo $id ?>" style="color:black; text-decoration:none;">
 			<div class="art">
 				<!-- 簡圖內容(上) -->
 				<div class="row art-head mid">
 					<!-- 作者-->
 					<div class="col-md-9 col-sm-8 col-8">
 						<img src="./image/user.png" class="img-fluid rounded-circle" id="writer-pic">
-						<p style="display: inline; font-size:2vmin; margin:0px;">淡江大學</p>
+						<p style="display: inline; font-size:2vmin; margin:0px;">
+							<?php
+								if ($row['anonymous'] == 0){
+									echo '匿名';
+								}else{
+									echo $row['post_name'];
+								}
+							?>
+						</p>
 					</div>
 					<!-- 作者 end-->
 
 					<!-- 按讚數 --> 
 					<div class="col-md-3 col-sm-4 col-4">
-						<h7 style="display: inline;">707</h7>
+						<h7 style="display: inline;"><?php echo $row['agree'];?></h7>
 						<img src="./image/good-white.png" class="img-fluid" id="good-pic">
 					</div>
 					<!-- 按讚數 end-->
@@ -156,14 +201,18 @@
 				<div class="row art-body mid">
 					<!-- 標題 -->
 					<div class="col-md-9 col-sm-9 col-8 col-lg-9 text-truncate">
-						<p class="font-weight-bold" style='font-size:3vmin; margin:0px;'>每年母親節，我都覺得我像個智障</p>
+						<p class="font-weight-bold" style='font-size:3vmin; margin:0px;'><?php echo $row['title'];?></p>
 						<p style="color:gray; font-size:2vmin; margin:0px;">
-						不知道我是不是專門生下來氣我媽的
+						<?php 
+							echo $row['excerpt'];
+						?>
+						<!-- 不知道我是不是專門生下來氣我媽的
 						幾乎每年母親節禮物我都踢到鐵板
 						外加我媽又毛很多
 						每年禮物都被嫌的一無是處
 						每年被澆的冷水我不知道可以挑戰多少次ice bucket challenge 了
-						要加s</p>
+						要加s -->
+						</p>
 					</div>
 					<!-- 標題 end -->
 
@@ -179,7 +228,13 @@
 				<div class="row art-fotter mid">
 					<!-- 看板 - 發文時間 -->
 					<div class="col-md-12 col-sm-12 col-12">
-						<p style=' font-size:1.75vmin; margin:0px; color:gray;'>有趣版 - 5月5日 20:35</p>
+						<p style=' font-size:1.75vmin; margin:0px; color:gray;'>
+							<?php
+								echo $row['category'];
+								echo ' - ';
+								echo $row['post_time'];
+							?>
+						</p>
 					</div>
 					<!-- 看板 - 發文時間 end -->
 				</div>
@@ -189,6 +244,8 @@
 		</a>
 		<!-- 文章區 -->
 		
+				<?php }//end while
+						} //end result if?>
 		
 		
   		<?php
@@ -226,7 +283,15 @@
 
 			<div>
 				<button type="button"class="btn btn-info font-weight-bold col-md-12">
-					<a href="../member/logout.php">登出</a>
+					<a href="../index/index.php?page=logout">登出</a>
+					<?php 
+						if($page == 'logout'){
+							unset($_SESSION['user']);
+							unset($_SESSION['nickname']);
+							session_destroy();
+							header("Location:../index/index.php");
+						}
+					?>
 				</button>
 			</div>
 		</div>
@@ -329,4 +394,5 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
   </body>
+
 </html>
