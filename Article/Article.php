@@ -25,7 +25,7 @@
 		<div class="row article-head">
 			<!-- 作者(照片+名稱) -->
 			<div class="col-md-9 col-sm-8 col-6 mid">
-				<img src="./image/user.png" class="img-fluid rounded-circle pic" >
+				<img src="../index/image/user.png" class="img-fluid rounded-circle pic" >
 				<p style="display: inline; font-size:3vmin; margin:0px 0px 0px 5px; font-family: setofont; font-weight:600">淡江大學</p>
 			</div>
 			<!-- 作者(照片+名稱) end-->
@@ -109,14 +109,14 @@ WTF
 		<div class="row mid hmes-head">
 			<!-- 第一名 -->
 			<div class="col-md-2 col-sm-2 col-3">
-				<img src="./image/1.png" class="img-fluid rounded-circle" style="height:8vh; width:auto;">
+				<img src="../index/image/1.png" class="img-fluid rounded-circle" style="height:8vh; width:auto;">
 			</div>
 			<!-- 第一名 end-->
 			<div class="col-md-10 col-sm-10 col-9 hmes-body">
 				<div class="row mid">
 					<!-- 作者照片-->
 					<div class="col-md-1 col-sm-1 col-2" style="margin:0px; padding:0px;">
-						<img src="./image/user.png" class="img-fluid rounded-circle" id="writer-pic">
+						<img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic">
 					</div>
 					<!-- 作者照片 end-->
 					<!-- 作者-->
@@ -128,7 +128,7 @@ WTF
 					<!-- 按讚數 --> 
 					<div class="col-md-3 col-sm-3 col-5">
 						<p style="display: inline; font-size:2.5vmin; font-weight:400; font-family:jf-openhuninn;">598</p>
-						<img src="./image/good-white.png" class="img-fluid" id="good-pic">
+						<img src="../index/image/good-white.png" class="img-fluid" id="good-pic">
 					</div>
 					<!-- 按讚數 end-->
 					
@@ -145,14 +145,14 @@ WTF
 		<div class="row mid hmes-head">
 			<!-- 第二名 -->
 			<div class="col-md-2 col-sm-2 col-3">
-				<img src="./image/2.png" class="img-fluid rounded-circle" style="height:8vh; width:auto;">
+				<img src="../index/image/2.png" class="img-fluid rounded-circle" style="height:8vh; width:auto;">
 			</div>
 			<!-- 第二名 end-->
 			<div class="col-md-10 col-sm-10 col-9 hmes-body">
 				<div class="row mid">
 					<!-- 作者照片-->
 					<div class="col-md-1 col-sm-1 col-2" style="margin:0px; padding:0px;">
-						<img src="./image/user.png" class="img-fluid rounded-circle" id="writer-pic">
+						<img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic">
 					</div>
 					<!-- 作者照片 end-->
 					<!-- 作者-->
@@ -164,7 +164,7 @@ WTF
 					<!-- 按讚數 --> 
 					<div class="col-md-3 col-sm-3 col-5">
 						<p style="display: inline; font-size:2.5vmin; font-weight:400; font-family:jf-openhuninn;">501</p>
-						<img src="./image/good-white.png" class="img-fluid" id="good-pic">
+						<img src="../index/image/good-white.png" class="img-fluid" id="good-pic">
 					</div>
 					<!-- 按讚數 end-->
 					
@@ -183,14 +183,14 @@ WTF
 		<div class="row mid hmes-head">
 			<!-- 第三名 -->
 			<div class="col-md-2 col-sm-2 col-3">
-				<img src="./image/3.png" class="img-fluid rounded-circle" style="height:8vh; width:auto;">
+				<img src="../index/image/3.png" class="img-fluid rounded-circle" style="height:8vh; width:auto;">
 			</div>
 			<!-- 第三名 end-->
 			<div class="col-md-10 col-sm-10 col-9 hmes-body">
 				<div class="row mid">
 					<!-- 作者照片-->
 					<div class="col-md-1 col-sm-1 col-2" style="margin:0px; padding:0px;">
-						<img src="./image/user.png" class="img-fluid rounded-circle" id="writer-pic">
+						<img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic">
 					</div>
 					<!-- 作者照片 end-->
 					<!-- 作者-->
@@ -202,7 +202,7 @@ WTF
 					<!-- 按讚數 --> 
 					<div class="col-md-3 col-sm-3 col-5">
 						<p style="display: inline; font-size:2.5vmin; font-weight:400; font-family:jf-openhuninn;">375</p>
-						<img src="./image/good-white.png" class="img-fluid" id="good-pic">
+						<img src="../index/image/good-white.png" class="img-fluid" id="good-pic">
 					</div>
 					<!-- 按讚數 end-->
 					
@@ -232,14 +232,14 @@ WTF
 		<div class="row mid hmes-head">
 			<!-- 圖片 -->
 			<div class="col-md-2 col-sm-2 col-3">
-				<img src="./image/mes.png" class="img-fluid rounded-circle" style="height:8vh; width:auto;">
+				<img src="../index/image/mes.png" class="img-fluid rounded-circle" style="height:8vh; width:auto;">
 			</div>
 			<!-- 圖片 end-->
 			<div class="col-md-10 col-sm-10 col-9 hmes-body">
 				<div class="row mid">
 					<!-- 作者照片-->
 					<div class="col-md-1 col-sm-1 col-2" style="margin:0px; padding:0px;">
-						<img src="./image/user.png" class="img-fluid rounded-circle" id="writer-pic">
+						<img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic">
 					</div>
 					<!-- 作者照片 end-->
 					<!-- 作者-->
@@ -251,7 +251,7 @@ WTF
 					<!-- 按讚數 --> 
 					<div class="col-md-3 col-sm-3 col-5">
 						<p style="display: inline; font-size:2.5vmin; font-weight:400; font-family:jf-openhuninn;">598</p>
-						<img src="./image/good-white.png" class="img-fluid" id="good-pic">
+						<img src="../index/image/good-white.png" class="img-fluid" id="good-pic">
 					</div>
 					<!-- 按讚數 end-->
 					
@@ -268,14 +268,14 @@ WTF
 		<div class="row mid hmes-head">
 			<!-- 圖片 -->
 			<div class="col-md-2 col-sm-2 col-3">
-				<img src="./image/mes.png" class="img-fluid rounded-circle" style="height:8vh; width:auto;">
+				<img src="../index/image/mes.png" class="img-fluid rounded-circle" style="height:8vh; width:auto;">
 			</div>
 			<!-- 圖片 end-->
 			<div class="col-md-10 col-sm-10 col-9 hmes-body">
 				<div class="row mid">
 					<!-- 作者照片-->
 					<div class="col-md-1 col-sm-1 col-2" style="margin:0px; padding:0px;">
-						<img src="./image/user.png" class="img-fluid rounded-circle" id="writer-pic">
+						<img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic">
 					</div>
 					<!-- 作者照片 end-->
 					<!-- 作者-->
@@ -287,7 +287,7 @@ WTF
 					<!-- 按讚數 --> 
 					<div class="col-md-3 col-sm-3 col-5">
 						<p style="display: inline; font-size:2.5vmin; font-weight:400; font-family:jf-openhuninn;">17</p>
-						<img src="./image/good-white.png" class="img-fluid" id="good-pic">
+						<img src="../index/image/good-white.png" class="img-fluid" id="good-pic">
 					</div>
 					<!-- 按讚數 end-->
 					

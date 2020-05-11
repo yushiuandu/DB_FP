@@ -4,6 +4,8 @@
 	if(!$link){
 	echo "no connect!";
 	}
+	$sql = "SELECT * FROM `article` ORDER BY `agree` DESC";
+
 	$page = "index";
 	if(isset($_GET['page'])){
 		$page = $_GET['page'];
@@ -151,18 +153,14 @@
 		<!-- 上面的按鈕 end-->
 		
 		<?php
-		// 最熱門排序
-			$sql = "SELECT * FROM `article` ORDER BY `agree` DESC";
-			$result = mysqli_query($link,$sql);
 		// 最新排序	
 			if($latest = 'true'){ 
 				$sql = "SELECT * FROM `article` ORDER BY `post_time` DESC";
-				$result = mysqli_query($link,$sql);
 			}else if($hot = 'true'){
 				$sql = "SELECT * FROM `article` ORDER BY `agree` DESC";
-				$result = mysqli_query($link,$sql);
 			}
-			
+
+			$result = mysqli_query($link,$sql);
 
 			if($result){
 				while($row = mysqli_fetch_assoc($result)){
@@ -177,7 +175,7 @@
 				<!-- 簡圖內容(上) -->
 				<div class="row art-head mid">
 					<!-- 作者-->
-					<div class="col-md-9 col-sm-8 col-8">
+					<div class="col-md-10 col-sm-9 col-9">
 						<img src="./image/user.png" class="img-fluid rounded-circle" id="writer-pic">
 						<p style="display: inline; font-size:2vmin; margin:0px;">
 							<?php
@@ -192,7 +190,7 @@
 					<!-- 作者 end-->
 
 					<!-- 按讚數 --> 
-					<div class="col-md-3 col-sm-4 col-4">
+					<div class="col-md-2 col-sm-3 col-3">
 						<h7 style="display: inline;"><?php echo $row['agree'];?></h7>
 						<img src="./image/good-white.png" class="img-fluid" id="good-pic">
 					</div>
@@ -203,7 +201,7 @@
 				<!-- 簡圖內容(中) -->
 				<div class="row art-body mid">
 					<!-- 標題 -->
-					<div class="col-md-9 col-sm-9 col-8 col-lg-9 text-truncate">
+					<div class="col-md-11 col-sm-11 col-11 col-lg-11 text-truncate">
 						<p class="font-weight-bold" style='font-size:3vmin; margin:0px;'><?php echo $row['title'];?></p>
 						<p style="color:gray; font-size:2vmin; margin:0px;">
 						<?php 
@@ -220,9 +218,9 @@
 					<!-- 標題 end -->
 
 					<!-- 圖檔 -->
-					<div class="col-md-3 col-sm-3 col-4 col-lg-3" >
+					<!-- <div class="col-md-3 col-sm-3 col-4 col-lg-3" >
 						<img src="./image/article-pic.jpg" id="article-pic">
-					</div>
+					</div> -->
 					<!-- 圖檔 end -->
 				</div>
 				<!-- 簡圖內容(中) end-->
