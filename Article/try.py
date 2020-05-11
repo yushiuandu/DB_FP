@@ -7,7 +7,8 @@ import pymysql
 import socket
 import re
 
-
+# 文章留言 http://dcard.tw/_api/posts/文章id/comments
+# 從最新發布的留言抓 http://dcard.tw/_api/posts/文章id/comments?after=floor數字
 #連接資料庫
 db = pymysql.connect( host = 'localhost' ,user = 'taigun', passwd ='ELn3yv07F567MwOF', db = 'taigun')
 #db = pymysql.connect(host = str(ip), user = 'root', passwd ='dub2233e', db = 'crul')
@@ -68,6 +69,12 @@ def find_Article(ids):
     reqjson = json.loads(Article_req.text)
     return reqjson
 
+def find_Comments(ids):
+    url = "http://dcard.tw/_api/posts/" + ids + "/comments"
+    comments_req = requests.get(url, headers = header)
+    reqjson = json.loads(comments_req.text)
+    return reqjson
+
 
 if(int(orgin_req.status_code)==200):
     print("Dcard伺服器狀態:連線中")
@@ -79,7 +86,6 @@ else:
 
 for i in range(0,10):
     
-    #INSERT INTO `article`(`AId`, `category`, `UId`, `agree`, `content`, `excerpt`, `post_time`, `anonymous`, `post_name`) VALUES ([value-1],[value-2],[value-3],[value-4],[value-5],[value-6],[value-7],[value-8],[value-9])
     #抓取文章的ID
     ids = find_id(orgin_req.text)
     #爬此篇文章
@@ -111,6 +117,29 @@ for i in range(0,10):
         except:
             db.rollback()
             print('fail!')
+    
+    c_reqjson = find_Comments(ids)
+
+    for j in range(0,30):
+        #留言
+        content = c_reqjson[j]['content']
+        #按讚數
+        likecount = c_reqjson[j]['likeCount']
+        #發布時間
+        date = c_reqjson["createdAt"]
+
+    if(db):
+        sql = "INSERT INTO article(AId, UId, content, likeCount, time, anonymous) VALUES (%s,%s,%s,%s,%s,%s)"
+        try:
+            cursor.execute(sql,(ids,'1',content,likecount,date,'0'))
+            db.commit()
+            print('success!')
+
+        except:
+            db.rollback()
+            print('fail!')
+
+    
             
           
 

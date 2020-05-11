@@ -6,7 +6,7 @@
 	}
 	$sql = "SELECT * FROM `article` ORDER BY `agree` DESC";
 
-	$page = "index";
+	$page = "index";	$latest = 'false';	$hot = 'false';	$id = 'flase';
 	if(isset($_GET['page'])){
 		$page = $_GET['page'];
 	}
@@ -154,12 +154,12 @@
 		
 		<?php
 		// 最新排序	
-			if($latest = 'true'){ 
+			if($latest == "true"){ 
 				$sql = "SELECT * FROM `article` ORDER BY `post_time` DESC";
-			}else if($hot = 'true'){
+			}else if($hot == "true"){
 				$sql = "SELECT * FROM `article` ORDER BY `agree` DESC";
 			}
-
+			
 			$result = mysqli_query($link,$sql);
 
 			if($result){
