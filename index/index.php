@@ -167,6 +167,9 @@
 			if($result){
 				while($row = mysqli_fetch_assoc($result)){
 					$id = $row['AId'];
+					if($row['category'] == 'relationship'){
+						$category = '感情版';
+					}
 		?>
 		<!-- 文章簡圖區 -->
 		<a href="../Article/Article.php?aid=<?php echo $id ?>" style="color:black; text-decoration:none;">
@@ -230,7 +233,7 @@
 					<div class="col-md-12 col-sm-12 col-12">
 						<p style=' font-size:1.75vmin; margin:0px; color:gray;'>
 							<?php
-								echo $row['category'];
+								echo $category;
 								echo ' - ';
 								echo $row['post_time'];
 							?>
