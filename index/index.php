@@ -5,8 +5,8 @@
 	echo "no connect!";
 	}
 	$sql = "SELECT * FROM `article` ORDER BY `agree` DESC";
-
-	$page = "index";	$latest = 'false';	$hot = 'false';	$id = 'flase';
+	// 將一切都先初始化
+	$page = 'index';	$latest = 'false';	$hot = 'false';	$id = 'flase';	$forum = 'all';
 	if(isset($_GET['page'])){
 		$page = $_GET['page'];
 	}
@@ -19,11 +19,9 @@
 	if(isset($_GET['latest'])){
 		$latest = $_GET['latest'];
 	}
-	if($page = 'logout'){
+	if($page == 'logout'){
 		$page = 'index';
 	}
-
-	
 ?>
 
 <!doctype html>
@@ -39,22 +37,32 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="./my.css" rel="stylesheet" type="text/css">
     <title>抬槓</title>
+	<script src="//s3-ap-northeast-1.amazonaws.com/justfont-user-script/jf-60019.js"></script>
+	<script src="//s3-ap-northeast-1.amazonaws.com/justfont-user-script/jf-60019.js"></script>
   </head>
 
   <body>
   	<!-- 導覽列 -->
     <div class="head-nav">
+		
+	
       <div class="row" >
-		  <div class="col-md-9 col-sm-6 mr-auto">
+	  	<nav class="navbar-expand-lg navbar-default navbar-light">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+		</nav>
+
+		  <div class="col-md-9 col-sm-5 mr-auto">
 		  	<a class="navbar-brand" href="index.php">
         		<img src="./image/Tai-gun.png" class="Tai-gun">
       		</a>
 		  </div>
 		  <div class="">
-			<form class="form-inline">
-        		<input class="form-control mr-sm-2" type="search" placeholder="搜尋...." style="width:125px;">
-        		<button type="button" class="btn btn-light btn-sm" type="submit">搜尋</button>
-      		</form>
+			<form class="form-inline" method="post" action="../index/search.php">
+				<input class="form-control mr-sm-2" type="search" placeholder="搜尋標題...." style="width:125px;" name="key">
+				<button type="sumbit" class="btn btn-light btn-sm" type="submit">搜尋</button>
+			</form>
 		  </div>	
 	  </div>
 	</div>
@@ -65,58 +73,58 @@
     <!-- 左半部 -->
     <div class="col-md-2" id="left">
       	<nav class=" navbar-expand-lg navbar-default navbar-light" >
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+			<!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
-			</button>
+			</button> -->
 			<div class="collapse navbar-collapse" id="navbarNavDropdown">
 				<ul class="navbar-nav  flex-column">
 					<li class="nav-item dropdown">
 						<img src="./image/logo.png" width="auto" height="80">
 					</li>
 					<!-- 所有看板 -->
-					<li class="nav-item dropdown">
+					<li class="nav-item dropdown" style="font-family:jf-openhuninn;">
 						<div class='link-head' id="all">
 						<div id="headingOne">
 							<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
 							所有看板</a>
 						</div>
 						<div id="collapseOne" class="collapse link-body" aria-labelledby="headingOne" data-parent="#all">
-							<a class="dropdown-item" href="../index/index.php?id=food">美食版</a>
-							<a class="dropdown-item" href="../index/index.php?id=makeup">美妝穿搭</a>
-							<a class="dropdown-item" href="../index/index.php?id=travel">旅遊版</a>
-							<a class="dropdown-item" href="../index/index.php?id=trending">新聞版</a>
-							<a class="dropdown-item" href="../index/index.php?id=funny">有趣版</a>
-							<a class="dropdown-item" href="../index/index.php?id=relationship">感情版</a>
-							<a class="dropdown-item" href="../index/index.php?id=other">其他版</a>
+							<a class="dropdown-item" href="../index/index.php?page=index&id=food">美食版</a>
+							<a class="dropdown-item" href="../index/index.php?page=index&id=makeup">美妝穿搭</a>
+							<a class="dropdown-item" href="../index/index.php?page=index&id=travel">旅遊版</a>
+							<a class="dropdown-item" href="../index/index.php?page=index&id=trending">新聞版</a>
+							<a class="dropdown-item" href="../index/index.php?page=index&id=funny">有趣版</a>
+							<a class="dropdown-item" href="../index/index.php?page=index&id=relationship">感情版</a>
+							<a class="dropdown-item" href="../index/index.php?page=index&id=other">其他版</a>
 						</div>
 						</div>
 					</li><!-- 所有看板end -->
 					<!-- 訂閱看板 -->
-					<li class="nav-item dropdown">
+					<li class="nav-item dropdown" style="font-family:jf-openhuninn;">
 						<div class='link-head' id="follow">
 						<div id="headingTwo">
 							<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
 							訂閱看板</a>
 						</div>
 							<div id="collapseTwo" class="collapse link-body" aria-labelledby="headingTwo" data-parent="#follow">
-								<a class="dropdown-item" href="../index/index.php?id=funny">美食版</a>
-								<a class="dropdown-item" href="../index/index.php?id=funny">美妝穿搭</a>
-								<a class="dropdown-item" href="../index/index.php?id=funny">旅遊版</a>
+								<a class="dropdown-item" href="../index/index.php?page=index&id=funny">美食版</a>
+								<a class="dropdown-item" href="../index/index.php?page=index&id=funny">美妝穿搭</a>
+								<a class="dropdown-item" href="../index/index.php?page=index&id=funny">旅遊版</a>
 							</div>
 						</div>
 					</li>
 					<!-- 訂閱看板 end-->
 					<!-- 熱門看板 -->
-					<li class="nav-item dropdown">
+					<li class="nav-item dropdown" style="font-family:jf-openhuninn;"> 
 						<div class='link-head' id="hot">
 						<div id="headingThree">
 							<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
 							熱門看板</a>
 						</div>
 						<div id="collapseThree" class="collapse link-body" aria-labelledby="headingThree" data-parent="#hot">
-							<a class="dropdown-item" href="../index.php?id=funny">有趣版</a>
-							<a class="dropdown-item" href="../index.php?id=relationship">感情版</a>
-							<a class="dropdown-item" href="../index.php?id=fun">其他版</a>
+							<a class="dropdown-item" href="../index.php?page=index&id=funny">有趣版</a>
+							<a class="dropdown-item" href="../index.php?page=index&id=relationship">感情版</a>
+							<a class="dropdown-item" href="../index.php?page=index&id=fun">其他版</a>
 						</div>
 						</div>
 					</li>
@@ -145,8 +153,15 @@
   						排序
 					</button>
 					<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-						<a class="dropdown-item" href="../index/index.php?hot=true">熱門</a>
-						<a class="dropdown-item" href="../index/index.php?latest=true">最新</a>
+						<?php
+							if(!(isset($forum))){
+								echo '<a class="dropdown-item" href="../index/index.php?page=index&id=all&hot=true">熱門</a>';
+								echo '<a class="dropdown-item" href="../index/index.php?page=index&id=all&latestt=true">熱門</a>';
+							}else{
+								echo '<a class="dropdown-item" href="../index/index.php?page=index&hot=true">熱門</a>';
+								echo '<a class="dropdown-item" href="../index/index.php?page=index&latest=true">最新</a>';
+							}
+						?>
 					</div>
 				</div>
 		</div>
@@ -154,23 +169,27 @@
 		
 		<?php
 		// 最新排序	
-			if($latest == "true"){ 
+			if($forum == 'all'){
+				if($latest == "true"){ 
 				$sql = "SELECT * FROM `article` ORDER BY `post_time` DESC";
-			}else if($hot == "true"){
-				$sql = "SELECT * FROM `article` ORDER BY `agree` DESC";
+				}else if($hot == "true"){
+					$sql = "SELECT * FROM `article` ORDER BY `agree` DESC";
+				}
+			}else{
+				if(isset($forum)){
+					$sql = "SELECT * FROM `article` WHERE `category` = \"$forum\" ORDER BY `agree` DESC";
+				}
 			}
-			
 			$result = mysqli_query($link,$sql);
 
 			if($result){
+				include("../index/fourm.php");
 				while($row = mysqli_fetch_assoc($result)){
 					$id = $row['AId'];
-					if($row['category'] == 'relationship'){
-						$category = '感情版';
-					}
+					$category = findFourm($row['category']);
 		?>
 		<!-- 文章簡圖區 -->
-		<a href="../Article/Article.php?aid=<?php echo $id ?>" style="color:black; text-decoration:none;">
+		<a href="../index/index.php?page=article&aid=<?php echo $id ?>" style="color:black; text-decoration:none;">
 			<div class="art">
 				<!-- 簡圖內容(上) -->
 				<div class="row art-head mid">
@@ -203,16 +222,10 @@
 					<!-- 標題 -->
 					<div class="col-md-11 col-sm-11 col-11 col-lg-11 text-truncate">
 						<p class="font-weight-bold" style='font-size:3vmin; margin:0px;'><?php echo $row['title'];?></p>
-						<p style="color:gray; font-size:2vmin; margin:0px;">
+						<p style="color:gray; font-size:2vmin; margin:0px;font-family:jf-openhuninn;">
 						<?php 
 							echo $row['excerpt'];
 						?>
-						<!-- 不知道我是不是專門生下來氣我媽的
-						幾乎每年母親節禮物我都踢到鐵板
-						外加我媽又毛很多
-						每年禮物都被嫌的一無是處
-						每年被澆的冷水我不知道可以挑戰多少次ice bucket challenge 了
-						要加s -->
 						</p>
 					</div>
 					<!-- 標題 end -->
@@ -245,13 +258,13 @@
 		</a>
 		<!-- 文章區 -->
 		
-				<?php }//end while
-						} //end result if?>
-		
 		
   		<?php
 		// 註冊頁面 如果按還不是會員 會跳轉到 member/register.php的頁面 
-		  }if($page == 'register'){
+				}//end while
+			}//end result  
+		}
+		  	if($page == 'register'){
 			$page = 'index';
 			include("../member/register.php"); }
 		?> 

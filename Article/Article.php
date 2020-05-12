@@ -1,9 +1,29 @@
 <?php
-  $page = "index";
-  if(isset($_GET['page'])){
-    $page = $_GET['page'];
-  }
+	#get page
+	$page = "index";
+	if(isset($_GET['page'])){
+		$page = $_GET['page'];
+	}
+	#connect to sql
+	$link = mysqli_connect("localhost","taigun","ELn3yv07F567MwOF","taigun");
+	if(!$link){
+		echo "no connect!";
+	}
+	#get article id
+	$aid = "";
+	if(isset($_GET['aid'])){
+		$aid = $_GET['aid'];
+	}
+
+	$sql = "SELECT * FROM `article` WHERE `AId` = \"$aid\" ";
+	$result = mysqli_query($link,$sql);
+	if($result){
+		$rank = 0;
+		include("../index/fourm.php");
+		$row = mysqli_fetch_assoc($result);
+		$category = findFourm($row['category']);
 ?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -20,21 +40,31 @@
 	<script src="//s3-ap-northeast-1.amazonaws.com/justfont-user-script/jf-60019.js"></script>
 </head>
   <body>
+	<!-- 文章 -->
     <div class="article">
         <!-- 文章內容(上) -->
 		<div class="row article-head">
 			<!-- 作者(照片+名稱) -->
 			<div class="col-md-9 col-sm-8 col-6 mid">
 				<img src="../index/image/user.png" class="img-fluid rounded-circle pic" >
-				<p style="display: inline; font-size:3vmin; margin:0px 0px 0px 5px; font-family: setofont; font-weight:600">淡江大學</p>
+				<p style="display: inline; font-size:3vmin; margin:0px 0px 0px 5px; font-family: setofont; font-weight:600">
+				<?php
+				if($row['anonymous']==0){
+					echo '匿名';
+				}else{
+					echo $row['post_name'];
+				}
+				?></p>
 			</div>
 			<!-- 作者(照片+名稱) end-->
-
-		<!-- 看板+發文時間 --> 
-			<div class="col-md-3 col-sm-4 col-6 bottom">
-                <p style=' font-size:2vmin; margin:0px; font-family: setofont; font-weight:600;'>有趣版 - 5月5日 20:35</p>
+			<div class></div>
+			<!-- 看板+發文時間 --> 
+			<div class="col-md-4 col-sm-5 col-7 bottom">
+                <p style=' font-size:2.2vmin; margin:0px; font-family: setofont; font-weight:600;'>
+				<?php echo $category.' - '.$row['post_time']; ?>
+				</p>
 			</div>
-		<!-- 看板+發文時間 end-->
+			<!-- 看板+發文時間 end-->
 		</div>
 		<!-- 文章內容(上) end-->
 				
@@ -42,39 +72,10 @@
 		<div class="row article-body mid">
 			<div class="col-md-12 col-sm-12 col-12 col-lg-12">
   				<!-- 標題 -->
-                <p class="font-weight-bold" style='font-size:5vmin; margin:20px 10px 20px 10px; font-family: setofont; font-weight:400;'>
-                    每年母親節，我都覺得我像個智障
-				</p>
-				<!-- 標題 end -->
+				<p class="font-weight-bold" style='font-size:5vmin; margin:20px 10px 20px 10px; font-family: 微軟正黑體; font-weight:400;'>
+                <?php echo $row['title'];?></p>
 				<!-- 文章內容 -->
-<p class='article-word'>不知道我是不是專門生下來氣我媽的
-幾乎每年母親節禮物我都踢到鐵板
-外加我媽又毛很多
-每年禮物都被嫌的一無是處
-每年被澆的冷水我不知道可以挑戰多少次ice bucket challenge 了
-要加s
-
-所以
-前年我放棄 我只帶他去吃飯
-餐廳我也做了很多功課
-but
-沒送禮物還是被唸沒心@&*@!&(*$#*@(#^&
-我真的把我媽醒派ki  
-
-但 肥我越挫越勇
-去年送蠟燭，還是女孩的夢想牌
-(是嗎? 是吧?)
-
-結果
-
-：你是多急著要幫我點蠟燭 ???????
-
-啊 忘記他(我媽)不是女孩了
-
-所以這莫名其妙貴到靠北的東西才在這呀
-WTF
-</p>
-<!-- 文章內容 end-->
+				<p class='article-word'><?php echo $row['content'];?></p>				
   				<!-- 文章tag -->
 				<div style="margin:10px 10px 0px 10px; font-family: setofont; font-weight:600;">
 					<button type="button" class="btn btn-sm btn-light">#討好媽媽</button>
@@ -98,20 +99,41 @@ WTF
 		</div>
 		<!-- 文章內容(下) end-->
 	</div>
+	<!-- article end -->
+	<?php } //end if ?>
+	<!-- 熱門留言區 -->
 	<div class="article">
         <!-- 熱門排行榜(上) -->
 		<div class="row hmes-head mid" style='border-bottom: 1px black solid;'>
 			<p class='mes-head'>火辣辣排行榜</p>
 		</div>
 		<!-- 熱門排行榜(上) end-->
+
+		<?php 
+		
+			$sql_hot = "SELECT * FROM `comment` WHERE `AId` = \"$aid\" ORDER BY `likeCount` DESC";
+			$result_hot = mysqli_query($link,$sql_hot);
+			if($result_hot){
+				for ($rank=1 ;$rank < 4; $rank++){
+					$row_hot = mysqli_fetch_assoc($result_hot);
+					
+		?>
 				
 		<!-- 熱門排行榜(下) -->
 		<div class="row mid hmes-head">
-			<!-- 第一名 -->
+			<!-- 顯示名次 -->
 			<div class="col-md-2 col-sm-2 col-3">
-				<img src="../index/image/1.png" class="img-fluid rounded-circle" style="height:8vh; width:auto;">
+			<?php 
+				if($rank == 1){
+					echo '<img src="../index/image/1.png" class="img-fluid rounded-circle" style="height:8vh; width:auto;">';
+				}else if ($rank == 2){
+					echo '<img src="../index/image/2.png" class="img-fluid rounded-circle" style="height:8vh; width:auto;">';
+				}else{
+					echo '<img src="../index/image/3.png" class="img-fluid rounded-circle" style="height:8vh; width:auto;">';
+				}
+			?>	
 			</div>
-			<!-- 第一名 end-->
+			<!-- 顯示熱門留言 -->
 			<div class="col-md-10 col-sm-10 col-9 hmes-body">
 				<div class="row mid">
 					<!-- 作者照片-->
@@ -121,13 +143,19 @@ WTF
 					<!-- 作者照片 end-->
 					<!-- 作者-->
 					<div class="col-md-8 col-sm-8 col-5" style="margin:0px; padding:0px;">
-						<p class='w'>哎呦阿施</p>
+						<p class='w'><?php 
+						if($row_hot['anonymous'] == 0){
+							echo '匿名';
+						}else{
+							echo $row_hot['post_name'];
+						}
+						?></p>
 					</div>
 					<!-- 作者 end-->
 
 					<!-- 按讚數 --> 
 					<div class="col-md-3 col-sm-3 col-5">
-						<p style="display: inline; font-size:2.5vmin; font-weight:400; font-family:jf-openhuninn;">598</p>
+						<p style="display: inline; font-size:2.5vmin; font-weight:400; font-family:jf-openhuninn;"><?php echo $row_hot['likeCount'];?></p>
 						<img src="../index/image/good-white.png" class="img-fluid" id="good-pic">
 					</div>
 					<!-- 按讚數 end-->
@@ -135,108 +163,44 @@ WTF
 					<div class="col-md-1 col-sm-1 col-1" style="margin:0px; padding:0px;"></div>
 					<!-- 留言內容-->
 					<div class="col-md-11 col-sm-11 col-11" style="margin:0px; padding:0px;">
-						<p class="hmes">包紅包！！！！
-沒得嫌了吧</p>
+						<p class="hmes"><?php echo $row_hot['content'];?></p>
 					</div>
 					<!-- 留言內容 end-->
 				</div>
-			</div>
+			</div>				
 		</div>
-		<div class="row mid hmes-head">
-			<!-- 第二名 -->
-			<div class="col-md-2 col-sm-2 col-3">
-				<img src="../index/image/2.png" class="img-fluid rounded-circle" style="height:8vh; width:auto;">
-			</div>
-			<!-- 第二名 end-->
-			<div class="col-md-10 col-sm-10 col-9 hmes-body">
-				<div class="row mid">
-					<!-- 作者照片-->
-					<div class="col-md-1 col-sm-1 col-2" style="margin:0px; padding:0px;">
-						<img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic">
-					</div>
-					<!-- 作者照片 end-->
-					<!-- 作者-->
-					<div class="col-md-8 col-sm-8 col-5" style="margin:0px; padding:0px;">
-						<p class="w">中原大學</p>
-					</div>
-					<!-- 作者 end-->
-
-					<!-- 按讚數 --> 
-					<div class="col-md-3 col-sm-3 col-5">
-						<p style="display: inline; font-size:2.5vmin; font-weight:400; font-family:jf-openhuninn;">501</p>
-						<img src="../index/image/good-white.png" class="img-fluid" id="good-pic">
-					</div>
-					<!-- 按讚數 end-->
-					
-					<div class="col-md-1 col-sm-1 col-1" style="margin:0px; padding:0px;"></div>
-					<!-- 留言內容-->
-					<div class="col-md-11 col-sm-11 col-11" style="margin:0px; padding:0px;">
-						<p class="hmes">你好用心喔😂 但我覺得口紅同牌應該沒問題吧
-如果你媽喜歡她現在自己用的那隻
-一樣的顏色 喔耶續命+1
-不一樣顏色 喔耶有不同顏色了</p>
-					</div>
-					<!-- 留言內容 end-->
-				</div>
-			</div>
-		</div>
-		<div class="row mid hmes-head">
-			<!-- 第三名 -->
-			<div class="col-md-2 col-sm-2 col-3">
-				<img src="../index/image/3.png" class="img-fluid rounded-circle" style="height:8vh; width:auto;">
-			</div>
-			<!-- 第三名 end-->
-			<div class="col-md-10 col-sm-10 col-9 hmes-body">
-				<div class="row mid">
-					<!-- 作者照片-->
-					<div class="col-md-1 col-sm-1 col-2" style="margin:0px; padding:0px;">
-						<img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic">
-					</div>
-					<!-- 作者照片 end-->
-					<!-- 作者-->
-					<div class="col-md-8 col-sm-8 col-5" style="margin:0px; padding:0px;">
-						<p class='w'>嘉南藥理大學</p>
-					</div>
-					<!-- 作者 end-->
-
-					<!-- 按讚數 --> 
-					<div class="col-md-3 col-sm-3 col-5">
-						<p style="display: inline; font-size:2.5vmin; font-weight:400; font-family:jf-openhuninn;">375</p>
-						<img src="../index/image/good-white.png" class="img-fluid" id="good-pic">
-					</div>
-					<!-- 按讚數 end-->
-					
-					<div class="col-md-1 col-sm-1 col-1" style="margin:0px; padding:0px;"></div>
-					<!-- 留言內容-->
-					<div class="col-md-11 col-sm-11 col-11" style="margin:0px; padding:0px;">
-						<p class="hmes">我已經被嫌到放棄了
-日式嫌生，台式嫌沒心意，歐式嫌不對味，韓式嫌東西難吃，泰式越式嫌酸甜辣，烤肉嫌臭，火鍋嫌熱，壽喜燒嫌重口味，問想吃什麼又說隨便
-禮物送自己做的不對，送設計師品牌也不對，送專櫃還能被嫌敗家，然後又到處說我都不買禮物給他
-這幾年都乾脆帶他隨便吃一頓千元餐廳…</p>
-					</div>
-					<!-- 留言內容 end-->
-				</div>
-			</div>
-		</div>
-		<!-- 熱門排行榜(下) end-->
+		<?php }
+		} ?>
 	</div>
-	  
+
+	
+	<!-- 留言區 -->
 	<div class="article">
         <!-- 留言區(上) -->
 		<div class="row hmes-head mid" style='border-bottom: 1px black solid;'>
 			<p class='mes-head'>留言區</p>
 		</div>
 		<!-- 留言區(上) end-->
+
+		<?php 
+		
+			$sql_c = "SELECT * FROM `comment` WHERE `AId` = \"$aid\" ORDER BY `time` ASC";
+			$result_c = mysqli_query($link,$sql_c);
+			if($result_c){
 				
+				while($row_c = mysqli_fetch_assoc($result_c)){
+		?>
+	
 		<!-- 留言區(下) -->
-		<div class="row mid hmes-head">
+		<div class="row mid hmes-head justify-content-center">
 			<!-- 圖片 -->
-			<div class="col-md-2 col-sm-2 col-3">
+			<!-- <div class="col-md-2 col-sm-2 col-3">
 				<img src="../index/image/mes.png" class="img-fluid rounded-circle" style="height:8vh; width:auto;">
-			</div>
+			</div> -->
 			<!-- 圖片 end-->
-			<div class="col-md-10 col-sm-10 col-9 hmes-body">
-				<div class="row mid">
+			<!-- 留言區 -->
+			<div class="col-md-10 col-sm-10 col-9 hmes-body ">
+				<div class="row mid ">
 					<!-- 作者照片-->
 					<div class="col-md-1 col-sm-1 col-2" style="margin:0px; padding:0px;">
 						<img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic">
@@ -244,13 +208,19 @@ WTF
 					<!-- 作者照片 end-->
 					<!-- 作者-->
 					<div class="col-md-8 col-sm-8 col-5" style="margin:0px; padding:0px;">
-						<p class='w'>哎呦阿施</p>
+						<p class='w'><?php 
+							if($row_c['anonymous'] == 0){
+								echo '匿名';
+							}else{
+								echo $row_c['post_name'];
+							}
+						?></p>
 					</div>
 					<!-- 作者 end-->
 
 					<!-- 按讚數 --> 
 					<div class="col-md-3 col-sm-3 col-5">
-						<p style="display: inline; font-size:2.5vmin; font-weight:400; font-family:jf-openhuninn;">598</p>
+						<p style="display: inline; font-size:2.5vmin; font-weight:400; font-family:jf-openhuninn;"><?php echo $row_c['likeCount'];?></p>
 						<img src="../index/image/good-white.png" class="img-fluid" id="good-pic">
 					</div>
 					<!-- 按讚數 end-->
@@ -258,50 +228,21 @@ WTF
 					<div class="col-md-1 col-sm-1 col-1" style="margin:0px; padding:0px;"></div>
 					<!-- 留言內容-->
 					<div class="col-md-11 col-sm-11 col-11" style="margin:0px; padding:0px;">
-						<p class="hmes">包紅包！！！！
-沒得嫌了吧</p>
+						<p class="hmes"><?php echo $row_c['content'];?></p>
 					</div>
 					<!-- 留言內容 end-->
 				</div>
 			</div>
-		</div>
-		<div class="row mid hmes-head">
-			<!-- 圖片 -->
-			<div class="col-md-2 col-sm-2 col-3">
-				<img src="../index/image/mes.png" class="img-fluid rounded-circle" style="height:8vh; width:auto;">
-			</div>
-			<!-- 圖片 end-->
-			<div class="col-md-10 col-sm-10 col-9 hmes-body">
-				<div class="row mid">
-					<!-- 作者照片-->
-					<div class="col-md-1 col-sm-1 col-2" style="margin:0px; padding:0px;">
-						<img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic">
-					</div>
-					<!-- 作者照片 end-->
-					<!-- 作者-->
-					<div class="col-md-8 col-sm-8 col-5" style="margin:0px; padding:0px;">
-						<p class='w'>Ethan757</p>
-					</div>
-					<!-- 作者 end-->
-
-					<!-- 按讚數 --> 
-					<div class="col-md-3 col-sm-3 col-5">
-						<p style="display: inline; font-size:2.5vmin; font-weight:400; font-family:jf-openhuninn;">17</p>
-						<img src="../index/image/good-white.png" class="img-fluid" id="good-pic">
-					</div>
-					<!-- 按讚數 end-->
-					
-					<div class="col-md-1 col-sm-1 col-1" style="margin:0px; padding:0px;"></div>
-					<!-- 留言內容-->
-					<div class="col-md-11 col-sm-11 col-11" style="margin:0px; padding:0px;">
-						<p class="hmes">嫌太少</p>
-					</div>
-					<!-- 留言內容 end-->
-				</div>
-			</div>
+			<!-- 留言區end -->
 		</div>
 		<!-- 留言區(下) end-->
+
+		<?php 
+					}//end while
+				}//end if
+		?>
 	</div>
+	
 	
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
