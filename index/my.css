@@ -272,7 +272,6 @@ button img{
 }
 .right{
   text-align: right;
-  margin:20px;
 }
 .w{
   display: inline;
@@ -284,4 +283,12 @@ button img{
 }
 .article-word.img{
   
+}
+.pointer{
+  cursor: pointer;
+}
+.gbb{
+  height: 30px;
+  width: 30px;
+  margin:10px;
 }
