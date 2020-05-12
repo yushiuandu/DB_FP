@@ -185,15 +185,15 @@
 		?>
 	
 		<!-- 留言區(下) -->
-		<div class="row mid hmes-head">
+		<div class="row mid hmes-head justify-content-center">
 			<!-- 圖片 -->
-			<div class="col-md-2 col-sm-2 col-3">
+			<!-- <div class="col-md-2 col-sm-2 col-3">
 				<img src="../index/image/mes.png" class="img-fluid rounded-circle" style="height:8vh; width:auto;">
-			</div>
+			</div> -->
 			<!-- 圖片 end-->
 			<!-- 留言區 -->
-			<div class="col-md-10 col-sm-10 col-9 hmes-body">
-				<div class="row mid">
+			<div class="col-md-10 col-sm-10 col-9 hmes-body ">
+				<div class="row mid ">
 					<!-- 作者照片-->
 					<div class="col-md-1 col-sm-1 col-2" style="margin:0px; padding:0px;">
 						<img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic">
