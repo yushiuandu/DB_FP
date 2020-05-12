@@ -37,6 +37,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="./my.css" rel="stylesheet" type="text/css">
     <title>抬槓</title>
+	<script src="//s3-ap-northeast-1.amazonaws.com/justfont-user-script/jf-60019.js"></script>
+	<script src="//s3-ap-northeast-1.amazonaws.com/justfont-user-script/jf-60019.js"></script>
   </head>
 
   <body>
@@ -201,7 +203,7 @@
 					<!-- 標題 -->
 					<div class="col-md-11 col-sm-11 col-11 col-lg-11 text-truncate">
 						<p class="font-weight-bold" style='font-size:3vmin; margin:0px;'><?php echo $row['title'];?></p>
-						<p style="color:gray; font-size:2vmin; margin:0px;">
+						<p style="color:gray; font-size:2vmin; margin:0px;font-family:jf-openhuninn">
 						<?php 
 							echo $row['excerpt'];
 						?>
