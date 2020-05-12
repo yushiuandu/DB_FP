@@ -74,7 +74,7 @@
 						<img src="./image/logo.png" width="auto" height="80">
 					</li>
 					<!-- 所有看板 -->
-					<li class="nav-item dropdown">
+					<li class="nav-item dropdown" style="font-family:jf-openhuninn;">
 						<div class='link-head' id="all">
 						<div id="headingOne">
 							<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
@@ -92,7 +92,7 @@
 						</div>
 					</li><!-- 所有看板end -->
 					<!-- 訂閱看板 -->
-					<li class="nav-item dropdown">
+					<li class="nav-item dropdown" style="font-family:jf-openhuninn;">
 						<div class='link-head' id="follow">
 						<div id="headingTwo">
 							<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
@@ -107,7 +107,7 @@
 					</li>
 					<!-- 訂閱看板 end-->
 					<!-- 熱門看板 -->
-					<li class="nav-item dropdown">
+					<li class="nav-item dropdown" style="font-family:jf-openhuninn;"> 
 						<div class='link-head' id="hot">
 						<div id="headingThree">
 							<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
@@ -203,7 +203,7 @@
 					<!-- 標題 -->
 					<div class="col-md-11 col-sm-11 col-11 col-lg-11 text-truncate">
 						<p class="font-weight-bold" style='font-size:3vmin; margin:0px;'><?php echo $row['title'];?></p>
-						<p style="color:gray; font-size:2vmin; margin:0px;font-family:jf-openhuninn">
+						<p style="color:gray; font-size:2vmin; margin:0px;font-family:jf-openhuninn;">
 						<?php 
 							echo $row['excerpt'];
 						?>
