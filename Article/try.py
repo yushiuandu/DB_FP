@@ -22,7 +22,7 @@ header = {
     'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.110 Safari/537.36'
 }
 #選擇美食版做爬文
-url = "https://www.dcard.tw/_api/forums/relationship/posts?popular=true"
+url = "https://www.dcard.tw/_api/forums/funny/posts?popular=true"
 orgin_req = requests.get(url, headers = header)
 
 

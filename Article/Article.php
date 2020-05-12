@@ -19,8 +19,9 @@
 	$result = mysqli_query($link,$sql);
 	if($result){
 		$rank = 0;
+		include("../index/fourm.php");
 		$row = mysqli_fetch_assoc($result);
-		
+		$category = findFourm($row['category']);
 ?>
 
 <!doctype html>
@@ -47,14 +48,20 @@
 			<div class="col-md-9 col-sm-8 col-6 mid">
 				<img src="../index/image/user.png" class="img-fluid rounded-circle pic" >
 				<p style="display: inline; font-size:3vmin; margin:0px 0px 0px 5px; font-family: setofont; font-weight:600">
-				淡江大學</p>
+				<?php
+				if($row['anonymous']==0){
+					echo '匿名';
+				}else{
+					echo $row['post_name'];
+				}
+				?></p>
 			</div>
 			<!-- 作者(照片+名稱) end-->
-
+			<div class></div>
 			<!-- 看板+發文時間 --> 
-			<div class="col-md-3 col-sm-4 col-6 bottom">
-                <p style=' font-size:2vmin; margin:0px; font-family: setofont; font-weight:600;'>
-				<?php echo $row['category'].' - '.$row['post_time']; ?>
+			<div class="col-md-4 col-sm-5 col-7 bottom">
+                <p style=' font-size:2.2vmin; margin:0px; font-family: setofont; font-weight:600;'>
+				<?php echo $category.' - '.$row['post_time']; ?>
 				</p>
 			</div>
 			<!-- 看板+發文時間 end-->
@@ -65,8 +72,8 @@
 		<div class="row article-body mid">
 			<div class="col-md-12 col-sm-12 col-12 col-lg-12">
   				<!-- 標題 -->
-                <p class="font-weight-bold" style='font-size:5vmin; margin:20px 10px 20px 10px; font-family: 微軟正黑體; font-weight:400;'>
-                    <?php echo $row['title'];?></p>
+				<p class="font-weight-bold" style='font-size:5vmin; margin:20px 10px 20px 10px; font-family: 微軟正黑體; font-weight:400;'>
+                <?php echo $row['title'];?></p>
 				<!-- 文章內容 -->
 				<p class='article-word'><?php echo $row['content'];?></p>				
   				<!-- 文章tag -->

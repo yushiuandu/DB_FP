@@ -6,7 +6,7 @@
 	}
 	$sql = "SELECT * FROM `article` ORDER BY `agree` DESC";
 	// 將一切都先初始化
-	$page = 'index';	$latest = 'false';	$hot = 'false';	$id = 'flase';
+	$page = 'index';	$latest = 'false';	$hot = 'false';	$id = 'flase';	$forum = 'all';
 	if(isset($_GET['page'])){
 		$page = $_GET['page'];
 	}
@@ -59,9 +59,9 @@
       		</a>
 		  </div>
 		  <div class="">
-			<form class="form-inline">
-				<input class="form-control mr-sm-2" type="search" placeholder="搜尋...." style="width:125px;">
-				<button type="button" class="btn btn-light btn-sm" type="submit">搜尋</button>
+			<form class="form-inline" method="post" action="../index/search.php">
+				<input class="form-control mr-sm-2" type="search" placeholder="搜尋標題...." style="width:125px;" name="key">
+				<button type="sumbit" class="btn btn-light btn-sm" type="submit">搜尋</button>
 			</form>
 		  </div>	
 	  </div>
@@ -153,8 +153,15 @@
   						排序
 					</button>
 					<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-						<a class="dropdown-item" href="../index/index.php?page=index&hot=true">熱門</a>
-						<a class="dropdown-item" href="../index/index.php?page=index&latest=true">最新</a>
+						<?php
+							if(!(isset($forum))){
+								echo '<a class="dropdown-item" href="../index/index.php?page=index&id=all&hot=true">熱門</a>';
+								echo '<a class="dropdown-item" href="../index/index.php?page=index&id=all&latestt=true">熱門</a>';
+							}else{
+								echo '<a class="dropdown-item" href="../index/index.php?page=index&hot=true">熱門</a>';
+								echo '<a class="dropdown-item" href="../index/index.php?page=index&latest=true">最新</a>';
+							}
+						?>
 					</div>
 				</div>
 		</div>
@@ -162,20 +169,24 @@
 		
 		<?php
 		// 最新排序	
-			if($latest == "true"){ 
+			if($forum == 'all'){
+				if($latest == "true"){ 
 				$sql = "SELECT * FROM `article` ORDER BY `post_time` DESC";
-			}else if($hot == "true"){
-				$sql = "SELECT * FROM `article` ORDER BY `agree` DESC";
+				}else if($hot == "true"){
+					$sql = "SELECT * FROM `article` ORDER BY `agree` DESC";
+				}
+			}else{
+				if(isset($forum)){
+					$sql = "SELECT * FROM `article` WHERE `category` = \"$forum\" ORDER BY `agree` DESC";
+				}
 			}
-			
 			$result = mysqli_query($link,$sql);
 
 			if($result){
+				include("../index/fourm.php");
 				while($row = mysqli_fetch_assoc($result)){
 					$id = $row['AId'];
-					if($row['category'] == 'relationship'){
-						$category = '感情版';
-					}
+					$category = findFourm($row['category']);
 		?>
 		<!-- 文章簡圖區 -->
 		<a href="../index/index.php?page=article&aid=<?php echo $id ?>" style="color:black; text-decoration:none;">
