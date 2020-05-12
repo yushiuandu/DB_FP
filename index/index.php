@@ -5,8 +5,8 @@
 	echo "no connect!";
 	}
 	$sql = "SELECT * FROM `article` ORDER BY `agree` DESC";
-
-	$page = "index";	$latest = 'false';	$hot = 'false';	$id = 'flase';
+	// 將一切都先初始化
+	$page = 'index';	$latest = 'false';	$hot = 'false';	$id = 'flase';
 	if(isset($_GET['page'])){
 		$page = $_GET['page'];
 	}
@@ -19,11 +19,9 @@
 	if(isset($_GET['latest'])){
 		$latest = $_GET['latest'];
 	}
-	if($page = 'logout'){
+	if($page == 'logout'){
 		$page = 'index';
 	}
-
-	
 ?>
 
 <!doctype html>
@@ -81,13 +79,13 @@
 							所有看板</a>
 						</div>
 						<div id="collapseOne" class="collapse link-body" aria-labelledby="headingOne" data-parent="#all">
-							<a class="dropdown-item" href="../index/index.php?id=food">美食版</a>
-							<a class="dropdown-item" href="../index/index.php?id=makeup">美妝穿搭</a>
-							<a class="dropdown-item" href="../index/index.php?id=travel">旅遊版</a>
-							<a class="dropdown-item" href="../index/index.php?id=trending">新聞版</a>
-							<a class="dropdown-item" href="../index/index.php?id=funny">有趣版</a>
-							<a class="dropdown-item" href="../index/index.php?id=relationship">感情版</a>
-							<a class="dropdown-item" href="../index/index.php?id=other">其他版</a>
+							<a class="dropdown-item" href="../index/index.php?page=index&id=food">美食版</a>
+							<a class="dropdown-item" href="../index/index.php?page=index&id=makeup">美妝穿搭</a>
+							<a class="dropdown-item" href="../index/index.php?page=index&id=travel">旅遊版</a>
+							<a class="dropdown-item" href="../index/index.php?page=index&id=trending">新聞版</a>
+							<a class="dropdown-item" href="../index/index.php?page=index&id=funny">有趣版</a>
+							<a class="dropdown-item" href="../index/index.php?page=index&id=relationship">感情版</a>
+							<a class="dropdown-item" href="../index/index.php?page=index&id=other">其他版</a>
 						</div>
 						</div>
 					</li><!-- 所有看板end -->
@@ -99,9 +97,9 @@
 							訂閱看板</a>
 						</div>
 							<div id="collapseTwo" class="collapse link-body" aria-labelledby="headingTwo" data-parent="#follow">
-								<a class="dropdown-item" href="../index/index.php?id=funny">美食版</a>
-								<a class="dropdown-item" href="../index/index.php?id=funny">美妝穿搭</a>
-								<a class="dropdown-item" href="../index/index.php?id=funny">旅遊版</a>
+								<a class="dropdown-item" href="../index/index.php?page=index&id=funny">美食版</a>
+								<a class="dropdown-item" href="../index/index.php?page=index&id=funny">美妝穿搭</a>
+								<a class="dropdown-item" href="../index/index.php?page=index&id=funny">旅遊版</a>
 							</div>
 						</div>
 					</li>
@@ -114,9 +112,9 @@
 							熱門看板</a>
 						</div>
 						<div id="collapseThree" class="collapse link-body" aria-labelledby="headingThree" data-parent="#hot">
-							<a class="dropdown-item" href="../index.php?id=funny">有趣版</a>
-							<a class="dropdown-item" href="../index.php?id=relationship">感情版</a>
-							<a class="dropdown-item" href="../index.php?id=fun">其他版</a>
+							<a class="dropdown-item" href="../index.php?page=index&id=funny">有趣版</a>
+							<a class="dropdown-item" href="../index.php?page=index&id=relationship">感情版</a>
+							<a class="dropdown-item" href="../index.php?page=index&id=fun">其他版</a>
 						</div>
 						</div>
 					</li>
@@ -145,8 +143,8 @@
   						排序
 					</button>
 					<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-						<a class="dropdown-item" href="../index/index.php?hot=true">熱門</a>
-						<a class="dropdown-item" href="../index/index.php?latest=true">最新</a>
+						<a class="dropdown-item" href="../index/index.php?page=index&hot=true">熱門</a>
+						<a class="dropdown-item" href="../index/index.php?page=index&latest=true">最新</a>
 					</div>
 				</div>
 		</div>
@@ -170,7 +168,7 @@
 					}
 		?>
 		<!-- 文章簡圖區 -->
-		<a href="../Article/Article.php?aid=<?php echo $id ?>" style="color:black; text-decoration:none;">
+		<a href="../index/index.php?page=article&aid=<?php echo $id ?>" style="color:black; text-decoration:none;">
 			<div class="art">
 				<!-- 簡圖內容(上) -->
 				<div class="row art-head mid">
@@ -245,13 +243,13 @@
 		</a>
 		<!-- 文章區 -->
 		
-				<?php }//end while
-						} //end result if?>
-		
 		
   		<?php
 		// 註冊頁面 如果按還不是會員 會跳轉到 member/register.php的頁面 
-		  }if($page == 'register'){
+				}//end while
+			}//end result  
+		}
+		  	if($page == 'register'){
 			$page = 'index';
 			include("../member/register.php"); }
 		?> 

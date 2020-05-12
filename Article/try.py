@@ -39,19 +39,19 @@ def text_cleanup(text):
         m2 = re.search('https.*',str(space[x]))
 
         if(m1):
-            p = '<img src="'+ t.rstrip() + '"><p>'
+            p = '<img src="'+ t.rstrip() + '"><br><br>'
             new = new + p  
         elif(photo):
             alter = re.search('m/.*',str(space[x]))
             string = str(alter.group(0))
             pic = re.sub('m/', '', string)
-            p = '<img src="https://imgur.dcard.tw/' + pic + '"><p>'
+            p = '<img src="https://imgur.dcard.tw/' + pic + '"><br><br>'
             new = new + p  
         elif(m2):
-            p = '<a href ="' + t.rstrip() + '">Link</a><p>'
+            p = '<a href ="' + t.rstrip() + '">Link</a><br><br>'
             new = new + p
         else:
-            p = t.rstrip() + '<p>'
+            p = t.rstrip() + '<br><br>'
             new = new + p
             new = new.rstrip()
         x = x + 1
@@ -71,9 +71,10 @@ def find_Article(ids):
 
 def find_Comments(ids):
     url = "http://dcard.tw/_api/posts/" + ids + "/comments"
+    print(ids)
     comments_req = requests.get(url, headers = header)
-    reqjson = json.loads(comments_req.text)
-    return reqjson
+    c_reqjson = json.loads(comments_req.text)
+    return c_reqjson
 
 
 if(int(orgin_req.status_code)==200):
@@ -112,32 +113,36 @@ for i in range(0,10):
         try:
             cursor.execute(sql,(ids,category,'1',likecount,content,title,excerpt,date,'0'))
             db.commit()
-            print('success!')
+            print('article_success!')
 
         except:
             db.rollback()
             print('fail!')
     
+    
     c_reqjson = find_Comments(ids)
 
-    for j in range(0,30):
-        #留言
-        content = c_reqjson[j]['content']
-        #按讚數
-        likecount = c_reqjson[j]['likeCount']
-        #發布時間
-        date = c_reqjson["createdAt"]
+    for j in range(0,10):
+        if((c_reqjson[j]["hiddenByAuthor"]) == False):
+            #留言內容
+            content = c_reqjson[j]["content"]
+            content = text_cleanup(content)
+            #按讚數
+            likecount = c_reqjson[j]["likeCount"]
+             #發布時間
+            date = c_reqjson[j]["createdAt"]
+        
 
-    if(db):
-        sql = "INSERT INTO article(AId, UId, content, likeCount, time, anonymous) VALUES (%s,%s,%s,%s,%s,%s)"
-        try:
-            cursor.execute(sql,(ids,'1',content,likecount,date,'0'))
-            db.commit()
-            print('success!')
+            if(db):
+                sql = "INSERT INTO comment(AId, UId, content, likeCount, time, anonymous) VALUES (%s,%s,%s,%s,%s,%s)"
+                try:
+                    cursor.execute(sql,(ids,'1',content,likecount,date,'0'))
+                    db.commit()
+                    print('comment_success!')
 
-        except:
-            db.rollback()
-            print('fail!')
+                except:
+                    db.rollback()
+                    print('fail!')
 
     
             
