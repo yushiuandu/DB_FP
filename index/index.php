@@ -44,17 +44,25 @@
   <body>
   	<!-- 導覽列 -->
     <div class="head-nav">
+		
+	
       <div class="row" >
-		  <div class="col-md-9 col-sm-6 mr-auto">
+	  	<nav class="navbar-expand-lg navbar-default navbar-light">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+		</nav>
+
+		  <div class="col-md-9 col-sm-5 mr-auto">
 		  	<a class="navbar-brand" href="index.php">
         		<img src="./image/Tai-gun.png" class="Tai-gun">
       		</a>
 		  </div>
 		  <div class="">
 			<form class="form-inline">
-        		<input class="form-control mr-sm-2" type="search" placeholder="搜尋...." style="width:125px;">
-        		<button type="button" class="btn btn-light btn-sm" type="submit">搜尋</button>
-      		</form>
+				<input class="form-control mr-sm-2" type="search" placeholder="搜尋...." style="width:125px;">
+				<button type="button" class="btn btn-light btn-sm" type="submit">搜尋</button>
+			</form>
 		  </div>	
 	  </div>
 	</div>
@@ -65,9 +73,9 @@
     <!-- 左半部 -->
     <div class="col-md-2" id="left">
       	<nav class=" navbar-expand-lg navbar-default navbar-light" >
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+			<!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
-			</button>
+			</button> -->
 			<div class="collapse navbar-collapse" id="navbarNavDropdown">
 				<ul class="navbar-nav  flex-column">
 					<li class="nav-item dropdown">
