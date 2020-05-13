@@ -294,6 +294,11 @@
 			if($page == 'article'){
 			$page = 'index';
 			include("../Article/article.php"); }
+		?>
+		<?php //好友頁面
+			if($page == 'friend'){
+			$page = 'index';
+			include("../index/friend.php"); }
 		?> 
 	</div>
 	<!-- 中間end -->
@@ -337,20 +342,60 @@
 			<div id="other-page">
 				
 				<div class="row">
-					<button type="button" class="btn col-md-6">
-						<a href="?page=person"  style="color:white;"><img src='../index/image/person.png'></a>
+					<button type="button" class="btn col-md-6" data-toggle="modal" data-target="#exampleModalCenter">
+						<img src='../index/image/person.png' title="個人頁面">
 					</button>
+					<!--四個btn-->
+					<div class="modal fade bd-example-modal-sm" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" >
+						<div class="modal-dialog modal-dialog-centered" role="document">
+							<div class="modal-content login-page">
+
+								<!--btn頭-->
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLongTitle">請選以下四個功能!</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<!--btn內容-->
+								
+								<div class="modal-body">
+									<div class="row">
+										<div class="col-md-6">
+											<a href="?page=collect"><img class="pointer gbb3" src="../index/image/collect.png" title="收藏的文章"></a>
+											<p class="font-weight-bold" style='font-size:12pt; margin:0px;'>收藏</p>
+										</div>
+										<div class="col-md-6">
+											<a href="?page=follow"><img class="pointer gbb3" src="../index/image/follow.png" title="追蹤的文章、tag、作者"></a>
+											<p class="font-weight-bold" style='font-size:12pt; margin:0px;'>追蹤</p>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<a href="?page=nickname"><img class="pointer gbb3" src="../index/image/nickname.png" title="我的文章"></a>
+											<p class="font-weight-bold" style='font-size:12pt; margin:0px;'>暱稱</p>
+										</div>
+										<div class="col-md-6">
+											<a href="?page=user"><img class="pointer gbb3" src="../index/image/setting.png" title="個人資料修改"></a>
+											<p class="font-weight-bold" style='font-size:12pt; margin:0px;'>個人設定</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--四個btn end-->
 
 					<button type="button" class="btn col-md-6">
-						<a href="?page=bell"  style="color:white;"><img src='../index/image/bell.png'></a>
+						<a href="?page=bell"  style="color:white;"><img src='../index/image/bell.png' title="通知"></a>
 					</button>
 				</div>
 				<div class="row">
 					<button type="button" class="btn col-md-6">
-						<a href="?page=test"  style="color:white;"><img src='../index/image/test.png'></a>
+						<a href="?page=test"  style="color:white;"><img src='../index/image/test.png' title="心理測驗"></a>
 					</button>
 					<button type="button" class="btn col-md-6">
-						<a href="?page=friend"  style="color:white;"><img src='../index/image/friend.png'></a>
+						<a href="?page=friend"  style="color:white;"><img src='../index/image/friend.png' title="好友列表"></a>
 					</button>
 				</div>
 			</div>

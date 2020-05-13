@@ -24,8 +24,8 @@
         <!-- nickname名稱 -->
         <p style='margin-bottom:0px; font-size:16pt; font-weight:600;'>小賀</p>
         <!-- nickname的文章列表 & 追蹤人數 -->
-        <p style='margin-bottom:5px; color:white;'>53 篇文章 - 35785人追蹤</p>
-        <button type="button"class="btn btn-info font-weight-bold" >追蹤</button>
+        <p style='margin-bottom:5px; color:white;'>53 篇文章 - 35785人追蹤 - 追蹤人數200</p>
+        <button type="button"class="btn btn-info font-weight-bold" >編輯</button>
     </div>
     <!-- 此nickname資料框 end-->
     <div class="row" style='width:90%; margin:30px auto 0px auto;'>
