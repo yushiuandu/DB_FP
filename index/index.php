@@ -357,7 +357,7 @@
 
 								<!--btn頭-->
 								<div class="modal-header">
-									<h5 class="modal-title" id="exampleModalLongTitle">請選以下四個功能!</h5>
+									<h5 class="modal-title" id="exampleModalLongTitle">想要看甚麼?</h5>
 									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 										<span aria-hidden="true">&times;</span>
 									</button>
@@ -378,7 +378,7 @@
 									<div class="row">
 										<div class="col-md-6">
 											<a href="?page=nickname"><img class="pointer gbb3" src="../index/image/nickname.png" title="我的文章"></a>
-											<p class="font-weight-bold" style='font-size:12pt; margin:0px;'>暱稱</p>
+											<p class="font-weight-bold" style='font-size:12pt; margin:0px;'>我的文章</p>
 										</div>
 										<div class="col-md-6">
 											<a href="?page=user"><img class="pointer gbb3" src="../index/image/setting.png" title="個人資料修改"></a>
