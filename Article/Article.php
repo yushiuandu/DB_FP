@@ -78,6 +78,7 @@
 				?></p>
 			</div>
 			<!-- 作者(照片+名稱) end-->
+			
 			<div class></div>
 			<!-- 看板+發文時間 --> 
 			<div class="col-md-4 col-sm-5 col-7 bottom">

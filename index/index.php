@@ -142,28 +142,29 @@
 
 		?>
   		<!-- 上面的按鈕 -->
-  		<div class="row">
-		  	<div class="btn-group col-md-3 col-sm-4 col-6" role="group" aria-label="Button group with nested dropdown">
+  		<div class="row ">
+		  	<div class="btn-group col-md-4 col-sm-6 col-9" role="group" aria-label="Button group with nested dropdown">
 				<button type="button" class="btn btn-sm btn-info active">全部文章</button>    <!--啟用狀態(active)-->
 				<button type="button" class="btn btn-sm btn-info">追蹤文章</button>
-			</div>
-			<div class="col-md-7 col-sm-6 col-3"></div>
-			<div class="btn-group col-md-2 col-sm-2 col-3" role="group">
-					<button id="btnGroupDrop1" type="button" class="btn btn-sm btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-  						排序
-					</button>
-					<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-						<?php
-							if(!(isset($forum))){
-								echo '<a class="dropdown-item" href="../index/index.php?page=index&id=all&hot=true">熱門</a>';
-								echo '<a class="dropdown-item" href="../index/index.php?page=index&id=all&latestt=true">熱門</a>';
-							}else{
-								echo '<a class="dropdown-item" href="../index/index.php?page=index&hot=true">熱門</a>';
-								echo '<a class="dropdown-item" href="../index/index.php?page=index&latest=true">最新</a>';
-							}
-						?>
-					</div>
+				<button id="btnGroupDrop1" type="button" class="btn btn-sm btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  					排序</button>
+				<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+				<?php
+					if(!(isset($forum))){
+						echo '<a class="dropdown-item" href="../index/index.php?page=index&id=all&hot=true">熱門</a>';
+						echo '<a class="dropdown-item" href="../index/index.php?page=index&id=all&latestt=true">熱門</a>';
+					}else{
+						echo '<a class="dropdown-item" href="../index/index.php?page=index&hot=true">熱門</a>';
+						echo '<a class="dropdown-item" href="../index/index.php?page=index&latest=true">最新</a>';
+					}
+					?>
 				</div>
+			</div>
+			<div class="col-md-5"></div>
+			<div class="col-md-3 col-sm-6 col-3">
+				<a href="?page=write"><img class="pointer gbb2" src="../index/image/pencil.png" title="寫文章"></a>
+				<button type="button" class="btn btn-sm btn-info">追蹤此看板</button>
+			</div>
 		</div>
 		<!-- 上面的按鈕 end-->
 		
@@ -268,7 +269,21 @@
 			$page = 'index';
 			include("../member/register.php"); }
 		?> 
-
+		<?php //文章撰寫
+		  	if($page == 'write'){
+			$page = 'index';
+			include("../Article/write.php"); }
+		?>
+		<?php //個人資料修改
+		  	if($page == 'user'){
+			$page = 'index';
+			include("../index/user.php"); }
+		?>
+		<?php //nickname頁面
+		  	if($page == 'nickname'){
+			$page = 'index';
+			include("../index/nickname.php"); }
+		?> 
 		<?php //文章頁面
 			if($page == 'article'){
 			$page = 'index';
@@ -288,7 +303,7 @@
 				if(isset($_SESSION['user'])){
 			?>
 			<div>
-				<img src="./image/test-user.jpg" class="img-fluid rounded-circle" id="user-pic" alt="Responsive image" >
+				<img src="./image/test-user.jpg" class="img-fluid rounded-circle" id="user-pic" alt="image" >
 			</div>
 			<div>
 				<p id='user-name' class="font-weight-bold"><?php echo $_SESSION['user'];?></p>
@@ -296,8 +311,8 @@
 			</div>
 
 			<div>
-				<button type="button"class="btn btn-info font-weight-bold col-md-12">
-					<a href="../index/index.php?page=logout">登出</a>
+				<button type="button"class="btn btn-info font-weight-bold col-md-6" >
+					<a href="../index/index.php?page=logout" style='text-decoration:none; color:white;'>登出</a>
 					<?php 
 						if($page == 'logout'){
 							unset($_SESSION['user']);
@@ -317,19 +332,19 @@
 				
 				<div class="row">
 					<button type="button" class="btn col-md-6">
-						<a href="?page=pencil"  style="color:white;"><img src='./image/pencil.png'></a>
+						<a href="?page=person"  style="color:white;"><img src='../index/image/person.png'></a>
 					</button>
 
 					<button type="button" class="btn col-md-6">
-						<a href="?page=bell"  style="color:white;"><img src='./image/bell.png'></a>
+						<a href="?page=bell"  style="color:white;"><img src='../index/image/bell.png'></a>
 					</button>
 				</div>
 				<div class="row">
 					<button type="button" class="btn col-md-6">
-						<a href="?page=test"  style="color:white;"><img src='./image/test.png'></a>
+						<a href="?page=test"  style="color:white;"><img src='../index/image/test.png'></a>
 					</button>
 					<button type="button" class="btn col-md-6">
-						<a href="?page=friend"  style="color:white;"><img src='./image/friend.png'></a>
+						<a href="?page=friend"  style="color:white;"><img src='../index/image/friend.png'></a>
 					</button>
 				</div>
 			</div>

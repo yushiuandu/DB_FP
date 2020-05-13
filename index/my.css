@@ -96,10 +96,17 @@ body{
   position: relative;
 }
 #user-pic{
+  height:110px;
   width:75%;
-  border:5px solid;
-  border-color:#F2F2F2;
   margin-bottom:15px;
+}
+#u-pic{
+  height:200px;
+  width:40%;
+  margin-bottom:15px;
+  position: relative;
+  left:30%;
+  right:30%;
 }
 #register{
   display:inline-block;
@@ -184,7 +191,15 @@ body{
   padding:0px 20px 0px 20px;
   float:left;
   font-size: 14px;
-  
+}
+.u1{
+  padding:20px;
+  border-radius:10px;
+  width:60%;
+  margin:auto;
+  background-color: rgb(193, 171, 173);
+  position: relative;
+  font-size: 14px;
 }
 #form{
   position: absolute;
@@ -218,7 +233,7 @@ label{
 }
 #user-nickname{
   font-size:16px;
-  margin:-5px 0px 0px 0px;
+  margin:-5px 0px 5px 0px;
 }
 #other-page{
   display:inline-block;
@@ -266,6 +281,7 @@ button img{
   align-items: center;
   font-family: "微軟正黑體";
 }
+
 .bottom{
   display: flex;
   align-items: flex-end;
@@ -281,8 +297,10 @@ button img{
   font-family:"jf-openhuninn";
   text-decoration:underline;
 }
-.article-word.img{
-  
+.article-word img{
+  text-align: left;
+  width:90%;
+  height:auto;
 }
 .pointer{
   cursor: pointer;
@@ -291,4 +309,34 @@ button img{
   height: 30px;
   width: 30px;
   margin:10px;
+}
+.gbb2{
+  height: 20px;
+  width: 20px;
+  margin:0px 20px 0px 20px;
+}
+.user{
+  text-align: center;
+  background-color: #F2F2F2;
+  border-radius: 10px;
+  width: 100%;
+  margin:15px 0px 0px 0px;
+}
+.person-btn{
+  
+}
+.nickname{
+  padding:20px;
+  border-radius:10px;
+  width:90%;
+  margin:20px auto 20px auto;
+  background-color: rgb(193, 171, 173);
+  position: relative;
+  font-size: 14px;
+  text-align: center;
+}
+#n-pic{
+  height:100px;
+  width:15%;
+  margin-bottom: 10px;
 }
