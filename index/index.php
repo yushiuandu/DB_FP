@@ -149,7 +149,6 @@
 		  	<div class="btn-group col-md-4 col-sm-6 col-9" role="group" aria-label="Button group with nested dropdown">
 				<button type="button" class="btn btn-sm btn-info active">全部文章</button>    <!--啟用狀態(active)-->
 				<button type="button" class="btn btn-sm btn-info">追蹤文章</button>
-<<<<<<< HEAD
 				<button id="btnGroupDrop1" type="button" class="btn btn-sm btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
   					排序</button>
 				<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
@@ -162,25 +161,6 @@
 						echo '<a class="dropdown-item" href="../index/index.php?page=index&latest=true">最新</a>';
 					}
 					?>
-=======
-			</div>
-			<div class="col-md-7 col-sm-6 col-3"></div>
-			<div class="btn-group col-md-2 col-sm-2 col-3" role="group">
-					<button id="btnGroupDrop1" type="button" class="btn btn-sm btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-  						排序
-					</button>
-					<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-						<?php
-							if(!(isset($forum))){
-								echo '<a class="dropdown-item" href="../index/index.php?page=index&id=all&hot=true">熱門</a>';
-								echo '<a class="dropdown-item" href="../index/index.php?page=index&id=all&latest=true">熱門</a>';
-							}else{
-								echo '<a class="dropdown-item" href="../index/index.php?page=index&id='.$forum.'&hot=true">熱門</a>';
-								echo '<a class="dropdown-item" href="../index/index.php?page=index&id='.$forum.'&latest=true">最新</a>';
-							}
-						?>
-					</div>
->>>>>>> 401ef99e4e0ac51ccd552a6b11873a5ecc97b78b
 				</div>
 			</div>
 			<div class="col-md-5"></div>
@@ -337,7 +317,6 @@
 			</div>
 
 			<div>
-<<<<<<< HEAD
 				<button type="button"class="btn btn-info font-weight-bold col-md-6" >
 					<a href="../index/index.php?page=logout" style='text-decoration:none; color:white;'>登出</a>
 					<?php 
@@ -348,10 +327,6 @@
 							header("Location:../index/index.php");
 						}
 					?>
-=======
-				<button type="button"class="btn btn-info font-weight-bold col-md-12">
-					<a href="../index/index.php?page=logout">登出</a>
->>>>>>> 401ef99e4e0ac51ccd552a6b11873a5ecc97b78b
 				</button>
 			</div>
 		</div>
