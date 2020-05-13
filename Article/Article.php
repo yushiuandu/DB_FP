@@ -160,9 +160,12 @@
 					</div>
 					<!-- 按讚數 end-->
 					
-					<div class="col-md-1 col-sm-1 col-1" style="margin:0px; padding:0px;"></div>
+					<div class="col-md-1 col-sm-1 col-1" style="margin:0px; padding:0px;">
+						
+					</div>
 					<!-- 留言內容-->
 					<div class="col-md-11 col-sm-11 col-11" style="margin:0px; padding:0px;">
+						<p class="hmes"><?php echo 'B'.$row_hot['floor'].' - '.$row_hot['time'];?></p>
 						<p class="hmes"><?php echo $row_hot['content'];?></p>
 					</div>
 					<!-- 留言內容 end-->
@@ -228,6 +231,7 @@
 					<div class="col-md-1 col-sm-1 col-1" style="margin:0px; padding:0px;"></div>
 					<!-- 留言內容-->
 					<div class="col-md-11 col-sm-11 col-11" style="margin:0px; padding:0px;">
+						<p class="hmes"><?php echo 'B'.$row_c['floor'].' - '.$row_c['time'];?></p>
 						<p class="hmes"><?php echo $row_c['content'];?></p>
 					</div>
 					<!-- 留言內容 end-->
@@ -241,6 +245,43 @@
 					}//end while
 				}//end if
 		?>
+
+		<!-- 留言輸入區 -->
+		<div class = "row mid hmes-head justify-content-center">
+			<div class="col-md-10 col-sm-10 col-9 hmes-body ">
+				<div class="row mid "> 
+					<!-- 作者照片-->
+					<div class="col-md-1 col-sm-1 col-2" style="margin:0px; padding:0px;">
+						<img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic">
+					</div>
+					<!-- 作者照片 end-->
+					<!-- 留言內容-->
+					<div class="col-md-11 col-sm-11 col-11" style="margin:0px; padding:0px;">
+						<form>
+						<div class="custom-control custom-switch">
+							<input type="checkbox" class="custom-control-input" id="anonymous">
+							<label class="custom-control-label hmes" for="anonymous">匿名</label>
+						</div>
+
+						<div class="form-row">
+							<div class="col-md-10 mb-5">
+								<label for="comment" class = "hmes">請輸入留言</label>
+								<textarea class="form-control" id="comment" placeholder="請輸入留言" required></textarea>
+								<button type="submit" class="btn btn-secondary btn-sm my-1">Submit</button>	
+							</div>
+						</div>
+						</form>
+					</div>
+					<!-- 留言內容 end-->
+
+				</div>
+				<!-- row end -->
+			</div>
+			<!-- col end -->
+		</div>
+		<!-- 留言輸入區end -->
+
+
 	</div>
 	
 	

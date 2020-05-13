@@ -54,7 +54,7 @@
 		</nav>
 
 		  <div class="col-md-9 col-sm-5 mr-auto">
-		  	<a class="navbar-brand" href="index.php">
+		  	<a class="navbar-brand" href="../index/index.php">
         		<img src="./image/Tai-gun.png" class="Tai-gun">
       		</a>
 		  </div>
@@ -85,7 +85,7 @@
 					<li class="nav-item dropdown" style="font-family:jf-openhuninn;">
 						<div class='link-head' id="all">
 						<div id="headingOne">
-							<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+							<a class="nav-link collapsed" href="../index/index.php" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
 							所有看板</a>
 						</div>
 						<div id="collapseOne" class="collapse link-body" aria-labelledby="headingOne" data-parent="#all">
@@ -156,10 +156,10 @@
 						<?php
 							if(!(isset($forum))){
 								echo '<a class="dropdown-item" href="../index/index.php?page=index&id=all&hot=true">熱門</a>';
-								echo '<a class="dropdown-item" href="../index/index.php?page=index&id=all&latestt=true">熱門</a>';
+								echo '<a class="dropdown-item" href="../index/index.php?page=index&id=all&latest=true">熱門</a>';
 							}else{
-								echo '<a class="dropdown-item" href="../index/index.php?page=index&hot=true">熱門</a>';
-								echo '<a class="dropdown-item" href="../index/index.php?page=index&latest=true">最新</a>';
+								echo '<a class="dropdown-item" href="../index/index.php?page=index&id='.$forum.'&hot=true">熱門</a>';
+								echo '<a class="dropdown-item" href="../index/index.php?page=index&id='.$forum.'&latest=true">最新</a>';
 							}
 						?>
 					</div>
@@ -176,7 +176,10 @@
 					$sql = "SELECT * FROM `article` ORDER BY `agree` DESC";
 				}
 			}else{
-				if(isset($forum)){
+				$sql = "SELECT * FROM `article` WHERE `category` = \"$forum\" ORDER BY `agree` DESC";
+				if( $latest == 'true'){
+					$sql = "SELECT * FROM `article` WHERE `category` = \"$forum\" ORDER BY `post_time` DESC";
+				}else if( $hot == 'true'){
 					$sql = "SELECT * FROM `article` WHERE `category` = \"$forum\" ORDER BY `agree` DESC";
 				}
 			}
@@ -244,7 +247,7 @@
 					<div class="col-md-12 col-sm-12 col-12">
 						<p style=' font-size:1.75vmin; margin:0px; color:gray;'>
 							<?php
-								echo $category;
+								echo "<a href = '../index/index.php?page=index&id=".$row['category']."' style = 'color:gray;text-decoration:none;'>".$category."</a>";
 								echo ' - ';
 								echo $row['post_time'];
 							?>

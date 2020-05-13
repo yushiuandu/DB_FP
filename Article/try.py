@@ -11,7 +11,7 @@ import re
 # 從最新發布的留言抓 http://dcard.tw/_api/posts/文章id/comments?after=floor數字
 #連接資料庫
 db = pymysql.connect( host = 'localhost' ,user = 'taigun', passwd ='ELn3yv07F567MwOF', db = 'taigun')
-#db = pymysql.connect(host = str(ip), user = 'root', passwd ='dub2233e', db = 'crul')
+
 if (db):
 	print("connect!")
 	cursor = db.cursor()
@@ -22,7 +22,7 @@ header = {
     'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.110 Safari/537.36'
 }
 #選擇美食版做爬文
-url = "https://www.dcard.tw/_api/forums/funny/posts?popular=true"
+url = "https://www.dcard.tw/_api/forums/relationship/posts?popular=true"
 orgin_req = requests.get(url, headers = header)
 
 
@@ -123,7 +123,7 @@ for i in range(0,10):
     c_reqjson = find_Comments(ids)
 
     for j in range(0,10):
-        if((c_reqjson[j]["hiddenByAuthor"]) == False):
+        if((c_reqjson[j]["hidden"]) == False):
             #留言內容
             content = c_reqjson[j]["content"]
             content = text_cleanup(content)
@@ -131,12 +131,12 @@ for i in range(0,10):
             likecount = c_reqjson[j]["likeCount"]
              #發布時間
             date = c_reqjson[j]["createdAt"]
-        
+            floor = c_reqjson[j]["floor"]
 
             if(db):
-                sql = "INSERT INTO comment(AId, UId, content, likeCount, time, anonymous) VALUES (%s,%s,%s,%s,%s,%s)"
+                sql = "INSERT INTO comment(AId, UId, content, likeCount, time, anonymous, floor) VALUES (%s,%s,%s,%s,%s,%s,%s)"
                 try:
-                    cursor.execute(sql,(ids,'1',content,likecount,date,'0'))
+                    cursor.execute(sql,(ids,'1',content,likecount,date,'0',floor))
                     db.commit()
                     print('comment_success!')
 
