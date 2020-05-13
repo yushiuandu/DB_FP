@@ -20,7 +20,10 @@
 		$latest = $_GET['latest'];
 	}
 	if($page == 'logout'){
-		$page = 'index';
+		unset($_SESSION['user']);
+		unset($_SESSION['nickname']);
+		session_destroy();
+		header("Location:../index/index.php");
 	}
 ?>
 
@@ -54,7 +57,7 @@
 		</nav>
 
 		  <div class="col-md-9 col-sm-5 mr-auto">
-		  	<a class="navbar-brand" href="index.php">
+		  	<a class="navbar-brand" href="../index/index.php">
         		<img src="./image/Tai-gun.png" class="Tai-gun">
       		</a>
 		  </div>
@@ -85,7 +88,7 @@
 					<li class="nav-item dropdown" style="font-family:jf-openhuninn;">
 						<div class='link-head' id="all">
 						<div id="headingOne">
-							<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+							<a class="nav-link collapsed" href="../index/index.php" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
 							所有看板</a>
 						</div>
 						<div id="collapseOne" class="collapse link-body" aria-labelledby="headingOne" data-parent="#all">
@@ -146,6 +149,7 @@
 		  	<div class="btn-group col-md-4 col-sm-6 col-9" role="group" aria-label="Button group with nested dropdown">
 				<button type="button" class="btn btn-sm btn-info active">全部文章</button>    <!--啟用狀態(active)-->
 				<button type="button" class="btn btn-sm btn-info">追蹤文章</button>
+<<<<<<< HEAD
 				<button id="btnGroupDrop1" type="button" class="btn btn-sm btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
   					排序</button>
 				<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
@@ -158,6 +162,25 @@
 						echo '<a class="dropdown-item" href="../index/index.php?page=index&latest=true">最新</a>';
 					}
 					?>
+=======
+			</div>
+			<div class="col-md-7 col-sm-6 col-3"></div>
+			<div class="btn-group col-md-2 col-sm-2 col-3" role="group">
+					<button id="btnGroupDrop1" type="button" class="btn btn-sm btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  						排序
+					</button>
+					<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+						<?php
+							if(!(isset($forum))){
+								echo '<a class="dropdown-item" href="../index/index.php?page=index&id=all&hot=true">熱門</a>';
+								echo '<a class="dropdown-item" href="../index/index.php?page=index&id=all&latest=true">熱門</a>';
+							}else{
+								echo '<a class="dropdown-item" href="../index/index.php?page=index&id='.$forum.'&hot=true">熱門</a>';
+								echo '<a class="dropdown-item" href="../index/index.php?page=index&id='.$forum.'&latest=true">最新</a>';
+							}
+						?>
+					</div>
+>>>>>>> 401ef99e4e0ac51ccd552a6b11873a5ecc97b78b
 				</div>
 			</div>
 			<div class="col-md-5"></div>
@@ -177,7 +200,10 @@
 					$sql = "SELECT * FROM `article` ORDER BY `agree` DESC";
 				}
 			}else{
-				if(isset($forum)){
+				$sql = "SELECT * FROM `article` WHERE `category` = \"$forum\" ORDER BY `agree` DESC";
+				if( $latest == 'true'){
+					$sql = "SELECT * FROM `article` WHERE `category` = \"$forum\" ORDER BY `post_time` DESC";
+				}else if( $hot == 'true'){
 					$sql = "SELECT * FROM `article` WHERE `category` = \"$forum\" ORDER BY `agree` DESC";
 				}
 			}
@@ -245,7 +271,7 @@
 					<div class="col-md-12 col-sm-12 col-12">
 						<p style=' font-size:1.75vmin; margin:0px; color:gray;'>
 							<?php
-								echo $category;
+								echo "<a href = '../index/index.php?page=index&id=".$row['category']."' style = 'color:gray;text-decoration:none;'>".$category."</a>";
 								echo ' - ';
 								echo $row['post_time'];
 							?>
@@ -311,6 +337,7 @@
 			</div>
 
 			<div>
+<<<<<<< HEAD
 				<button type="button"class="btn btn-info font-weight-bold col-md-6" >
 					<a href="../index/index.php?page=logout" style='text-decoration:none; color:white;'>登出</a>
 					<?php 
@@ -321,6 +348,10 @@
 							header("Location:../index/index.php");
 						}
 					?>
+=======
+				<button type="button"class="btn btn-info font-weight-bold col-md-12">
+					<a href="../index/index.php?page=logout">登出</a>
+>>>>>>> 401ef99e4e0ac51ccd552a6b11873a5ecc97b78b
 				</button>
 			</div>
 		</div>
