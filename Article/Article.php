@@ -38,7 +38,28 @@
     <title>抬槓</title>
 	<script src="//s3-ap-northeast-1.amazonaws.com/justfont-user-script/jf-60019.js"></script>
 	<script src="//s3-ap-northeast-1.amazonaws.com/justfont-user-script/jf-60019.js"></script>
-</head>
+	<script>
+		var str1=["../index/image/bell-white","../index/image/bell-black"];
+		var str2=["../index/image/bookmark-white","../index/image/bookmark-black"];
+		var str3=["../index/image/good-white","../index/image/good-black"];
+		var i=0; j=0; k=0;
+		function bell() {
+			i=(i+1)%2;
+			document.getElementById('change1').src=str1[i]+".png";
+		}
+		function bookmark() {
+			j=(j-1+2)%2;
+			document.getElementById('change2').src=str2[j]+".png";
+		}
+		function good() {
+			k=(k-1+2)%2;
+			document.getElementById('change3').src=str3[k]+".png";
+		}
+
+
+	</script>
+	
+	</head>
   <body>
 	<!-- 文章 -->
     <div class="article">
@@ -91,9 +112,9 @@
 			<!-- 按鈕們-->
 			<!-- 再修 -->
 			<div class="col-md-12 col-sm-12 col-12">
-				<button type="button" class="btn btn-sm btn-secondary">星星</button>
-				<button type="button" class="btn btn-sm btn-secondary">收藏</button>
-				<button type="button" class="btn btn-sm btn-secondary">讚</button>
+				<img class="pointer gbb" id="change1" src="../index/image/bell-white.png" title="追蹤" onclick="bell();">
+				<img class="pointer gbb" id="change2" src="../index/image/bookmark-white.png" title="收藏" onclick="bookmark();">
+				<img class="pointer gbb" id="change3" src="../index/image/good-white.png" title="喜歡" onclick="good();">
 			</div>
 			<!-- 按鈕們 end -->
 		</div>
