@@ -20,7 +20,10 @@
 		$latest = $_GET['latest'];
 	}
 	if($page == 'logout'){
-		$page = 'index';
+		unset($_SESSION['user']);
+		unset($_SESSION['nickname']);
+		session_destroy();
+		header("Location:../index/index.php");
 	}
 ?>
 
@@ -301,14 +304,6 @@
 			<div>
 				<button type="button"class="btn btn-info font-weight-bold col-md-12">
 					<a href="../index/index.php?page=logout">登出</a>
-					<?php 
-						if($page == 'logout'){
-							unset($_SESSION['user']);
-							unset($_SESSION['nickname']);
-							session_destroy();
-							header("Location:../index/index.php");
-						}
-					?>
 				</button>
 			</div>
 		</div>

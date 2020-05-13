@@ -132,6 +132,7 @@ for i in range(0,10):
              #發布時間
             date = c_reqjson[j]["createdAt"]
             floor = c_reqjson[j]["floor"]
+            floor = int(floor)
 
             if(db):
                 sql = "INSERT INTO comment(AId, UId, content, likeCount, time, anonymous, floor) VALUES (%s,%s,%s,%s,%s,%s,%s)"

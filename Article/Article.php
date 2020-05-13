@@ -13,6 +13,7 @@
 	$aid = "";
 	if(isset($_GET['aid'])){
 		$aid = $_GET['aid'];
+		$_SESSION['aid'] = $aid;
 	}
 
 	$sql = "SELECT * FROM `article` WHERE `AId` = \"$aid\" ";
@@ -276,25 +277,45 @@
 						<img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic">
 					</div>
 					<!-- 作者照片 end-->
+
+					<?php 
+						if(isset($_SESSION['user'])){
+					?>
 					<!-- 留言內容-->
 					<div class="col-md-11 col-sm-11 col-11" style="margin:0px; padding:0px;">
-						<form>
-						<div class="custom-control custom-switch">
-							<input type="checkbox" class="custom-control-input" id="anonymous">
-							<label class="custom-control-label hmes" for="anonymous">匿名</label>
+						<form method="post" action="../Article/addcom.php">
+						<div class="form-row">
+							<div class="col-md-4">
+								<label for="inputState">是否匿名</label>
+								<select id="inputState" class="form-control" name="anonymous">
+									<option selected value = "0">匿名</option>
+									<option value = "1">顯示暱稱</option>
+								</select>
+							</div>
 						</div>
 
 						<div class="form-row">
 							<div class="col-md-10 mb-5">
 								<label for="comment" class = "hmes">請輸入留言</label>
-								<textarea class="form-control" id="comment" placeholder="請輸入留言" required></textarea>
+								<textarea class="form-control" id="comment" placeholder="請輸入留言" required name="content"></textarea>
 								<button type="submit" class="btn btn-secondary btn-sm my-1">Submit</button>	
 							</div>
 						</div>
 						</form>
 					</div>
 					<!-- 留言內容 end-->
+						<?php }
+								else{
+						?>
+					<div class="col-md-11 col-sm-11 col-11" style="margin:0px; padding:0px;">
+						<div class="alert alert-dark" role="alert">
+						請先登入再輸入留言
+						</div>
 
+					</div>
+
+					<?php
+					}?>
 				</div>
 				<!-- row end -->
 			</div>
