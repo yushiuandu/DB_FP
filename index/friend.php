@@ -40,11 +40,7 @@
         </div>
     </div>
 
-	<?php //聊天頁面
-		  	if($page == 'chat'){
-			$page = 'index';
-			include("../index/chat.php"); }
-	?>
+	
 	
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

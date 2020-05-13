@@ -299,7 +299,12 @@
 			if($page == 'friend'){
 			$page = 'index';
 			include("../index/friend.php"); }
-		?> 
+		?>
+		<?php //聊天頁面
+		if($page == 'chat'){
+		$page = 'index';
+		include("../index/chat.php"); }
+		?>
 	</div>
 	<!-- 中間end -->
 

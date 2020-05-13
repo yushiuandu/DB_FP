@@ -379,3 +379,42 @@ button img{
   padding:20px 10px 0px 10px;
   float: left;
 }
+.chat-head{
+  text-align: right;
+  background-color: #F2F2F2;
+  border-radius: 0px 10px 0px 0px;
+  width: 90%;
+  margin:15px auto 0px auto;
+  border-bottom: 1px black solid;
+  
+}
+.chat-body{
+  background-color: #F2F2F2;
+  width: 90%;
+  margin:0px auto 0px auto;
+  min-height: 380px;
+  max-height: 380px;
+  overflow-y: auto;
+}
+.chat-fotter{
+  text-align: left;
+  background-color: #F2F2F2;
+  border-radius: 0px 0px 10px 10px;
+  width: 90%;
+  margin:0px auto 0px auto;
+  padding: 10px 20px 10px 20px;
+}
+#chat{
+  font-size: 12px;
+  border-radius: 10px;
+  width: 100%;
+  background: rgb(233, 230, 230) url('../index/image/pen.png') no-repeat 3px 3px;
+  padding: 5px 5px 5px 35px;
+  margin:auto;
+  background-size:3%;
+}
+#chat-pic{
+  height:90px;
+  width:30%;
+  margin:10px 0px 10px 0px;
+}

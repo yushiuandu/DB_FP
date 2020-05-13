@@ -12,9 +12,34 @@
     <title>抬槓</title>
 	<script src="//s3-ap-northeast-1.amazonaws.com/justfont-user-script/jf-60019.js"></script>
 	<script src="//s3-ap-northeast-1.amazonaws.com/justfont-user-script/jf-60019.js"></script>
-	</head>
+  </head>
+  <!-- 聊天室 -->
   <body>
-	
+    <!-- 聊天室的頭 -->
+    <div class="chat-head">
+      <div class="row">
+        <div class="col-md-6">
+            <p style='position:relative; top:35px; font-size:18pt; font-weight:600;'>張芳瑜</p>
+        </div>
+        <div class="col-md-6">
+          <img src="../index/image/test1.jpg" class="img-fluid rounded-circle" id="chat-pic">         
+        </div>
+      </div>
+    </div>
+    <!-- 聊天室的頭 end -->
+    <!-- 聊天室的中間段(對話區) -->
+    <div class="chat-body">
+      <div class="row">
+       
+      
+      </div>
+    </div>
+    <!-- 聊天室的中間段(對話區) -->
+    <!-- 聊天室的尾段(輸入區) -->
+    <div class="chat-fotter">
+      <input id="chat" name="text" type="text" placeholder='說點什麼吧...'>
+    </div>
+    <!-- 聊天室的尾段(輸入區) -->
 	
 	
     <!-- Optional JavaScript -->
