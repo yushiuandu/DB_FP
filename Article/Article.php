@@ -47,7 +47,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="../index/my.css" rel="stylesheet" type="text/css">
 	<title>抬槓</title>
-	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+	<!-- <script src="//code.jquery.com/jquery-1.10.2.js"></script> -->
 	<script src="//s3-ap-northeast-1.amazonaws.com/justfont-user-script/jf-60019.js"></script>
 	<script src="//s3-ap-northeast-1.amazonaws.com/justfont-user-script/jf-60019.js"></script>
 	<script>
@@ -268,7 +268,18 @@
 				<div class="row mid ">
 					<!-- 作者照片-->
 					<div class="col-md-1 col-sm-1 col-2" style="margin:0px; padding:0px;">
-						<img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic">
+					
+						<?php 
+							// 如果不是匿名
+							if($row['anonymous'] == 1){
+								echo '<a href="../index/index.php?page=nickname&uid='.$row[UId].'">';	
+						?>
+							<img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic"></a>
+						<?php
+							}else{ ?>
+								<img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic">
+						<?php	}//end else
+						?>
 					</div>
 					<!-- 作者照片 end-->
 					<!-- 作者-->
