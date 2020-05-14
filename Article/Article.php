@@ -155,7 +155,7 @@
 		<!-- 熱門排行榜(下) -->
 		<div class="row mid hmes-head">
 			<!-- 顯示名次 -->
-			<div class="col-md-2 col-sm-2 col-3">
+			<div class="col-md-2 col-sm-2 col-3 middle">
 			<?php 
 				if($rank == 1){
 					echo '<img src="../index/image/1.png" class="img-fluid rounded-circle" style="height:8vh; width:auto;">';
@@ -258,6 +258,11 @@
 				<img src="../index/image/mes.png" class="img-fluid rounded-circle" style="height:8vh; width:auto;">
 			</div> -->
 			<!-- 圖片 end-->
+			<!-- 樓層 -->
+			<div class="col-md-2 col-sm-2 col-3 cir mid" style="text-align: center;">
+				<p style='margin:0px; font-size:12pt; font-weight:400;'> 1F </p>
+			</div>
+			<!-- 樓層 end-->
 			<!-- 留言區 -->
 			<div class="col-md-10 col-sm-10 col-9 hmes-body ">
 				<div class="row mid ">

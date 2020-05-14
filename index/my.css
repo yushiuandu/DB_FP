@@ -315,6 +315,17 @@ button img{
   width: 20px;
   margin:0px 20px 0px 20px;
 }
+.gbb3{
+  width:50%;
+  height:auto;
+  margin:10px;
+  background-color: #a7a9ac;
+  border-radius: 10%;
+  padding: 10px;
+}
+.gbb3:hover{
+  background-color: #58656b;
+}
 .user{
   text-align: center;
   background-color: #F2F2F2;
@@ -339,4 +350,71 @@ button img{
   height:100px;
   width:15%;
   margin-bottom: 10px;
+}
+.cir{
+  text-align: center;
+  border-radius: 50%;
+  border: #939699 3px ridge;
+  margin:auto;
+  max-width:50px;
+  height: 50px;
+}
+.middle{
+  text-align: center;
+}
+#search{
+  font-size: 16px;
+  border-radius: 10px;
+  width: 100%;
+  background: rgb(233, 230, 230) url('../index/image/search.png') no-repeat 3px 3px;
+  padding: 5px 5px 5px 35px;
+  margin:auto;
+  background-size:3%;
+}
+.friend{
+  display:inline-block;
+  background-color:rgb(193, 171, 173);
+  margin:50px 35px 0px 35px;
+  text-align: center;
+  padding:20px 10px 0px 10px;
+  float: left;
+}
+.chat-head{
+  text-align: right;
+  background-color: #F2F2F2;
+  border-radius: 0px 10px 0px 0px;
+  width: 90%;
+  margin:15px auto 0px auto;
+  border-bottom: 1px black solid;
+  
+}
+.chat-body{
+  background-color: #F2F2F2;
+  width: 90%;
+  margin:0px auto 0px auto;
+  min-height: 380px;
+  max-height: 380px;
+  overflow-y: auto;
+}
+.chat-fotter{
+  text-align: left;
+  background-color: #F2F2F2;
+  border-radius: 0px 0px 10px 10px;
+  width: 90%;
+  margin:0px auto 0px auto;
+  padding: 10px 20px 10px 20px;
+}
+#chat{
+  font-size: 12px;
+  border-radius: 10px;
+  width: 100%;
+  background: rgb(233, 230, 230) url('../index/image/pen.png') no-repeat 3px 3px;
+  padding: 5px 5px 5px 35px;
+  margin:auto;
+  background-size:3%;
+}
+#chat-pic{
+  height:90px;
+  width:30%;
+  margin:10px 0px 10px 0px;
 }
