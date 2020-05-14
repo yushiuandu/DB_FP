@@ -47,30 +47,11 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="../index/my.css" rel="stylesheet" type="text/css">
 	<title>抬槓</title>
-
+	<!-- <script src="//code.jquery.com/jquery-1.10.2.js"></script> -->
 	<script src="//s3-ap-northeast-1.amazonaws.com/justfont-user-script/jf-60019.js"></script>
 	<script src="//s3-ap-northeast-1.amazonaws.com/justfont-user-script/jf-60019.js"></script>
-	<script>
-		var str1=["../index/image/bell-white","../index/image/bell-black"];
-		var str2=["../index/image/bookmark-white","../index/image/bookmark-black"];
-		var str3=["../index/image/good-white","../index/image/good-black"];
-		var i=0; j=0; k=0;	m=0;
-		// function bell() {
-		// 	i=(i+1)%2;
-		// 	document.getElementById('change1').src=str1[i]+".png";
-		// }
-		function bookmark() {
-			j=(j-1+2)%2;
-			document.getElementById('change2').src=str2[j]+".png";
-		}
-		function good() {
-			k=(k-1+2)%2;
-			document.getElementById('change3').src=str3[k]+".png";
-		}
+  </head>
 
-	</script>
-	
-	</head>
   <body>
 	<!-- 文章 -->
     <div class="article">
@@ -128,11 +109,36 @@
 		<!-- 文章內容(下) -->
 		<div class="row article-fotter right">
 			<!-- 按鈕們-->
-			<!-- 再修 -->
 			<div class="col-md-12 col-sm-12 col-12">
-				<a herf ="#" onclick="bell();"><img class="pointer gbb" id="change1" src="../index/image/bell-white.png" title="追蹤" ></a>
-				<img class="pointer gbb" id="change2" src="../index/image/bookmark-white.png" title="收藏" onclick="bookmark();">
-				<img class="pointer gbb" id="change3" src="../index/image/good-white.png" title="喜歡" onclick="good();">
+				<a herf ="#"><img class="pointer gbb"  src="../index/image/bell-white.png" title="追蹤"></a>
+				<img class="pointer gbb"  src="../index/image/bookmark-white.png" title="收藏" >
+
+				<!-- 按讚數 -->
+				<?php 
+					if(isset($_SESSION['nickname'])){
+						$sql_good = "SELECT ISNOT FROM good WHERE `UId` = \"$uid\" AND `AId` = \"$row[AId]\"";
+						$result_good = mysqli_query($link,$sql_good);
+						$row_good = mysqli_fetch_assoc($result_good);
+							
+						if($result_good AND isset($row_good['ISNOT'])){
+							echo '<a href = "../Article/good.php?aid='.$row['AId'].'">';
+							$row_good = mysqli_fetch_assoc($result_good);
+
+							if(($row_good['ISNOT']== 1)){
+								echo '<img class="pointer gbb" src="../index/image/good-black.png"></a>';
+							}else if($row_good['ISNOT'] == 0){
+								echo '<img class="pointer gbb" src="../index/image/good-white.png"></a>';
+							}
+						}else{
+							echo '<a href = "../Article/good.php?aid='.$row['AId'].'">';
+							echo '<img class="pointer gbb" src="../index/image/good-white.png"></a>';
+						}
+					}else{
+						echo '<img class="pointer gbb" src="../index/image/good-white.png">';
+					}
+				?>
+				<!-- 前端先拿下面這個修，上面的註解調 -->
+				<!-- <img class="pointer gbb" src="../index/image/good-white.png" title="喜歡"> -->
 			</div>
 			<!-- 按鈕們 end -->
 		</div>
@@ -275,7 +281,18 @@
 				<div class="row mid ">
 					<!-- 作者照片-->
 					<div class="col-md-1 col-sm-1 col-2" style="margin:0px; padding:0px;">
-						<img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic">
+					
+						<?php 
+							// 如果不是匿名
+							if($row['anonymous'] == 1){
+								echo '<a href="../index/index.php?page=nickname&uid='.$row[UId].'">';	
+						?>
+							<img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic"></a>
+						<?php
+							}else{ ?>
+								<img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic">
+						<?php	}//end else
+						?>
 					</div>
 					<!-- 作者照片 end-->
 					<!-- 作者-->

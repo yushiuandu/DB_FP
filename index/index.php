@@ -83,7 +83,7 @@
 			<div class="collapse navbar-collapse" id="navbarNavDropdown">
 				<ul class="navbar-nav  flex-column">
 					<li class="nav-item dropdown">
-						<img src="./image/logo.png" width="auto" height="80">
+						<a href = "../index/index.php"><img src="./image/logo.png" width="auto" height="80"></a>
 					</li>
 					<!-- 所有看板 -->
 					<li class="nav-item dropdown" style="font-family:jf-openhuninn;">
@@ -175,6 +175,9 @@
 			<div class="col-md-5"></div>
 			<div class="col-md-3 col-sm-6 col-3 right">
 				<a href="?page=write"><img class="pointer gbb2" src="../index/image/pencil.png" title="寫文章"></a>
+				<?php  if($forum != 'all'){?>
+				<button type="button" class="btn btn-sm btn-info">追蹤此看板</button>
+				<?php } ?>
 			</div>
 		</div>
 		<!-- 上面的按鈕 end-->
@@ -211,7 +214,18 @@
 				<div class="row art-head mid">
 					<!-- 作者-->
 					<div class="col-md-10 col-sm-9 col-9">
-						<img src="./image/user.png" class="img-fluid rounded-circle" id="writer-pic">
+						<!-- 作者頭像 -->
+						<?php 
+							if($row['anonymous'] == 1){
+								echo '<a href="../index/index.php?page=nickname&uid='.$row[UId].'">';	
+						?>
+							<img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic"></a>
+						<?php
+							}else{ ?>
+								<img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic">
+						<?php	}//end else
+						?>
+						<!-- 作者名稱 -->
 						<p style="display: inline; font-size:2vmin; margin:0px;">
 							<?php
 								if ($row['anonymous'] == 0){
@@ -502,5 +516,5 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
   </body>
-
+  
 </html>
