@@ -25,7 +25,7 @@
   <!-- 撰寫文章 -->
   <body>
   <div class='write-head'>
-		<p class='board'>寫篇文章吧</p>
+		<p class='board'>編輯文章</p>
 	</div>
   <div class='write'>
     <form>
@@ -52,13 +52,12 @@
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-sm-2 col-form-label">傳送圖檔</label>
         <div class="col-sm-10">
         <input Type="File" Name="YouFile">
         </div>
       </div>
       <div class='right'>
-        <button type="submit" class="btn btn-info font-weight-bold">發送</button>
+        <button type="update" class="btn btn-info font-weight-bold">更改</button>
       </div>
     </form>
   </div>

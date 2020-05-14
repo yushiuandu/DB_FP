@@ -47,7 +47,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="../index/my.css" rel="stylesheet" type="text/css">
 	<title>抬槓</title>
-	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+
 	<script src="//s3-ap-northeast-1.amazonaws.com/justfont-user-script/jf-60019.js"></script>
 	<script src="//s3-ap-northeast-1.amazonaws.com/justfont-user-script/jf-60019.js"></script>
 	<script>
@@ -98,6 +98,12 @@
 				</p>
 			</div>
 			<!-- 看板+發文時間 end-->
+			<div class="col-md-8 col-sm-7 col-5 right">
+				<button type="button" class="btn btn-sm btn-info">
+					<a href="../index/index.php?page=edit" style='text-decoration:none; color:white;'>編輯文章</a>
+				</button>
+				<button type="button" class="btn btn-sm btn-info">刪除文章</button>
+			</div>
 		</div>
 		<!-- 文章內容(上) end-->
 				
@@ -192,13 +198,14 @@
 						<?php 
 							if(isset($_SESSION['nickname'])){
 								$sql_good = "SELECT ISNOT FROM good WHERE `UId` = \"$uid\" AND `CId` = \"$row_hot[CId]\"";
-								$result_good = mysqli_query($link,$sql_good);
 								
-								if($result_good){
-									echo '<a href = "../Article/good.php?cid='.$row_hot['CId'].'">';
-									$row_good = mysqli_fetch_assoc($result_good);
+								$result_good = mysqli_query($link,$sql_good);
+								$row_good = mysqli_fetch_assoc($result_good);
 
-									if(($row_good['ISNOT']== 1)){
+								if(isset($row_good['ISNOT'])){
+									echo '<a href = "../Article/good.php?cid='.$row_hot['CId'].'">';
+
+									if(($row_good['ISNOT'] == 1)){
 										echo '<img class="img-fluid pointer gbb" src="../index/image/good-black.png" id="good-pic"></a>';
 									}else if($row_good['ISNOT'] == 0){
 										echo '<img class="img-fluid pointer gbb" src="../index/image/good-white.png" id="good-pic"></a>';

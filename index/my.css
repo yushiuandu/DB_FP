@@ -35,6 +35,13 @@ body{
   top:0px;
   overflow-y: auto;
 }
+.board{
+  font-weight:400;
+  font-family:"jf-openhuninn";
+  font-size: 20pt;
+  width: 90%;
+  margin:10px 0px 10px 0px;
+}
 /* 文章簡圖區 */
 .art{
   text-align: left;
@@ -382,7 +389,7 @@ button img{
 .chat-head{
   text-align: right;
   background-color: #F2F2F2;
-  border-radius: 0px 10px 0px 0px;
+  border-radius: 10px 10px 0px 0px;
   width: 90%;
   margin:15px auto 0px auto;
   border-bottom: 1px black solid;
@@ -395,6 +402,7 @@ button img{
   min-height: 380px;
   max-height: 380px;
   overflow-y: auto;
+  padding:10px 20px 10px 20px;
 }
 .chat-fotter{
   text-align: left;
@@ -405,7 +413,7 @@ button img{
   padding: 10px 20px 10px 20px;
 }
 #chat{
-  font-size: 12px;
+  font-size: 14px;
   border-radius: 10px;
   width: 100%;
   background: rgb(233, 230, 230) url('../index/image/pen.png') no-repeat 3px 3px;
@@ -417,4 +425,65 @@ button img{
   height:90px;
   width:30%;
   margin:10px 0px 10px 0px;
+}
+.talk{
+  display:inline-block;
+  text-align: left;
+  margin:10px 5px 0px 10px;
+  padding:5px 10px 5px 10px;
+  border-radius: 10px;
+  background-color: rgb(193, 171, 173);
+
+  min-height: 40px;
+  max-width: 70%;
+}
+.talk-word{
+  font-family: "jf-openhuninn";
+  font-weight:400;
+  word-break: break-all;
+  word-wrap:break-word;
+  white-space:pre-wrap;
+  margin:0px; 
+  font-size:12pt;
+}
+.c-pic{
+  width: 40px;
+  height: 40px;
+}
+.write{
+  display:inline-block;
+  text-align: left;
+  margin:auto;
+  padding:20px;
+  border-radius: 10px;
+  background-color:#F2F2F2;
+  width: 90%;
+  position: relative;
+  left: 5%;
+  right: 5%;
+}
+.write-head{
+  display:inline-block;
+  text-align: left;
+  margin:10px auto 0px auto;
+  border-radius: 10px;
+  width: 90%;
+  position: relative;
+  left: 5%;
+  right: 5%;
+}
+.long{
+  background-color: #F2F2F2;
+  border-radius: 10px;
+  width: 100%;
+  margin:10px;
+  height: 200px;
+}
+.short{
+  background-color: #F2F2F2;
+  border-radius: 10px;
+  width: 45%;
+  margin:10px;
+  height: 200px;
+  float: left;
 }
