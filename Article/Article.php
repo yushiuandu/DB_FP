@@ -9,6 +9,14 @@
 	if(!$link){
 		echo "no connect!";
 	}
+
+	#找到UId
+	include("../index/fourm.php");
+	if(isset($_SESSION['nickname'])){
+		$uid = finduid($_SESSION['nickname']);
+	}
+	
+	
 	#get article id
 	$aid = "";
 	if(isset($_GET['aid'])){
@@ -16,13 +24,15 @@
 		$_SESSION['aid'] = $aid;
 	}
 
+	#顯示文章
 	$sql = "SELECT * FROM `article` WHERE `AId` = \"$aid\" ";
 	$result = mysqli_query($link,$sql);
 	if($result){
 		$rank = 0;
-		include("../index/fourm.php");
+		// include("../index/fourm.php");   //將分類變成中文
 		$row = mysqli_fetch_assoc($result);
 		$category = findFourm($row['category']);
+		
 ?>
 
 <!doctype html>
@@ -36,18 +46,19 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="../index/my.css" rel="stylesheet" type="text/css">
-    <title>抬槓</title>
+	<title>抬槓</title>
+	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
 	<script src="//s3-ap-northeast-1.amazonaws.com/justfont-user-script/jf-60019.js"></script>
 	<script src="//s3-ap-northeast-1.amazonaws.com/justfont-user-script/jf-60019.js"></script>
 	<script>
 		var str1=["../index/image/bell-white","../index/image/bell-black"];
 		var str2=["../index/image/bookmark-white","../index/image/bookmark-black"];
 		var str3=["../index/image/good-white","../index/image/good-black"];
-		var i=0; j=0; k=0;
-		function bell() {
-			i=(i+1)%2;
-			document.getElementById('change1').src=str1[i]+".png";
-		}
+		var i=0; j=0; k=0;	m=0;
+		// function bell() {
+		// 	i=(i+1)%2;
+		// 	document.getElementById('change1').src=str1[i]+".png";
+		// }
 		function bookmark() {
 			j=(j-1+2)%2;
 			document.getElementById('change2').src=str2[j]+".png";
@@ -56,7 +67,6 @@
 			k=(k-1+2)%2;
 			document.getElementById('change3').src=str3[k]+".png";
 		}
-
 
 	</script>
 	
@@ -114,7 +124,7 @@
 			<!-- 按鈕們-->
 			<!-- 再修 -->
 			<div class="col-md-12 col-sm-12 col-12">
-				<img class="pointer gbb" id="change1" src="../index/image/bell-white.png" title="追蹤" onclick="bell();">
+				<a herf ="#" onclick="bell();"><img class="pointer gbb" id="change1" src="../index/image/bell-white.png" title="追蹤" ></a>
 				<img class="pointer gbb" id="change2" src="../index/image/bookmark-white.png" title="收藏" onclick="bookmark();">
 				<img class="pointer gbb" id="change3" src="../index/image/good-white.png" title="喜歡" onclick="good();">
 			</div>
@@ -177,9 +187,33 @@
 					<!-- 作者 end-->
 
 					<!-- 按讚數 --> 
-					<div class="col-md-3 col-sm-3 col-5">
+					<div class="col-md-3 col-sm-3 col-5" id = 'test'>
 						<p style="display: inline; font-size:2.5vmin; font-weight:400; font-family:jf-openhuninn;"><?php echo $row_hot['likeCount'];?></p>
-						<img src="../index/image/good-white.png" class="img-fluid" id="good-pic">
+						<?php 
+							if(isset($_SESSION['nickname'])){
+								$sql_good = "SELECT ISNOT FROM good WHERE `UId` = \"$uid\" AND `CId` = \"$row_hot[CId]\"";
+								$result_good = mysqli_query($link,$sql_good);
+								
+								if($result_good){
+									echo '<a href = "../Article/good.php?cid='.$row_hot['CId'].'">';
+									$row_good = mysqli_fetch_assoc($result_good);
+
+									if(($row_good['ISNOT']== 1)){
+										echo '<img class="img-fluid pointer gbb" src="../index/image/good-black.png" id="good-pic"></a>';
+									}else if($row_good['ISNOT'] == 0){
+										echo '<img class="img-fluid pointer gbb" src="../index/image/good-white.png" id="good-pic"></a>';
+									}
+
+								}else{
+									echo '<a href = "../Article/good.php?cid='.$row_hot['CId'].'">';
+									echo '<img class="img-fluid pointer gbb" src="../index/image/good-white.png" id="good-pic"></a>';
+								}
+							}else{
+								echo '<img class="img-fluid pointer gbb" src="../index/image/good-white.png" id="good-pic">';
+							}
+						?>
+						
+					</a>
 					</div>
 					<!-- 按讚數 end-->
 					
@@ -247,7 +281,29 @@
 					<!-- 按讚數 --> 
 					<div class="col-md-3 col-sm-3 col-5">
 						<p style="display: inline; font-size:2.5vmin; font-weight:400; font-family:jf-openhuninn;"><?php echo $row_c['likeCount'];?></p>
-						<img src="../index/image/good-white.png" class="img-fluid" id="good-pic">
+						<?php 
+							if(isset($_SESSION['nickname'])){
+								$sql_good = "SELECT ISNOT FROM good WHERE `UId` = \"$uid\" AND `CId` = \"$row_c[CId]\"";
+								$result_good = mysqli_query($link,$sql_good);
+								
+								if($result_good){
+									echo '<a href = "../Article/good.php?cid='.$row_c['CId'].'">';
+									$row_good = mysqli_fetch_assoc($result_good);
+
+									if(($row_good['ISNOT']== 1)){
+										echo '<img class="img-fluid pointer gbb" src="../index/image/good-black.png" id="good-pic"></a>';
+									}else if($row_good['ISNOT'] == 0){
+										echo '<img class="img-fluid pointer gbb" src="../index/image/good-white.png" id="good-pic"></a>';
+									}
+
+								}else{
+									echo '<a href = "../Article/good.php?cid='.$row_c['CId'].'">';
+									echo '<img class="img-fluid pointer gbb" src="../index/image/good-white.png" id="good-pic"></a>';
+								}
+							}else{
+								echo '<img class="img-fluid pointer gbb" src="../index/image/good-white.png" id="good-pic">';
+							}
+						?>
 					</div>
 					<!-- 按讚數 end-->
 					
