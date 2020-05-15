@@ -10,8 +10,11 @@
     }
 ?>
 <?php 
-    $cid = ''; $aid = '';
+    $cid = ''; $aid = ''; $is_index ="";
 
+    if(isset($_GET['is_index'])){
+        $is_index = $_GET['is_index'];
+    }
 
     // 留言按讚
     if(isset($_GET['cid'])){
@@ -106,8 +109,14 @@
                 $sql_q = "UPDATE article SET `agree` = \"$agree\" WHERE `AId` = \"$aid\"";
                 mysqli_query($link,$sql_q);
 
-                header("Location:../index/index.php?page=article&aid=$_SESSION[aid]");
-                exit;
+                if($is_index == 'true'){
+                    header("Location:../index/index.php");
+                    exit;
+                }else{
+                    header("Location:../index/index.php?page=article&aid=$_SESSION[aid]");
+                    exit;
+                }
+                
             }else{
                 $sql_u = "UPDATE good SET `ISNOT` = 1 WHERE `UId` = \"$uid\" AND `AId` = \"$aid\"";
                 mysqli_query($link,$sql_u);
@@ -121,8 +130,13 @@
                 $sql_q = "UPDATE article SET `agree` = \"$agree\" WHERE `AId` = \"$aid\"";
                 mysqli_query($link,$sql_q);
 
-                header("Location:../index/index.php?page=article&aid=$_SESSION[aid]");
-                exit;
+                if($is_index == 'true'){
+                    header("Location:../index/index.php");
+                    exit;
+                }else{
+                    header("Location:../index/index.php?page=article&aid=$_SESSION[aid]");
+                    exit;
+                }
             }
         }else{
             #將它有按讚的東東存進資料庫
@@ -139,8 +153,13 @@
                 mysqli_query($link,$sql_q);
 
                 
-                header("Location:../index/index.php?page=article&aid=$_SESSION[aid]");
-                exit;
+                if($is_index == 'true'){
+                    header("Location:../index/index.php");
+                    exit;
+                }else{
+                    header("Location:../index/index.php?page=article&aid=$_SESSION[aid]");
+                    exit;
+                }
             }else{
                 echo '失敗';
             }
