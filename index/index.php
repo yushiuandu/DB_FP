@@ -147,9 +147,17 @@
 	  	if($page == 'index'){
 
 		?>
-  		<!-- 上面的按鈕 -->
-  		<div class="row ">
-		  	<div class="btn-group col-md-4 col-sm-6 col-9" role="group" aria-label="Button group with nested dropdown">
+		<!-- 上面的按鈕 -->
+		<div class="row">
+			<div class="col-md-10 col-sm-10 col-10">
+			  <p class='board'>所有看板</p>
+			</div>
+			<div class="col-md-2 col-sm-2 col-2 right mid">
+				<button type="button" class="btn btn-sm btn-info">追蹤此看板</button>
+		  </div>
+		</div>
+  		<div class="row mid">
+			<div class="btn-group col-md-4 col-sm-6 col-9" role="group" aria-label="Button group with nested dropdown">
 				<button type="button" class="btn btn-sm btn-info active">全部文章</button>    <!--啟用狀態(active)-->
 				<button type="button" class="btn btn-sm btn-info">追蹤文章</button>
 				<button id="btnGroupDrop1" type="button" class="btn btn-sm btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -167,7 +175,7 @@
 				</div>
 			</div>
 			<div class="col-md-5"></div>
-			<div class="col-md-3 col-sm-6 col-3">
+			<div class="col-md-3 col-sm-6 col-3 right">
 				<a href="?page=write"><img class="pointer gbb2" src="../index/image/pencil.png" title="寫文章"></a>
 				<?php  if($forum != 'all'){?>
 				<button type="button" class="btn btn-sm btn-info">追蹤此看板</button>
@@ -206,6 +214,7 @@
 					$category = findFourm($row['category']);
 		?>
 		<!-- 文章簡圖區 -->
+		
 		<a href="../index/index.php?page=article&aid=<?php echo $id ?>" style="color:black; text-decoration:none;">
 			<div class="art">
 				<!-- 簡圖內容(上) -->
@@ -237,7 +246,7 @@
 					<!-- 作者 end-->
 
 					<!-- 按讚數 --> 
-					<div class="col-md-2 col-sm-3 col-3">
+					<div class="col-md-2 col-sm-3 col-3 right">
 						<h7 style="display: inline;"><?php echo $row['agree'];?></h7>
 						<?php 
 							// if(isset($_SESSION['nickname'])){
@@ -309,7 +318,6 @@
 		</a>
 		<!-- 文章區 -->
 		
-		
   		<?php
 		// 註冊頁面 如果按還不是會員 會跳轉到 member/register.php的頁面 
 				}//end while
@@ -343,6 +351,21 @@
 			if($page == 'friend'){
 			$page = 'index';
 			include("../index/friend.php"); }
+		?>
+		<?php //追蹤頁面
+			if($page == 'follow'){
+			$page = 'index';
+			include("../index/follow.php"); }
+		?>
+		<?php //收藏頁面
+			if($page == 'collect'){
+			$page = 'index';
+			include("../index/collect.php"); }
+		?>
+		<?php //文章編輯頁面
+			if($page == 'edit'){
+			$page = 'index';
+			include("../Article/edit.php"); }
 		?>
 		<?php //聊天頁面
 		if($page == 'chat'){

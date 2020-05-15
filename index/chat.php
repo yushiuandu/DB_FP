@@ -29,10 +29,45 @@
     <!-- 聊天室的頭 end -->
     <!-- 聊天室的中間段(對話區) -->
     <div class="chat-body">
-      <div class="row">
-       
-      
+
+      <!-- 對方的對話框 -->
+      <div style='text-align:left;'>
+        <!-- 對方頭貼 -->
+        <img src="../index/image/test2.jpg" class="img-fluid rounded-circle c-pic" >
+        
+        <!-- 對方的話 -->
+        <div class="talk">
+          <pre class='talk-word'>曾出演《與神同行》前兩部的EXO 成員都敬秀確定出演《與神同行》第三、四部.</pre>
+        </div>
       </div>
+      <!-- 對方的對話框 end -->
+
+      <!-- 自己的對話框 -->
+      <div style='text-align:right;'>
+        <!-- 自己的話 -->
+        <div class="talk"> 
+          <pre class='talk-word'>稍晚，助教會把期中考成績輸入系統。
+# 30分以下的非常危險
+# 20分以下的高度危險
+# 10分以下的不用我說
+# 雖然不捨
+# 但我們還是在此分手吧！</pre>
+        </div>
+        <!-- 自己的頭貼 -->
+        <img src="../index/image/test1.jpg" class="img-fluid rounded-circle c-pic" >
+      </div>
+      <!-- 自己對話框 end -->
+      <!-- 對方的對話框 -->
+      <div style='text-align:left;'>
+        <!-- 對方頭貼 -->
+        <img src="../index/image/test2.jpg" class="img-fluid rounded-circle c-pic" >
+        <!-- 對方的聊天框 -->
+        <div class="talk">
+          <pre class='talk-word'>《與神同行》第三部和第四部預計將於2021年開拍，和前兩作一樣也將採取同時兩部影片同時拍攝的方式制作，除都敬秀以外，河正宇等原班人馬也將有望繼續出演。
+PS : D.O. 退伍日期為2021.1.25</pre>
+        </div>
+      </div>
+      <!-- 對方的對話框 end -->
     </div>
     <!-- 聊天室的中間段(對話區) -->
     <!-- 聊天室的尾段(輸入區) -->
