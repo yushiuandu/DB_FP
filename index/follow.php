@@ -14,10 +14,113 @@
 	<script src="//s3-ap-northeast-1.amazonaws.com/justfont-user-script/jf-60019.js"></script>
   </head>
   <!-- 追蹤 -->
-  <body >
-    <div class='long'></div>
-	<div class='short'></div>
-	<div class='short'></div>
+  <body>
+    <!-- article追蹤 -->
+	<div class="col-md-11 long">
+        <div class='tit'>
+            <p class='ww'>追蹤的文章</p>
+        </div>
+    </div>
+    <!-- article追蹤 end -->
+
+    <div class="row">
+        <!-- 追蹤的人 -->
+        <div class="col-md-5 short">
+            <!-- title -->
+            <div class='tit'>
+                <p class='ww'>追蹤的人</p>
+            </div>
+            <!-- title end -->
+            <!-- body -->
+            <div class='con'>
+                <!-- user -->
+                <a href='#' style='color:black;'>
+                    <div class='cc'>
+                        <div class="card" style="width: 9rem;">
+                            <img class="card-img-top" src="../index/image/test1.jpg" alt="user">
+                            <div class="card-body">
+                                <p class='ss'>小黑</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <!-- user end -->
+                <!-- user -->
+                <a href='#' style='color:black;'>
+                    <div class='cc'>
+                        <div class="card" style="width: 9rem;">
+                            <img class="card-img-top" src="../index/image/test1.jpg" alt="user">
+                            <div class="card-body">
+                                <p class='ss'>小黑</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <!-- user end -->
+                <!-- user -->
+                <a href='#' style='color:black;'>
+                    <div class='cc'>
+                        <div class="card" style="width: 9rem;">
+                            <img class="card-img-top" src="../index/image/test1.jpg" alt="user">
+                            <div class="card-body">
+                                <p class='ss'>小黑</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <!-- user end -->
+            </div>
+            <!-- body -->
+            
+        </div>
+        <!-- 追蹤的人 end -->
+        <!-- 追蹤的tag -->
+        <div class="col-md-5 short">
+            <div class='tit'>
+                <p class='ww'>追蹤的tag</p>
+            </div>
+            <!-- body -->
+            <div class='con'>
+                <!-- tag -->
+                <a href='#' style='color:black;'>
+                    <div class='tag'>
+                        <p class='ss'>#中山大學</p>
+                    </div>
+                </a>
+                <!-- tag end -->
+                <!-- tag -->
+                <a href='#' style='color:black;'>
+                    <div class='tag'>
+                        <p class='ss'>#西子灣</p>
+                    </div>
+                </a>
+                <!-- tag end -->
+                <!-- tag -->
+                <a href='#' style='color:black;'>
+                    <div class='tag'>
+                        <p class='ss'>#資訊管理學系</p>
+                    </div>
+                </a>
+                <!-- tag end -->
+                <!-- tag -->
+                <a href='#' style='color:black;'>
+                    <div class='tag'>
+                        <p class='ss'>#大二</p>
+                    </div>
+                </a>
+                <!-- tag end -->
+                <!-- tag -->
+                <a href='#' style='color:black;'>
+                    <div class='tag'>
+                        <p class='ss'>#杜俞萱</p>
+                    </div>
+                </a>
+                <!-- tag end -->
+            </div>
+            <!-- body -->
+        </div>
+        <!-- 追蹤的tag end -->
+    </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

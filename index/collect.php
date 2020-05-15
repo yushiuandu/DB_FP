@@ -16,7 +16,39 @@
   <!-- 收藏 -->
   <body>
     
-	
+    <!-- 全部收藏 -->
+	<div class="col-md-11 long">
+        <div class='tit'>
+            <p class='ww'>全部收藏</p>
+        </div>
+    </div>
+    <!-- 全部收藏 end -->
+    
+    <!-- 收藏分類 -->
+    <div class="row">
+        <!-- 單個分類 -->
+        <div class="col-md-5 short">
+            <div class='tit'>
+                <p class='ww'>桌布分享</p>
+            </div>
+        </div>
+        <!-- 單個分類 end -->
+        <!-- 單個分類 -->
+        <div class="col-md-5 short">
+            <div class='tit'>
+                <p class='ww'>網美店</p>
+            </div>
+        </div>
+        <!-- 單個分類 -->
+        <!-- 單個分類 -->
+        <div class="col-md-5 short">
+            <div class='tit'>
+                <p class='ww'>好吃好玩</p>
+            </div>
+        </div>
+        <!-- 單個分類 -->
+    </div>
+	<!-- 收藏分類 end -->
 	
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

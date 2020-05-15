@@ -1,3 +1,4 @@
+
 div.link-head:hover > div.link-body /*停在hover上會有懸空的東西or連接*/
 {
   display:block;/*區塊(會換行)*/
@@ -476,14 +477,68 @@ button img{
   background-color: #F2F2F2;
   border-radius: 10px;
   width: 100%;
-  margin:10px;
-  height: 200px;
+  margin:0px auto 20px auto;
+  height: 240px;
+  padding: 0px;
+  overflow-y: auto;
 }
 .short{
   background-color: #F2F2F2;
   border-radius: 10px;
   width: 45%;
-  margin:10px;
-  height: 200px;
+  margin:0px 35px 20px 35px;
+  height: 280px;
   float: left;
+  padding: 0px;
+}
+.tit{
+  text-align: center;
+  background-color: rgb(199,199,187);
+  border-radius: 10px 10px 0px 0px;
+  margin:0px;
+  height: 60px;
+  padding: 10px;
+  font-family:"jf-openhuninn";
+}
+.con{
+  text-align: center;
+  background-color: #F2F2F2;
+  border-radius: 0px 0px 10px 10px;
+  margin:0px;
+  padding: 10px;
+  overflow-y: auto;
+  max-height: 220px;
+}
+.ww{
+  margin: 0px;
+  font-weight:400;
+  font-family:"jf-openhuninn";
+  font-size: 20pt;
+}
+.cc{
+  margin:20px 0px 0px 20px;
+  float: left;
+}
+.tag{
+  text-align: center;
+  background-color: white;
+  border-radius: 10px;
+  margin:10px auto 0px auto;
+  padding: 5px;
+  max-width: 80%;
+  font-family:"setofont";
+  font-weight:600;
+}
+.card-body{
+  padding: 0.5rem;
+}
+.card{
+  border-radius: 10px;
+}
+.ss{
+  margin: 0px;
+  font-weight:400;
+  font-size: 14pt;
+  text-decoration:none;
+  text-align: center;
 }
