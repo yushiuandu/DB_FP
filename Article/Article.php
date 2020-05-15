@@ -125,15 +125,15 @@
 
 				<!-- 按讚數 -->
 				<?php 
+			
 					if(isset($_SESSION['nickname'])){
 						$sql_good = "SELECT ISNOT FROM good WHERE `UId` = \"$uid\" AND `AId` = \"$row[AId]\"";
 						$result_good = mysqli_query($link,$sql_good);
 						$row_good = mysqli_fetch_assoc($result_good);
 							
-						if($result_good AND isset($row_good['ISNOT'])){
+						if(isset($row_good['ISNOT'])){
 							echo '<a href = "../Article/good.php?aid='.$row['AId'].'">';
-							$row_good = mysqli_fetch_assoc($result_good);
-
+							
 							if(($row_good['ISNOT']== 1)){
 								echo '<img class="pointer gbb" src="../index/image/good-black.png"></a>';
 							}else if($row_good['ISNOT'] == 0){
@@ -155,7 +155,7 @@
 		<!-- 文章內容(下) end-->
 	</div>
 	<!-- article end -->
-	<?php } //end if ?>
+				<?php } //end if ?>
 	<!-- 熱門留言區 -->
 	<?php 
 		

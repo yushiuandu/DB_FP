@@ -122,16 +122,18 @@
         <div class="art">
 
 			<?php 
-				if($result && isset($row['AId'])){
+				if(isset($row['AId'])){
 					// 照熱門、最新功能待測
 					if ($nhot == 'true'){
 						$sql = "SELECT * FROM article WHERE `UID` = \"$uid\" AND `anonymous` = 1 ORDER BY `agree` DESC";
 					}else{
 						$sql = "SELECT * FROM article WHERE `UID` = \"$uid\" AND `anonymous` = 1 ORDER BY `post_time` DESC";
 					}
+					$result = mysqli_query($link,$sql);
 					while($row = mysqli_fetch_assoc($result)){
 			?>
 			<!-- 簡圖內容(上) -->
+			<a href="../index/index.php?page=article&aid=<?php echo $row['AId']; ?>" style="color:black; text-decoration:none;">
 			<div class="row art-head mid">
 				<!-- 作者-->
 				<div class="col-md-10 col-sm-9 col-9">
@@ -172,6 +174,7 @@
 				<!-- 看板 - 發文時間 end -->
 			</div>
 			<!-- 簡圖內容(下) end-->
+			</a>
 			<?php 
 						}//end while
 					}//end if
