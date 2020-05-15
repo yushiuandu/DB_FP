@@ -27,6 +27,10 @@
 		exit;
 	}
 
+	include("../index/fourm.php"); #匯入function
+	$category = findFourm($forum);
+	// 時區宣告
+	date_default_timezone_set('Asia/Taipei');
 	
 ?>
 
@@ -54,7 +58,7 @@
 	
       <div class="row" >
 	  	<nav class="navbar-expand-lg navbar-default navbar-light">
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#forum" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 		</nav>
@@ -82,7 +86,7 @@
 			<!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button> -->
-			<div class="collapse navbar-collapse" id="navbarNavDropdown">
+			<div class="collapse navbar-collapse" id="forum">
 				<ul class="navbar-nav  flex-column">
 					<li class="nav-item dropdown">
 						<a href = "../index/index.php"><img src="./image/logo.png" width="auto" height="80"></a>
@@ -128,9 +132,9 @@
 							熱門看板</a>
 						</div>
 						<div id="collapseThree" class="collapse link-body" aria-labelledby="headingThree" data-parent="#hot">
-							<a class="dropdown-item" href="../index.php?page=index&id=funny">有趣版</a>
-							<a class="dropdown-item" href="../index.php?page=index&id=relationship">感情版</a>
-							<a class="dropdown-item" href="../index.php?page=index&id=talk">其他版</a>
+							<a class="dropdown-item" href="../index/index.php?page=index&id=funny">有趣版</a>
+							<a class="dropdown-item" href="../index/index.php?page=index&id=relationship">感情版</a>
+							<a class="dropdown-item" href="../index/index.php?page=index&id=talk">其他版</a>
 						</div>
 						</div>
 					</li>
@@ -150,11 +154,13 @@
 		<!-- 上面的按鈕 -->
 		<div class="row">
 			<div class="col-md-10 col-sm-10 col-10">
-			  <p class='board'>所有看板</p>
+			  <p class='board'><?php echo $category;?></p>
 			</div>
+			<?php  if($forum != 'all'){?>
 			<div class="col-md-2 col-sm-2 col-2 right mid">
 				<button type="button" class="btn btn-sm btn-info">追蹤此看板</button>
-		  </div>
+		  	</div>
+		  	<?php } ?>
 		</div>
   		<div class="row mid">
 			<div class="btn-group col-md-4 col-sm-6 col-9" role="group" aria-label="Button group with nested dropdown">
@@ -176,11 +182,11 @@
 			</div>
 			<div class="col-md-5"></div>
 			<div class="col-md-3 col-sm-6 col-3 right">
+			<?php if(isset($_SESSION['user'])){ ?>
 				<a href="?page=write"><img class="pointer gbb2" src="../index/image/pencil.png" title="寫文章"></a>
-				<?php  if($forum != 'all'){?>
-				<button type="button" class="btn btn-sm btn-info">追蹤此看板</button>
-				<?php } ?>
+			<?php }?>
 			</div>
+			
 		</div>
 		<!-- 上面的按鈕 end-->
 		
@@ -201,7 +207,7 @@
 				}
 			}
 			$result = mysqli_query($link,$sql);
-			include("../index/fourm.php"); #匯入function
+			
 			if($result){
 				
 				while($row = mysqli_fetch_assoc($result)){
@@ -224,7 +230,7 @@
 						<!-- 作者頭像 -->
 						<?php 
 							if($row['anonymous'] == 1){
-								echo '<a href="../index/index.php?page=nickname&uid='.$row[UId].'">';	
+								echo '<a href="../index/index.php?page=nickname&uid='.$row['UId'].'">';	
 						?>
 							<img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic"></a>
 						<?php
@@ -306,7 +312,7 @@
 							<?php
 								echo "<a href = '../index/index.php?page=index&id=".$row['category']."' style = 'color:gray;text-decoration:none;'>".$category."</a>";
 								echo ' - ';
-								echo $row['post_time'];
+								echo date('Y-m-d H:i',strtotime($row['post_time']));
 							?>
 						</p>
 					</div>
@@ -364,8 +370,8 @@
 		?>
 		<?php //文章編輯頁面
 			if($page == 'edit'){
-			$page = 'index';
-			include("../Article/edit.php"); }
+				$page = 'index';
+				include("../Article/edit.php"); }	
 		?>
 		<?php //聊天頁面
 		if($page == 'chat'){

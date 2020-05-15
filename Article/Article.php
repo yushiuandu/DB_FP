@@ -75,7 +75,7 @@
 			<!-- 看板+發文時間 --> 
 			<div class="col-md-4 col-sm-5 col-7 bottom">
                 <p style=' font-size:2.2vmin; margin:0px; font-family: setofont; font-weight:600;'>
-				<?php echo $category.' - '.$row['post_time']; ?>
+				<?php echo $category.' - '.date('Y-m-d H:i',strtotime($row['post_time'])); ?>
 				</p>
 			</div>
 			<!-- 看板+發文時間 end-->
@@ -157,6 +157,15 @@
 	<!-- article end -->
 	<?php } //end if ?>
 	<!-- 熱門留言區 -->
+	<?php 
+		
+			$sql_hot = "SELECT * FROM `comment` WHERE `AId` = \"$aid\" ORDER BY `likeCount` DESC";
+			$result_hot = mysqli_query($link,$sql_hot);
+			$row_hot = $row_hot = mysqli_fetch_assoc($result_hot);
+			if(isset($row_hot)){
+				
+					
+	?>
 	<div class="article">
         <!-- 熱門排行榜(上) -->
 		<div class="row hmes-head mid" style='border-bottom: 1px black solid;'>
@@ -245,7 +254,7 @@
 					</div>
 					<!-- 留言內容-->
 					<div class="col-md-11 col-sm-11 col-11" style="margin:0px; padding:0px;">
-						<p class="hmes"><?php echo 'B'.$row_hot['floor'].' - '.$row_hot['time'];?></p>
+						<p class="hmes"><?php echo 'B'.$row_hot['floor'].' - '.date('Y-m-d H:i',strtotime($row_hot['time']));?></p>
 						<p class="hmes"><?php echo $row_hot['content'];?></p>
 					</div>
 					<!-- 留言內容 end-->
@@ -256,7 +265,7 @@
 		} ?>
 	</div>
 
-	
+	<?php } //如果沒有熱門留言?>
 	<!-- 留言區 -->
 	<div class="article">
         <!-- 留言區(上) -->
@@ -349,7 +358,7 @@
 					<div class="col-md-1 col-sm-1 col-1" style="margin:0px; padding:0px;"></div>
 					<!-- 留言內容-->
 					<div class="col-md-11 col-sm-11 col-11" style="margin:0px; padding:0px;">
-						<p class="hmes"><?php echo 'B'.$row_c['floor'].' - '.$row_c['time'];?></p>
+						<p class="hmes"><?php echo 'B'.$row_c['floor'].' - '.date('Y-m-d H:i',strtotime($row_c['time']));?></p>
 						<p class="hmes"><?php echo $row_c['content'];?></p>
 					</div>
 					<!-- 留言內容 end-->

@@ -12,8 +12,8 @@
     $row = mysqli_fetch_assoc($result);
     $UId = $row['UId'];
     
-
-    $datetime = date ("Y-m-d H:i:s" , mktime(date('H')+7, date('i'), date('s'), date('m'), date('d'), date('Y'))) ;
+    date_default_timezone_set('Asia/Taipei');
+    $datetime = date ("Y-m-d H:i:s" , mktime(date('H'), date('i'), date('s'), date('m'), date('d'), date('Y'))) ;
     $content = $_POST["content"];
     $anonymous = $_POST["anonymous"];
     $aid = $_SESSION["aid"];
