@@ -21,9 +21,8 @@ if (db):
 header = { 
     'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.110 Safari/537.36'
 }
-#選擇美食版做爬文
-url = "https://www.dcard.tw/_api/forums/relationship/posts?popular=true"
-orgin_req = requests.get(url, headers = header)
+
+forum = ['food', 'makeup', 'travel', 'trending', 'funny', 'relationship', 'talk']
 
 
 #將換行字元換成html語法，將圖片檔換成連結
@@ -76,74 +75,118 @@ def find_Comments(ids):
     c_reqjson = json.loads(comments_req.text)
     return c_reqjson
 
-
-if(int(orgin_req.status_code)==200):
-    print("Dcard伺服器狀態:連線中")
-else:
-    print("Dcard伺服器狀態:拍謝失敗捏")
-    os.system("pause")
-    os._exit()
+#留言遭刪除
+delete = '嗚嗚嗚。。該留言已遭刪除。。'
 
 
-for i in range(0,10):
+for m in range (0,7):
     
-    #抓取文章的ID
-    ids = find_id(orgin_req.text)
-    #爬此篇文章
-    reqjson = find_Article(ids)
+    url = "https://www.dcard.tw/_api/forums/"+forum[m]+"/posts?popular=true"
+    orgin_req = requests.get(url, headers = header)
 
-    title = reqjson["title"]
-    # title = text_cleanup(title) #標題會有非法字原要幫她去掉
-    #print(title)
+    if(int(orgin_req.status_code)==200):
+        print("Dcard伺服器狀態:連線中")
+    else:
+        print("Dcard伺服器狀態:拍謝失敗捏")
+        os.system("pause")
+        os._exit()
 
-    excerpt = reqjson["excerpt"]
-    # excerpt = text_cleanup(excerpt) #標題會有非法字原要幫她去掉
-    #print(excerpt)
+    for i in range(0,10):
+        
+        #抓取文章的ID
+        ids = find_id(orgin_req.text)
+        #爬此篇文章
+        reqjson = find_Article(ids)
 
-    content = reqjson["content"]
-    content = text_cleanup(content) #標題會有非法字原要幫她去掉
-    #print(content)
+        title = reqjson["title"]
+        # title = text_cleanup(title) #標題會有非法字原要幫她去掉
+        #print(title)
 
-    date = reqjson["createdAt"]
-    likecount = reqjson["likeCount"]
-    category = reqjson["forumAlias"]
+        excerpt = reqjson["excerpt"]
+        # excerpt = text_cleanup(excerpt) #標題會有非法字原要幫她去掉
+        #print(excerpt)
 
-    if(db):
-        sql = "INSERT INTO article(AId, category, UId, agree, content, title, excerpt, post_time, anonymous) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)"
-        try:
-            cursor.execute(sql,(ids,category,'1',likecount,content,title,excerpt,date,'0'))
-            db.commit()
-            print('article_success!')
+        content = reqjson["content"]
+        content = text_cleanup(content) #標題會有非法字原要幫她去掉
+        #print(content)
 
-        except:
-            db.rollback()
-            print('fail!')
-    
-    
-    c_reqjson = find_Comments(ids)
+        date = reqjson["createdAt"]
+        likecount = reqjson["likeCount"]
+        category = reqjson["forumAlias"]
 
-    for j in range(0,10):
-        if((c_reqjson[j]["hidden"]) == False):
-            #留言內容
-            content = c_reqjson[j]["content"]
-            content = text_cleanup(content)
-            #按讚數
-            likecount = c_reqjson[j]["likeCount"]
-             #發布時間
-            date = c_reqjson[j]["createdAt"]
-            floor = c_reqjson[j]["floor"]
-            floor = int(floor)
+        if(db):
+            sql = "INSERT INTO article(AId, category, UId, agree, content, title, excerpt, post_time, anonymous) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+            try:
+                cursor.execute(sql,(ids,category,'0',likecount,content,title,excerpt,date,'0'))
+                db.commit()
+                print('article_success!')
 
-            if(db):
-                sql = "INSERT INTO comment(AId, UId, content, likeCount, time, anonymous, floor) VALUES (%s,%s,%s,%s,%s,%s,%s)"
-                try:
-                    cursor.execute(sql,(ids,'1',content,likecount,date,'0',floor))
-                    db.commit()
-                    print('comment_success!')
+            except:
+                db.rollback()
+                print('article_fail!')
 
-                except:
-                    db.rollback()
-                    print('fail!')
+
+        num = len(reqjson["topics"])
+        print(num)
+        if num != 0:
+            for k in range(0,num):
+                tag = reqjson["topics"][k]
+                print(tag)
+                if(db):
+                    sql = "INSERT INTO article_tag(AId,tag) VALUES (%s,%s)"
+                    try:
+                        cursor.execute(sql,(ids,tag))
+                        db.commit()
+                        print('tag_success!')
+
+                    except:
+                        db.rollback()
+                        print('tag_fail!')
+        
+        
+        c_reqjson = find_Comments(ids)
+        num = len(c_reqjson);
+        if num > 10:
+            num = 10
+        
+
+        for j in range(0,num):
+            if(c_reqjson[j]):
+                if((c_reqjson[j]["hidden"]) == False):
+                    #留言內容
+                    content = c_reqjson[j]["content"]
+                    content = text_cleanup(content)
+                    #按讚數
+                    likecount = c_reqjson[j]["likeCount"]
+                    #發布時間
+                    date = c_reqjson[j]["createdAt"]
+                    floor = c_reqjson[j]["floor"]
+                    floor = int(floor)
+
+                    if(db):
+                        sql = "INSERT INTO comment(AId, UId, content, likeCount, time, anonymous, floor) VALUES (%s,%s,%s,%s,%s,%s,%s)"
+                        try:
+                            cursor.execute(sql,(ids,'0',content,likecount,date,'0',floor))
+                            db.commit()
+                            print('comment_success!')
+
+                        except:
+                            db.rollback()
+                            print('fail!')
+
+                else:
+                    if((c_reqjson[j]["hidden"]) == True):
+                        floor = floor + 1
+                        if(db):
+                            sql = "INSERT INTO comment(AId, UId, content, likeCount, time, anonymous, floor) VALUES (%s,%s,%s,%s,%s,%s,%s)"
+                            try:
+                                cursor.execute(sql,(ids,'0',delete,0,date,'2',floor))
+                                db.commit()
+                                print('comment_success!')
+
+                            except:
+                                db.rollback()
+                                print('comment_fail!')
 
     
             

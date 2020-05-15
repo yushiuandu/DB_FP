@@ -11,11 +11,11 @@
         }
 
         if($category == "food"){
-            $category = '食物版';
+            $category = '美食版';
         }
 
         if($category == "makeup"){
-            $category = '美妝版';
+            $category = '美妝穿搭版';
         }
 
         if($category == "travel"){
@@ -30,7 +30,7 @@
             $category = '有趣版';
         }
 
-        if($category == "other"){
+        if($category == "talk"){
             $category = '其他版';
         }
 

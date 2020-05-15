@@ -92,8 +92,18 @@
 				<p class='article-word'><?php echo $row['content'];?></p>				
   				<!-- 文章tag -->
 				<div style="margin:10px 10px 0px 10px; font-family: setofont; font-weight:600;">
-					<button type="button" class="btn btn-sm btn-light">#討好媽媽</button>
-					<button type="button" class="btn btn-sm btn-light">#好難</button>
+					<?php 
+						$sql_tag = "SELECT tag FROM article_tag WHERE AId = \"$aid\"";
+						$result_tag = mysqli_query($link, $sql_tag);
+						$row_tag = mysqli_fetch_assoc($result_tag);
+						if($result_tag AND isset($row_tag)){
+							while($row_tag){
+					?>
+					<button type="button" class="btn btn-sm btn-light">#<?php echo $row_tag['tag'];?></button>
+					<?php
+							$row_tag = mysqli_fetch_assoc($result_tag);}
+						}
+					?>
 				</div>
 				<!-- 文章tag end-->
 			</div>		

@@ -26,6 +26,8 @@
 		header("Location:../index/index.php");
 		exit;
 	}
+
+	
 ?>
 
 <!doctype html>
@@ -99,7 +101,7 @@
 							<a class="dropdown-item" href="../index/index.php?page=index&id=trending">新聞版</a>
 							<a class="dropdown-item" href="../index/index.php?page=index&id=funny">有趣版</a>
 							<a class="dropdown-item" href="../index/index.php?page=index&id=relationship">感情版</a>
-							<a class="dropdown-item" href="../index/index.php?page=index&id=other">其他版</a>
+							<a class="dropdown-item" href="../index/index.php?page=index&id=talk">其他版</a>
 						</div>
 						</div>
 					</li><!-- 所有看板end -->
@@ -128,7 +130,7 @@
 						<div id="collapseThree" class="collapse link-body" aria-labelledby="headingThree" data-parent="#hot">
 							<a class="dropdown-item" href="../index.php?page=index&id=funny">有趣版</a>
 							<a class="dropdown-item" href="../index.php?page=index&id=relationship">感情版</a>
-							<a class="dropdown-item" href="../index.php?page=index&id=fun">其他版</a>
+							<a class="dropdown-item" href="../index.php?page=index&id=talk">其他版</a>
 						</div>
 						</div>
 					</li>
@@ -191,11 +193,16 @@
 				}
 			}
 			$result = mysqli_query($link,$sql);
-
+			include("../index/fourm.php"); #匯入function
 			if($result){
-				include("../index/fourm.php");
+				
 				while($row = mysqli_fetch_assoc($result)){
 					$id = $row['AId'];
+					#找到UId
+					if(isset($_SESSION['nickname'])){
+						$uid = finduid($_SESSION['nickname']);
+					}
+
 					$category = findFourm($row['category']);
 		?>
 		<!-- 文章簡圖區 -->
@@ -232,6 +239,29 @@
 					<!-- 按讚數 --> 
 					<div class="col-md-2 col-sm-3 col-3">
 						<h7 style="display: inline;"><?php echo $row['agree'];?></h7>
+						<?php 
+							// if(isset($_SESSION['nickname'])){
+							// 	$sql_good = "SELECT ISNOT FROM good WHERE `UId` = \"$uid\" AND `AId` = \"$row[AId]\"";
+							// 	$result_good = mysqli_query($link,$sql_good);
+							// 	$row_good = mysqli_fetch_assoc($result_good);
+									
+							// 	if($result_good AND isset($row_good['ISNOT'])){
+							// 		echo '<a href = "../Article/good.php?aid='.$row['AId'].'&is_index=true">';
+							// 		$row_good = mysqli_fetch_assoc($result_good);
+
+							// 		if(($row_good['ISNOT']== 1)){
+							// 			echo '<img src="./image/good-white.png" class="img-fluid" id="good-pic"></a>';
+							// 		}else if($row_good['ISNOT'] == 0){
+							// 			echo '<img src="./image/good-white.png" class="img-fluid" id="good-pic"></a>';
+							// 		}
+							// 	}else{
+							// 		echo '<a href = "../Article/good.php?aid='.$row['AId'].'&is_index=true">';
+							// 		echo '<img src="./image/good-white.png" class="img-fluid" id="good-pic"></a>';
+							// 	}
+							// }else{
+							// 	echo '<img src="./image/good-white.png" class="img-fluid" id="good-pic">';
+							// }
+						?>
 						<img src="./image/good-white.png" class="img-fluid" id="good-pic">
 					</div>
 					<!-- 按讚數 end-->
