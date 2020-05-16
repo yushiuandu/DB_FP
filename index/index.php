@@ -220,9 +220,9 @@
 					$category = findFourm($row['category']);
 		?>
 		<!-- 文章簡圖區 -->
-		
-		<a href="../index/index.php?page=article&aid=<?php echo $id ?>" style="color:black; text-decoration:none;">
-			<div class="art">
+	
+		<!-- <a href="../index/index.php?page=article&aid=" style="color:black; text-decoration:none;"> -->
+			<div class="art" onclick="location.href='../index/index.php?page=article&aid=<?php echo $row['AId']; ?>';">
 				<!-- 簡圖內容(上) -->
 				<div class="row art-head mid">
 					<!-- 作者-->
@@ -255,29 +255,30 @@
 					<div class="col-md-2 col-sm-3 col-3 right">
 						<h7 style="display: inline;"><?php echo $row['agree'];?></h7>
 						<?php 
-							// if(isset($_SESSION['nickname'])){
-							// 	$sql_good = "SELECT ISNOT FROM good WHERE `UId` = \"$uid\" AND `AId` = \"$row[AId]\"";
-							// 	$result_good = mysqli_query($link,$sql_good);
-							// 	$row_good = mysqli_fetch_assoc($result_good);
-									
-							// 	if($result_good AND isset($row_good['ISNOT'])){
-							// 		echo '<a href = "../Article/good.php?aid='.$row['AId'].'&is_index=true">';
-							// 		$row_good = mysqli_fetch_assoc($result_good);
 
-							// 		if(($row_good['ISNOT']== 1)){
-							// 			echo '<img src="./image/good-white.png" class="img-fluid" id="good-pic"></a>';
-							// 		}else if($row_good['ISNOT'] == 0){
-							// 			echo '<img src="./image/good-white.png" class="img-fluid" id="good-pic"></a>';
-							// 		}
-							// 	}else{
-							// 		echo '<a href = "../Article/good.php?aid='.$row['AId'].'&is_index=true">';
-							// 		echo '<img src="./image/good-white.png" class="img-fluid" id="good-pic"></a>';
-							// 	}
-							// }else{
-							// 	echo '<img src="./image/good-white.png" class="img-fluid" id="good-pic">';
-							// }
+						
+							if(isset($_SESSION['nickname'])){
+								$sql_good = "SELECT ISNOT FROM good WHERE `UId` = \"$uid\" AND `AId` = \"$row[AId]\"";
+								$result_good = mysqli_query($link,$sql_good);
+								$row_good = mysqli_fetch_assoc($result_good);
+									
+								if(isset($row_good['ISNOT'])){
+
+									echo '<a href = "../Article/good.php?aid='.$row['AId'].'&is_index=true">';
+									if(($row_good['ISNOT']== 1)){
+										echo '<img src="./image/good-black.png" class="img-fluid" id="good-pic"></a>';
+									}else if($row_good['ISNOT'] == 0){
+										echo '<img src="./image/good-white.png" class="img-fluid" id="good-pic"></a>';
+									}
+								}else{
+									echo '<a href = "../Article/good.php?aid='.$row['AId'].'&is_index=true">';
+									echo '<img src="./image/good-white.png" class="img-fluid" id="good-pic"></a>';
+								}
+							}else{
+								echo '<img src="./image/good-white.png" class="img-fluid" id="good-pic">';
+							}
 						?>
-						<img src="./image/good-white.png" class="img-fluid" id="good-pic">
+						<!-- <img src="./image/good-white.png" class="img-fluid" id="good-pic"> -->
 					</div>
 					<!-- 按讚數 end-->
 				</div>
@@ -321,7 +322,7 @@
 				<!-- 簡圖內容(下) end-->
 			</div>
 			<!-- 文章簡圖區 end-->
-		</a>
+		<!-- </a> -->
 		<!-- 文章區 -->
 		
   		<?php
