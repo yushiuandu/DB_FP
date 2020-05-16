@@ -480,7 +480,7 @@ button img{
   margin:0px auto 20px auto;
   height: 240px;
   padding: 0px;
-  overflow-y: auto;
+  float: left;
 }
 .short{
   background-color: #F2F2F2;
@@ -508,6 +508,23 @@ button img{
   padding: 10px;
   overflow-y: auto;
   max-height: 220px;
+}
+.con2{
+  text-align: center;
+  background-color: #F2F2F2;
+  border-radius: 0px 0px 10px 10px;
+  margin:0px;
+  padding: 10px;
+  overflow-y: auto;
+  max-height: 180px;
+}
+.bo{
+  background-color: white;
+  width:45%;
+  margin:10px 15px 0px 15px;
+  float: left;
+  text-align: left;
+  border-radius: 10px;
 }
 .ww{
   margin: 0px;
