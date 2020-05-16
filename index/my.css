@@ -526,6 +526,14 @@ button img{
   text-align: left;
   border-radius: 10px;
 }
+.bo2{
+  background-color: white;
+  width:100%;
+  margin:10px auto 0px auto;
+  float: left;
+  text-align: left;
+  border-radius: 10px;
+}
 .ww{
   margin: 0px;
   font-weight:400;

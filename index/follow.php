@@ -15,115 +15,116 @@
   </head>
   <!-- 追蹤 -->
   <body>
-  <div class="row">
-    <!-- article追蹤 -->
-	<div class="col-md-11 long">
-        <div class='tit'>
-            <p class='ww'>追蹤的文章</p>
-        </div>
+    <!-- 文章追蹤 -->
+    <div class="row">
+        <div class="col-md-11 long">
+            <div class='tit'>
+                <p class='ww'>追蹤的文章</p>
+            </div>
 
-        <div class="con2">
-            <!-- 文章 -->
-            <div class="bo">
-                <!-- 文章(上) -->
-				<div class="row art-head mid">
-					<!-- 作者-->
-					<div class="col-md-10 col-sm-9 col-9">
-						<!-- 作者頭像 -->
-						<img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic"></a>
-						<!-- 作者名稱 -->
-						<p style="display: inline; font-size:2vmin; margin:0px;">匿名</p>
-					</div>
-					<!-- 作者 end-->
-				</div>
-				<!-- 文章(上) end-->
-				
-				<!-- 文章(下) -->
-				<div class="row art-body mid">
-					<!-- 標題 -->
-					<div class="col-md-11 col-sm-11 col-11 col-lg-11 text-truncate">
-						<p class="font-weight-bold" style='font-size:3vmin; margin:0px;'>同學，你勾起我的惡夢。</p>
-						<p style="color:gray; font-size:2vmin; margin:0px;font-family:jf-openhuninn;">
-						大學四年級空課很多，就在等待上課的悠閒時光，突然間，我同學壞掉了。
-他開始念念有詞……
-「Lucy你是耐ㄟ這呢敖」
-						</p>
-					</div>
-					<!-- 標題 end -->
-				</div>
-				<!-- 文章(下) end-->
-            </div>
-            <!-- 文章 end -->
+            <div class="con2">
+                <!-- 文章 -->
+                <div class="bo">
+                    <!-- 文章(上) -->
+                    <div class="row art-head mid">
+                        <!-- 作者-->
+                        <div class="col-md-10 col-sm-9 col-9">
+                            <!-- 作者頭像 -->
+                            <img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic"></a>
+                            <!-- 作者名稱 -->
+                            <p style="display: inline; font-size:2vmin; margin:0px;">匿名</p>
+                        </div>
+                        <!-- 作者 end-->
+                    </div>
+                    <!-- 文章(上) end-->
+                    
+                    <!-- 文章(下) -->
+                    <div class="row art-body mid">
+                        <!-- 標題 -->
+                        <div class="col-md-11 col-sm-11 col-11 col-lg-11 text-truncate">
+                            <p class="font-weight-bold" style='font-size:3vmin; margin:0px;'>同學，你勾起我的惡夢。</p>
+                            <p style="color:gray; font-size:2vmin; margin:0px;font-family:jf-openhuninn;">
+                            大學四年級空課很多，就在等待上課的悠閒時光，突然間，我同學壞掉了。
+    他開始念念有詞……
+    「Lucy你是耐ㄟ這呢敖」
+                            </p>
+                        </div>
+                        <!-- 標題 end -->
+                    </div>
+                    <!-- 文章(下) end-->
+                </div>
+                <!-- 文章 end -->
 
-            <!-- 文章2 -->
-            <div class="bo">
-                <!-- 文章(上) -->
-				<div class="row art-head mid">
-					<!-- 作者-->
-					<div class="col-md-10 col-sm-9 col-9">
-						<!-- 作者頭像 -->
-						<img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic"></a>
-						<!-- 作者名稱 -->
-						<p style="display: inline; font-size:2vmin; margin:0px;">匿名</p>
-					</div>
-					<!-- 作者 end-->
-				</div>
-				<!-- 文章(上) end-->
-				
-				<!-- 文章(下) -->
-				<div class="row art-body mid">
-					<!-- 標題 -->
-					<div class="col-md-11 col-sm-11 col-11 col-lg-11 text-truncate">
-						<p class="font-weight-bold" style='font-size:3vmin; margin:0px;'>同學，你勾起我的惡夢。</p>
-						<p style="color:gray; font-size:2vmin; margin:0px;font-family:jf-openhuninn;">
-						大學四年級空課很多，就在等待上課的悠閒時光，突然間，我同學壞掉了。
-他開始念念有詞……
-「Lucy你是耐ㄟ這呢敖」
-						</p>
-					</div>
-					<!-- 標題 end -->
-				</div>
-				<!-- 文章(下) end-->
+                <!-- 文章2 -->
+                <div class="bo">
+                    <!-- 文章(上) -->
+                    <div class="row art-head mid">
+                        <!-- 作者-->
+                        <div class="col-md-10 col-sm-9 col-9">
+                            <!-- 作者頭像 -->
+                            <img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic"></a>
+                            <!-- 作者名稱 -->
+                            <p style="display: inline; font-size:2vmin; margin:0px;">匿名</p>
+                        </div>
+                        <!-- 作者 end-->
+                    </div>
+                    <!-- 文章(上) end-->
+                    
+                    <!-- 文章(下) -->
+                    <div class="row art-body mid">
+                        <!-- 標題 -->
+                        <div class="col-md-11 col-sm-11 col-11 col-lg-11 text-truncate">
+                            <p class="font-weight-bold" style='font-size:3vmin; margin:0px;'>同學，你勾起我的惡夢。</p>
+                            <p style="color:gray; font-size:2vmin; margin:0px;font-family:jf-openhuninn;">
+                            大學四年級空課很多，就在等待上課的悠閒時光，突然間，我同學壞掉了。
+    他開始念念有詞……
+    「Lucy你是耐ㄟ這呢敖」
+                            </p>
+                        </div>
+                        <!-- 標題 end -->
+                    </div>
+                    <!-- 文章(下) end-->
+                    
+                </div>
+                <!-- 文章2 end -->
                 
+                <!-- 文章3 -->
+                <div class="bo">
+                    <!-- 文章(上) -->
+                    <div class="row art-head mid">
+                        <!-- 作者-->
+                        <div class="col-md-10 col-sm-9 col-9">
+                            <!-- 作者頭像 -->
+                            <img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic"></a>
+                            <!-- 作者名稱 -->
+                            <p style="display: inline; font-size:2vmin; margin:0px;">匿名</p>
+                        </div>
+                        <!-- 作者 end-->
+                    </div>
+                    <!-- 文章(上) end-->
+                    
+                    <!-- 文章(下) -->
+                    <div class="row art-body mid">
+                        <!-- 標題 -->
+                        <div class="col-md-11 col-sm-11 col-11 col-lg-11 text-truncate">
+                            <p class="font-weight-bold" style='font-size:3vmin; margin:0px;'>同學，你勾起我的惡夢。</p>
+                            <p style="color:gray; font-size:2vmin; margin:0px;font-family:jf-openhuninn;">
+                            大學四年級空課很多，就在等待上課的悠閒時光，突然間，我同學壞掉了。
+    他開始念念有詞……
+    「Lucy你是耐ㄟ這呢敖」
+                            </p>
+                        </div>
+                        <!-- 標題 end -->
+                    </div>
+                    <!-- 文章(下) end-->
+                    
+                </div>
+                <!-- 文章3 end -->
             </div>
-            <!-- 文章2 end -->
-            
-            <!-- 文章3 -->
-            <div class="bo">
-                <!-- 文章(上) -->
-				<div class="row art-head mid">
-					<!-- 作者-->
-					<div class="col-md-10 col-sm-9 col-9">
-						<!-- 作者頭像 -->
-						<img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic"></a>
-						<!-- 作者名稱 -->
-						<p style="display: inline; font-size:2vmin; margin:0px;">匿名</p>
-					</div>
-					<!-- 作者 end-->
-				</div>
-				<!-- 文章(上) end-->
-				
-				<!-- 文章(下) -->
-				<div class="row art-body mid">
-					<!-- 標題 -->
-					<div class="col-md-11 col-sm-11 col-11 col-lg-11 text-truncate">
-						<p class="font-weight-bold" style='font-size:3vmin; margin:0px;'>同學，你勾起我的惡夢。</p>
-						<p style="color:gray; font-size:2vmin; margin:0px;font-family:jf-openhuninn;">
-						大學四年級空課很多，就在等待上課的悠閒時光，突然間，我同學壞掉了。
-他開始念念有詞……
-「Lucy你是耐ㄟ這呢敖」
-						</p>
-					</div>
-					<!-- 標題 end -->
-				</div>
-				<!-- 文章(下) end-->
-                
-            </div>
-            <!-- 文章3 end -->
         </div>
     </div>
-    <!-- article追蹤 end -->
-</div>
+    <!-- 文章追蹤 end -->
+
     <div class="row">
         <!-- 追蹤的人 -->
         <div class="col-md-5 short">
