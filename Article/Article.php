@@ -164,7 +164,7 @@
 						$result_follow = mysqli_query($link, $sql_follow);
 						$row_follow = mysqli_fetch_assoc($result_follow);
 							
-						if($row_follow['AId'] == $row['AId']){
+						if(isset($row_follow['AId'])){
 							// 已追蹤
 							echo '<a href ="../Article/follow.php?aid='.$row['AId'].'&follow=1">';
 							echo '<img class="pointer gbb"  src="../index/image/bell-black.png" title="追蹤"></a>';
@@ -269,7 +269,7 @@
 					<!-- 作者 end-->
 
 					<!-- 按讚數 --> 
-					<div class="col-md-3 col-sm-3 col-5" id = 'test'>
+					<div class="col-md-3 col-sm-3 col-5 right" id = 'test'>
 						<p style="display: inline; font-size:2.5vmin; font-weight:400; font-family:jf-openhuninn;"><?php echo $row_hot['likeCount'];?></p>
 						<?php 
 							if(isset($_SESSION['nickname'])){
@@ -295,8 +295,13 @@
 								echo '<img class="img-fluid pointer gbb" src="../index/image/good-white.png" id="good-pic">';
 							}
 						?>
-						
-					</a>
+						<div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+							<img src='../index/image/pen.png' id="btnGroupDrop1" class="edit-pic dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></img>
+							<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+								<a class="dropdown-item" href="#">留言編輯</a>
+								<a class="dropdown-item" href="#">留言刪除</a>
+							</div>
+						</div>
 					</div>
 					<!-- 按讚數 end-->
 					
@@ -384,8 +389,9 @@
 							if(isset($_SESSION['nickname'])){
 								$sql_good = "SELECT ISNOT FROM good WHERE `UId` = \"$uid\" AND `CId` = \"$row_c[CId]\"";
 								$result_good = mysqli_query($link,$sql_good);
-								
-								if($result_good){
+								$num = mysqli_num_rows($result_good);
+
+								if($num>0){
 									echo '<a href = "../Article/good.php?cid='.$row_c['CId'].'">';
 									$row_good = mysqli_fetch_assoc($result_good);
 
