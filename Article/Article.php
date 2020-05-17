@@ -134,7 +134,7 @@
 			<!-- 按鈕們-->
 			<div class="col-md-12 col-sm-12 col-12">
 				<!-- 按讚數 -->
-				<p style="display: inline; margin:0px; font-size:16pt; position:relative; top:5px; left:5px;">2000</p>
+				<p style="display: inline; margin:0px; font-size:16pt; position:relative; top:5px; left:5px;"><?php echo $row['agree'];?></p>
 				<?php 
 					if(isset($_SESSION['nickname'])){
 						$sql_good = "SELECT ISNOT FROM good WHERE `UId` = \"$uid\" AND `AId` = \"$row[AId]\"";
