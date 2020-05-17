@@ -183,9 +183,9 @@
 					if(isset($_SESSION['nickname'])){
 						$sql_save = "	SELECT AId FROM `save` WHERE UId = \"$uid\" AND `AId` =\"$row[AId]\"";
 						$result_save = mysqli_query($link, $sql_save);
-						$row_save = mysqli_fetch_assoc($result_save);
+						$num - mysqli_num_rows($result_save);
 							
-						if($row_save['AId'] == $row['AId']){
+						if($num>0){
 							// 已追蹤
 							echo '<a href ="../Article/save.php?aid='.$row['AId'].'&save=1">';
 							echo '<img class="pointer gbb"  src="../index/image/bookmark-black.png" title="追蹤"></a>';
@@ -276,7 +276,6 @@
 								$sql_good = "SELECT ISNOT FROM good WHERE `UId` = \"$uid\" AND `CId` = \"$row_hot[CId]\"";
 								
 								$result_good = mysqli_query($link,$sql_good);
-								$row_good = mysqli_fetch_assoc($result_good);
 
 								if(isset($row_good['ISNOT'])){
 									echo '<a href = "../Article/good.php?cid='.$row_hot['CId'].'">';
