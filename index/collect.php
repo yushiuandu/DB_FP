@@ -23,7 +23,7 @@
             </div>
             <div class="con2">
                 <!-- 文章 -->
-                <div class="bo">
+                <div class="bo pointer" onclick="location.href='#';">
                     <!-- 文章(上) -->
                     <div class="row art-head mid">
                         <!-- 作者-->
@@ -55,7 +55,7 @@
                 <!-- 文章 end -->
 
                 <!-- 文章2 -->
-                <div class="bo">
+                <div class="bo pointer" onclick="location.href='#';">
                     <!-- 文章(上) -->
                     <div class="row art-head mid">
                         <!-- 作者-->
@@ -88,7 +88,7 @@
                 <!-- 文章2 end -->
                 
                 <!-- 文章3 -->
-                <div class="bo">
+                <div class="bo pointer" onclick="location.href='#';">
                     <!-- 文章(上) -->
                     <div class="row art-head mid">
                         <!-- 作者-->
@@ -133,7 +133,7 @@
             </div>
             <div class="con">
                 <!-- 文章 -->
-                <div class="bo2">
+                <div class="bo2 pointer" onclick="location.href='#';">
                     <!-- 文章(上) -->
                     <div class="row art-head mid">
                         <!-- 作者-->
@@ -165,7 +165,7 @@
                 <!-- 文章 end -->
 
                 <!-- 文章2 -->
-                <div class="bo2">
+                <div class="bo2 pointer" onclick="location.href='#';">
                     <!-- 文章(上) -->
                     <div class="row art-head mid">
                         <!-- 作者-->
@@ -207,7 +207,7 @@
             </div>
             <div class="con">
                 <!-- 文章 -->
-                <div class="bo2">
+                <div class="bo2 pointer" onclick="location.href='#';">
                     <!-- 文章(上) -->
                     <div class="row art-head mid">
                         <!-- 作者-->
@@ -239,7 +239,7 @@
                 <!-- 文章 end -->
 
                 <!-- 文章2 -->
-                <div class="bo2">
+                <div class="bo2 pointer" onclick="location.href='#';">
                     <!-- 文章(上) -->
                     <div class="row art-head mid">
                         <!-- 作者-->
