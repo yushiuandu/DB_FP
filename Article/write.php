@@ -12,7 +12,6 @@
 		$write = $_GET['write'];
 	}
 
-	
 ?>
 
 <!doctype html>
@@ -29,13 +28,13 @@
 		<title>抬槓</title>
 		<script src="//s3-ap-northeast-1.amazonaws.com/justfont-user-script/jf-60019.js"></script>
 		<script src="//s3-ap-northeast-1.amazonaws.com/justfont-user-script/jf-60019.js"></script>
-	<script type="text/javascript">
-		function autogrow(textarea){
-		var adjustedHeight=textarea.clientHeight;
+		<script type="text/javascript">
+			function autogrow(textarea){
+			var adjustedHeight=textarea.clientHeight;
 
-		adjustedHeight=Math.max(textarea.scrollHeight,adjustedHeight);
-		if (adjustedHeight>textarea.clientHeight){
-			textarea.style.height=adjustedHeight+'px';}
+			adjustedHeight=Math.max(textarea.scrollHeight,adjustedHeight);
+			if (adjustedHeight>textarea.clientHeight){
+				textarea.style.height=adjustedHeight+'px';}
 		}
 	</script>
 </head>
@@ -59,7 +58,7 @@
 		<div class="form-group row">
 			<label class="col-sm-3 col-form-label">選擇看板</label>
 			<div class="col-sm-9">
-			<select id="inputState" class="form-control" name = "fourm">
+			<select id="inputState" class="form-control" name = "forum">
 				<option selected value="funny">	有趣版</option>
 				<option value = "relationship">	感情版</option>
 				<option value = "makeup">		美妝穿搭版</option>
@@ -92,7 +91,7 @@
 			<input Type="File" Name="YouFile">
 			</div>
 		</div> -->
-
+		
 		<div class='right'>
 			<button type="submit" class="btn btn-info font-weight-bold">發送</button>
 		</div>
@@ -112,14 +111,14 @@
 <?php
 
 	if($write == 'true'){
-		include("../index/fourm.php");
+		include("../index/forum.php");
 		$uid = finduid($_SESSION['nickname']);
 		echo $uid;
 
 		$datetime = date ("Y-m-d H:i:s" , mktime(date('H'), date('i'), date('s'), date('m'), date('d'), date('Y'))) ;
 		$excerpt = substr( $_POST['content'] , 0 , 200 );
 		$sql = "INSERT INTO article (`category`,`UId`, `title`, `content`, `excerpt`, `post_time`, `anonymous`, `post_name`) 
-				VALUES ('$_POST[fourm]', '$uid', '$_POST[title]', '$_POST[content]', '$excerpt', '$datetime', '$_POST[anonymous]','$_SESSION[nickname]')";
+				VALUES ('$_POST[forum]', '$uid', '$_POST[title]', '$_POST[content]', '$excerpt', '$datetime', '$_POST[anonymous]','$_SESSION[nickname]')";
 
 		if(!(mysqli_query($link, $sql))){
 			mysqli_error();

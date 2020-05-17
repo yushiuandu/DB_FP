@@ -76,7 +76,7 @@
 
 
 <?php 
-	include("../index/fourm.php");
+	include("../index/forum.php");
 	$uid = finduid($_SESSION['nickname']);
 	
 

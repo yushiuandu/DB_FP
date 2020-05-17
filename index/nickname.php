@@ -30,7 +30,7 @@
 	}
 
 	// 現在在看網頁的人
-	include("../index/fourm.php");
+	include("../index/forum.php");
 	if(isset($_SESSION['nickname'])){
 		$uid_current = finduid($_SESSION['nickname']);
 	}

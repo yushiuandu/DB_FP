@@ -4,7 +4,7 @@
 		echo "no connect!";
     }
     #找出uid
-    include("../index/fourm.php");
+    include("../index/forum.php");
 	if(isset($_SESSION['nickname'])){
 		$uid = finduid($_SESSION['nickname']);
     }

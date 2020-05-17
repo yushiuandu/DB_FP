@@ -16,8 +16,8 @@
   <!-- 收藏 -->
   <body>
     <!-- 全部收藏 -->
-    <div class="row">
-        <div class="col-md-11 long">
+    <div class="row justify-content-center">
+        <div class="col-md-12 long">
             <div class='tit'>
                 <p class='ww'>全部收藏</p>
             </div>
@@ -125,9 +125,9 @@
     <!-- 全部收藏 end -->
 
     <!-- 收藏分類 -->
-    <div class="row">
+    <div class="row justify-content-center">
         <!-- 單個分類(1) -->
-        <div class="col-md-5 short">
+        <div class="col-md-6">
             <div class='tit'>
                 <p class='ww'>桌布分享</p>
             </div>
@@ -199,8 +199,9 @@
         </div>
         <!-- 單個分類(1) end -->
 
+
         <!-- 單個分類(2) -->
-        <div class="col-md-5 short">
+        <div class="col-md-6">
             <div class='tit'>
                 <p class='ww'>網美店</p>
             </div>

@@ -5,8 +5,8 @@
     echo "no connect!";
     }
 
-    if (!function_exists('findFourm')){
-        function findFourm ($category){
+    if (!function_exists('findForum')){
+        function findForum ($category){
             if($category == "relationship"){
                 $category = '感情版';
             }
@@ -36,6 +36,9 @@
             }
             if($category == 'all'){
                 $category = '所有看版';
+            }
+            if($category == 'follow'){
+                $category = '追蹤文章';
             }
 
             return $category;

@@ -11,7 +11,7 @@
 	}
 
 	#找到UId
-	include("../index/fourm.php");
+	include("../index/forum.php");
 	if(isset($_SESSION['nickname'])){
 		$uid = finduid($_SESSION['nickname']);
 	}
@@ -29,9 +29,9 @@
 	$result = mysqli_query($link,$sql);
 	if($result){
 		$rank = 0;
-		// include("../index/fourm.php");   //將分類變成中文
+		// include("../index/forum.php");   //將分類變成中文
 		$row = mysqli_fetch_assoc($result);
-		$category = findFourm($row['category']);
+		$category = findForum($row['category']);
 		
 ?>
 
@@ -80,10 +80,12 @@
 			</div>
 			<!-- 看板+發文時間 end-->
 			<div class="col-md-8 col-sm-7 col-5 right">
+				 <?php if($uid == $row['UId']){?>   <!--如果是本人寫的文章才會出現下面的button -->
 				<button type="button" class="btn btn-sm btn-info">
 					<a href="../index/index.php?page=edit" style='text-decoration:none; color:white;'>編輯文章</a>
 				</button>
 				<button type="button" class="btn btn-sm btn-info">刪除文章</button>
+				<?php } ?>
 			</div>
 		</div>
 		<!-- 文章內容(上) end-->
@@ -120,8 +122,49 @@
 		<div class="row article-fotter right">
 			<!-- 按鈕們-->
 			<div class="col-md-12 col-sm-12 col-12">
-				<a herf ="#"><img class="pointer gbb"  src="../index/image/bell-white.png" title="追蹤"></a>
-				<img class="pointer gbb"  src="../index/image/bookmark-white.png" title="收藏" >
+				<!-- 追蹤 -->
+				<?php 
+					if(isset($_SESSION['nickname'])){
+						$sql_follow = "	SELECT `AId` FROM `follow` WHERE `UId` = \"$uid\" AND `AId` =\"$row[AId]\"";
+						$result_follow = mysqli_query($link, $sql_follow);
+						$row_follow = mysqli_fetch_assoc($result_follow);
+							
+						if($row_follow['AId'] == $row['AId']){
+							// 已追蹤
+							echo '<a href ="../Article/follow.php?aid='.$row['AId'].'&follow=1">';
+							echo '<img class="pointer gbb"  src="../index/image/bell-black.png" title="追蹤"></a>';
+
+						}else{
+							// 未追蹤
+							echo '<a href ="../Article/follow.php?aid='.$row['AId'].'&follow=0">';
+							echo '<img class="pointer gbb"  src="../index/image/bell-white.png" title="追蹤"></a>';
+						}
+					}else{
+						echo '<img class="pointer gbb"  src="../index/image/bell-white.png" title="追蹤">';
+					}
+				?>
+				<!-- 收藏 -->
+				<?php 
+					if(isset($_SESSION['nickname'])){
+						$sql_save = "	SELECT AId FROM `save` WHERE UId = \"$uid\" AND `AId` =\"$row[AId]\"";
+						$result_save = mysqli_query($link, $sql_save);
+						$row_save = mysqli_fetch_assoc($result_save);
+							
+						if($row_save['AId'] == $row['AId']){
+							// 已追蹤
+							echo '<a href ="../Article/save.php?aid='.$row['AId'].'&save=1">';
+							echo '<img class="pointer gbb"  src="../index/image/bookmark-black.png" title="追蹤"></a>';
+
+						}else{
+							// 未追蹤
+							echo '<a href ="../Article/save.php?aid='.$row['AId'].'&save=0">';
+							echo '<img class="pointer gbb"  src="../index/image/bookmark-white.png" title="追蹤"></a>';
+						}
+					}else{
+						echo '<img class="pointer gbb"  src="../index/image/bookmark-white.png" title="追蹤">';
+					}
+				?>
+				<!-- <img class="pointer gbb"  src="../index/image/bookmark-white.png" title="收藏" > -->
 
 				<!-- 按讚數 -->
 				<?php 

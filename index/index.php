@@ -6,7 +6,7 @@
 	}
 	$sql = "SELECT * FROM `article` ORDER BY `agree` DESC";
 	// 將一切都先初始化
-	$page = 'index';	$latest = 'false';	$hot = 'false';	$id = 'flase';	$forum = 'all';
+	$page = 'index';	$latest = 'false';	$hot = 'false';	$aid = 'flase';	$forum = 'all';
 	if(isset($_GET['page'])){
 		$page = $_GET['page'];
 	}
@@ -19,6 +19,11 @@
 	if(isset($_GET['latest'])){
 		$latest = $_GET['latest'];
 	}
+	if(isset($_GET['follow'])){
+		$follow = $_GET['follow'];
+	}else{
+		$follow = 'false';
+	}
 	if($page == 'logout'){
 		unset($_SESSION['user']);
 		unset($_SESSION['nickname']);
@@ -27,8 +32,12 @@
 		exit;
 	}
 
-	include("../index/fourm.php"); #匯入function
-	$category = findFourm($forum);
+	include("../index/forum.php"); #匯入function
+	if(isset($_SESSION['nickname'])){
+		$uid = finduid($_SESSION['nickname']);
+	}
+
+	$category = findForum($forum);
 	// 時區宣告
 	date_default_timezone_set('Asia/Taipei');
 	
@@ -112,14 +121,33 @@
 					<!-- 訂閱看板 -->
 					<li class="nav-item dropdown" style="font-family:jf-openhuninn;">
 						<div class='link-head' id="follow">
-						<div id="headingTwo">
-							<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-							訂閱看板</a>
-						</div>
+							<div id="headingTwo">
+								<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+								訂閱看板</a>
+							</div>
+						
 							<div id="collapseTwo" class="collapse link-body" aria-labelledby="headingTwo" data-parent="#follow">
-								<a class="dropdown-item" href="../index/index.php?page=index&id=funny">美食版</a>
-								<a class="dropdown-item" href="../index/index.php?page=index&id=funny">美妝穿搭</a>
-								<a class="dropdown-item" href="../index/index.php?page=index&id=funny">旅遊版</a>
+								<?php 
+									$sql_forum = "SELECT `Category` FROM `follow` WHERE `UId` = \"$uid\"";
+									$result_forum = mysqli_query($link, $sql_forum);
+									$num = mysqli_num_rows($result_forum);
+									if($num > 0){
+										while($row_forum = mysqli_fetch_assoc($result_forum)){
+											if(isset($row_forum['Category'])){
+												$follow_forum = findForum($row_forum['Category']);
+								?>
+								<a class="dropdown-item" href="../index/index.php?page=index&id=<?php echo $row_forum['Category']; ?>"><?php echo $follow_forum; ?></a>
+								<?php 
+										}//end if
+										else{
+											echo '<p>還沒追蹤看板QQ</p>';
+										}
+									}//end while
+								}//end if
+								else{
+									echo '<p>還沒追蹤看板QQ</p>';
+								}
+								?>
 							</div>
 						</div>
 					</li>
@@ -158,14 +186,35 @@
 			</div>
 			<?php  if($forum != 'all'){?>
 			<div class="col-md-2 col-sm-2 col-2 right mid">
-				<button type="button" class="btn btn-sm btn-info">追蹤此看板</button>
+				<?php 
+					$sql_forum = "SELECT * FROM `follow` WHERE `UId`=\"$uid\" AND `Category` = \"$forum\"";
+					$result_forum = mysqli_query($link, $sql_forum);
+					$num = mysqli_num_rows($result_forum);
+					if($num == 0){
+				?>
+					<a href="../Article/follow.php?forum=<?php echo $forum;?>">
+					<button type="button" class="btn btn-sm btn-info">追蹤此看板</button></a>
+				<?php
+					}else{
+				?>
+					<a href="../Article/follow.php?forum=<?php echo $forum;?>">
+					<button type="button" class="btn btn-sm btn-info">✔已追蹤</button></a>
+					<?php }?>
 		  	</div>
 		  	<?php } ?>
 		</div>
+
   		<div class="row mid">
 			<div class="btn-group col-md-4 col-sm-6 col-9" role="group" aria-label="Button group with nested dropdown">
-				<button type="button" class="btn btn-sm btn-info active">全部文章</button>    <!--啟用狀態(active)-->
-				<button type="button" class="btn btn-sm btn-info">追蹤文章</button>
+				<!-- 全部文章 -->
+				<a href="../index/index.php?page=index&id=all&hot=true">
+					<button type="button" class="btn btn-sm btn-info <?php if($forum == 'all'){echo 'active';}?>">全部文章</button> 
+				</a> 
+				<!-- 追蹤文章 -->
+				<a href="../index/index.php?page=index&follow=true&hot=true&id=follow">
+					<button type="button" class="btn btn-sm btn-info <?php if($follow == 'true'){echo 'active';}?>">追蹤文章</button>
+				</a>
+				<!-- 排序 -->
 				<button id="btnGroupDrop1" type="button" class="btn btn-sm btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
   					排序</button>
 				<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
@@ -174,8 +223,8 @@
 						echo '<a class="dropdown-item" href="../index/index.php?page=index&id=all&hot=true">熱門</a>';
 						echo '<a class="dropdown-item" href="../index/index.php?page=index&id=all&latestt=true">熱門</a>';
 					}else{
-						echo '<a class="dropdown-item" href="../index/index.php?page=index&hot=true">熱門</a>';
-						echo '<a class="dropdown-item" href="../index/index.php?page=index&latest=true">最新</a>';
+						echo '<a class="dropdown-item" href="../index/index.php?page=index&id='.$forum.'&hot=true">熱門</a>';
+						echo '<a class="dropdown-item" href="../index/index.php?page=index&id='.$forum.'&latest=true">最新</a>';
 					}
 					?>
 				</div>
@@ -191,14 +240,20 @@
 		<!-- 上面的按鈕 end-->
 		
 		<?php
-		// 最新排序	
-			if($forum == 'all'){
+			// 追蹤文章排序
+			if($follow == 'true'){ 
+				$sql = "SELECT `AId` FROM `save` WHERE `UId` = \"$uid\"";
+			}
+			// 所有文章排序
+			else if($forum == 'all'){
 				if($latest == "true"){ 
 				$sql = "SELECT * FROM `article` ORDER BY `post_time` DESC";
 				}else if($hot == "true"){
 					$sql = "SELECT * FROM `article` ORDER BY `agree` DESC";
 				}
-			}else{
+			}
+			// 看板裡的文章排序
+			else{
 				$sql = "SELECT * FROM `article` WHERE `category` = \"$forum\" ORDER BY `agree` DESC";
 				if( $latest == 'true'){
 					$sql = "SELECT * FROM `article` WHERE `category` = \"$forum\" ORDER BY `post_time` DESC";
@@ -206,22 +261,26 @@
 					$sql = "SELECT * FROM `article` WHERE `category` = \"$forum\" ORDER BY `agree` DESC";
 				}
 			}
+
 			$result = mysqli_query($link,$sql);
-			
+
 			if($result){
 				
 				while($row = mysqli_fetch_assoc($result)){
-					$id = $row['AId'];
+					$aid = $row['AId'];
 					#找到UId
-					if(isset($_SESSION['nickname'])){
-						$uid = finduid($_SESSION['nickname']);
-					}
 
-					$category = findFourm($row['category']);
+					if($follow == 'true'){
+						$sql_follow = "SELECT * FROM `article` WHERE `AId` = \"$aid\"";
+						$result_follow = mysqli_query($link,$sql_follow);
+						$row = mysqli_fetch_assoc($result_follow);
+					}
+					$category = findForum($row['category']);
 		?>
 		<!-- 文章簡圖區 -->
-	
-		<!-- <a href="../index/index.php?page=article&aid=" style="color:black; text-decoration:none;"> -->
+		
+		<!-- 顯示文章 -->
+		
 			<div class="art" onclick="location.href='../index/index.php?page=article&aid=<?php echo $row['AId']; ?>';">
 				<!-- 簡圖內容(上) -->
 				<div class="row art-head mid">
@@ -322,7 +381,6 @@
 				<!-- 簡圖內容(下) end-->
 			</div>
 			<!-- 文章簡圖區 end-->
-		<!-- </a> -->
 		<!-- 文章區 -->
 		
   		<?php
@@ -375,9 +433,9 @@
 				include("../Article/edit.php"); }	
 		?>
 		<?php //聊天頁面
-		if($page == 'chat'){
-		$page = 'index';
-		include("../index/chat.php"); }
+			if($page == 'chat'){
+			$page = 'index';
+			include("../index/chat.php"); }
 		?>
 	</div>
 	<!-- 中間end -->
