@@ -567,3 +567,8 @@ button img{
   text-decoration:none;
   text-align: center;
 }
+.edit-pic{
+  width:20px;
+  height:20px;
+  cursor: pointer;
+}

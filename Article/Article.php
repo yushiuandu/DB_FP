@@ -45,7 +45,9 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link href="../index/my.css" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<link href="../index/my.css" rel="stylesheet" type="text/css">
 	<title>抬槓</title>
 	<!-- <script src="//code.jquery.com/jquery-1.10.2.js"></script> -->
 	<script src="//s3-ap-northeast-1.amazonaws.com/justfont-user-script/jf-60019.js"></script>
@@ -70,21 +72,30 @@
 				?></p>
 			</div>
 			<!-- 作者(照片+名稱) end-->
-			
+			<!-- 文章編輯、刪除 -->
+			<div class="col-md-3 col-sm-4 col-6 right">
+				<!-- <button type="button" class="btn btn-sm btn-info">
+					<a href="../index/index.php?page=edit" style='text-decoration:none; color:white;'>編輯文章</a>
+				</button>
+				<button type="button" class="btn btn-sm btn-info">刪除文章</button> -->
+				<div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+					<img src='../index/image/pen.png' id="btnGroupDrop1" class="edit-pic dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></img>
+					<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+						<a class="dropdown-item" href="#">文章編輯</a>
+						<a class="dropdown-item" href="#">文章刪除</a>
+					</div>
+				</div>
+			</div>
+			<!-- 文章編輯、刪除 end-->
+
 			<div class></div>
 			<!-- 看板+發文時間 --> 
-			<div class="col-md-4 col-sm-5 col-7 bottom">
+			<div class="col-md-12 col-sm-12 col-12 bottom">
                 <p style=' font-size:2.2vmin; margin:0px; font-family: setofont; font-weight:600;'>
 				<?php echo $category.' - '.date('Y-m-d H:i',strtotime($row['post_time'])); ?>
 				</p>
 			</div>
 			<!-- 看板+發文時間 end-->
-			<div class="col-md-8 col-sm-7 col-5 right">
-				<button type="button" class="btn btn-sm btn-info">
-					<a href="../index/index.php?page=edit" style='text-decoration:none; color:white;'>編輯文章</a>
-				</button>
-				<button type="button" class="btn btn-sm btn-info">刪除文章</button>
-			</div>
 		</div>
 		<!-- 文章內容(上) end-->
 				
@@ -120,32 +131,35 @@
 		<div class="row article-fotter right">
 			<!-- 按鈕們-->
 			<div class="col-md-12 col-sm-12 col-12">
+				<p style="display: inline; margin:0px; font-size:16pt; position:relative; top:5px; left:5px;">2000</p>
+				<img class="pointer gbb" src="../index/image/good-white.png" title="喜歡">
 				<a herf ="#"><img class="pointer gbb"  src="../index/image/bell-white.png" title="追蹤"></a>
 				<img class="pointer gbb"  src="../index/image/bookmark-white.png" title="收藏" >
+				
 
 				<!-- 按讚數 -->
 				<?php 
 			
-					if(isset($_SESSION['nickname'])){
-						$sql_good = "SELECT ISNOT FROM good WHERE `UId` = \"$uid\" AND `AId` = \"$row[AId]\"";
-						$result_good = mysqli_query($link,$sql_good);
-						$row_good = mysqli_fetch_assoc($result_good);
+					// if(isset($_SESSION['nickname'])){
+					// 	$sql_good = "SELECT ISNOT FROM good WHERE `UId` = \"$uid\" AND `AId` = \"$row[AId]\"";
+					// 	$result_good = mysqli_query($link,$sql_good);
+					// 	$row_good = mysqli_fetch_assoc($result_good);
 							
-						if(isset($row_good['ISNOT'])){
-							echo '<a href = "../Article/good.php?aid='.$row['AId'].'">';
+					// 	if(isset($row_good['ISNOT'])){
+					// 		echo '<a href = "../Article/good.php?aid='.$row['AId'].'">';
 							
-							if(($row_good['ISNOT']== 1)){
-								echo '<img class="pointer gbb" src="../index/image/good-black.png"></a>';
-							}else if($row_good['ISNOT'] == 0){
-								echo '<img class="pointer gbb" src="../index/image/good-white.png"></a>';
-							}
-						}else{
-							echo '<a href = "../Article/good.php?aid='.$row['AId'].'">';
-							echo '<img class="pointer gbb" src="../index/image/good-white.png"></a>';
-						}
-					}else{
-						echo '<img class="pointer gbb" src="../index/image/good-white.png">';
-					}
+					// 		if(($row_good['ISNOT']== 1)){
+					// 			echo '<img class="pointer gbb" src="../index/image/good-black.png"></a>';
+					// 		}else if($row_good['ISNOT'] == 0){
+					// 			echo '<img class="pointer gbb" src="../index/image/good-white.png"></a>';
+					// 		}
+					// 	}else{
+					// 		echo '<a href = "../Article/good.php?aid='.$row['AId'].'">';
+					// 		echo '<img class="pointer gbb" src="../index/image/good-white.png"></a>';
+					// 	}
+					// }else{
+					// 	echo '<img class="pointer gbb" src="../index/image/good-white.png">';
+					// }
 				?>
 				<!-- 前端先拿下面這個修，上面的註解調 -->
 				<!-- <img class="pointer gbb" src="../index/image/good-white.png" title="喜歡"> -->
@@ -431,7 +445,13 @@
 
 	</div>
 	
-	
+	<!-- 手動呼叫 -->
+	<script>
+		$(document).ready(function(){
+  			$(".dropdown-toggle").dropdown();
+		});
+	</script>
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
