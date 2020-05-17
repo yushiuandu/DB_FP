@@ -78,6 +78,7 @@
 					<a href="../index/index.php?page=edit" style='text-decoration:none; color:white;'>編輯文章</a>
 				</button>
 				<button type="button" class="btn btn-sm btn-info">刪除文章</button> -->
+				<?php if($uid == $row['UId']){?> 
 				<div class="btn-group" role="group" aria-label="Button group with nested dropdown">
 					<img src='../index/image/pen.png' id="btnGroupDrop1" class="edit-pic dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></img>
 					<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
@@ -85,6 +86,7 @@
 						<a class="dropdown-item" href="#">文章刪除</a>
 					</div>
 				</div>
+				<?php } ?>
 			</div>
 			<!-- 文章編輯、刪除 end-->
 
@@ -96,14 +98,6 @@
 				</p>
 			</div>
 			<!-- 看板+發文時間 end-->
-			<div class="col-md-8 col-sm-7 col-5 right">
-				 <?php if($uid == $row['UId']){?>   <!--如果是本人寫的文章才會出現下面的button -->
-				<button type="button" class="btn btn-sm btn-info">
-					<a href="../index/index.php?page=edit" style='text-decoration:none; color:white;'>編輯文章</a>
-				</button>
-				<button type="button" class="btn btn-sm btn-info">刪除文章</button>
-				<?php } ?>
-			</div>
 		</div>
 		<!-- 文章內容(上) end-->
 				
@@ -139,6 +133,30 @@
 		<div class="row article-fotter right">
 			<!-- 按鈕們-->
 			<div class="col-md-12 col-sm-12 col-12">
+				<!-- 按讚數 -->
+				<p style="display: inline; margin:0px; font-size:16pt; position:relative; top:5px; left:5px;">2000</p>
+				<?php 
+					if(isset($_SESSION['nickname'])){
+						$sql_good = "SELECT ISNOT FROM good WHERE `UId` = \"$uid\" AND `AId` = \"$row[AId]\"";
+						$result_good = mysqli_query($link,$sql_good);
+						$row_good = mysqli_fetch_assoc($result_good);
+							
+						if(isset($row_good['ISNOT'])){
+							echo '<a href = "../Article/good.php?aid='.$row['AId'].'">';
+							
+							if(($row_good['ISNOT']== 1)){
+								echo '<img class="pointer gbb" src="../index/image/good-black.png"></a>';
+							}else if($row_good['ISNOT'] == 0){
+								echo '<img class="pointer gbb" src="../index/image/good-white.png"></a>';
+							}
+						}else{
+							echo '<a href = "../Article/good.php?aid='.$row['AId'].'">';
+							echo '<img class="pointer gbb" src="../index/image/good-white.png"></a>';
+						}
+					}else{
+						echo '<img class="pointer gbb" src="../index/image/good-white.png">';
+					}
+				?>
 				<!-- 追蹤 -->
 				<?php 
 					if(isset($_SESSION['nickname'])){
@@ -181,39 +199,7 @@
 						echo '<img class="pointer gbb"  src="../index/image/bookmark-white.png" title="追蹤">';
 					}
 				?>
-				<!-- <img class="pointer gbb"  src="../index/image/bookmark-white.png" title="收藏" > -->
-				<p style="display: inline; margin:0px; font-size:16pt; position:relative; top:5px; left:5px;">2000</p>
-				<img class="pointer gbb" src="../index/image/good-white.png" title="喜歡">
-				<a herf ="#"><img class="pointer gbb"  src="../index/image/bell-white.png" title="追蹤"></a>
-				<img class="pointer gbb"  src="../index/image/bookmark-white.png" title="收藏" >
 				
-
-				<!-- 按讚數 -->
-				<?php 
-			
-					// if(isset($_SESSION['nickname'])){
-					// 	$sql_good = "SELECT ISNOT FROM good WHERE `UId` = \"$uid\" AND `AId` = \"$row[AId]\"";
-					// 	$result_good = mysqli_query($link,$sql_good);
-					// 	$row_good = mysqli_fetch_assoc($result_good);
-							
-					// 	if(isset($row_good['ISNOT'])){
-					// 		echo '<a href = "../Article/good.php?aid='.$row['AId'].'">';
-							
-					// 		if(($row_good['ISNOT']== 1)){
-					// 			echo '<img class="pointer gbb" src="../index/image/good-black.png"></a>';
-					// 		}else if($row_good['ISNOT'] == 0){
-					// 			echo '<img class="pointer gbb" src="../index/image/good-white.png"></a>';
-					// 		}
-					// 	}else{
-					// 		echo '<a href = "../Article/good.php?aid='.$row['AId'].'">';
-					// 		echo '<img class="pointer gbb" src="../index/image/good-white.png"></a>';
-					// 	}
-					// }else{
-					// 	echo '<img class="pointer gbb" src="../index/image/good-white.png">';
-					// }
-				?>
-				<!-- 前端先拿下面這個修，上面的註解調 -->
-				<!-- <img class="pointer gbb" src="../index/image/good-white.png" title="喜歡"> -->
 			</div>
 			<!-- 按鈕們 end -->
 		</div>
