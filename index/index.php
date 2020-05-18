@@ -54,7 +54,37 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link href="./my.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" type="text/css" href="./my.css" ty="theme">
+	<!-- 有心力要來修改這個 -->
+	<!-- <script> 
+		function setStyleSheet(title){
+		// 找到head
+		var doc_head = document.head;
+		// 找到所有的link標籤
+		var link_list = document.getElementsByTagName("link");
+		if ( link_list ){
+			for ( var i=0;i<link_list.length;i++ ){
+				// 找到我們需要替換的link，
+				// 一般情況下有些樣式是公共樣式，我們可以寫到功能樣式文件中，不用來做替換；
+				// 這樣可以避免每次替換的時候樣式文件都很大；可以節省加載速度；
+				if ( link_list[i].getAttribute("ty") === "theme" ){
+					// 找到後將這個link標籤重head中移除
+					doc_head.removeChild(link_list[i]);
+				}
+			}
+		}
+		// 創建一個新link標籤
+		var link_style = document.createElement("link");
+		// 對link標籤中的屬性賦值
+		link_style.setAttribute("rel","stylesheet");
+		link_style.setAttribute("type","text/css");
+		link_style.setAttribute("href","./my1.css");
+		link_style.setAttribute("ty","theme");
+		// 加載到head中最後的位置
+		doc_head.appendChild(link_style);
+		};
+	</script> -->
+
     <title>抬槓</title>
 	<script src="//s3-ap-northeast-1.amazonaws.com/justfont-user-script/jf-60019.js"></script>
 	<script src="//s3-ap-northeast-1.amazonaws.com/justfont-user-script/jf-60019.js"></script>
@@ -78,9 +108,9 @@
       		</a>
 		  </div>
 		  <div class="">
-			<form class="form-inline" method="post" action="../index/search.php">
-				<input class="form-control mr-sm-2" type="search" placeholder="搜尋標題...." style="width:125px;" name="key">
-				<button type="sumbit" class="btn btn-light btn-sm" type="submit">搜尋</button>
+			<form class="form-inline" method="post" action="../index/?page=search">
+				<input class="form-control mr-sm-2" type="search" placeholder="要找甚麼...." style="width:125px;" name="key">
+				<button class="btn btn-light btn-sm" type="submit"><a href="?page=search" style = 'color:black;text-decoration:none;'>搜尋</a></button>
 			</form>
 		  </div>	
 	  </div>
@@ -402,6 +432,11 @@
 			$page = 'index';
 			include("../index/user.php"); }
 		?>
+		<?php //通知
+		  	if($page == 'bell'){
+			$page = 'index';
+			include("../index/bell.php"); }
+		?>
 		<?php //nickname頁面
 		  	if($page == 'nickname'){
 			$page = 'index';
@@ -436,6 +471,11 @@
 			if($page == 'chat'){
 			$page = 'index';
 			include("../index/chat.php"); }
+		?>
+		<?php //搜尋
+		  	if($page == 'search'){
+			$page = 'index';
+			include("../index/search.php"); }
 		?>
 	</div>
 	<!-- 中間end -->
@@ -535,6 +575,11 @@
 						<a href="?page=friend"  style="color:white;"><img src='../index/image/friend.png' title="好友列表"></a>
 					</button>
 				</div>
+				<div class="row justify-content-center">
+					<button type="button" class="btn btn-light font-weight-bold col-md-10" style='margin-top:10px;'>
+						<p onclick="setStyleSheet()" style='font-size:12pt; margin:0px;'>管理員模式</p>
+					</button>
+				</div>
 			</div>
 			<!--右下半部 分頁格子 end-->
 			<?php
@@ -604,7 +649,7 @@
 	</div>
 	<!-- row end -->
 	
-
+	
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
