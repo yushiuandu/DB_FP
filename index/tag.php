@@ -6,7 +6,8 @@
     }
     
     if(isset($_GET['tag'])){
-        $tag = $_GET['tag'];
+		$tag = $_GET['tag'];
+		$_SESSION['local'] = "../index/index.php?page=tag&tag=$tag";
     }
 
     #找到UId

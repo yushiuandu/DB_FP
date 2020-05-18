@@ -149,15 +149,15 @@
             <div class='con'>
                 <!-- tag -->
                 <?php
-                    $sql_tag = "SELECT * FROM `follow` WHERE `UId` = \"$uid\" AND `tag`!= NULL 
+                    $sql_tag = "SELECT * FROM `follow` WHERE `UId` = \"$uid\" AND `Tag`!= 'NULL' 
                     ORDER BY `follow_time` DESC";
                     $result_tag = mysqli_query($link, $sql_tag);
                     $row = mysqli_fetch_assoc($result_tag);
                     while($row){
                 ?>
-                <a href='../index/index.php?page=tag&tag=<?php echo $row_tag['tag'];?>' style='color:black;'>
+                <a href='../index/index.php?page=tag&tag=<?php echo $row['Tag'];?>' style='color:black;'>
                     <div class='tag'>
-                        <p class='ss'>#中山大學</p>
+                        <p class='ss'>#<?php echo $row['Tag'];?></p>
                     </div>
                 </a>
                 <!-- tag end -->

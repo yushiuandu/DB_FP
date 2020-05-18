@@ -12,16 +12,21 @@
 
 	#找到UId
 	include("../index/forum.php");
+	$uid = "";
 	if(isset($_SESSION['nickname'])){
 		$uid = finduid($_SESSION['nickname']);
 	}
-	
-	
 	#get article id
 	$aid = "";
 	if(isset($_GET['aid'])){
 		$aid = $_GET['aid'];
 		$_SESSION['aid'] = $aid;
+		$_SESSION['local'] = "../index/index.php?page=article&aid=$aid";
+	}
+
+	$cid = "";
+	if(isset($_GET['edit'])){
+		$cid = $_GET['edit'];
 	}
 
 	#顯示文章
@@ -78,7 +83,7 @@
 					<a href="../index/index.php?page=edit" style='text-decoration:none; color:white;'>編輯文章</a>
 				</button>
 				<button type="button" class="btn btn-sm btn-info">刪除文章</button> -->
-				<?php if($uid == $row['UId']){?> 
+				<?php if($uid == $row['UId'] AND isset($_SESSION['nickname'])){?> 
 				<div class="btn-group" role="group" aria-label="Button group with nested dropdown">
 					<img src='../index/image/pen.png' id="btnGroupDrop1" class="edit-pic dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></img>
 					<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
@@ -436,7 +441,7 @@
 							<div class="btn-group" role="group" aria-label="Button group with nested dropdown">
 								<img src='../index/image/pen.png' id="btnGroupDrop1" class="edit-pic dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></img>
 								<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-									<a class="dropdown-item" href="#">留言編輯</a>
+									<a class="dropdown-item" href="../index/index.php?page=article&aid=<?php echo $row_c['AId'];?>&edit=<?php echo $row_c['CId'];?>">留言編輯</a>
 									<a class="dropdown-item" href="../Article/edit.php?deletec=<?php echo $row_c['CId'];?>">留言刪除</a>
 								</div>
 							</div>
@@ -451,7 +456,19 @@
 					<!-- 留言內容-->
 					<div class="col-md-11 col-sm-11 col-11" style="margin:0px; padding:0px;">
 						<p class="hmes"><?php echo 'B'.$row_c['floor'].' - '.date('Y-m-d H:i',strtotime($row_c['time']));?></p>
-						<p class="hmes"><?php echo $row_c['content'];?></p>
+						<?php if($cid == $row_c['CId']){?>
+							<form method="post" action="../Article/addcom.php?cid=<?php echo $row_c['CId'];?>&aid=<?php echo $row_c['AId'];?>">
+								<div class="form-row">
+									<div class="col-md-10 mb-5">
+										<textarea class="form-control" id="comment" required name="content"><?php echo $row_c['content'];?></textarea>
+										<a href="../index/index.php/?page=article&aid=<?php echo $row_c['AId'];?>"><button type="submit" class="btn btn-secondary btn-sm my-1">離開</button></a>
+										<button type="submit" class="btn btn-secondary btn-sm my-1">修改</button>	
+									</div>
+								</div>
+							</form>
+						<?php }else{ ?>
+							<p class="hmes"><?php echo $row_c['content'];?></p>
+						<?php }?>
 					</div>
 					<!-- 留言內容 end-->
 				</div>

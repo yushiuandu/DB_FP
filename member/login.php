@@ -18,7 +18,7 @@
         if($row['Password'] == $pass){
             $_SESSION['user'] = $row['Name'];
             $_SESSION['nickname'] = $row['Nickname'];
-            header("Location:../index/index.php");
+            header("Location:$_SESSION[local]");
         }else{
         echo '帳號或密碼錯誤！';
         }
