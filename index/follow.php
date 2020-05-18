@@ -31,8 +31,8 @@
   <!-- 追蹤 -->
   <body>
     <!-- 文章追蹤 -->
-    <div class="row">
-        <div class="col-md-11 long">
+    <div class="row justify-content-center">
+        <div class="col-md-12 long">
             <div class='tit'>
                 <p class='ww'>追蹤的文章</p>
             </div>
@@ -48,7 +48,7 @@
                     
                 ?>
                 <!-- 文章 -->
-                <div class="bo" onclick="location.href='../index/index.php?page=article&aid=<?php echo $row['AId']; ?>';">
+                <div class="bo pointer" onclick="location.href='#';">
                     <!-- 文章(上) -->
                     <div class="row art-head mid">
                         <!-- 作者-->
@@ -102,9 +102,9 @@
     </div>
     <!-- 文章追蹤 end -->
 
-    <div class="row">
+    <div class="row justify-content-center">
         <!-- 追蹤的人 -->
-        <div class="col-md-5 short">
+        <div class="col-md-6">
             <!-- title -->
             <div class='tit'>
                 <p class='ww'>追蹤的人</p>
@@ -154,7 +154,7 @@
         </div>
         <!-- 追蹤的人 end -->
         <!-- 追蹤的tag -->
-        <div class="col-md-5 short">
+        <div class="col-md-6">
             <div class='tit'>
                 <p class='ww'>追蹤的tag</p>
             </div>
