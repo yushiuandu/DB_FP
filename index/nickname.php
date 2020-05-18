@@ -52,9 +52,25 @@
 
 	$result_user = mysqli_query($link, $sql);
 	$row_user = mysqli_fetch_assoc($result_user);
-	
 
+	//計算他有幾篇文章
+	if($is_oneself == 1){ //如果是非本人看
+	$sql_a = "SELECT COUNT(AId) as total FROM `article` WHERE `UId` =\"$uid\" AND `anonymous` = 1 GROUP BY `UId`";
+	}else{
+		$sql_a = "SELECT COUNT(AId) as total FROM `article` WHERE `UId` =\"$uid\" GROUP BY `UId`";
+	}
+	$result = mysqli_query($link,$sql_a);
+	$row_a = mysqli_fetch_assoc($result);
+	$num_a =  $row_a['total'];
 
+	//計算他追蹤多少人
+	$sql_f = "SELECT COUNT(follow_id) AS total FROM `follow` WHERE `UID` = '$uid' GROUP BY `UId`";
+	$result = mysqli_query($link,$sql_f);
+	$row_f = mysqli_fetch_assoc($result);
+	$num_f = $row_f['total'];
+	if(!isset($num_f)){
+		$num_f = 0;
+	}
 ?>
 <!doctype html>
 <html lang="en">
@@ -81,15 +97,26 @@
         <!-- 此nickname的照片 -->
         <!-- nickname名稱 -->
         <p style='margin-bottom:0px; font-size:16pt; font-weight:600;'><?php echo $row_user['Nickname'];?></p>
+
         <!-- nickname的文章列表 & 追蹤人數 -->
-        <p style='margin-bottom:5px; color:white;'>53 篇文章 - 35785人追蹤 - 追蹤人數200</p>
+        <p style='margin-bottom:5px; color:white;'><?php echo $num_a;?> 篇文章 - <?php echo $row_user['Fans_num'];?> 人追蹤 - 追蹤人數 <?php echo $num_f;?></p>
+		
 		<!-- 如果是本人使用自己的nickname頁面 -->
 		<?php  if($is_oneself == 0){ ?>
-        <button type="button" class="btn btn-info font-weight-bold" >編輯</button>
+        	<a href="../index/index.php?page=user"><button type="button" class="btn btn-info font-weight-bold" >編輯</button></a>
+		
 		<!-- 如果非本人使用自己的nickname頁面 -->
-		<?php  }else if($is_oneself == 1){ ?>
-		<button type="button" class="btn btn-info font-weight-bold" >追蹤</button>
-		<?php } ?>
+		<?php  }else if($is_oneself == 1){ 
+				$sql = "SELECT * FROM `follow` WHERE `follow_id` = \"$uid\" AND `UId` = \"$uid_current\"";
+				$result = mysqli_query($link, $sql);
+				$num = mysqli_num_rows($result);
+				if($num == 0){ //未追蹤
+		?>
+			<a href="../Article/follow.php?followuid=<?php echo $uid;?>"><button type="button" class="btn btn-info font-weight-bold" >追蹤</button></a>
+		<?php }else{?>
+			<a href="../Article/follow.php?followuid=<?php echo $uid;?>"><button type="button" class="btn btn-info font-weight-bold" >✔已追蹤</button></a>
+		<?php			}
+				} ?>
     </div>
     <!-- 此nickname資料框 end-->
 
@@ -112,7 +139,11 @@
 	<!-- 區塊title end -->
 
 	<?php 
-		$sql = "SELECT * FROM article WHERE `UID` = \"$uid\" AND `anonymous` = 1";
+		if($is_oneself == 1){
+			$sql = "SELECT * FROM article WHERE `UID` = \"$uid\" AND `anonymous` = 1";
+		}else if($is_oneself == 0){
+			$sql = "SELECT * FROM article WHERE `UID` = \"$uid\"";
+		}
 		$result = mysqli_query($link,$sql);
 		$row = mysqli_fetch_assoc($result);
 	?>

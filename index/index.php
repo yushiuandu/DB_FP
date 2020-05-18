@@ -140,7 +140,8 @@
 								<?php 
 										}//end if
 										else{
-											echo '<p>還沒追蹤看板QQ</p>';
+											echo '<ul>';
+											echo '<p>還沒追蹤看板QQ</p></ul>';
 										}
 									}//end while
 								}//end if

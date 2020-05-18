@@ -44,6 +44,37 @@
 
 	}
 
+	if(isset($_GET['followuid'])){
+		$follow_uid = $_GET['followuid'];
+
+		$sql = "SELECT * FROM `follow` WHERE `follow_id` = \"$follow_uid\" AND `UId` = \"$uid\"";
+		$result = mysqli_query($link, $sql);
+		$num = mysqli_num_rows($result);
+
+		$sql_add = "SELECT `Fans_num` FROM `member` WHERE `UId` = \"$follow_uid\"";
+		$result_add = mysqli_query($link, $sql_add);
+		$row = mysqli_fetch_assoc($result_add);
+		$fans_num = $row['Fans_num'] + 1;
+
+		if($num == 0){
+			$sql = "INSERT INTO	`follow` (`UId`, `follow_id`, `follow_time`) VALUES ('$uid', '$follow_uid', '$datetime')";
+			$fans_num = $row['Fans_num'] + 1;
+			$sql_num = "UPDATE `member` SET `Fans_num` = \"$fans_num\" WHERE `UId` = '$follow_uid'";
+		}else{
+			$sql = "DELETE FROM `follow` WHERE `follow_id` = \"$follow_uid\" AND `UId` = \"$uid\"";
+			$fans_num = $row['Fans_num'] - 1;
+			$sql_num = "UPDATE `member` SET `Fans_num` = \"$fans_num\" WHERE `UId` = '$follow_uid'";
+		}
+
+		if(mysqli_query($link,$sql)){
+			mysqli_query($link,$sql_num);
+			echo 'success';
+			header("Location:../index/index.php?page=nickname&uid=$follow_uid"); 
+			exit;
+		}else{
+			echo 'failQQ';
+		}
+	}
 
 	
 	if($follow == 0){

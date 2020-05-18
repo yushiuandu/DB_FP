@@ -82,8 +82,8 @@
 				<div class="btn-group" role="group" aria-label="Button group with nested dropdown">
 					<img src='../index/image/pen.png' id="btnGroupDrop1" class="edit-pic dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></img>
 					<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-						<a class="dropdown-item" href="#">文章編輯</a>
-						<a class="dropdown-item" href="#">文章刪除</a>
+						<a class="dropdown-item" href="../index/index.php?page=edit&aid=<?php echo $row['AId'];?>">文章編輯</a>
+						<a class="dropdown-item" href="../Article/edit.php?delete=<?php echo $row['AId'];?>">文章刪除</a>
 					</div>
 				</div>
 				<?php } ?>
@@ -217,6 +217,12 @@
 				
 					
 	?>
+	<?php 
+		$sql_hot = "SELECT * FROM `comment` WHERE `AId` = \"$aid\" ORDER BY `likeCount` DESC";
+		$result_hot = mysqli_query($link,$sql_hot);
+		$num = mysqli_num_rows($result_hot);
+
+		if($num >2){?>
 	<div class="article">
         <!-- 熱門排行榜(上) -->
 		<div class="row hmes-head mid" style='border-bottom: 1px black solid;'>
@@ -225,9 +231,6 @@
 		<!-- 熱門排行榜(上) end-->
 
 		<?php 
-		
-			$sql_hot = "SELECT * FROM `comment` WHERE `AId` = \"$aid\" ORDER BY `likeCount` DESC";
-			$result_hot = mysqli_query($link,$sql_hot);
 			if($result_hot){
 				for ($rank=1 ;$rank < 4; $rank++){
 					$row_hot = mysqli_fetch_assoc($result_hot);
@@ -253,7 +256,17 @@
 				<div class="row mid">
 					<!-- 作者照片-->
 					<div class="col-md-1 col-sm-1 col-2" style="margin:0px; padding:0px;">
-						<img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic">
+						<?php 
+							// 如果不是匿名
+							if($row_hot['anonymous'] == 1){
+								echo '<a href="../index/index.php?page=nickname&uid='.$row['UId'].'">';	
+						?>
+							<img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic"></a>
+						<?php
+							}else{ ?>
+								<img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic">
+						<?php	}//end else
+						?>
 					</div>
 					<!-- 作者照片 end-->
 					<!-- 作者-->
@@ -261,7 +274,8 @@
 						<p class='w'><?php 
 						if($row_hot['anonymous'] == 0){
 							echo '匿名';
-						}else{
+						}
+						else if ($row_hot['anonymous'] == 1){
 							echo $row_hot['post_name'];
 						}
 						?></p>
@@ -294,13 +308,15 @@
 								echo '<img class="img-fluid pointer gbb" src="../index/image/good-white.png" id="good-pic">';
 							}
 						?>
+						<?php if($row_hot['UId'] == $uid AND $row_hot['anonymous']!=2){?>
 						<div class="btn-group" role="group" aria-label="Button group with nested dropdown">
 							<img src='../index/image/pen.png' id="btnGroupDrop1" class="edit-pic dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></img>
 							<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
 								<a class="dropdown-item" href="#">留言編輯</a>
-								<a class="dropdown-item" href="#">留言刪除</a>
+								<a class="dropdown-item" href="../Article/edit.php?deletec=<?php echo $row_hot['CId'];?>">留言刪除</a>
 							</div>
 						</div>
+						<?php }?>
 					</div>
 					<!-- 按讚數 end-->
 					
@@ -314,11 +330,13 @@
 					</div>
 					<!-- 留言內容 end-->
 				</div>
+				
 			</div>				
 		</div>
-		<?php }
-		} ?>
+		<?php }//end for
+		} //end if?>
 	</div>
+	<?php }//end if?>
 
 	<?php } //如果沒有熱門留言?>
 	<!-- 留言區 -->
@@ -338,7 +356,7 @@
 				while($row_c = mysqli_fetch_assoc($result_c)){
 		?>
 	
-		<!-- 留言區(下) -->
+		<!-- 一般留言區(下) -->
 		<div class="row mid hmes-head justify-content-center">
 			<!-- 圖片 -->
 			<!-- <div class="col-md-2 col-sm-2 col-3">
@@ -358,8 +376,8 @@
 					
 						<?php 
 							// 如果不是匿名
-							if($row['anonymous'] == 1){
-								echo '<a href="../index/index.php?page=nickname&uid='.$row[UId].'">';	
+							if($row_c['anonymous'] == 1){
+								echo '<a href="../index/index.php?page=nickname&uid='.$row['UId'].'">';	
 						?>
 							<img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic"></a>
 						<?php
@@ -374,15 +392,18 @@
 						<p class='w'><?php 
 							if($row_c['anonymous'] == 0){
 								echo '匿名';
-							}else{
+							}else if ($row_c['anonymous'] == 1){
 								echo $row_c['post_name'];
+							}else{
+								echo '掰掰用戶';
 							}
 						?></p>
 					</div>
 					<!-- 作者 end-->
-
+					
 					<!-- 按讚數 --> 
 					<div class="col-md-3 col-sm-3 col-5">
+					<?php if($row_c['anonymous']!=2){?>
 						<p style="display: inline; font-size:2.5vmin; font-weight:400; font-family:jf-openhuninn;"><?php echo $row_c['likeCount'];?></p>
 						<?php 
 							if(isset($_SESSION['nickname'])){
@@ -404,12 +425,26 @@
 									echo '<a href = "../Article/good.php?cid='.$row_c['CId'].'">';
 									echo '<img class="img-fluid pointer gbb" src="../index/image/good-white.png" id="good-pic"></a>';
 								}
-							}else{
+							}
+							else{
 								echo '<img class="img-fluid pointer gbb" src="../index/image/good-white.png" id="good-pic">';
 							}
 						?>
+
+						<?php if($row_c['UId'] == $uid){?>
+							<div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+								<img src='../index/image/pen.png' id="btnGroupDrop1" class="edit-pic dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></img>
+								<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+									<a class="dropdown-item" href="#">留言編輯</a>
+									<a class="dropdown-item" href="../Article/edit.php?deletec=<?php echo $row_c['CId'];?>">留言刪除</a>
+								</div>
+							</div>
+						<?php }?>
+					<?php }//如果anonymous != 2 end?>
 					</div>
 					<!-- 按讚數 end-->
+						
+					
 					
 					<div class="col-md-1 col-sm-1 col-1" style="margin:0px; padding:0px;"></div>
 					<!-- 留言內容-->
