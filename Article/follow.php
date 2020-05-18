@@ -76,6 +76,25 @@
 		}
 	}
 
+	if(isset($_GET['tag'])){
+		$tag = $_GET['tag'];
+		$sql = "SELECT * FROM `follow` WHERE `Tag` = \"$tag\" AND `UId` = \"$uid\"";
+		$result = mysqli_query($link, $sql);
+		$num = mysqli_num_rows($result);
+
+		if($num > 0){
+			$sql = "DELETE FROM `follow` WHERE `UId` = \"$uid\" AND `Tag` = \"$tag\"";
+		}else{
+			$sql = "INSERT INTO `follow` (`UId`,`Tag`,`follow_time`) VALUES ('$uid', '$tag', '$datetime')";
+		}
+		if(mysqli_query($link,$sql)){
+			echo 'success';
+			header("Location:../index/index.php?page=tag&tag=$tag"); 
+			exit;
+		}else{
+			echo 'failQQ';
+		}
+	}
 	
 	if($follow == 0){
 		$sql = "INSERT INTO `follow` (`UId`,`AId`,`follow_time`) VALUES ('$uid', '$aid', '$datetime')";

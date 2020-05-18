@@ -282,7 +282,7 @@
 		
 		<!-- 顯示文章 -->
 		
-			<div class="art" onclick="location.href='../index/index.php?page=article&aid=<?php echo $row['AId']; ?>';">
+			<div class="art pointer" onclick="location.href='../index/index.php?page=article&aid=<?php echo $row['AId']; ?>';">
 				<!-- 簡圖內容(上) -->
 				<div class="row art-head mid">
 					<!-- 作者-->
@@ -437,6 +437,11 @@
 			if($page == 'chat'){
 			$page = 'index';
 			include("../index/chat.php"); }
+		?>
+		<?php //TAG頁面
+			if($page == 'tag'){
+			$page = 'index';
+			include("../index/tag.php"); }
 		?>
 	</div>
 	<!-- 中間end -->

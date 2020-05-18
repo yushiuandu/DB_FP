@@ -118,7 +118,8 @@
 						if($result_tag AND isset($row_tag)){
 							while($row_tag){
 					?>
-					<button type="button" class="btn btn-sm btn-light">#<?php echo $row_tag['tag'];?></button>
+					<a href = "../index/index.php?page=tag&tag=<?php echo $row_tag['tag'];?>">
+					<button type="button" class="btn btn-sm btn-light">#<?php echo $row_tag['tag'];?></button></a>
 					<?php
 							$row_tag = mysqli_fetch_assoc($result_tag);}
 						}
