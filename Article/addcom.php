@@ -5,6 +5,18 @@
         if(!$link){
         echo "no connect!";
     }
+    //修改留言
+    if(isset($_GET['cid'])){
+		$aid = $_GET['aid'];
+		$cid = $_GET['cid'];
+		$sql = "UPDATE `comment` SET `content` = \"$_POST[content]\" WHERE CId = \"$cid\"";
+		if(mysqli_query($link, $sql)){
+			header("Location:../index/index.php?page=article&aid=$aid");
+			exit;
+		}else{
+			echo "fail";
+		}
+	}else{
 
     // 先找出UID
     $sql = "SELECT `UId` FROM `member` WHERE `Nickname` = \"$_SESSION[nickname]\"";
@@ -31,5 +43,6 @@
     {die('Error: ' . mysqli_error());}
     else{
     header("Location:../index/index.php?page=article&aid=$aid"); 
-    }
+    exit;
+    }}
 ?>

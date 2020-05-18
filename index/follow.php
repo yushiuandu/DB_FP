@@ -8,7 +8,7 @@
 		$uid = finduid($_SESSION['nickname']);
     }
     
-    $sql = "SELECT * FROM `follow` WHERE `UId` = \"$uid\" ORDER BY `follow_time` DESC";
+    $sql = "SELECT `AId` FROM `follow` WHERE `UId` = \"$uid\" AND `AId` != 'NULL' ORDER BY `follow_time` DESC";
     $result = mysqli_query($link, $sql);
 ?>
 
@@ -48,7 +48,7 @@
                     
                 ?>
                 <!-- 文章 -->
-                <div class="bo pointer" onclick="location.href='#';">
+                <div class="bo pointer" onclick="location.href='../index/index.php?page=article&aid=<?php echo $row_follow['AId']; ?>';">
                     <!-- 文章(上) -->
                     <div class="row art-head mid">
                         <!-- 作者-->
@@ -101,7 +101,8 @@
         </div>
     </div>
     <!-- 文章追蹤 end -->
-
+    
+    <!-- 追蹤人、TAG -->
     <div class="row justify-content-center">
         <!-- 追蹤的人 -->
         <div class="col-md-6">
@@ -113,41 +114,27 @@
             <!-- body -->
             <div class='con'>
                 <!-- user -->
+                <?php 
+                    $sql = "SELECT M.UId, M.Nickname 
+                            FROM `follow` AS F JOIN `member` AS M
+                            WHERE F.follow_id = M.UId AND F.UId = \"$uid\"";
+                    $result = mysqli_query($link, $sql);
+                    $row = mysqli_fetch_assoc($result);
+                    while($row){
+                ?>
                 <a href='#' style='color:black;'>
                     <div class='cc'>
                         <div class="card" style="width: 9rem;">
                             <img class="card-img-top" src="../index/image/test1.jpg" alt="user">
                             <div class="card-body">
-                                <p class='ss'>小黑</p>
+                                <p class='ss'><?php echo $row['Nickname'];?></p>
                             </div>
                         </div>
                     </div>
                 </a>
                 <!-- user end -->
-                <!-- user -->
-                <a href='#' style='color:black;'>
-                    <div class='cc'>
-                        <div class="card" style="width: 9rem;">
-                            <img class="card-img-top" src="../index/image/test1.jpg" alt="user">
-                            <div class="card-body">
-                                <p class='ss'>小黑</p>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                <!-- user end -->
-                <!-- user -->
-                <a href='#' style='color:black;'>
-                    <div class='cc'>
-                        <div class="card" style="width: 9rem;">
-                            <img class="card-img-top" src="../index/image/test1.jpg" alt="user">
-                            <div class="card-body">
-                                <p class='ss'>小黑</p>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                <!-- user end -->
+                    <?php $row = mysqli_fetch_assoc($result);
+                        }?>
             </div>
             <!-- body -->
             
@@ -161,40 +148,21 @@
             <!-- body -->
             <div class='con'>
                 <!-- tag -->
-                <a href='#' style='color:black;'>
+                <?php
+                    $sql_tag = "SELECT * FROM `follow` WHERE `UId` = \"$uid\" AND `Tag`!= 'NULL' 
+                    ORDER BY `follow_time` DESC";
+                    $result_tag = mysqli_query($link, $sql_tag);
+                    $row = mysqli_fetch_assoc($result_tag);
+                    while($row){
+                ?>
+                <a href='../index/index.php?page=tag&tag=<?php echo $row['Tag'];?>' style='color:black;'>
                     <div class='tag'>
-                        <p class='ss'>#中山大學</p>
+                        <p class='ss'>#<?php echo $row['Tag'];?></p>
                     </div>
                 </a>
                 <!-- tag end -->
-                <!-- tag -->
-                <a href='#' style='color:black;'>
-                    <div class='tag'>
-                        <p class='ss'>#西子灣</p>
-                    </div>
-                </a>
-                <!-- tag end -->
-                <!-- tag -->
-                <a href='#' style='color:black;'>
-                    <div class='tag'>
-                        <p class='ss'>#資訊管理學系</p>
-                    </div>
-                </a>
-                <!-- tag end -->
-                <!-- tag -->
-                <a href='#' style='color:black;'>
-                    <div class='tag'>
-                        <p class='ss'>#大二</p>
-                    </div>
-                </a>
-                <!-- tag end -->
-                <!-- tag -->
-                <a href='#' style='color:black;'>
-                    <div class='tag'>
-                        <p class='ss'>#杜俞萱</p>
-                    </div>
-                </a>
-                <!-- tag end -->
+                <?php $row = mysqli_fetch_assoc($result);
+                        }?>
             </div>
             <!-- body -->
         </div>

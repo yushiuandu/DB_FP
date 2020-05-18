@@ -73,7 +73,7 @@
 		<div class="form-group row">
 			<label class="col-sm-3 col-form-label">標題</label>
 			<div class="col-sm-9">
-			<input name = "title" type="text" class="form-control" placeholder="請輸入文章標題">
+			<input name = "title" type="text" class="form-control" placeholder="請輸入文章標題" required> 
 			</div>
 		</div>
 
@@ -81,7 +81,7 @@
 			<label class="col-sm-3 col-form-label">文章內容</label>
 			<!-- 自動變長 -->
 			<div class="col-sm-9">
-			<textarea name = "content" type="text" class="form-control" placeholder="文章內容" name="message" cols="90" rows="13" onkeyup="autogrow(this);"></textarea>
+			<textarea required name = "content" type="text" class="form-control" placeholder="文章內容" cols="90" rows="13" onkeyup="autogrow(this);"></textarea>
 			</div>
 		</div>
 

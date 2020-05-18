@@ -1,4 +1,6 @@
-<?php session_start();?>
+<?php 	session_start();
+		$_SESSION['local'] = '../index/index.php';
+?>
 <?php
 	$link = mysqli_connect("localhost","taigun","ELn3yv07F567MwOF","taigun");//連結伺服器//選擇資料庫
 	if(!$link){
@@ -12,6 +14,7 @@
 	}
 	if(isset($_GET['id'])){
 		$forum = $_GET['id'];
+		$_SESSION['local'] = "../index/index.php?page=index&id=$forum";
 	}
 	if(isset($_GET['hot'])){
 		$hot = $_GET['hot'];
@@ -40,7 +43,6 @@
 	$category = findForum($forum);
 	// 時區宣告
 	date_default_timezone_set('Asia/Taipei');
-	
 ?>
 
 <!doctype html>
@@ -158,7 +160,8 @@
 						
 							<div id="collapseTwo" class="collapse link-body" aria-labelledby="headingTwo" data-parent="#follow">
 								<?php 
-									$sql_forum = "SELECT `Category` FROM `follow` WHERE `UId` = \"$uid\"";
+								if(isset($uid)){
+									$sql_forum = "SELECT `Category` FROM `follow` WHERE `UId` = \"$uid\" AND `Category`!='NULL'";
 									$result_forum = mysqli_query($link, $sql_forum);
 									$num = mysqli_num_rows($result_forum);
 									if($num > 0){
@@ -168,14 +171,15 @@
 								?>
 								<a class="dropdown-item" href="../index/index.php?page=index&id=<?php echo $row_forum['Category']; ?>"><?php echo $follow_forum; ?></a>
 								<?php 
-										}//end if
-										else{
-											echo '<p>還沒追蹤看板QQ</p>';
-										}
-									}//end while
-								}//end if
-								else{
-									echo '<p>還沒追蹤看板QQ</p>';
+											}//end if
+										}//end while
+									}//end if
+									else{
+										echo '<ul>';
+										echo '<p>還沒追蹤看板QQ</p></ul>';}
+								}else{
+									echo '<ul>';
+										echo '<p>還沒追蹤看板QQ</p></ul>';
 								}
 								?>
 							</div>
@@ -214,7 +218,7 @@
 			<div class="col-md-10 col-sm-10 col-10">
 			  <p class='board'><?php echo $category;?></p>
 			</div>
-			<?php  if($forum != 'all'){?>
+			<?php  if($forum != 'all' AND isset($_SESSION['nickname'])){?>
 			<div class="col-md-2 col-sm-2 col-2 right mid">
 				<?php 
 					$sql_forum = "SELECT * FROM `follow` WHERE `UId`=\"$uid\" AND `Category` = \"$forum\"";
@@ -311,7 +315,7 @@
 		
 		<!-- 顯示文章 -->
 		
-			<div class="art" onclick="location.href='../index/index.php?page=article&aid=<?php echo $row['AId']; ?>';">
+			<div class="art pointer" onclick="location.href='../index/index.php?page=article&aid=<?php echo $row['AId']; ?>';">
 				<!-- 簡圖內容(上) -->
 				<div class="row art-head mid">
 					<!-- 作者-->
@@ -476,6 +480,11 @@
 		  	if($page == 'search'){
 			$page = 'index';
 			include("../index/search.php"); }
+		?>
+		<?php //TAG頁面
+			if($page == 'tag'){
+			$page = 'index';
+			include("../index/tag.php"); }
 		?>
 	</div>
 	<!-- 中間end -->
