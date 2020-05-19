@@ -1,7 +1,11 @@
 
 <?php
     //$key = $_GET["key"];
-
+    if(isset($_GET['search'])){
+        $search = $_GET['search'];
+    }else{
+        $search = "all";
+    }
     
 ?>
 <!doctype html>
@@ -24,16 +28,17 @@
     <div class="row justify-content-center">
         <div class="col-md-12 bt">
             <!-- now是現在在地分頁 -->
-            <div class="btnn pointer now" onclick="location.href='../index/index/?page=search&';">全部</div>
-            <div class="btnn pointer" onclick="location.href='../index/index/?page=search&';">文章</div>
-            <div class="btnn pointer" onclick="location.href='../index/index/?page=search&';">看板</div>
-            <div class="btnn pointer" onclick="location.href='../index/index/?page=search&';">話題</div>
-            <div class="btnn pointer" onclick="location.href='../index/index/?page=search&';">話題</div>
+            <div class="btnn pointer <?php if($search == 'all'){ echo 'now';}?>" onclick="location.href='../index/index.php?page=search&search=all';">全部</div>
+            <div class="btnn pointer <?php if($search == 'article'){ echo 'now';}?>" onclick="location.href='../index/index.php?page=search&search=article';">文章</div>
+            <div class="btnn pointer <?php if($search == 'forum'){ echo 'now';}?>" onclick="location.href='../index/index.php?page=search&search=forum';">看板</div>
+            <div class="btnn pointer <?php if($search == 'tag'){ echo 'now';}?>" onclick="location.href='../index/index.php?page=search&search=tag';">話題</div>
+            <div class="btnn pointer <?php if($search == 'nickname'){ echo 'now';}?>" onclick="location.href='../index/index.php?page=search&search=nickname';">暱稱</div>
         </div>
     </div>
     <!-- 按鈕選項( 全部、文章、看板、話題、話題)end -->
 
     <!-- 全部按鈕 -->
+    <?php if($search == 'all'){ ?>
     <!-- 文章 -->
     <div class='search-article'>
         <div class="row justify-content-start">
@@ -219,8 +224,9 @@
     <!-- 話題end -->
     <!-- 全部按鈕end -->
     
-    <?php ?>
+    <?php }?>
     
+    <?php if($search == 'article'){ ?>
     <!-- 文章按鈕 -->
     <div class='sm-article'>
         <div class="row justify-content-start mid">
@@ -302,8 +308,8 @@
     </div>
     <!-- 文章按鈕end -->
 
-    <?php ?>
-
+    <?php }?>
+    <?php if($search == 'forum'){ ?>
     <!-- 看板按鈕 -->
      <div class='sm-article'>
         <div class="row justify-content-start">
@@ -341,8 +347,9 @@
     </div>
     <!-- 看板按鈕end -->
 
-    <?php ?>
-
+    <?php }?>
+    
+    <?php if($search == 'nickname'){ ?>
     <!-- 暱稱按鈕 -->
     <div class='sm-article'>
         <div class="row justify-content-start">
@@ -380,7 +387,8 @@
     </div>
     <!-- 暱稱按鈕end -->
 
-    <?php ?>
+    <?php }?>
+    <?php if($search == 'tag'){ ?>
     <!-- 話題按鈕 -->
     <div class='sm-article'>
         <div class="row justify-content-start">
@@ -418,7 +426,7 @@
     </div>
     <!-- 話題按鈕end -->
 
-    <?php ?>
+    <?php }?>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
