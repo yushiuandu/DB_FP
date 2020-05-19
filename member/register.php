@@ -76,7 +76,7 @@
 			</div>
 			<div class="form-group">
 				<label>你的照片</label> <br>
-				<input Type="File" Name="YouFile">
+				<input id="upload" Type="File" Name="YouFile" accept="image/*" @change="showFile">
 			</div>
         	<button type="submit" class="btn btn-info font-weight-bold">註冊</button>
       </form>
