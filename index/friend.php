@@ -56,7 +56,7 @@
         </div>
     </form>
     <!-- 搜尋好友 end -->
-    <div class="row">
+    <div class="row justify-content-start align-items-start">
     <?php
         if($result){
             $num = mysqli_num_rows($result);
@@ -74,7 +74,6 @@
                 <p style="margin:20px; font-family:jf-openhuninn; "><?php echo $row['nickname'];?></p>
             </a>
         </div>
-
     <?php
             }//end while
         }//end if

@@ -486,6 +486,16 @@
 			$page = 'index';
 			include("../index/tag.php"); }
 		?>
+		<?php //心理測驗-1
+			if($page == 'test1'){
+			$page = 'index';
+			include("../index/test1.php"); }
+		?>
+		<?php //心理測驗-2
+			if($page == 'test2'){
+			$page = 'index';
+			include("../index/test2.php"); }
+		?>
 	</div>
 	<!-- 中間end -->
 
@@ -578,7 +588,7 @@
 				</div>
 				<div class="row">
 					<button type="button" class="btn col-md-6">
-						<a href="?page=test"  style="color:white;"><img src='../index/image/test.png' title="心理測驗"></a>
+						<a href="?page=test1"  style="color:white;"><img src='../index/image/test.png' title="心理測驗"></a>
 					</button>
 					<button type="button" class="btn col-md-6">
 						<a href="?page=friend"  style="color:white;"><img src='../index/image/friend.png' title="好友列表"></a>
