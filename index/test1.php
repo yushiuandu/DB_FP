@@ -17,23 +17,22 @@
   <!-- 心理測驗-1 -->
   <body>
     <div class='test'>
-		<div class="row justify-content-center">
-			<div class="col-md-12">
-        <!-- 照片 -->
-				<img src='../index/image/test.png' class='test-logo'></img>
-        <!-- slogn -->
-        <p class='test-ww'>性格決定一切！？<br>
-									讓抬槓幫你找到合適的人吧！</p>
-			</div>
-		</div>
-		<div class="row justify-content-center">
-      <!-- 測驗button -->
-			<div class='col-md-2 test-btn pointer' onclick="location.href='#'" >
-				開始測驗
-			</div>
-		</div>
+      <div class="row justify-content-center">
+        <div class="col-md-12">
+          <!-- 照片 -->
+          <img src='../index/image/test.png' class='test-logo'></img>
+          <!-- slogn -->
+          <p class='test-ww'>性格決定一切！？<br>
+                    讓抬槓幫你找到合適的人吧！</p>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <!-- 測驗button -->
+        <div class='col-md-2 test-btn pointer' onclick="location.href='../index/index.php?page=test2'" >
+          開始測驗
+        </div>
+      </div>
     </div>
-	
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

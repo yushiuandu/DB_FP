@@ -491,6 +491,11 @@
 			$page = 'index';
 			include("../index/test1.php"); }
 		?>
+		<?php //心理測驗-2
+			if($page == 'test2'){
+			$page = 'index';
+			include("../index/test2.php"); }
+		?>
 	</div>
 	<!-- 中間end -->
 
