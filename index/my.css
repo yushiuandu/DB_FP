@@ -607,6 +607,7 @@ button img{
   font-size: 18pt;
   margin: 5px;
   font-weight: 500;
+  padding: 5px;
 }
 .search-article{
   background-color: #F2F2F2;
@@ -671,4 +672,32 @@ button img{
   margin: 10px auto 0px auto;
   max-height: 70vh;
   width:95%;
+}
+.test{
+  text-align: center;
+	padding:2%;
+	vertical-align:top;
+  background-color: rgb(193, 171, 173);
+  height:calc(100vh - 125px);
+  border-radius: 10px;
+}
+.test-logo{
+  width: 30%;
+  height: auto;
+  margin: 10px auto 0px auto;
+}
+.test-ww{
+  text-align: center;
+  margin: 20px;
+  font-family: '標楷體';
+  font-size: 16pt;
+}
+.test-btn{
+  background-color: #90656F;
+  color: white;
+  border-radius: 10px;
+  padding:8px;
+  font-size: 14pt;
+  position: absolute;
+  bottom:100px;
 }

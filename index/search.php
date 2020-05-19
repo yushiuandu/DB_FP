@@ -223,9 +223,15 @@
     
     <!-- 文章按鈕 -->
     <div class='sm-article'>
-        <div class="row justify-content-start">
-            <div class="col-md-12">
+        <div class="row justify-content-start mid">
+            <div class="col-md-2">
                 <p class='search-title'>文章</p>
+            </div>
+            <div class="col-md-10 right">
+                <!-- 熱門文章 -->
+				<button type="button" class="btn btn-sm btn-info">HOT</button>
+			    <!-- 最新文章 -->
+			    <button type="button" class="btn btn-sm btn-info">NEW</button>
             </div>
             <!-- 文章區 -->
             <div class='ser-con2'>
