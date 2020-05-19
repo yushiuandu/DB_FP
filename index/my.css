@@ -416,7 +416,7 @@ button img{
 #chat{
   font-size: 14px;
   border-radius: 10px;
-  width: 100%;
+  width: 90%;
   background: rgb(233, 230, 230) url('../index/image/pen.png') no-repeat 3px 3px;
   padding: 5px 5px 5px 35px;
   margin:auto;
