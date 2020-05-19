@@ -20,78 +20,399 @@
 	<script src="//s3-ap-northeast-1.amazonaws.com/justfont-user-script/jf-60019.js"></script>
   </head>
   <body>
-    <!-- 按鈕選項( 全部、文章、看板、話題、暱稱) -->
+    <!-- 按鈕選項( 全部、文章、看板、話題、話題) -->
     <div class="row justify-content-center">
-        <div class="col-md-12">
-            <div class='btnn'><a href='../index/?page=search-all'>全部</a></div>
-            <div class='btnn'><a href='../index/?page=search-article'>文章</a></div>
-            <div class='btnn'><a href='../index/?page=search-board'>看板</a></div>
-            <div class='btnn'><a href='../index/?page=search-topic'>話題</a></div>
-            <div class='btnn'><a href='../index/?page=search-nickname'>暱稱</a></div>
+        <div class="col-md-12 bt">
+            <!-- now是現在在地分頁 -->
+            <div class="btnn pointer now" onclick="location.href='../index/index/?page=search&';">全部</div>
+            <div class="btnn pointer" onclick="location.href='../index/index/?page=search&';">文章</div>
+            <div class="btnn pointer" onclick="location.href='../index/index/?page=search&';">看板</div>
+            <div class="btnn pointer" onclick="location.href='../index/index/?page=search&';">話題</div>
+            <div class="btnn pointer" onclick="location.href='../index/index/?page=search&';">話題</div>
         </div>
     </div>
-    <!-- 按鈕選項( 全部、文章、看板、話題、暱稱)end -->
+    <!-- 按鈕選項( 全部、文章、看板、話題、話題)end -->
 
-    <?php if($page == 'search-all'):?>
-<!-- 全部按鈕 -->
+    <!-- 全部按鈕 -->
     <!-- 文章 -->
-    <div class="row justify-content-center">
-        <div class="col-md-12"></div>
+    <div class='search-article'>
+        <div class="row justify-content-start">
+            <div class="col-md-12">
+                <p class='search-title'>文章</p>
+            </div>
+            <!-- 文章區 -->
+            <div class='ser-con'>
+                <!-- 文章 -->
+                <div class="art2 pointer" onclick="location.href='#'">
+                    <div class="row art-head justify-content-start">
+                        <!-- 作者-->
+                        <div class="col-md-10 col-sm-9 col-9">
+                            <!-- 作者頭像 -->
+                            <img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic"></a>
+                            <!-- 作者名稱 -->
+                            <p style="display: inline; font-size:2vmin; margin:0px;">匿名</p>
+                        </div>
+                        <!-- 作者 end-->
+                    </div>
+                    <!-- 簡圖內容(上) end-->
+                    
+                    <!-- 簡圖內容(中) -->
+                    <div class="row art-body justify-content-start">
+                        <div class="col-md-11 col-sm-11 col-11 col-lg-11 text-truncate">
+                            <!-- 標題 -->
+                            <p class="font-weight-bold" style='font-size:3vmin; margin:0px;'>一則簡訊差點毀了我六年的感情</p>
+                            <!-- 簡述 -->
+                            <p style="color:gray; font-size:2vmin; margin:0px;font-family:jf-openhuninn;">昨天早上準備出門的時候
+    男友突然問：寶貝你愛我嗎？
+    正在畫眼線的我 沒空理他
+    直接回：不愛啦！
+                            </p>
+                        </div>
+                    </div>
+                    <!-- 簡圖內容(中) end-->
+                </div>
+                <!-- 文章 end-->
+                <!-- 文章 -->
+                <div class="art2 pointer" onclick="location.href='#'">
+                    <div class="row art-head justify-content-start">
+                        <!-- 作者-->
+                        <div class="col-md-10 col-sm-9 col-9">
+                            <!-- 作者頭像 -->
+                            <img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic"></a>
+                            <!-- 作者名稱 -->
+                            <p style="display: inline; font-size:2vmin; margin:0px;">匿名</p>
+                        </div>
+                        <!-- 作者 end-->
+                    </div>
+                    <!-- 簡圖內容(上) end-->
+                    
+                    <!-- 簡圖內容(中) -->
+                    <div class="row art-body justify-content-start">
+                        <div class="col-md-11 col-sm-11 col-11 col-lg-11 text-truncate">
+                            <!-- 標題 -->
+                            <p class="font-weight-bold" style='font-size:3vmin; margin:0px;'>一則簡訊差點毀了我六年的感情</p>
+                            <!-- 簡述 -->
+                            <p style="color:gray; font-size:2vmin; margin:0px;font-family:jf-openhuninn;">昨天早上準備出門的時候
+    男友突然問：寶貝你愛我嗎？
+    正在畫眼線的我 沒空理他
+    直接回：不愛啦！
+                            </p>
+                        </div>
+                    </div>
+                    <!-- 簡圖內容(中) end-->
+                </div>
+                <!-- 文章 end-->
+                <p onclick="location.href='#'" class='ser-fot pointer'>查看更多</p>
+            </div>
+            <!-- 文章區end -->
+        </div>
     </div>
-    <!-- 文章end -->
 
+    <!-- 看板+暱稱 -->
+    <div class='search-article2'>
+        <div class="row justify-content-center">   
+            <!-- 看板 -->
+            <div class='search-nickname'>
+                <div class="col-md-6">
+                    <p class='search-title'>看板</p>
+                </div>
+                <!-- 看板內容 -->
+                <div class='ser-con left'>
+                    <!-- 一個看板 -->
+                    <div class='row justify-content-start art2 pointer' onclick="location.href='#'">
+                        <div class="col-md-8">
+                            <p class='ser-ww'>感情版</p>
+                        </div>
+                        <div class="col-md-4 right">
+                            <div class='ser-btn pointer ' onclick="location.href='#'" >Follow</div>
+                        </div>
+                    </div>
+                    <!-- 一個看板end -->
 
-    <div class="row justify-content-center">
-        <!-- 看板 -->
-        <div class="col-md-6"></div>
-        <!-- 暱稱 -->
-        <div class="col-md-6"></div>
+                    <!-- 一個看板 -->
+                    <div class='row justify-content-start art2 pointer' onclick="location.href='#'">
+                        <div class="col-md-8">
+                            <p class='ser-ww'>有趣版</p>
+                        </div>
+                        <div class="col-md-4 right">
+                            <div class='ser-btn pointer ' onclick="location.href='#'" >Follow</div>
+                        </div>
+                    </div>
+                    <!-- 一個看板end -->
+                    <p onclick="location.href='#'" class='ser-fot pointer'>查看更多</p>
+                </div>
+                <!-- 看板內容end -->
+            </div>
+            <!-- 看板end -->
+            
+            <!-- 暱稱 -->
+            <div class='search-nickname'>
+                <div class="col-md-6">
+                    <p class='search-title'>暱稱</p>
+                </div>
+                <!-- 暱稱內容 -->
+                <div class='ser-con left'>
+                    <!-- 一個暱稱 -->
+                    <div class='row justify-content-start art2 pointer' onclick="location.href='#'">
+                        <div class="col-md-8">
+                            <p class='ser-ww'>小賀</p>
+                        </div>
+                        <div class="col-md-4 right">
+                            <div class='ser-btn pointer ' onclick="location.href='#'" >Follow</div>
+                        </div>
+                    </div>
+                    <!-- 一個暱稱end -->
+
+                    <!-- 一個暱稱 -->
+                    <div class='row justify-content-start art2 pointer' onclick="location.href='#'">
+                        <div class="col-md-8">
+                            <p class='ser-ww'>姸姸</p>
+                        </div>
+                        <div class="col-md-4 right">
+                            <div class='ser-btn pointer ' onclick="location.href='#'" >Follow</div>
+                        </div>
+                    </div>
+                    <!-- 一個暱稱end -->
+                    <p onclick="location.href='#'" class='ser-fot pointer'>查看更多</p>
+                </div>
+                <!-- 看板內容end -->
+            </div>
+            <!-- 暱稱end -->
+        </div>
     </div>
+    <!-- 看板+暱稱end -->
 
     <!-- 話題 -->
-    <div class="row justify-content-center">
-        <div class="col-md-12"></div>
+    <div class='search-article'>
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <p class='search-title'>話題</p>
+            </div>
+            <!-- 話題內容 -->
+            <div class='ser-con left'>
+                    <!-- 一個話題 -->
+                    <div class='row justify-content-start art2 pointer' onclick="location.href='#'">
+                        <div class="col-md-8">
+                            <p class='ser-ww'>#條碼女孩吧啦吧啦吧啦</p>
+                        </div>
+                        <div class="col-md-4 right">
+                            <div class='ser-btn pointer ' onclick="location.href='#'" >Follow</div>
+                        </div>
+                    </div>
+                    <!-- 一個看板end -->
+
+                    <!-- 一個看板 -->
+                    <div class='row justify-content-start art2 pointer' onclick="location.href='#'">
+                        <div class="col-md-8">
+                            <p class='ser-ww'>#乖乖女的戀愛指南</p>
+                        </div>
+                        <div class="col-md-4 right">
+                            <div class='ser-btn pointer ' onclick="location.href='#'" >Follow</div>
+                        </div>
+                    </div>
+                    <!-- 一個看板end -->
+                    <p onclick="location.href='#'" class='ser-fot pointer'>查看更多</p>
+                </div>
+                <!-- 看板內容end -->
+        </div>
     </div>
     <!-- 話題end -->
-<!-- 全部按鈕end -->
-
-    <?php elseif($page == 'search-article'):?>
-<!-- 文章按鈕 -->
-    <!-- 文章 -->
-    <div class="row justify-content-center">
-        <div class="col-md-12"></div>
+    <!-- 全部按鈕end -->
+    
+    <?php ?>
+    
+    <!-- 文章按鈕 -->
+    <div class='sm-article'>
+        <div class="row justify-content-start">
+            <div class="col-md-12">
+                <p class='search-title'>文章</p>
+            </div>
+            <!-- 文章區 -->
+            <div class='ser-con2'>
+                <!-- 文章 -->
+                <div class="art2 pointer" onclick="location.href='#'">
+                    <div class="row art-head justify-content-start">
+                        <!-- 作者-->
+                        <div class="col-md-10 col-sm-9 col-9">
+                            <!-- 作者頭像 -->
+                            <img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic"></a>
+                            <!-- 作者名稱 -->
+                            <p style="display: inline; font-size:2vmin; margin:0px;">匿名</p>
+                        </div>
+                        <!-- 作者 end-->
+                    </div>
+                    <!-- 簡圖內容(上) end-->
+                    
+                    <!-- 簡圖內容(中) -->
+                    <div class="row art-body justify-content-start">
+                        <div class="col-md-11 col-sm-11 col-11 col-lg-11 text-truncate">
+                            <!-- 標題 -->
+                            <p class="font-weight-bold" style='font-size:3vmin; margin:0px;'>一則簡訊差點毀了我六年的感情</p>
+                            <!-- 簡述 -->
+                            <p style="color:gray; font-size:2vmin; margin:0px;font-family:jf-openhuninn;">昨天早上準備出門的時候
+    男友突然問：寶貝你愛我嗎？
+    正在畫眼線的我 沒空理他
+    直接回：不愛啦！
+                            </p>
+                        </div>
+                    </div>
+                    <!-- 簡圖內容(中) end-->
+                </div>
+                <!-- 文章 end-->
+                <!-- 文章 -->
+                <div class="art2 pointer" onclick="location.href='#'">
+                    <div class="row art-head justify-content-start">
+                        <!-- 作者-->
+                        <div class="col-md-10 col-sm-9 col-9">
+                            <!-- 作者頭像 -->
+                            <img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic"></a>
+                            <!-- 作者名稱 -->
+                            <p style="display: inline; font-size:2vmin; margin:0px;">匿名</p>
+                        </div>
+                        <!-- 作者 end-->
+                    </div>
+                    <!-- 簡圖內容(上) end-->
+                    
+                    <!-- 簡圖內容(中) -->
+                    <div class="row art-body justify-content-start">
+                        <div class="col-md-11 col-sm-11 col-11 col-lg-11 text-truncate">
+                            <!-- 標題 -->
+                            <p class="font-weight-bold" style='font-size:3vmin; margin:0px;'>一則簡訊差點毀了我六年的感情</p>
+                            <!-- 簡述 -->
+                            <p style="color:gray; font-size:2vmin; margin:0px;font-family:jf-openhuninn;">昨天早上準備出門的時候
+    男友突然問：寶貝你愛我嗎？
+    正在畫眼線的我 沒空理他
+    直接回：不愛啦！
+                            </p>
+                        </div>
+                    </div>
+                    <!-- 簡圖內容(中) end-->
+                </div>
+                <!-- 文章 end-->
+                <p onclick="location.href='#'" class='ser-fot pointer'>查看更多</p>
+            </div>
+            <!-- 文章區end -->
+        </div>
     </div>
-    <!-- 文章end -->
-<!-- 文章按鈕end -->
+    <!-- 文章按鈕end -->
 
-    <?php elseif($page == 'search-board'):?>
-<!-- 看板按鈕 -->
-    <!-- 看板 -->
-    <div class="row justify-content-center">
-        <div class="col-md-12"></div>
+    <?php ?>
+
+    <!-- 看板按鈕 -->
+     <div class='sm-article'>
+        <div class="row justify-content-start">
+            <div class="col-md-12">
+                <p class='search-title'>看板</p>
+            </div>
+            <!-- 看板內容 -->
+            <div class='ser-con2 left'>
+                <!-- 一個看板 -->
+                <div class='row justify-content-start art2 pointer' onclick="location.href='#'">
+                    <div class="col-md-8">
+                        <p class='ser-ww'>感情版</p>
+                    </div>
+                    <div class="col-md-4 right">
+                        <div class='ser-btn pointer ' onclick="location.href='#'" >Follow</div>
+                    </div>
+                </div>
+                <!-- 一個看板end -->
+
+                <!-- 一個看板 -->
+                <div class='row justify-content-start art2 pointer' onclick="location.href='#'">
+                    <div class="col-md-8">
+                        <p class='ser-ww'>有趣版</p>
+                    </div>
+                    <div class="col-md-4 right">
+                        <div class='ser-btn pointer ' onclick="location.href='#'" >Follow</div>
+                    </div>
+                </div>
+                <!-- 一個看板end -->
+                
+                <p onclick="location.href='#'" class='ser-fot pointer'>查看更多</p>
+            </div>
+            <!-- 看板內容end -->
+        </div>
     </div>
-    <!-- 看板end -->
-<!-- 看板按鈕end -->
+    <!-- 看板按鈕end -->
 
-<?php elseif($page == 'search-topic'):?>
-<!-- 話題按鈕 -->
-    <!-- 話題 -->
-    <div class="row justify-content-center">
-        <div class="col-md-12"></div>
+    <?php ?>
+
+    <!-- 暱稱按鈕 -->
+    <div class='sm-article'>
+        <div class="row justify-content-start">
+            <div class="col-md-12">
+                <p class='search-title'>暱稱</p>
+            </div>
+            <!-- 暱稱內容 -->
+            <div class='ser-con2 left'>
+                <!-- 一個暱稱 -->
+                <div class='row justify-content-start art2 pointer' onclick="location.href='#'">
+                    <div class="col-md-8">
+                        <p class='ser-ww'>小賀</p>
+                    </div>
+                    <div class="col-md-4 right">
+                        <div class='ser-btn pointer ' onclick="location.href='#'" >Follow</div>
+                    </div>
+                </div>
+                <!-- 一個暱稱end -->
+
+                <!-- 一個暱稱 -->
+                <div class='row justify-content-start art2 pointer' onclick="location.href='#'">
+                    <div class="col-md-8">
+                        <p class='ser-ww'>姸姸</p>
+                    </div>
+                    <div class="col-md-4 right">
+                        <div class='ser-btn pointer ' onclick="location.href='#'" >Follow</div>
+                    </div>
+                </div>
+                <!-- 一個暱稱end -->
+                
+                <p onclick="location.href='#'" class='ser-fot pointer'>查看更多</p>
+            </div>
+            <!-- 暱稱內容end -->
+        </div>
     </div>
-    <!-- 話題end -->
-<!-- 話題按鈕end -->
+    <!-- 暱稱按鈕end -->
 
-<?php elseif($page == 'search-nickname'):?>
-<!-- 暱稱按鈕 -->
-    <!-- 暱稱 -->
-    <div class="row justify-content-center">
-        <div class="col-md-12"></div>
+    <?php ?>
+    <!-- 話題按鈕 -->
+    <div class='sm-article'>
+        <div class="row justify-content-start">
+            <div class="col-md-12">
+                <p class='search-title'>話題</p>
+            </div>
+            <!-- 話題內容 -->
+            <div class='ser-con2 left'>
+                <!-- 一個話題 -->
+                <div class='row justify-content-start art2 pointer' onclick="location.href='#'">
+                    <div class="col-md-8">
+                        <p class='ser-ww'>#條碼女孩吧啦吧啦吧啦</p>
+                    </div>
+                    <div class="col-md-4 right">
+                        <div class='ser-btn pointer ' onclick="location.href='#'" >Follow</div>
+                    </div>
+                </div>
+                <!-- 一個話題end -->
+
+                <!-- 一個話題 -->
+                <div class='row justify-content-start art2 pointer' onclick="location.href='#'">
+                    <div class="col-md-8">
+                        <p class='ser-ww'>#乖乖女的戀愛指南</p>
+                    </div>
+                    <div class="col-md-4 right">
+                        <div class='ser-btn pointer ' onclick="location.href='#'" >Follow</div>
+                    </div>
+                </div>
+                <!-- 一個話題end -->
+                
+                <p onclick="location.href='#'" class='ser-fot pointer'>查看更多</p>
+            </div>
+            <!-- 話題內容end -->
+        </div>
     </div>
-    <!-- 暱稱end -->
-<!-- 暱稱按鈕end -->
+    <!-- 話題按鈕end -->
 
-<?php endif;?>
+    <?php ?>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
