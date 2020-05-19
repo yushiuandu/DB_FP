@@ -224,14 +224,14 @@
     <!-- 文章按鈕 -->
     <div class='sm-article'>
         <div class="row justify-content-start mid">
-            <div class="col-md-2">
+            <div class="col-md-9">
                 <p class='search-title'>文章</p>
             </div>
-            <div class="col-md-10 right">
+            <div class="col-md-3 right">
                 <!-- 熱門文章 -->
-				<button type="button" class="btn btn-sm btn-info">HOT</button>
+				<div class='ser-btn pointer' onclick="location.href='#'" >HOT</div>
 			    <!-- 最新文章 -->
-			    <button type="button" class="btn btn-sm btn-info">NEW</button>
+			    <div class='ser-btn pointer' onclick="location.href='#'" >NEW</div>
             </div>
             <!-- 文章區 -->
             <div class='ser-con2'>
