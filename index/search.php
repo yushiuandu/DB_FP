@@ -1,11 +1,42 @@
 
 <?php
-    //$key = $_GET["key"];
+    $_SESSION['local'] = '../index/index.php?page=search';
+
+    $link = mysqli_connect("localhost","taigun","ELn3yv07F567MwOF","taigun");//連結伺服器//選擇資料庫
+	if(!$link){
+	echo "no connect!";
+    }
+    
     if(isset($_GET['search'])){
         $search = $_GET['search'];
     }else{
         $search = "all";
     }
+    
+    // 關鍵詞
+    if(isset($_POST['key'])){
+        $key = $_POST['key'];
+        // echo $key;
+        $_SESSION['key'] = $key;
+        header("Location:../index/index.php?page=search&key=$key");
+    }else{
+        $key = "";
+    }
+
+    if(isset($_GET['key'])){
+        $_SESSION['key'] = $_GET['key'];
+    }else{
+        $key="";
+    }
+    
+    if(isset($_SESSION['nickname'])){
+        $uid = finduid($_SESSION['nickname']);
+    }
+    if(isset($_SESSION['key'])){
+        $key = $_SESSION['key'];
+    }
+
+    echo $key;
     
 ?>
 <!doctype html>
@@ -38,7 +69,8 @@
     <!-- 按鈕選項( 全部、文章、看板、話題、話題)end -->
 
     <!-- 全部按鈕 -->
-    <?php if($search == 'all'){ ?>
+    <?php if($search == 'all'){
+    ?>
     <!-- 文章 -->
     <div class='search-article'>
         <div class="row justify-content-start">
@@ -48,14 +80,29 @@
             <!-- 文章區 -->
             <div class='ser-con'>
                 <!-- 文章 -->
-                <div class="art2 pointer" onclick="location.href='#'">
+                <?php 
+                    $sql = "SELECT * FROM `article` WHERE `title` LIKE '%$key%' ORDER BY `post_time` DESC LIMIT 3";
+                    $result = mysqli_query($link, $sql);
+                    $num = 0;
+                    if($result){
+                        $num = mysqli_num_rows($result);
+                    }
+                    if($num>0){
+                        while($row = mysqli_fetch_assoc($result)){
+                ?>
+                <div class="art2 pointer" onclick="location.href='../index/index.php?page=article&aid=<?=$row['AId'];?>'">
                     <div class="row art-head justify-content-start">
                         <!-- 作者-->
                         <div class="col-md-10 col-sm-9 col-9">
-                            <!-- 作者頭像 -->
-                            <img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic"></a>
-                            <!-- 作者名稱 -->
-                            <p style="display: inline; font-size:2vmin; margin:0px;">匿名</p>
+                            <?php if($row['anonymous'] == 1){?>
+                                <!-- 作者頭像 -->
+                                <a href="../index/index.php?page=nickname&uid=<?=$row["UId"];?>"><img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic"></a>
+                                <!-- 作者名稱 -->
+                                <p style="display: inline; font-size:2vmin; margin:0px;"><?=$row["post_name"];?></p>
+                            <?php }else if ($row['anonymous'] == 0){?>
+                                <img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic">
+                                <p style="display: inline; font-size:2vmin; margin:0px;">匿名</p>
+                            <?php }?>
                         </div>
                         <!-- 作者 end-->
                     </div>
@@ -65,49 +112,18 @@
                     <div class="row art-body justify-content-start">
                         <div class="col-md-11 col-sm-11 col-11 col-lg-11 text-truncate">
                             <!-- 標題 -->
-                            <p class="font-weight-bold" style='font-size:3vmin; margin:0px;'>一則簡訊差點毀了我六年的感情</p>
+                            <p class="font-weight-bold" style='font-size:3vmin; margin:0px;'><?=$row['title'];?></p>
                             <!-- 簡述 -->
-                            <p style="color:gray; font-size:2vmin; margin:0px;font-family:jf-openhuninn;">昨天早上準備出門的時候
-    男友突然問：寶貝你愛我嗎？
-    正在畫眼線的我 沒空理他
-    直接回：不愛啦！
-                            </p>
+                            <p style="color:gray; font-size:2vmin; margin:0px;font-family:jf-openhuninn;"><?=$row['excerpt'];?></p>
                         </div>
                     </div>
                     <!-- 簡圖內容(中) end-->
                 </div>
                 <!-- 文章 end-->
-                <!-- 文章 -->
-                <div class="art2 pointer" onclick="location.href='#'">
-                    <div class="row art-head justify-content-start">
-                        <!-- 作者-->
-                        <div class="col-md-10 col-sm-9 col-9">
-                            <!-- 作者頭像 -->
-                            <img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic"></a>
-                            <!-- 作者名稱 -->
-                            <p style="display: inline; font-size:2vmin; margin:0px;">匿名</p>
-                        </div>
-                        <!-- 作者 end-->
-                    </div>
-                    <!-- 簡圖內容(上) end-->
-                    
-                    <!-- 簡圖內容(中) -->
-                    <div class="row art-body justify-content-start">
-                        <div class="col-md-11 col-sm-11 col-11 col-lg-11 text-truncate">
-                            <!-- 標題 -->
-                            <p class="font-weight-bold" style='font-size:3vmin; margin:0px;'>一則簡訊差點毀了我六年的感情</p>
-                            <!-- 簡述 -->
-                            <p style="color:gray; font-size:2vmin; margin:0px;font-family:jf-openhuninn;">昨天早上準備出門的時候
-    男友突然問：寶貝你愛我嗎？
-    正在畫眼線的我 沒空理他
-    直接回：不愛啦！
-                            </p>
-                        </div>
-                    </div>
-                    <!-- 簡圖內容(中) end-->
-                </div>
-                <!-- 文章 end-->
-                <p onclick="location.href='#'" class='ser-fot pointer'>查看更多</p>
+                <?php }//end while
+                }//end if?>
+                
+                <a href="../index/index.php?page=search&search=article" style="text-decoration:none"><p class='ser-fot pointer'>查看更多</p></a>
             </div>
             <!-- 文章區end -->
         </div>
@@ -123,28 +139,32 @@
                 </div>
                 <!-- 看板內容 -->
                 <div class='ser-con left'>
+                    <?php
+                         $sql = "SELECT `category`,`eng` FROM `forumid` WHERE `category` LIKE '%$key%'";
+                         $result = mysqli_query($link, $sql);
+                         if($result){
+                             if((mysqli_num_rows($result)) > 0 ){
+                                 while($row = mysqli_fetch_assoc($result)){
+                    ?>
                     <!-- 一個看板 -->
-                    <div class='row justify-content-start art2 pointer' onclick="location.href='#'">
+                    <div class='row justify-content-start art2 pointer' onclick="location.href='../index/index.php?page=index&id=<?=$row['eng'];?>'">
                         <div class="col-md-8">
-                            <p class='ser-ww'>感情版</p>
+                            <p class='ser-ww'><?=$row['category'];?></p>
                         </div>
                         <div class="col-md-4 right">
                             <div class='ser-btn pointer ' onclick="location.href='#'" >Follow</div>
                         </div>
                     </div>
                     <!-- 一個看板end -->
-
-                    <!-- 一個看板 -->
-                    <div class='row justify-content-start art2 pointer' onclick="location.href='#'">
-                        <div class="col-md-8">
-                            <p class='ser-ww'>有趣版</p>
-                        </div>
-                        <div class="col-md-4 right">
-                            <div class='ser-btn pointer ' onclick="location.href='#'" >Follow</div>
-                        </div>
-                    </div>
-                    <!-- 一個看板end -->
-                    <p onclick="location.href='#'" class='ser-fot pointer'>查看更多</p>
+                    <?php
+                                }//end while
+                            }//end num if
+                            // 沒有搜尋結果
+                            else if((mysqli_num_rows($result)) == 0 ){
+                                echo "沒有搜尋結果";
+                            }
+                        }//end result if?>
+                    <a href="../index/index.php?page=search&search=forum" style="text-decoration:none"><p class='ser-fot pointer'>查看更多</p></a>
                 </div>
                 <!-- 看板內容end -->
             </div>
@@ -157,28 +177,28 @@
                 </div>
                 <!-- 暱稱內容 -->
                 <div class='ser-con left'>
+                    <?php 
+                        $sql = "SELECT DISTINCT `Nickname` ,`UId`FROM `member` WHERE `Nickname` LIKE '%$key%' LIMIT 3";
+                        $result = mysqli_query($link, $sql);
+                        if($result){
+                            if((mysqli_num_rows($result)) > 0 ){
+                                while($row = mysqli_fetch_assoc($result)){
+                    ?>
                     <!-- 一個暱稱 -->
-                    <div class='row justify-content-start art2 pointer' onclick="location.href='#'">
+                    <div class='row justify-content-start art2 pointer' onclick="location.href='../index/index.php>page=nickname&uid=<?=$row['UId'];?>'">
                         <div class="col-md-8">
-                            <p class='ser-ww'>小賀</p>
+                            <p class='ser-ww'><?=$row['Nickname'];?></p>
                         </div>
                         <div class="col-md-4 right">
-                            <div class='ser-btn pointer ' onclick="location.href='#'" >Follow</div>
+                            <div class='ser-btn pointer' >Follow</div>
                         </div>
                     </div>
                     <!-- 一個暱稱end -->
-
-                    <!-- 一個暱稱 -->
-                    <div class='row justify-content-start art2 pointer' onclick="location.href='#'">
-                        <div class="col-md-8">
-                            <p class='ser-ww'>姸姸</p>
-                        </div>
-                        <div class="col-md-4 right">
-                            <div class='ser-btn pointer ' onclick="location.href='#'" >Follow</div>
-                        </div>
-                    </div>
-                    <!-- 一個暱稱end -->
-                    <p onclick="location.href='#'" class='ser-fot pointer'>查看更多</p>
+                    <?php
+                            }//end while
+                        }//end num if
+                    }//end result if?>
+                    <a href="../index/index.php?page=search&search=nickname" style="text-decoration:none"><p class='ser-fot pointer'>查看更多</p></a>
                 </div>
                 <!-- 看板內容end -->
             </div>
@@ -196,27 +216,27 @@
             <!-- 話題內容 -->
             <div class='ser-con left'>
                     <!-- 一個話題 -->
-                    <div class='row justify-content-start art2 pointer' onclick="location.href='#'">
+                    <?php 
+                        $sql = "SELECT DISTINCT tag FROM `article_tag`  WHERE `tag` LIKE '%$key%' LIMIT 3";
+                        $result = mysqli_query($link, $sql);
+                        if($result){
+                            if((mysqli_num_rows($result)) > 0 ){
+                                while($row = mysqli_fetch_assoc($result)){
+                    ?>
+                    <div class='row justify-content-start art2 pointer' onclick="location.href='../index/index.php?page=tag&tag=<?=$row['tag'];?>'">
                         <div class="col-md-8">
-                            <p class='ser-ww'>#條碼女孩吧啦吧啦吧啦</p>
+                            <p class='ser-ww'>#<?=$row['tag'];?></p>
                         </div>
                         <div class="col-md-4 right">
                             <div class='ser-btn pointer ' onclick="location.href='#'" >Follow</div>
                         </div>
                     </div>
-                    <!-- 一個看板end -->
-
-                    <!-- 一個看板 -->
-                    <div class='row justify-content-start art2 pointer' onclick="location.href='#'">
-                        <div class="col-md-8">
-                            <p class='ser-ww'>#乖乖女的戀愛指南</p>
-                        </div>
-                        <div class="col-md-4 right">
-                            <div class='ser-btn pointer ' onclick="location.href='#'" >Follow</div>
-                        </div>
-                    </div>
-                    <!-- 一個看板end -->
-                    <p onclick="location.href='#'" class='ser-fot pointer'>查看更多</p>
+                    <!-- 一個話題end -->
+                    <?php
+                            }//end while
+                        }//end num if
+                    }//end result if?>
+                    <a href="../index/index.php?page=search&search=tag" style="text-decoration:none"><p class='ser-fot pointer'>查看更多</p></a>
                 </div>
                 <!-- 看板內容end -->
         </div>
@@ -226,7 +246,8 @@
     
     <?php }?>
     
-    <?php if($search == 'article'){ ?>
+    <?php if($search == 'article'){ 
+    ?>
     <!-- 文章按鈕 -->
     <div class='sm-article'>
         <div class="row justify-content-start mid">
@@ -235,21 +256,44 @@
             </div>
             <div class="col-md-3 right">
                 <!-- 熱門文章 -->
-				<div class='ser-btn pointer' onclick="location.href='#'" >HOT</div>
+				<div class='ser-btn pointer' onclick="location.href='../index/index.php?page=search&search=article&hot=true'" >HOT</div>
 			    <!-- 最新文章 -->
-			    <div class='ser-btn pointer' onclick="location.href='#'" >NEW</div>
+			    <div class='ser-btn pointer' onclick="location.href='../index/index.php?page=search&search=article'" >NEW</div>
             </div>
+            
             <!-- 文章區 -->
             <div class='ser-con2'>
                 <!-- 文章 -->
-                <div class="art2 pointer" onclick="location.href='#'">
+                <?php 
+                    if(isset($_GET['hot'])){
+                        $sql = "SELECT * FROM `article` WHERE `title` LIKE '%$key%' ORDER BY `agree` DESC";
+                    }else{
+                        $sql = "SELECT * FROM `article` WHERE `title` LIKE '%$key%' ORDER BY `post_time` DESC";
+                    }
+                    $result = mysqli_query($link, $sql);
+                    if($result){
+                        if((mysqli_num_rows($result)) > 0 ){
+                            while($row = mysqli_fetch_assoc($result)){
+                ?>
+                <div class="art2 pointer" onclick="location.href='../index/index.php?page=article&aid=<?=$row['AId'];?>'" >
                     <div class="row art-head justify-content-start">
                         <!-- 作者-->
                         <div class="col-md-10 col-sm-9 col-9">
-                            <!-- 作者頭像 -->
-                            <img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic"></a>
-                            <!-- 作者名稱 -->
-                            <p style="display: inline; font-size:2vmin; margin:0px;">匿名</p>
+                            <!-- 匿名 -->
+                            <?php if($row['anonymous'] == 0){?>
+                                <!-- 作者頭像 -->
+                                <img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic">
+                                <!-- 作者名稱 -->
+                                <p style="display: inline; font-size:2vmin; margin:0px;">匿名</p>
+
+                            <!-- 不匿名 -->
+                            <?php }else if($row['anonymous'] == 1){ ?>
+                                <!-- 作者頭像 -->
+                                <a href="../index/index.php?page=nickname&uid=<?php echo $row['UId'];?>" >
+                                <img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic"></a>
+                                <!-- 作者名稱 -->
+                                <p style="display: inline; font-size:2vmin; margin:0px;"><?php echo $row['post_name'];?></p>
+                            <?php } ?>
                         </div>
                         <!-- 作者 end-->
                     </div>
@@ -259,56 +303,26 @@
                     <div class="row art-body justify-content-start">
                         <div class="col-md-11 col-sm-11 col-11 col-lg-11 text-truncate">
                             <!-- 標題 -->
-                            <p class="font-weight-bold" style='font-size:3vmin; margin:0px;'>一則簡訊差點毀了我六年的感情</p>
+                            <p class="font-weight-bold" style='font-size:3vmin; margin:0px;'><?php echo $row['title'];?></p>
                             <!-- 簡述 -->
-                            <p style="color:gray; font-size:2vmin; margin:0px;font-family:jf-openhuninn;">昨天早上準備出門的時候
-    男友突然問：寶貝你愛我嗎？
-    正在畫眼線的我 沒空理他
-    直接回：不愛啦！
-                            </p>
+                            <p style="color:gray; font-size:2vmin; margin:0px;font-family:jf-openhuninn;"><?php echo $row['excerpt'];?></p>
                         </div>
                     </div>
                     <!-- 簡圖內容(中) end-->
                 </div>
                 <!-- 文章 end-->
-                <!-- 文章 -->
-                <div class="art2 pointer" onclick="location.href='#'">
-                    <div class="row art-head justify-content-start">
-                        <!-- 作者-->
-                        <div class="col-md-10 col-sm-9 col-9">
-                            <!-- 作者頭像 -->
-                            <img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic"></a>
-                            <!-- 作者名稱 -->
-                            <p style="display: inline; font-size:2vmin; margin:0px;">匿名</p>
-                        </div>
-                        <!-- 作者 end-->
-                    </div>
-                    <!-- 簡圖內容(上) end-->
-                    
-                    <!-- 簡圖內容(中) -->
-                    <div class="row art-body justify-content-start">
-                        <div class="col-md-11 col-sm-11 col-11 col-lg-11 text-truncate">
-                            <!-- 標題 -->
-                            <p class="font-weight-bold" style='font-size:3vmin; margin:0px;'>一則簡訊差點毀了我六年的感情</p>
-                            <!-- 簡述 -->
-                            <p style="color:gray; font-size:2vmin; margin:0px;font-family:jf-openhuninn;">昨天早上準備出門的時候
-    男友突然問：寶貝你愛我嗎？
-    正在畫眼線的我 沒空理他
-    直接回：不愛啦！
-                            </p>
-                        </div>
-                    </div>
-                    <!-- 簡圖內容(中) end-->
-                </div>
-                <!-- 文章 end-->
-                <p onclick="location.href='#'" class='ser-fot pointer'>查看更多</p>
+                <?php
+                            }//end while
+                        }//end num if
+                    }//end result if?>
             </div>
             <!-- 文章區end -->
         </div>
     </div>
     <!-- 文章按鈕end -->
 
-    <?php }?>
+    <?php              
+            }?>
     <?php if($search == 'forum'){ ?>
     <!-- 看板按鈕 -->
      <div class='sm-article'>
@@ -317,30 +331,43 @@
                 <p class='search-title'>看板</p>
             </div>
             <!-- 看板內容 -->
-            <div class='ser-con2 left'>
+            <div class="ser-con2 left">
+                <?php 
+                    $sql = "SELECT DISTINCT `category`, `eng` FROM `forumid` WHERE `category` LIKE '%$key%' ";
+                    $result = mysqli_query($link, $sql);
+                    if($result){
+                        if((mysqli_num_rows($result)) > 0 ){
+                            while($row = mysqli_fetch_assoc($result)){
+                ?>
                 <!-- 一個看板 -->
-                <div class='row justify-content-start art2 pointer' onclick="location.href='#'">
+                <div class='row justify-content-start art2 pointer'>
                     <div class="col-md-8">
-                        <p class='ser-ww'>感情版</p>
+                        <a href="../index/index.php?page=index&id=<?=$row['eng'];?>">
+                        <p class='ser-ww'><?php echo $row['category']; ?></p></a>
                     </div>
                     <div class="col-md-4 right">
-                        <div class='ser-btn pointer ' onclick="location.href='#'" >Follow</div>
-                    </div>
-                </div>
-                <!-- 一個看板end -->
+                        <?php
+                            $Link = "../Article/follow.php?forum=".$row['eng'];
+                            if(isset($_SESSION['nickname'])){
+                                $sql_forum = "SELECT * FROM `follow` WHERE `category` = \"$row[eng]\" AND `UId` = \"$uid\"";
+                                $result_forum = mysqli_query($link,$sql_forum);
+                                $num = mysqli_num_rows($result_forum);
+                            }else{
+                            $num  = 0;}
 
-                <!-- 一個看板 -->
-                <div class='row justify-content-start art2 pointer' onclick="location.href='#'">
-                    <div class="col-md-8">
-                        <p class='ser-ww'>有趣版</p>
-                    </div>
-                    <div class="col-md-4 right">
-                        <div class='ser-btn pointer ' onclick="location.href='#'" >Follow</div>
+                            if($num == 0){
+                        ?>
+                        <div class='ser-btn pointer follow_forum' data-url="<?=$Link?>">Follow</div>
+                        <?php }else{ ?>
+                            <div class='follow_forum ser-btn pointer' data-url="<?=$Link?>">Following</div>
+                        <?php }?>
                     </div>
                 </div>
                 <!-- 一個看板end -->
-                
-                <p onclick="location.href='#'" class='ser-fot pointer'>查看更多</p>
+                <?php
+                            }//end while
+                        }//end num if
+                    }//end result if?>
             </div>
             <!-- 看板內容end -->
         </div>
@@ -358,29 +385,27 @@
             </div>
             <!-- 暱稱內容 -->
             <div class='ser-con2 left'>
+                <?php 
+                    $sql = "SELECT DISTINCT `Nickname` ,`UId`FROM `member` WHERE `Nickname` LIKE '%$key%' ";
+                    $result = mysqli_query($link, $sql);
+                    if($result){
+                        if((mysqli_num_rows($result)) > 0 ){
+                            while($row = mysqli_fetch_assoc($result)){
+                ?>
                 <!-- 一個暱稱 -->
-                <div class='row justify-content-start art2 pointer' onclick="location.href='#'">
+                <div class='row justify-content-start art2 pointer' onclick="location.href='../index/index.php?page=nickname&uid=<?=$row['UId'];?>'">
                     <div class="col-md-8">
-                        <p class='ser-ww'>小賀</p>
+                        <p class='ser-ww'><?php echo $row['Nickname'];?></p>
                     </div>
                     <div class="col-md-4 right">
                         <div class='ser-btn pointer ' onclick="location.href='#'" >Follow</div>
                     </div>
                 </div>
                 <!-- 一個暱稱end -->
-
-                <!-- 一個暱稱 -->
-                <div class='row justify-content-start art2 pointer' onclick="location.href='#'">
-                    <div class="col-md-8">
-                        <p class='ser-ww'>姸姸</p>
-                    </div>
-                    <div class="col-md-4 right">
-                        <div class='ser-btn pointer ' onclick="location.href='#'" >Follow</div>
-                    </div>
-                </div>
-                <!-- 一個暱稱end -->
-                
-                <p onclick="location.href='#'" class='ser-fot pointer'>查看更多</p>
+                <?php
+                            }//end while
+                        }//end num if
+                    }//end result if?>
             </div>
             <!-- 暱稱內容end -->
         </div>
@@ -397,29 +422,40 @@
             </div>
             <!-- 話題內容 -->
             <div class='ser-con2 left'>
+                <?php 
+                    $sql = "SELECT DISTINCT tag FROM `article_tag`  WHERE `tag` LIKE '%$key%' ";
+                    $result = mysqli_query($link, $sql);
+                    if($result){
+                        if((mysqli_num_rows($result)) > 0 ){
+                            while($row = mysqli_fetch_assoc($result)){
+                ?>
                 <!-- 一個話題 -->
-                <div class='row justify-content-start art2 pointer' onclick="location.href='#'">
+                <div class='row justify-content-start art2 pointer' onclick="location.href='../index/index.php?page=tag&tag=<?=$row['tag'];?>'">
                     <div class="col-md-8">
-                        <p class='ser-ww'>#條碼女孩吧啦吧啦吧啦</p>
+                        <p class='ser-ww'>#<?php echo $row['tag'];?></p>
                     </div>
                     <div class="col-md-4 right">
-                        <div class='ser-btn pointer ' onclick="location.href='#'" >Follow</div>
-                    </div>
-                </div>
-                <!-- 一個話題end -->
+                        <?php   $Link = "../Article/follow.php?tag=".$row['tag']; 
+                                if(isset($_SESSION['nickname'])){
+                                    $sql_tag = "SELECT * FROM `follow` WHERE `tag` = \"$row[tag]\" AND `UId` = \"$uid\"";
+                                    $result_tag = mysqli_query($link,$sql_tag);
+                                    $num = mysqli_num_rows($result_tag);
+                                }else{
+                                $num  = 0;}
 
-                <!-- 一個話題 -->
-                <div class='row justify-content-start art2 pointer' onclick="location.href='#'">
-                    <div class="col-md-8">
-                        <p class='ser-ww'>#乖乖女的戀愛指南</p>
-                    </div>
-                    <div class="col-md-4 right">
-                        <div class='ser-btn pointer ' onclick="location.href='#'" >Follow</div>
+                                if($num == 0){
+                        ?>
+                        <div class='follow ser-btn pointer' data-url="<?=$Link?>">Follow</div>
+                        <?php }else{ ?>
+                            <div class='follow ser-btn pointer' data-url="<?=$Link?>">Following</div>
+                        <?php }?>
                     </div>
                 </div>
                 <!-- 一個話題end -->
-                
-                <p onclick="location.href='#'" class='ser-fot pointer'>查看更多</p>
+                <?php
+                            }//end while
+                        }//end num if
+                    }//end result if?>
             </div>
             <!-- 話題內容end -->
         </div>
@@ -427,9 +463,61 @@
     <!-- 話題按鈕end -->
 
     <?php }?>
+
+    <script>
+    <?php if(isset($_SESSION)){?>
+    // 追蹤tag
+        $(".follow").click(function(){
+            var url = $(this).data("url");
+            var eq = $(".follow").index($(this));
+
+            console.log(eq);
+            $.ajax({
+                type: 'POST',
+				url: url,
+				data: {type : "ajax"},
+				dataType :"json"
+            }).done(function(data) {
+				console.log(data);
+				if(data['success'] == "OK"){
+						$(".follow").eq(eq).html("Following");
+						// console.log("black");
+					}else if(data['success'] == "DEL_OK"){
+						$(".follow").eq(eq).html("Follow");
+						// console.log("white");
+					}
+			});
+        });
+    // 追蹤看板
+        $(".follow_forum").click(function(){
+            var url = $(this).data("url");
+            var forum = $(".follow_forum").index($(this));
+
+            // console.log(f);
+            $.ajax({
+                type: 'POST',
+				url: url,
+				data: {type : "ajax"},
+				dataType :"json"
+            }).done(function(data) {
+				console.log(data);
+				if(data['success'] == "OK"){
+						$(".follow_forum").eq(forum).html("Following");
+						// console.log(f);
+					}else if(data['success'] == "DEL_OK"){
+						$(".follow_forum").eq(forum).html("Follow");
+						// console.log("white");
+					}
+			});
+        });
+
+   <?php  }?>
+    </script>
+
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
   </body>

@@ -50,7 +50,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	<link href="../index/my.css" rel="stylesheet" type="text/css">
 	
@@ -173,13 +173,13 @@
 							
 						if(isset($row_follow['AId'])){
 							// 已追蹤
-							echo '<a href ="../Article/follow.php?aid='.$row['AId'].'&follow=1">';
-							echo '<img class="pointer gbb"  src="../index/image/bell-black.png" title="追蹤"></a>';
+							//echo '<a href ="../Article/follow.php?aid='.$row['AId'].'&follow=1">';
+							echo '<img class="pointer gbb" id="bell" src="../index/image/bell-black.png" title="追蹤">';
 
 						}else{
 							// 未追蹤
-							echo '<a href ="../Article/follow.php?aid='.$row['AId'].'&follow=0">';
-							echo '<img class="pointer gbb"  src="../index/image/bell-white.png" title="追蹤"></a>';
+							//echo '<a href ="../Article/follow.php?aid='.$row['AId'].'&follow=0">';
+							echo '<img class="pointer gbb"  id="bell" src="../index/image/bell-white.png" title="追蹤">';
 						}
 					}else{
 						echo '<img class="pointer gbb"  src="../index/image/bell-white.png" title="追蹤">';
@@ -294,16 +294,17 @@
 						<p style="display: inline; font-size:2.5vmin; font-weight:400; font-family:jf-openhuninn;"><?php echo $row_hot['likeCount'];?></p>
 						<?php 
 							if(isset($_SESSION['nickname'])){
-								$sql_good = "SELECT ISNOT FROM good WHERE `UId` = \"$uid\" AND `CId` = \"$row_hot[CId]\"";
+								$sql_good = "SELECT `ISNOT` FROM good WHERE `UId` = \"$uid\" AND `CId` = \"$row_hot[CId]\"";
 								
 								$result_good = mysqli_query($link,$sql_good);
+								$num = mysqli_num_rows($result_good);
 
-								if(isset($row_good['ISNOT'])){
+								if(isset($row_good['ISNOT']) AND $num > 0){
 									echo '<a href = "../Article/good.php?cid='.$row_hot['CId'].'">';
 
 									if(($row_good['ISNOT'] == 1)){
 										echo '<img class="img-fluid pointer gbb" src="../index/image/good-black.png" id="good-pic"></a>';
-									}else if($row_good['ISNOT'] == 0){
+									}else {
 										echo '<img class="img-fluid pointer gbb" src="../index/image/good-white.png" id="good-pic"></a>';
 									}
 
@@ -546,11 +547,31 @@
 		$(document).ready(function(){
   			$(".dropdown-toggle").dropdown();
 		});
+
+		$("#bell").click(function(){
+			$.ajax({
+				type: 'POST',
+				url: '../Article/follow.php?aid=<?=$row['AId']?>',
+				data: {type : "ajax"},
+				dataType :"json"
+			}).done(function( data ) {
+				console.log(data);
+				if(data['success'] == "OK"){
+						$("#bell").attr("src","../index/image/bell-black.png");
+						console.log("black");
+					}else if(data['success'] == "DEL_OK"){
+						$("#bell").attr("src","../index/image/bell-white.png");
+						console.log("white");
+					}
+			});
+		});
+
+		
 	</script>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
   </body>

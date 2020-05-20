@@ -53,7 +53,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="./my.css" ty="theme">
@@ -110,9 +110,9 @@
       		</a>
 		  </div>
 		  <div class="">
-			<form class="form-inline" method="post" action="../index/?page=search">
+			<form class="form-inline" method="POST" action="../index/search.php">
 				<input class="form-control mr-sm-2" type="search" placeholder="要找甚麼...." style="width:125px;" name="key">
-				<button class="btn btn-light btn-sm" type="submit"><a href="?page=search" style = 'color:black;text-decoration:none;'>搜尋</a></button>
+				<button class="btn btn-light btn-sm" type="submit">搜尋</button>
 			</form>
 		  </div>	
 	  </div>
@@ -244,10 +244,12 @@
 				<a href="../index/index.php?page=index&id=all&hot=true">
 					<button type="button" class="btn btn-sm btn-info <?php if($forum == 'all'){echo 'active';}?>">全部文章</button> 
 				</a> 
+				<?php if(isset($_SESSION['nickname'])){?>
 				<!-- 追蹤文章 -->
 				<a href="../index/index.php?page=index&follow=true&hot=true&id=follow">
 					<button type="button" class="btn btn-sm btn-info <?php if($follow == 'true'){echo 'active';}?>">追蹤文章</button>
 				</a>
+				<?php }?>
 				<!-- 排序 -->
 				<button id="btnGroupDrop1" type="button" class="btn btn-sm btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
   					排序</button>
@@ -671,8 +673,8 @@
 	
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>-->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script> 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
   </body>
   
