@@ -838,5 +838,10 @@ button img{
   padding: 10px;
 }
 .match-fotter{
-  margin: 0px auto 25px auto;
+  margin: 10px auto 25px auto;
+}
+.sorry-pic{
+  width: auto;
+  height: 125px;
+  margin: 10px auto 20px auto;
 }

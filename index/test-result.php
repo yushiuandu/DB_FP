@@ -25,43 +25,56 @@
                 <!--配對畫面-->
                 <!-- data-backdrop點背景不會關閉視窗/data-keyboard可用esc關閉 -->
 				<div class="modal fade bd-example-modal-sm match-ww" id="match" aria-hidden="true" data-backdrop="static" data-keyboard="true">
-					<div class="modal-dialog modal-dialog-centered"> <!--center重直置中-->
+					<div class="modal-dialog modal-dialog-centered"> <!--centered重直置中-->
 						<div class="modal-content match-page"> 
-
-							<!--登入頭-->
-							<div>
-								<p class="match-title">夢中情人</p>
-							</div>
-							<!--登入內容-->
-							<div class="modal-body">
-								<div class='match-con'>
-                                    <div class="row justify-content-center">
-                                        <div class="col-md-7 mid">
-                                            <img class='match-pic' src='../index/image/test1.JPG'></img>
-                                        </div>
-                                        <div class="col-md-5 match-intro left">
-                                            <p class='match-ww'>姓名：　　許淑美</p>
-                                            <p class='match-ww'>暱稱：　　小黑</p>
-                                            <p class='match-ww'>文章：　　56篇</p>
-                                            <p class='match-ww'>追蹤者：　66個</p>
-                                            <p class='match-ww'>追隨者：　88個</p>
-                                        </div>
+                            <!-- 配對頁面內容 -->
+                            <p class="match-title">夢中情人</p>
+							<div class="modal-body match-con">
+                                <div class="row justify-content-center">
+                                    <!-- 配對到的人照片 -->
+                                    <div class="col-md-7 mid">
+                                        <img class='match-pic' src='../index/image/test1.JPG'></img>
                                     </div>
-								
-								</div>
+                                    <!-- 配對到的人簡介 -->
+                                    <div class="col-md-5 match-intro left">
+                                        <p class='match-ww'>姓名：　　許淑美</p>
+                                        <p class='match-ww'>暱稱：　　小黑</p>
+                                        <p class='match-ww'>文章：　　56篇</p>
+                                        <p class='match-ww'>追蹤者：　66個</p>
+                                        <p class='match-ww'>追隨者：　88個</p>
+                                    </div>
+                                </div>
 							</div>
-							<!--登入尾-->
+							<!--下面選項-->
 							<div class='match-fotter'>
+                                <!-- 開始聊天 -->
 								<button class="btn btn-secondary">
                                     <a href='../index/index.php?page=chat' class='link-ww'>開始聊天</a>
                                 </button>
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">下次再說...</button>
-							</div>
-						</from>
+                                <!-- 拒絕聊天 -->
+                                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#match2">下次再說...</button>
+                                <div class="modal fade bd-example-modal-sm match-ww" id="match2" aria-hidden="true" data-backdrop="static" data-keyboard="true">
+                                    <div class="modal-dialog modal-dialog-centered"> <!--centered重直置中-->
+                                        <div class="modal-content match-page"> 
+                                            <!-- 配對頁面內容 -->
+                                            <p class="match-title">Oh...No...</p>
+                                            <div class="modal-body match-con">
+                                                <img src='../index/image/cry.png' class='sorry-pic'></img>
+                                                <p class='match-ww'>你錯過進一步認識他/她的機會</p>
+                                            </div>
+                                            <!--下面選項-->
+                                            <div class='match-fotter'>
+                                                <!-- bye -->
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 						</div>
 					</div>
 				</div>
-				<!--登入畫面end-->
+				<!--配對頁面end-->
             </div>
 				
         </div>
