@@ -30,7 +30,9 @@
 						<option>E</option>
 						<option>F</option>
 					</select>
-					<button type="submit" class="btn btn-secondary btn-sm choice">送出</button>
+					<button type="submit" class="btn btn-secondary btn-sm choice">
+						<a href='../index/index.php?page=test-result' class='link-ww'>送出</a>
+					</button>
 				</div>
 			</div>
 		</div>

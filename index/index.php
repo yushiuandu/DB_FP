@@ -496,6 +496,11 @@
 			$page = 'index';
 			include("../index/test2.php"); }
 		?>
+		<?php //心理測驗-result
+			if($page == 'test-result'){
+			$page = 'index';
+			include("../index/test-result.php"); }
+		?>
 	</div>
 	<!-- 中間end -->
 

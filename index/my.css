@@ -772,3 +772,11 @@ button img{
   top: 34%;
   right:25%;
 }
+.link-ww{
+  color: white;
+  text-decoration: none;
+}
+.link-ww:hover{
+  color: white;
+  text-decoration: none;
+}
