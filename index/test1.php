@@ -28,9 +28,7 @@
       </div>
       <div class="row justify-content-center">
         <!-- 測驗button -->
-        <div class='col-md-2 test-btn pointer' onclick="location.href='../index/index.php?page=test2'" >
-          開始測驗
-        </div>
+        <div class='col-md-2 test-btn pointer' onclick="location.href='../index/index.php?page=test2'">開始測驗</div>
       </div>
     </div>
     <!-- Optional JavaScript -->
