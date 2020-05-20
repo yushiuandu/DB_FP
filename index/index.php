@@ -240,6 +240,7 @@
 
   		<div class="row mid">
 			<div class="btn-group col-md-4 col-sm-6 col-9" role="group" aria-label="Button group with nested dropdown">
+				<div class='shii'>
 				<!-- 全部文章 -->
 				<a href="../index/index.php?page=index&id=all&hot=true">
 					<button type="button" class="btn btn-sm btn-info <?php if($forum == 'all'){echo 'active';}?>">全部文章</button> 
@@ -263,6 +264,7 @@
 						echo '<a class="dropdown-item" href="../index/index.php?page=index&id='.$forum.'&latest=true">最新</a>';
 					}
 					?>
+				</div>
 				</div>
 			</div>
 			<div class="col-md-5"></div>
@@ -497,6 +499,11 @@
 			if($page == 'test2'){
 			$page = 'index';
 			include("../index/test2.php"); }
+		?>
+		<?php //心理測驗-result
+			if($page == 'test-result'){
+			$page = 'index';
+			include("../index/test-result.php"); }
 		?>
 	</div>
 	<!-- 中間end -->
