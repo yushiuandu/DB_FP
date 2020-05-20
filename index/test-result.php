@@ -17,7 +17,53 @@
     <!-- 心理測驗-result -->
     <body>
         <div class='test'>
-            
+            <div class='result mid'>
+                <p class='test2-ww'>B：此人自信心極強，顯得很理智，為人冷靜，自認為能夠將對方說服，令對方相信。另一方面，“應該”說得過多時，反映了有“動搖”心理，長期擔任領導職務的人，易有此類口頭語。</p>
+            </div>
+            <div class='result-btn'>
+                <div class='link-ww pointer' data-toggle="modal" data-target="#match">EXIT</div> <!--data-target後面要#!!!-->
+                <!--配對畫面-->
+                <!-- data-backdrop點背景不會關閉視窗/data-keyboard可用esc關閉 -->
+				<div class="modal fade bd-example-modal-sm match-ww" id="match" aria-hidden="true" data-backdrop="static" data-keyboard="true">
+					<div class="modal-dialog modal-dialog-centered"> <!--center重直置中-->
+						<div class="modal-content match-page"> 
+
+							<!--登入頭-->
+							<div>
+								<p class="match-title">夢中情人</p>
+							</div>
+							<!--登入內容-->
+							<div class="modal-body">
+								<div class='match-con'>
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-7 mid">
+                                            <img class='match-pic' src='../index/image/test1.JPG'></img>
+                                        </div>
+                                        <div class="col-md-5 match-intro left">
+                                            <p class='match-ww'>姓名：　　許淑美</p>
+                                            <p class='match-ww'>暱稱：　　小黑</p>
+                                            <p class='match-ww'>文章：　　56篇</p>
+                                            <p class='match-ww'>追蹤者：　66個</p>
+                                            <p class='match-ww'>追隨者：　88個</p>
+                                        </div>
+                                    </div>
+								
+								</div>
+							</div>
+							<!--登入尾-->
+							<div class='match-fotter'>
+								<button class="btn btn-secondary">
+                                    <a href='../index/index.php?page=chat' class='link-ww'>開始聊天</a>
+                                </button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">下次再說...</button>
+							</div>
+						</from>
+						</div>
+					</div>
+				</div>
+				<!--登入畫面end-->
+            </div>
+				
         </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

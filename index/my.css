@@ -289,7 +289,11 @@ button img{
   align-items: center;
   font-family: "微軟正黑體";
 }
-
+.le{
+  display: flex;
+  align-items: flex-start;
+  font-family: "微軟正黑體";
+}
 .bottom{
   display: flex;
   align-items: flex-end;
@@ -312,6 +316,10 @@ button img{
   text-align: left;
   width:90%;
   height:auto;
+}
+.shii{
+  display: inline-block;
+  float: left;
 }
 .pointer{
   cursor: pointer;
@@ -779,4 +787,56 @@ button img{
 .link-ww:hover{
   color: white;
   text-decoration: none;
+}
+.result{
+  width: 70%;
+  height: 50%;
+  border: 2px #90656F dashed;
+  border-radius: 10px;
+  margin:50px auto 0px auto;
+  background-color: rgb(234,230,223);
+}
+.result-btn{
+  background-color: #90656F;
+  color: white;
+  border-radius: 10px;
+  padding:8px;
+  font-size: 14pt;
+  width: 150px;
+  position: relative;
+  margin: auto;
+  top: 10%;
+}
+.match-page{
+  background-color: rgb(157,162,174);
+}
+.match-ww{
+  color:rgb(41,50,66);
+  margin: 5px auto 0px auto;
+  font-family: "jf-openhuninn";
+  font-weight:400;
+  font-size: 12pt;
+}
+.match-title{
+  margin:20px auto 10px auto;
+  font-family: "jf-openhuninn";
+  font-weight:400;
+  font-size: 16pt;
+}
+.match-pic{
+  width: 100%;
+  height: auto;
+  margin: auto;
+  border-radius: 10px;
+}
+.match-con{
+  padding:10px;
+}
+.match-intro{
+  background-color: rgb(214, 215, 218);
+  border-radius: 10px;
+  padding: 10px;
+}
+.match-fotter{
+  margin: 0px auto 25px auto;
 }
