@@ -122,14 +122,15 @@
                     <!-- 簡圖內容(中) end-->
                 </div>
                 <!-- 文章 end-->
-                <a href="../index/index.php?page=search&search=article" style="text-decoration:none"><p class='ser-fot pointer'>查看更多</p></a>
+               
                 <!-- if 有搜尋結果 end-->
-                <!------------------------------------------------------------------->
-                <!-- if沒有搜尋結果 -->
-                <!-- <p class='no-result'>沒有搜尋結果</p> -->
-                <!-- if沒有搜尋結果 end -->
-                <?php }//end while
-                }//end if?>
+                <?php }//end while ?>
+                     <a href="../index/index.php?page=search&search=article" style="text-decoration:none"><p class='ser-fot pointer'>查看更多</p></a>
+                <?php }//end if
+                        // 沒有搜尋結果
+                       else{
+                            echo '<p class="no-result">沒有搜尋結果</p>';
+                       } ?>
             </div>
             <!-- 文章區end -->
         </div>
@@ -181,17 +182,17 @@
                     <!-- 一個看板end -->
                     <a href="../index/index.php?page=search&search=forum" style="text-decoration:none"><p class='ser-fot pointer'>查看更多</p></a>
                     <!-- if 有搜尋結果 end-->
-                    <!------------------------------------------------------------------->
-                    <!-- if沒有搜尋結果 -->
-                    <!-- <p class='no-result'>沒有搜尋結果</p> -->
-                    <!-- if沒有搜尋結果 end -->
+                    
                     <?php
                                 }//end while
                             }//end num if
                             // 沒有搜尋結果
-                            else if((mysqli_num_rows($result)) == 0 ){
-                                echo "沒有搜尋結果";
-                            }
+                            else if((mysqli_num_rows($result)) == 0 ){?>
+                            <!-- if沒有搜尋結果 -->
+                            <p class='no-result'>沒有搜尋結果</p>
+                            <!-- if沒有搜尋結果 end -->
+                                
+                    <?php       }
                         }//end result if?>
                 </div>
                 <!-- 看板內容end -->
@@ -240,12 +241,12 @@
                     <a href="../index/index.php?page=search&search=nickname" style="text-decoration:none"><p class='ser-fot pointer'>查看更多</p></a>
                     <!-- if 有搜尋結果 end-->
                     <!------------------------------------------------------------------->
-                    <!-- if沒有搜尋結果 -->
-                    <!-- <p class='no-result'>沒有搜尋結果</p> -->
-                    <!-- if沒有搜尋結果 end -->
                     <?php
                             }//end while
                         }//end num if
+                        else{
+                            echo '<p class="no-result">沒有搜尋結果</p>';
+                       }
                     }//end result if?>
                 </div>
                 <!-- 暱稱內容end -->
@@ -298,12 +299,12 @@
                     <a href="../index/index.php?page=search&search=tag" style="text-decoration:none"><p class='ser-fot pointer'>查看更多</p></a>
                     <!-- if 有搜尋結果 end-->
                     <!------------------------------------------------------------------->
-                    <!-- if沒有搜尋結果 -->
-                    <!-- <p class='no-result'>沒有搜尋結果</p> -->
-                    <!-- if沒有搜尋結果 end -->
                     <?php
                             }//end while
                         }//end num if
+                        else{
+                            echo '<p class="no-result">沒有搜尋結果</p>';
+                       }
                     }//end result if?>
                 
                 </div>
@@ -382,15 +383,14 @@
                     <!-- 簡圖內容(中) end-->
                 </div>
                 <!-- 文章 end-->
-                <p onclick="location.href='#'" class='ser-fot pointer'>查看更多</p>
                 <!-- if 有搜尋結果 end-->
                 <!------------------------------------------------------------------->
-                <!-- if沒有搜尋結果 -->
-                <!-- <p class='no-result'>沒有搜尋結果</p> -->
-                <!-- if沒有搜尋結果 end -->
                 <?php
                             }//end while
                         }//end num if
+                        else{
+                            echo '<p class="no-result">沒有搜尋結果</p>';
+                       }
                     }//end result if?>
             </div>
             <!-- 文章區end -->
@@ -442,14 +442,15 @@
                     </div>
                 </div>
                 <!-- 一個看板end -->
+                
                 <!-- if 有搜尋結果 end-->
                 <!------------------------------------------------------------------->
-                <!-- if沒有搜尋結果 -->
-                <!-- <p class='no-result'>沒有搜尋結果</p> -->
-                <!-- if沒有搜尋結果 end -->
                 <?php
                             }//end while
                         }//end num if
+                        else{
+                            echo '<p class="no-result">沒有搜尋結果</p>';
+                       }
                     }//end result if?>
             </div>
             <!-- 看板內容end -->
@@ -501,14 +502,15 @@
                     </div>
                 </div>
                 <!-- 一個暱稱end -->
+                
                 <!-- if 有搜尋結果 end-->
                 <!------------------------------------------------------------------->
-                <!-- if沒有搜尋結果 -->
-                <!-- <p class='no-result'>沒有搜尋結果</p> -->
-                <!-- if沒有搜尋結果 end -->
                 <?php
                             }//end while
                         }//end num if
+                        else{
+                            echo '<p class="no-result">沒有搜尋結果</p>';
+                       }
                     }//end result if?>
             </div>
             <!-- 暱稱內容end -->
@@ -561,12 +563,12 @@
                 <!-- 一個話題end -->
                 <!-- if 有搜尋結果 end-->
                 <!------------------------------------------------------------------->
-                <!-- if沒有搜尋結果 -->
-                <!-- <p class='no-result'>沒有搜尋結果</p> -->
-                <!-- if沒有搜尋結果 end -->
                 <?php
                             }//end while
                         }//end num if
+                        else{
+                            echo '<p class="no-result">沒有搜尋結果</p>';
+                       }
                     }//end result if?>
             </div>
             <!-- 話題內容end -->
