@@ -122,7 +122,7 @@
                     <!-- 簡圖內容(中) end-->
                 </div>
                 <!-- 文章 end-->
-                <p onclick="location.href='#'" class='ser-fot pointer'>查看更多</p>
+                <a href="../index/index.php?page=search&search=article" style="text-decoration:none"><p class='ser-fot pointer'>查看更多</p></a>
                 <!-- if 有搜尋結果 end-->
                 <!------------------------------------------------------------------->
                 <!-- if沒有搜尋結果 -->
@@ -130,8 +130,6 @@
                 <!-- if沒有搜尋結果 end -->
                 <?php }//end while
                 }//end if?>
-                
-                <a href="../index/index.php?page=search&search=article" style="text-decoration:none"><p class='ser-fot pointer'>查看更多</p></a>
             </div>
             <!-- 文章區end -->
         </div>
@@ -181,7 +179,7 @@
                         </div>
                     </div>
                     <!-- 一個看板end -->
-                    <p onclick="location.href='#'" class='ser-fot pointer'>查看更多</p>
+                    <a href="../index/index.php?page=search&search=forum" style="text-decoration:none"><p class='ser-fot pointer'>查看更多</p></a>
                     <!-- if 有搜尋結果 end-->
                     <!------------------------------------------------------------------->
                     <!-- if沒有搜尋結果 -->
@@ -195,7 +193,6 @@
                                 echo "沒有搜尋結果";
                             }
                         }//end result if?>
-                    <a href="../index/index.php?page=search&search=forum" style="text-decoration:none"><p class='ser-fot pointer'>查看更多</p></a>
                 </div>
                 <!-- 看板內容end -->
             </div>
@@ -240,7 +237,7 @@
                         </div>
                     </div>
                     <!-- 一個暱稱end -->
-                    <p onclick="location.href='#'" class='ser-fot pointer'>查看更多</p>
+                    <a href="../index/index.php?page=search&search=nickname" style="text-decoration:none"><p class='ser-fot pointer'>查看更多</p></a>
                     <!-- if 有搜尋結果 end-->
                     <!------------------------------------------------------------------->
                     <!-- if沒有搜尋結果 -->
@@ -250,7 +247,6 @@
                             }//end while
                         }//end num if
                     }//end result if?>
-                    <a href="../index/index.php?page=search&search=nickname" style="text-decoration:none"><p class='ser-fot pointer'>查看更多</p></a>
                 </div>
                 <!-- 暱稱內容end -->
             </div>
@@ -269,26 +265,6 @@
             <div class='ser-con left'>
                 
                 <!-- if 有搜尋結果 -->
-                <!-- 一個話題 -->
-                <div class='row justify-content-start art2 pointer' onclick="location.href='#'">
-                    <div class="col-md-8">
-                        <p class='ser-ww'>#條碼女孩吧啦吧啦吧啦</p>
-                    </div>
-                    <div class="col-md-4 right">
-                        <div class='ser-btn pointer ' onclick="location.href='#'" >Follow</div>
-                    </div>
-                </div>
-                <!-- 一個話題end -->
-
-                <!-- 一個話題 -->
-                <div class='row justify-content-start art2 pointer' onclick="location.href='#'">
-                    <div class="col-md-8">
-                        <p class='ser-ww'>#乖乖女的戀愛指南</p>
-                    </div>
-                    <div class="col-md-4 right">
-                        <div class='ser-btn pointer ' onclick="location.href='#'" >Follow</div>
-                    </div>
-                    <!-- 一個話題 -->
                     <?php 
                         $sql = "SELECT DISTINCT tag FROM `article_tag`  WHERE `tag` LIKE '%$key%' LIMIT 3";
                         $result = mysqli_query($link, $sql);
@@ -319,19 +295,18 @@
                         </div>
                     </div>
                     <!-- 一個話題end -->
+                    <a href="../index/index.php?page=search&search=tag" style="text-decoration:none"><p class='ser-fot pointer'>查看更多</p></a>
+                    <!-- if 有搜尋結果 end-->
+                    <!------------------------------------------------------------------->
+                    <!-- if沒有搜尋結果 -->
+                    <!-- <p class='no-result'>沒有搜尋結果</p> -->
+                    <!-- if沒有搜尋結果 end -->
                     <?php
                             }//end while
                         }//end num if
                     }//end result if?>
-                    <a href="../index/index.php?page=search&search=tag" style="text-decoration:none"><p class='ser-fot pointer'>查看更多</p></a>
+                
                 </div>
-                <!-- 一個話題end -->
-                <p onclick="location.href='#'" class='ser-fot pointer'>查看更多</p>
-                <!-- if 有搜尋結果 end-->
-                <!------------------------------------------------------------------->
-                <!-- if沒有搜尋結果 -->
-                <!-- <p class='no-result'>沒有搜尋結果</p> -->
-                <!-- if沒有搜尋結果 end -->
             </div>
             <!-- 話題內容end -->
         </div>
