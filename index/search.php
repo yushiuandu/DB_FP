@@ -47,6 +47,8 @@
             </div>
             <!-- 文章區 -->
             <div class='ser-con'>
+
+                <!-- if 有搜尋結果 -->
                 <!-- 文章 -->
                 <div class="art2 pointer" onclick="location.href='#'">
                     <div class="row art-head justify-content-start">
@@ -108,6 +110,11 @@
                 </div>
                 <!-- 文章 end-->
                 <p onclick="location.href='#'" class='ser-fot pointer'>查看更多</p>
+                <!-- if 有搜尋結果 end-->
+                <!------------------------------------------------------------------->
+                <!-- if沒有搜尋結果 -->
+                <!-- <p class='no-result'>沒有搜尋結果</p> -->
+                <!-- if沒有搜尋結果 end -->
             </div>
             <!-- 文章區end -->
         </div>
@@ -123,6 +130,8 @@
                 </div>
                 <!-- 看板內容 -->
                 <div class='ser-con left'>
+                    
+                    <!-- if 有搜尋結果 -->
                     <!-- 一個看板 -->
                     <div class='row justify-content-start art2 pointer' onclick="location.href='#'">
                         <div class="col-md-8">
@@ -145,6 +154,11 @@
                     </div>
                     <!-- 一個看板end -->
                     <p onclick="location.href='#'" class='ser-fot pointer'>查看更多</p>
+                    <!-- if 有搜尋結果 end-->
+                    <!------------------------------------------------------------------->
+                    <!-- if沒有搜尋結果 -->
+                    <!-- <p class='no-result'>沒有搜尋結果</p> -->
+                    <!-- if沒有搜尋結果 end -->
                 </div>
                 <!-- 看板內容end -->
             </div>
@@ -157,6 +171,8 @@
                 </div>
                 <!-- 暱稱內容 -->
                 <div class='ser-con left'>
+
+                    <!-- if 有搜尋結果-->
                     <!-- 一個暱稱 -->
                     <div class='row justify-content-start art2 pointer' onclick="location.href='#'">
                         <div class="col-md-8">
@@ -179,8 +195,13 @@
                     </div>
                     <!-- 一個暱稱end -->
                     <p onclick="location.href='#'" class='ser-fot pointer'>查看更多</p>
+                    <!-- if 有搜尋結果 end-->
+                    <!------------------------------------------------------------------->
+                    <!-- if沒有搜尋結果 -->
+                    <!-- <p class='no-result'>沒有搜尋結果</p> -->
+                    <!-- if沒有搜尋結果 end -->
                 </div>
-                <!-- 看板內容end -->
+                <!-- 暱稱內容end -->
             </div>
             <!-- 暱稱end -->
         </div>
@@ -195,30 +216,37 @@
             </div>
             <!-- 話題內容 -->
             <div class='ser-con left'>
-                    <!-- 一個話題 -->
-                    <div class='row justify-content-start art2 pointer' onclick="location.href='#'">
-                        <div class="col-md-8">
-                            <p class='ser-ww'>#條碼女孩吧啦吧啦吧啦</p>
-                        </div>
-                        <div class="col-md-4 right">
-                            <div class='ser-btn pointer ' onclick="location.href='#'" >Follow</div>
-                        </div>
+                
+                <!-- if 有搜尋結果 -->
+                <!-- 一個話題 -->
+                <div class='row justify-content-start art2 pointer' onclick="location.href='#'">
+                    <div class="col-md-8">
+                        <p class='ser-ww'>#條碼女孩吧啦吧啦吧啦</p>
                     </div>
-                    <!-- 一個看板end -->
-
-                    <!-- 一個看板 -->
-                    <div class='row justify-content-start art2 pointer' onclick="location.href='#'">
-                        <div class="col-md-8">
-                            <p class='ser-ww'>#乖乖女的戀愛指南</p>
-                        </div>
-                        <div class="col-md-4 right">
-                            <div class='ser-btn pointer ' onclick="location.href='#'" >Follow</div>
-                        </div>
+                    <div class="col-md-4 right">
+                        <div class='ser-btn pointer ' onclick="location.href='#'" >Follow</div>
                     </div>
-                    <!-- 一個看板end -->
-                    <p onclick="location.href='#'" class='ser-fot pointer'>查看更多</p>
                 </div>
-                <!-- 看板內容end -->
+                <!-- 一個話題end -->
+
+                <!-- 一個話題 -->
+                <div class='row justify-content-start art2 pointer' onclick="location.href='#'">
+                    <div class="col-md-8">
+                        <p class='ser-ww'>#乖乖女的戀愛指南</p>
+                    </div>
+                    <div class="col-md-4 right">
+                        <div class='ser-btn pointer ' onclick="location.href='#'" >Follow</div>
+                    </div>
+                </div>
+                <!-- 一個話題end -->
+                <p onclick="location.href='#'" class='ser-fot pointer'>查看更多</p>
+                <!-- if 有搜尋結果 end-->
+                <!------------------------------------------------------------------->
+                <!-- if沒有搜尋結果 -->
+                <!-- <p class='no-result'>沒有搜尋結果</p> -->
+                <!-- if沒有搜尋結果 end -->
+            </div>
+            <!-- 話題內容end -->
         </div>
     </div>
     <!-- 話題end -->
@@ -241,6 +269,8 @@
             </div>
             <!-- 文章區 -->
             <div class='ser-con2'>
+
+                <!-- if 有搜尋結果 -->
                 <!-- 文章 -->
                 <div class="art2 pointer" onclick="location.href='#'">
                     <div class="row art-head justify-content-start">
@@ -302,6 +332,11 @@
                 </div>
                 <!-- 文章 end-->
                 <p onclick="location.href='#'" class='ser-fot pointer'>查看更多</p>
+                <!-- if 有搜尋結果 end-->
+                <!------------------------------------------------------------------->
+                <!-- if沒有搜尋結果 -->
+                <!-- <p class='no-result'>沒有搜尋結果</p> -->
+                <!-- if沒有搜尋結果 end -->
             </div>
             <!-- 文章區end -->
         </div>
@@ -318,6 +353,8 @@
             </div>
             <!-- 看板內容 -->
             <div class='ser-con2 left'>
+
+                <!-- if 有搜尋結果 -->
                 <!-- 一個看板 -->
                 <div class='row justify-content-start art2 pointer' onclick="location.href='#'">
                     <div class="col-md-8">
@@ -341,6 +378,11 @@
                 <!-- 一個看板end -->
                 
                 <p onclick="location.href='#'" class='ser-fot pointer'>查看更多</p>
+                <!-- if 有搜尋結果 end-->
+                <!------------------------------------------------------------------->
+                <!-- if沒有搜尋結果 -->
+                <!-- <p class='no-result'>沒有搜尋結果</p> -->
+                <!-- if沒有搜尋結果 end -->
             </div>
             <!-- 看板內容end -->
         </div>
@@ -358,6 +400,8 @@
             </div>
             <!-- 暱稱內容 -->
             <div class='ser-con2 left'>
+
+                <!-- if 有搜尋結果 -->
                 <!-- 一個暱稱 -->
                 <div class='row justify-content-start art2 pointer' onclick="location.href='#'">
                     <div class="col-md-8">
@@ -381,6 +425,11 @@
                 <!-- 一個暱稱end -->
                 
                 <p onclick="location.href='#'" class='ser-fot pointer'>查看更多</p>
+                <!-- if 有搜尋結果 end-->
+                <!------------------------------------------------------------------->
+                <!-- if沒有搜尋結果 -->
+                <!-- <p class='no-result'>沒有搜尋結果</p> -->
+                <!-- if沒有搜尋結果 end -->
             </div>
             <!-- 暱稱內容end -->
         </div>
@@ -397,6 +446,8 @@
             </div>
             <!-- 話題內容 -->
             <div class='ser-con2 left'>
+
+                <!-- if 有搜尋結果 -->
                 <!-- 一個話題 -->
                 <div class='row justify-content-start art2 pointer' onclick="location.href='#'">
                     <div class="col-md-8">
@@ -418,8 +469,12 @@
                     </div>
                 </div>
                 <!-- 一個話題end -->
-                
                 <p onclick="location.href='#'" class='ser-fot pointer'>查看更多</p>
+                <!-- if 有搜尋結果 end-->
+                <!------------------------------------------------------------------->
+                <!-- if沒有搜尋結果 -->
+                <!-- <p class='no-result'>沒有搜尋結果</p> -->
+                <!-- if沒有搜尋結果 end -->
             </div>
             <!-- 話題內容end -->
         </div>

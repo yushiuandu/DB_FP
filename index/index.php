@@ -590,7 +590,9 @@
 					<!--四個btn end-->
 
 					<button type="button" class="btn col-md-6">
-						<a href="?page=bell"  style="color:white;"><img src='../index/image/bell.png' title="通知"></a>
+						<!-- 沒有跳通知的是<img src='../index/image/bell.png' title="通知">
+							  有跳通知的是<img src='../index/image/bell-shake.gif' title="通知"> -->
+						<a href="?page=bell"  style="color:white;"><img src='../index/image/bell-shake.gif' title="通知"></a>
 					</button>
 				</div>
 				<div class="row">
