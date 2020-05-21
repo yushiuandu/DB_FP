@@ -16,6 +16,45 @@
   </head>
   <!-- 收藏 -->
   <body>
+    <div class='collect-set right pointer' data-toggle="modal" data-target="#collect">
+        <p>setting <img src='../index/image/collect-set.png' class='collect-pic'></p>
+    </div>
+    <div class="modal fade bd-example-modal-sm match-ww middle" id="collect" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered"> <!--centered重直置中-->
+            <div class="modal-content match-page"> 
+                <!-- 配對頁面內容 -->
+                <p class="match-title">編輯收藏</p>
+                <div class="modal-body">
+                    <div class='collect-add'>
+                    <!-- 可以新增收藏選項並加入 -->
+                        <input type='text' name='collect' placeholder='請輸入分類名稱'>
+                        <button type="submit" class="btn btn-sm btn-secondary">新增</button>
+                    </div>
+                    <div class='collect'>
+                        <!-- if有收藏 -->
+                        <div class="row justify-content-start">
+                            <div class="col-md-6">
+                                <p class="collect-view">網美店 <img src='../index/image/delete.png' type="delete" class='delete-pic pointer'></p>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="collect-view">桌布分享 <img src='../index/image/delete.png' type="delete" class='delete-pic pointer'></p>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="collect-view">貓貓狗狗 <img src='../index/image/delete.png' type="delete" class='delete-pic pointer'></p>
+                            </div>
+                        </div>
+                        <!-- if沒有收藏 -->
+                        <!-- <p class='collect-no'>你還沒有收藏喔！</p> -->
+                    </div>	
+                </div>
+                <!--下面選項-->
+                <div class='collect-fotter'>
+                    <!-- 取消收藏 -->
+                    <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+	</div>
     <!-- 全部收藏 -->
     <div class="row justify-content-center">
         <div class="col-md-12 long">

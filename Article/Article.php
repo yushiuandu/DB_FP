@@ -207,7 +207,7 @@
 					<div class="modal fade bd-example-modal-sm match-ww middle" id="collect" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered"> <!--centered重直置中-->
                             <div class="modal-content match-page"> 
-                                <!-- 配對頁面內容 -->
+                                <!-- 收藏內容 -->
                                 <p class="match-title">請選擇一個收藏分類</p>
                                 <div class="modal-body">
 									<div class='collect-add'>
