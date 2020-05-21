@@ -12,8 +12,33 @@
 		$write = $_GET['write'];
 	}
 
-?>
+	
+	if($write == 'true'){
+		include("../index/forum.php");
+		$uid = finduid($_SESSION['nickname']);
+		echo $uid;
 
+		$datetime = date ("Y-m-d H:i:s" , mktime(date('H'), date('i'), date('s'), date('m'), date('d'), date('Y'))) ;
+		$excerpt = substr( $_POST['content'] , 0 , 200 );
+		$sql = "INSERT INTO article (`category`,`UId`, `title`, `content`, `excerpt`, `post_time`, `anonymous`, `post_name`) 
+				VALUES ('$_POST[forum]', '$uid', '$_POST[title]', '$_POST[content]', '$excerpt', '$datetime', '$_POST[anonymous]','$_SESSION[nickname]')";
+
+		if(!(mysqli_query($link, $sql))){
+			mysqli_error();
+		}else{
+			$sql = "SELECT AId FROM article WHERE `UId` = \"$uid\" AND `post_time` = \"$datetime\"";
+			$result = mysqli_query($link, $sql);
+			$row = mysqli_fetch_assoc($result);
+			$aid = $row['AId'];
+			header('Location:../index/index.php?page=article&aid='.$aid.'');
+			exit;
+		}
+
+
+
+	}
+
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -98,7 +123,7 @@
 		<div class="from-group row">
 			<label class='col-sm-3 col-form-label'> tag</label>
 			<div class='col-sm-6' id="add">
-				<input type='text' name='tag' class='add-input'>
+				<input type='text' name='tag' class='add-input' placeholder="ex: #中山大學、#猴子..." pattern="^#+(?=.*[\u4e00-\u9fa5A-Za-z0-9]).{1,}$">
 				
 				<label>
 					<img src='../index/image/plus.png' class='tag-pic'>
@@ -140,6 +165,8 @@
 			newInput.type=mytype;  
 			newInput.name="tag"; 
 			newInput.className="add-input"; //class
+			newInput.placeholder="ex: #中山大學、#猴子...";
+			newInput.pattern="^#+(?=.*[\u4e00-\u9fa5A-Za-z0-9]).{1,}$";
 			TemO.appendChild(newInput); //將元素追加到某個標籤内容中
 			var newline= document.createElement("br"); //建一个BR為了換行 
 			TemO.appendChild(newline); 
@@ -157,28 +184,5 @@
 
 <?php
 
-	if($write == 'true'){
-		include("../index/forum.php");
-		$uid = finduid($_SESSION['nickname']);
-		echo $uid;
-
-		$datetime = date ("Y-m-d H:i:s" , mktime(date('H'), date('i'), date('s'), date('m'), date('d'), date('Y'))) ;
-		$excerpt = substr( $_POST['content'] , 0 , 200 );
-		$sql = "INSERT INTO article (`category`,`UId`, `title`, `content`, `excerpt`, `post_time`, `anonymous`, `post_name`) 
-				VALUES ('$_POST[forum]', '$uid', '$_POST[title]', '$_POST[content]', '$excerpt', '$datetime', '$_POST[anonymous]','$_SESSION[nickname]')";
-
-		if(!(mysqli_query($link, $sql))){
-			mysqli_error();
-		}else{
-			$sql = "SELECT AId FROM article WHERE `UId` = \"$uid\" AND `post_time` = \"$datetime\"";
-			$result = mysqli_query($link, $sql);
-			$row = mysqli_fetch_assoc($result);
-			$aid = $row['AId'];
-			header('Location:../index/index.php?page=article&aid='.$aid.'');
-		}
-
-
-
-	}
 
 ?>
