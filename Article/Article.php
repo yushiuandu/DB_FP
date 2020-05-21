@@ -184,33 +184,60 @@
 				?>
 				<!-- 收藏 -->
 				<?php 
-					if(isset($_SESSION['nickname'])){
-						$sql_save = "	SELECT AId FROM `save` WHERE UId = \"$uid\" AND `AId` =\"$row[AId]\"";
-						$result_save = mysqli_query($link, $sql_save);
-						$num - mysqli_num_rows($result_save);
+				//	if(isset($_SESSION['nickname'])){
+					//	$sql_save = "	SELECT AId FROM `save` WHERE UId = \"$uid\" AND `AId` =\"$row[AId]\"";
+					//	$result_save = mysqli_query($link, $sql_save);
+					//	$num - mysqli_num_rows($result_save);
 							
-						if($num>0){
+					//	if($num>0){
 							// 已追蹤
-							echo '<a href ="../Article/save.php?aid='.$row['AId'].'&save=1">';
-							echo '<img class="pointer gbb"  src="../index/image/bookmark-black.png" title="追蹤"></a>';
+					//		echo '<a href ="../Article/save.php?aid='.$row['AId'].'&save=1">';
+					//		echo '<img class="pointer gbb"  src="../index/image/bookmark-black.png" title="追蹤"></a>';
 
-						}else{
+					//	}else{
 							// 未追蹤
-							echo '<a href ="../Article/save.php?aid='.$row['AId'].'&save=0">';
-							echo '<img class="pointer gbb"  src="../index/image/bookmark-white.png" title="追蹤"></a>';
+					//		echo '<a href ="../Article/save.php?aid='.$row['AId'].'&save=0">';
+					//		echo '<img class="pointer gbb"  src="../index/image/bookmark-white.png" title="追蹤"></a>';
 						}
-					}else{
-						echo '<img class="pointer gbb"  src="../index/image/bookmark-white.png" title="追蹤">';
-					}
+				//	}else{
+				//		echo '<img class="pointer gbb"  src="../index/image/bookmark-white.png" title="追蹤">';
+				//	}
 				?>
-				
+				<img class="pointer gbb"  src="../index/image/bookmark-white.png" title="追蹤" data-toggle="modal" data-target="#collect">
+					<div class="modal fade bd-example-modal-sm match-ww middle" id="collect" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered"> <!--centered重直置中-->
+                            <div class="modal-content match-page"> 
+                                <!-- 配對頁面內容 -->
+                                <p class="match-title">請選擇一個收藏分類</p>
+                                <div class="modal-body">
+									<div class='collect-add'>
+										<!-- 可以新增收藏選項並加入 -->
+										<input type='text' name='collect' placeholder='輸入分類名稱'>
+										<button type="submit" class="btn btn-sm btn-secondary">新增</button>
+									</div>
+									<div class='collect'>
+										<button type="button" class="btn collect-btn">網美店</button>
+										<button type="button" class="btn collect-btn">桌布分享</button>
+										<button type="button" class="btn collect-btn">狗狗貓貓</button>
+										<button type="button" class="btn collect-btn">狗狗貓貓</button>
+										<button type="button" class="btn collect-btn">狗狗貓貓</button>
+									</div>	
+                                </div>
+                                <!--下面選項-->
+                                <div class='collect-fotter'>
+									<!-- 取消收藏 -->
+									<button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">取消</button>
+                                </div>
+                            </div>
+                        </div>
+					</div>
 			</div>
 			<!-- 按鈕們 end -->
 		</div>
 		<!-- 文章內容(下) end-->
 	</div>
 	<!-- article end -->
-				<?php } //end if ?>
+				<?php// } //end if ?>
 	<!-- 熱門留言區 -->
 	<?php 
 		

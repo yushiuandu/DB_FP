@@ -883,3 +883,25 @@ button img{
   position: relative;
   top: 50px;
 }
+.collect{
+  background-color: rgb(199, 201, 240);
+  border-radius: 10px;
+  padding-left: 20px;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  margin: 0px 10px 0px 10px;
+  text-align: left;
+}
+.collect-btn{
+  margin:10px 5px 0px 5px;
+  background-color: rgb(242,242,242);
+}
+.collect-fotter{
+  margin: 10px 10px 10px auto;
+}
+.collect-add{
+  margin:0px auto 15px auto;
+}
+.collect-btn:hover{
+  background-color: rgb(151, 151, 151);
+}
