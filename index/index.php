@@ -682,8 +682,7 @@
 	$(".good_article").click(function(){
             var url = $(this).data("url");
             var good = $(".good_article").index($(this));
-			// var count = $(".Count").index($(this));
-			// console.log(count);
+			// var count = $("Count").index($(this));
 
             console.log(good);
             $.ajax({
@@ -695,8 +694,7 @@
             }).done(function(data) {
 				console.log(data);
 				if(data['success'] == "OK"){
-
-					// $(".Count").eq(count).html('1');
+					// $(".Count").eq(count).html("1");
 					$(".good_article").eq(good).attr("src","../index/image/good-black.png");
 					console.log(good);
 					// console.log(good_c);
