@@ -49,13 +49,13 @@
 				</div>
 				<!-- 綽號 -->
 				<div class="form-group col-md-6">
-					<label>取個綽號</label>
-					<input type="text" class="form-control" placeholder="請輸入您的綽號" name="nickname" required>
+					<label for='nickname'>取個綽號</label>
+					<input id='nickname' type="text" class="form-control" placeholder="請輸入您的綽號" name="nickname" required>
 				</div>
 				<!-- 生日 -->
 				<div class="form-group col-md-6">
-					<label for="exampleFormControlSelect1">你的生日</label>
-					<input type="date" class="form-control" name="birthdate" required>
+					<label for='birthday'>你的生日</label>
+					<input id='birthday' type="date" class="form-control" name="birthdate" required min="1990-01-01" max="2003-12-30">
 				</div>
         	</div>   
 			<!-- row end -->

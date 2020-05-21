@@ -79,6 +79,8 @@
             </div>
             <!-- 文章區 -->
             <div class='ser-con'>
+
+                <!-- if 有搜尋結果 -->
                 <!-- 文章 -->
                 <?php 
                     $sql = "SELECT * FROM `article` WHERE `title` LIKE '%$key%' ORDER BY `post_time` DESC LIMIT 3";
@@ -120,10 +122,14 @@
                     <!-- 簡圖內容(中) end-->
                 </div>
                 <!-- 文章 end-->
+                <a href="../index/index.php?page=search&search=article" style="text-decoration:none"><p class='ser-fot pointer'>查看更多</p></a>
+                <!-- if 有搜尋結果 end-->
+                <!------------------------------------------------------------------->
+                <!-- if沒有搜尋結果 -->
+                <!-- <p class='no-result'>沒有搜尋結果</p> -->
+                <!-- if沒有搜尋結果 end -->
                 <?php }//end while
                 }//end if?>
-                
-                <a href="../index/index.php?page=search&search=article" style="text-decoration:none"><p class='ser-fot pointer'>查看更多</p></a>
             </div>
             <!-- 文章區end -->
         </div>
@@ -139,6 +145,8 @@
                 </div>
                 <!-- 看板內容 -->
                 <div class='ser-con left'>
+                    
+                    <!-- if 有搜尋結果 -->
                     <?php
                          $sql = "SELECT `category`,`eng` FROM `forumid` WHERE `category` LIKE '%$key%'";
                          $result = mysqli_query($link, $sql);
@@ -171,6 +179,12 @@
                         </div>
                     </div>
                     <!-- 一個看板end -->
+                    <a href="../index/index.php?page=search&search=forum" style="text-decoration:none"><p class='ser-fot pointer'>查看更多</p></a>
+                    <!-- if 有搜尋結果 end-->
+                    <!------------------------------------------------------------------->
+                    <!-- if沒有搜尋結果 -->
+                    <!-- <p class='no-result'>沒有搜尋結果</p> -->
+                    <!-- if沒有搜尋結果 end -->
                     <?php
                                 }//end while
                             }//end num if
@@ -179,7 +193,6 @@
                                 echo "沒有搜尋結果";
                             }
                         }//end result if?>
-                    <a href="../index/index.php?page=search&search=forum" style="text-decoration:none"><p class='ser-fot pointer'>查看更多</p></a>
                 </div>
                 <!-- 看板內容end -->
             </div>
@@ -192,6 +205,8 @@
                 </div>
                 <!-- 暱稱內容 -->
                 <div class='ser-con left'>
+
+                    <!-- if 有搜尋結果-->
                     <?php 
                         $sql = "SELECT DISTINCT `Nickname` ,`UId`FROM `member` WHERE `Nickname` LIKE '%$key%' LIMIT 3";
                         $result = mysqli_query($link, $sql);
@@ -222,13 +237,18 @@
                         </div>
                     </div>
                     <!-- 一個暱稱end -->
+                    <a href="../index/index.php?page=search&search=nickname" style="text-decoration:none"><p class='ser-fot pointer'>查看更多</p></a>
+                    <!-- if 有搜尋結果 end-->
+                    <!------------------------------------------------------------------->
+                    <!-- if沒有搜尋結果 -->
+                    <!-- <p class='no-result'>沒有搜尋結果</p> -->
+                    <!-- if沒有搜尋結果 end -->
                     <?php
                             }//end while
                         }//end num if
                     }//end result if?>
-                    <a href="../index/index.php?page=search&search=nickname" style="text-decoration:none"><p class='ser-fot pointer'>查看更多</p></a>
                 </div>
-                <!-- 看板內容end -->
+                <!-- 暱稱內容end -->
             </div>
             <!-- 暱稱end -->
         </div>
@@ -243,7 +263,8 @@
             </div>
             <!-- 話題內容 -->
             <div class='ser-con left'>
-                    <!-- 一個話題 -->
+                
+                <!-- if 有搜尋結果 -->
                     <?php 
                         $sql = "SELECT DISTINCT tag FROM `article_tag`  WHERE `tag` LIKE '%$key%' LIMIT 3";
                         $result = mysqli_query($link, $sql);
@@ -274,13 +295,20 @@
                         </div>
                     </div>
                     <!-- 一個話題end -->
+                    <a href="../index/index.php?page=search&search=tag" style="text-decoration:none"><p class='ser-fot pointer'>查看更多</p></a>
+                    <!-- if 有搜尋結果 end-->
+                    <!------------------------------------------------------------------->
+                    <!-- if沒有搜尋結果 -->
+                    <!-- <p class='no-result'>沒有搜尋結果</p> -->
+                    <!-- if沒有搜尋結果 end -->
                     <?php
                             }//end while
                         }//end num if
                     }//end result if?>
-                    <a href="../index/index.php?page=search&search=tag" style="text-decoration:none"><p class='ser-fot pointer'>查看更多</p></a>
+                
                 </div>
-                <!-- 看板內容end -->
+            </div>
+            <!-- 話題內容end -->
         </div>
     </div>
     <!-- 話題end -->
@@ -305,6 +333,8 @@
             
             <!-- 文章區 -->
             <div class='ser-con2'>
+
+                <!-- if 有搜尋結果 -->
                 <!-- 文章 -->
                 <?php 
                     if(isset($_GET['hot'])){
@@ -353,6 +383,12 @@
                     <!-- 簡圖內容(中) end-->
                 </div>
                 <!-- 文章 end-->
+                <p onclick="location.href='#'" class='ser-fot pointer'>查看更多</p>
+                <!-- if 有搜尋結果 end-->
+                <!------------------------------------------------------------------->
+                <!-- if沒有搜尋結果 -->
+                <!-- <p class='no-result'>沒有搜尋結果</p> -->
+                <!-- if沒有搜尋結果 end -->
                 <?php
                             }//end while
                         }//end num if
@@ -374,6 +410,7 @@
             </div>
             <!-- 看板內容 -->
             <div class="ser-con2 left">
+                <!-- if有搜尋結果 -->
                 <?php 
                     $sql = "SELECT DISTINCT `category`, `eng` FROM `forumid` WHERE `category` LIKE '%$key%' ";
                     $result = mysqli_query($link, $sql);
@@ -406,6 +443,13 @@
                     </div>
                 </div>
                 <!-- 一個看板end -->
+                
+                <p onclick="location.href='#'" class='ser-fot pointer'>查看更多</p>
+                <!-- if 有搜尋結果 end-->
+                <!------------------------------------------------------------------->
+                <!-- if沒有搜尋結果 -->
+                <!-- <p class='no-result'>沒有搜尋結果</p> -->
+                <!-- if沒有搜尋結果 end -->
                 <?php
                             }//end while
                         }//end num if
@@ -427,6 +471,8 @@
             </div>
             <!-- 暱稱內容 -->
             <div class='ser-con2 left'>
+
+                <!-- if 有搜尋結果 -->
                 <?php 
                     $sql = "SELECT DISTINCT `Nickname` ,`UId`FROM `member` WHERE `Nickname` LIKE '%$key%' ";
                     $result = mysqli_query($link, $sql);
@@ -458,6 +504,13 @@
                     </div>
                 </div>
                 <!-- 一個暱稱end -->
+                
+                <p onclick="location.href='#'" class='ser-fot pointer'>查看更多</p>
+                <!-- if 有搜尋結果 end-->
+                <!------------------------------------------------------------------->
+                <!-- if沒有搜尋結果 -->
+                <!-- <p class='no-result'>沒有搜尋結果</p> -->
+                <!-- if沒有搜尋結果 end -->
                 <?php
                             }//end while
                         }//end num if
@@ -478,6 +531,8 @@
             </div>
             <!-- 話題內容 -->
             <div class='ser-con2 left'>
+
+                <!-- if 有搜尋結果 -->
                 <?php 
                     $sql = "SELECT DISTINCT tag FROM `article_tag`  WHERE `tag` LIKE '%$key%' ";
                     $result = mysqli_query($link, $sql);
@@ -509,6 +564,12 @@
                     </div>
                 </div>
                 <!-- 一個話題end -->
+                <p onclick="location.href='#'" class='ser-fot pointer'>查看更多</p>
+                <!-- if 有搜尋結果 end-->
+                <!------------------------------------------------------------------->
+                <!-- if沒有搜尋結果 -->
+                <!-- <p class='no-result'>沒有搜尋結果</p> -->
+                <!-- if沒有搜尋結果 end -->
                 <?php
                             }//end while
                         }//end num if
