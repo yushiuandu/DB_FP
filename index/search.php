@@ -147,12 +147,27 @@
                                  while($row = mysqli_fetch_assoc($result)){
                     ?>
                     <!-- 一個看板 -->
-                    <div class='row justify-content-start art2 pointer' onclick="location.href='../index/index.php?page=index&id=<?=$row['eng'];?>'">
+                    <div class='row justify-content-start art2 pointer'>
                         <div class="col-md-8">
-                            <p class='ser-ww'><?=$row['category'];?></p>
+                        <a href="../index/index.php?page=index&id=<?=$row['eng'];?>">
+                            <p class='ser-ww'><?=$row['category'];?></p></a>
                         </div>
                         <div class="col-md-4 right">
-                            <div class='ser-btn pointer ' onclick="location.href='#'" >Follow</div>
+                            <?php
+                                $Link = "../Article/follow.php?forum=".$row['eng'];
+                                if(isset($_SESSION['nickname'])){
+                                    $sql_forum = "SELECT * FROM `follow` WHERE `category` = \"$row[eng]\" AND `UId` = \"$uid\"";
+                                    $result_forum = mysqli_query($link,$sql_forum);
+                                    $num = mysqli_num_rows($result_forum);
+                                }else{
+                                $num  = 0;}
+
+                                if($num == 0){
+                            ?>
+                            <div class='ser-btn pointer follow_forum' data-url="<?=$Link?>">Follow</div>
+                            <?php }else{ ?>
+                                <div class='follow_forum ser-btn pointer' data-url="<?=$Link?>">Following</div>
+                            <?php }?>
                         </div>
                     </div>
                     <!-- 一個看板end -->
@@ -190,7 +205,20 @@
                             <p class='ser-ww'><?=$row['Nickname'];?></p>
                         </div>
                         <div class="col-md-4 right">
-                            <div class='ser-btn pointer' >Follow</div>
+                            <?php 
+                                $Link = "../Article/follow.php?followuid=$row[UId]";
+                                if(isset($_SESSION['nickname'])){
+                                    $sql_n = "SELECT * FROM `follow` WHERE `follow_id` = \"$row[UId]\" AND `UId` = \"$uid\"";
+                                    $result_n = mysqli_query($link,$sql_n);
+                                    $num = mysqli_num_rows($result_n);
+                                }else{$num  = 0;}
+                                if($num == 0){
+                                    if($uid != $row["UId"]){
+                            ?>
+                            <div class='ser-btn pointer follow_nickname'data-url="<?=$Link;?>">Follow</div>
+                            <?php } }else{ ?>
+                                <div class='follow_nickname ser-btn pointer' data-url="<?=$Link;?>">Following</div>
+                            <?php }?>
                         </div>
                     </div>
                     <!-- 一個暱稱end -->
@@ -223,12 +251,26 @@
                             if((mysqli_num_rows($result)) > 0 ){
                                 while($row = mysqli_fetch_assoc($result)){
                     ?>
-                    <div class='row justify-content-start art2 pointer' onclick="location.href='../index/index.php?page=tag&tag=<?=$row['tag'];?>'">
+                    <div class='row justify-content-start art2 pointer'>
                         <div class="col-md-8">
-                            <p class='ser-ww'>#<?=$row['tag'];?></p>
+                            <a href="../index/index.php?page=tag&tag=<?=$row['tag'];?>">
+                            <p class='ser-ww'>#<?=$row['tag'];?></p></a>
                         </div>
                         <div class="col-md-4 right">
-                            <div class='ser-btn pointer ' onclick="location.href='#'" >Follow</div>
+                            <?php   $Link = "../Article/follow.php?tag=".$row['tag']; 
+                                    if(isset($_SESSION['nickname'])){
+                                        $sql_tag = "SELECT * FROM `follow` WHERE `tag` = \"$row[tag]\" AND `UId` = \"$uid\"";
+                                        $result_tag = mysqli_query($link,$sql_tag);
+                                        $num = mysqli_num_rows($result_tag);
+                                    }else{
+                                    $num  = 0;}
+
+                                    if($num == 0){
+                            ?>
+                            <div class='follow ser-btn pointer' data-url="<?=$Link?>">Follow</div>
+                            <?php }else{ ?>
+                                <div class='follow ser-btn pointer' data-url="<?=$Link?>">Following</div>
+                            <?php }?>
                         </div>
                     </div>
                     <!-- 一個話題end -->
@@ -393,12 +435,26 @@
                             while($row = mysqli_fetch_assoc($result)){
                 ?>
                 <!-- 一個暱稱 -->
-                <div class='row justify-content-start art2 pointer' onclick="location.href='../index/index.php?page=nickname&uid=<?=$row['UId'];?>'">
+                <div class='row justify-content-start art2 pointer'>
                     <div class="col-md-8">
-                        <p class='ser-ww'><?php echo $row['Nickname'];?></p>
+                        <a href="../index/index.php?page=nickname&uid=<?=$row['UId'];?>" >
+                        <p class='ser-ww'><?php echo $row['Nickname'];?></p></a>
                     </div>
                     <div class="col-md-4 right">
-                        <div class='ser-btn pointer ' onclick="location.href='#'" >Follow</div>
+                        <?php 
+                            $Link = "../Article/follow.php?followuid=$row[UId]";
+                            if(isset($_SESSION['nickname'])){
+                                $sql_n = "SELECT * FROM `follow` WHERE `follow_id` = \"$row[UId]\" AND `UId` = \"$uid\"";
+                                $result_n = mysqli_query($link,$sql_n);
+                                $num = mysqli_num_rows($result_n);
+                            }else{$num  = 0;}
+                            if($num == 0){
+                                if($uid != $row["UId"]){
+                        ?>
+                        <div class='ser-btn pointer follow_nickname'data-url="<?=$Link;?>">Follow</div>
+                        <?php } }else{ ?>
+                            <div class='follow_nickname ser-btn pointer' data-url="<?=$Link;?>">Following</div>
+                        <?php }?>
                     </div>
                 </div>
                 <!-- 一個暱稱end -->
@@ -430,8 +486,9 @@
                             while($row = mysqli_fetch_assoc($result)){
                 ?>
                 <!-- 一個話題 -->
-                <div class='row justify-content-start art2 pointer' onclick="location.href='../index/index.php?page=tag&tag=<?=$row['tag'];?>'">
+                <div class='row justify-content-start art2 pointer'>
                     <div class="col-md-8">
+                        <a href="../index/index.php?page=tag&tag=<?=$row['tag'];?>">
                         <p class='ser-ww'>#<?php echo $row['tag'];?></p>
                     </div>
                     <div class="col-md-4 right">
@@ -506,6 +563,29 @@
 						// console.log(f);
 					}else if(data['success'] == "DEL_OK"){
 						$(".follow_forum").eq(forum).html("Follow");
+						// console.log("white");
+					}
+			});
+        });
+        
+        // 追蹤暱稱
+        $(".follow_nickname").click(function(){
+            var url = $(this).data("url");
+            var nickname = $(".follow_nickname").index($(this));
+
+            console.log(nickname);
+            $.ajax({
+                type: 'POST',
+				url: url,
+				data: {type : "ajax"},
+				dataType :"json"
+            }).done(function(data) {
+				console.log(data);
+				if(data['success'] == "OK"){
+						$(".follow_nickname").eq(nickname).html("Following");
+						console.log(nickname);
+					}else if(data['success'] == "DEL_OK"){
+						$(".follow_nickname").eq(nickname).html("Follow");
 						// console.log("white");
 					}
 			});

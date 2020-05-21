@@ -16,9 +16,28 @@
     </head>
     <!-- 心理測驗-result -->
     <body>
+        <?php    
+            $choice = $_POST['choice'];
+            $tid = $_GET['tid'];
+
+            $link = mysqli_connect("localhost","taigun","ELn3yv07F567MwOF","taigun");//連結伺服器//選擇資料庫
+			if(!$link){
+			echo "no connect!";
+			}
+
+            $sql = "INSERT INTO `user_ans`(`UId`,`Ans`) VALUES ('$uid','$choice')";
+            mysqli_query($link,$sql);
+
+            $sql = "SELECT * FROM `ans` WHERE `testid` = \"$tid\"";
+            $result = mysqli_query($link,$sql);
+        
+            for($i = 0; $i < $choice ; $i++){
+                $row = mysqli_fetch_assoc($result);
+            }
+        ?>
         <div class='test'>
             <div class='result mid'>
-                <p class='test2-ww'>B：此人自信心極強，顯得很理智，為人冷靜，自認為能夠將對方說服，令對方相信。另一方面，“應該”說得過多時，反映了有“動搖”心理，長期擔任領導職務的人，易有此類口頭語。</p>
+                <p class='test2-ww'><?=$row['ans'];?></p>
             </div>
             <div class='result-btn'>
                 <div class='link-ww pointer' data-toggle="modal" data-target="#match">EXIT</div> <!--data-target後面要#!!!-->
@@ -65,7 +84,7 @@
                                             <!--下面選項-->
                                             <div class='match-fotter'>
                                                 <!-- bye -->
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="location.href='../index/index.php'">關閉</button>
                                             </div>
                                         </div>
                                     </div>

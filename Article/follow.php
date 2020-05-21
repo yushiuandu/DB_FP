@@ -14,7 +14,7 @@
 	$aid = ''; $follow ="";
 
 	if(isset($_GET['aid'])){
-		$ais = $_GET['aid'];
+		$aid = $_GET['aid'];
 		$sql = "SELECT * FROM `follow` WHERE `AId` = \"$aid\" AND `UId` = \"$uid\"";
 		$result = mysqli_query($link, $sql);
 		$num = mysqli_num_rows($result);
@@ -100,9 +100,18 @@
 
 		if(mysqli_query($link,$sql)){
 			mysqli_query($link,$sql_num);
-			echo 'success';
-			header("Location:../index/index.php?page=nickname&uid=$follow_uid"); 
-			exit;
+			if($_POST['type'] == 'ajax'){
+				if($num == 0){
+					exit(json_encode(array("success"=>"OK")));
+				}else{
+					exit(json_encode(array("success"=>"DEL_OK")));
+				}
+			}else{
+				echo 'success';
+				header("Location:../index/index.php?page=nickname&uid=$follow_uid"); 
+				exit;
+				echo 'failQQ';
+			}
 		}else{
 			echo 'failQQ';
 		}

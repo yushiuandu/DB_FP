@@ -140,25 +140,21 @@
 		<div class="row article-fotter right">
 			<!-- 按鈕們-->
 			<div class="col-md-12 col-sm-12 col-12">
-				<!-- 按讚數 -->
+				<!-- 文章按讚數 -->
 				<p style="display: inline; margin:0px; font-size:16pt; position:relative; top:5px; left:5px;"><?php echo $row['agree'];?></p>
 				<?php 
 					if(isset($_SESSION['nickname'])){
-						$sql_good = "SELECT ISNOT FROM good WHERE `UId` = \"$uid\" AND `AId` = \"$row[AId]\"";
+						$sql_good = "SELECT * FROM `good` WHERE `UId` = \"$uid\" AND `AId` = \"$row[AId]\"";
 						$result_good = mysqli_query($link,$sql_good);
 						$row_good = mysqli_fetch_assoc($result_good);
-							
-						if(isset($row_good['ISNOT'])){
-							echo '<a href = "../Article/good.php?aid='.$row['AId'].'">';
-							
-							if(($row_good['ISNOT']== 1)){
-								echo '<img class="pointer gbb" src="../index/image/good-black.png"></a>';
-							}else if($row_good['ISNOT'] == 0){
-								echo '<img class="pointer gbb" src="../index/image/good-white.png"></a>';
-							}
+						$num = mysqli_num_rows($result_good);
+
+						$Link = "../Article/good.php?aid=".$row['AId']."";
+
+						if($num > 0){
+							echo '<img class="good pointer gbb" data-url="'.$Link.'" src="../index/image/good-black.png">';
 						}else{
-							echo '<a href = "../Article/good.php?aid='.$row['AId'].'">';
-							echo '<img class="pointer gbb" src="../index/image/good-white.png"></a>';
+							echo '<img class="good pointer gbb" data-url="'.$Link.'" src="../index/image/good-white.png">';
 						}
 					}else{
 						echo '<img class="pointer gbb" src="../index/image/good-white.png">';
@@ -167,6 +163,7 @@
 				<!-- 追蹤 -->
 				<?php 
 					if(isset($_SESSION['nickname'])){
+						$Link = "../Article/follow.php?aid=".$aid;
 						$sql_follow = "	SELECT `AId` FROM `follow` WHERE `UId` = \"$uid\" AND `AId` =\"$row[AId]\"";
 						$result_follow = mysqli_query($link, $sql_follow);
 						$row_follow = mysqli_fetch_assoc($result_follow);
@@ -174,12 +171,12 @@
 						if(isset($row_follow['AId'])){
 							// 已追蹤
 							//echo '<a href ="../Article/follow.php?aid='.$row['AId'].'&follow=1">';
-							echo '<img class="pointer gbb" id="bell" src="../index/image/bell-black.png" title="追蹤">';
+							echo '<img class="pointer gbb follow_bell" data-url="'.$Link.'" src="../index/image/bell-black.png" title="追蹤">';
 
 						}else{
 							// 未追蹤
 							//echo '<a href ="../Article/follow.php?aid='.$row['AId'].'&follow=0">';
-							echo '<img class="pointer gbb"  id="bell" src="../index/image/bell-white.png" title="追蹤">';
+							echo '<img class="pointer gbb follow_bell"  data-url="'.$Link.'" src="../index/image/bell-white.png" title="追蹤">';
 						}
 					}else{
 						echo '<img class="pointer gbb"  src="../index/image/bell-white.png" title="追蹤">';
@@ -289,28 +286,21 @@
 					</div>
 					<!-- 作者 end-->
 
-					<!-- 按讚數 --> 
+					<!-- 熱門按讚數 --> 
 					<div class="col-md-3 col-sm-3 col-5 right" id = 'test'>
 						<p style="display: inline; font-size:2.5vmin; font-weight:400; font-family:jf-openhuninn;"><?php echo $row_hot['likeCount'];?></p>
 						<?php 
 							if(isset($_SESSION['nickname'])){
-								$sql_good = "SELECT `ISNOT` FROM good WHERE `UId` = \"$uid\" AND `CId` = \"$row_hot[CId]\"";
+								$sql_good = "SELECT * FROM good WHERE `UId` = \"$uid\" AND `CId` = \"$row_hot[CId]\"";
 								
 								$result_good = mysqli_query($link,$sql_good);
 								$num = mysqli_num_rows($result_good);
+								$Link = "../Article/good.php?cid=".$row_hot['CId'];
 
-								if(isset($row_good['ISNOT']) AND $num > 0){
-									echo '<a href = "../Article/good.php?cid='.$row_hot['CId'].'">';
-
-									if(($row_good['ISNOT'] == 1)){
-										echo '<img class="img-fluid pointer gbb" src="../index/image/good-black.png" id="good-pic"></a>';
-									}else {
-										echo '<img class="img-fluid pointer gbb" src="../index/image/good-white.png" id="good-pic"></a>';
-									}
-
-								}else{
-									echo '<a href = "../Article/good.php?cid='.$row_hot['CId'].'">';
-									echo '<img class="img-fluid pointer gbb" src="../index/image/good-white.png" id="good-pic"></a>';
+								if($num > 0){
+									echo '<img class="good img-fluid pointer gbb" data-url="'.$Link.'" src="../index/image/good-black.png" id="good-pic">';
+								}else {
+									echo '<img class="good img-fluid pointer gbb" data-url="'.$Link.'" src="../index/image/good-white.png" id="good-pic">';
 								}
 							}else{
 								echo '<img class="img-fluid pointer gbb" src="../index/image/good-white.png" id="good-pic">';
@@ -409,29 +399,21 @@
 					</div>
 					<!-- 作者 end-->
 					
-					<!-- 按讚數 --> 
+					<!-- 留言按讚數 --> 
 					<div class="col-md-3 col-sm-3 col-5">
 					<?php if($row_c['anonymous']!=2){?>
 						<p style="display: inline; font-size:2.5vmin; font-weight:400; font-family:jf-openhuninn;"><?php echo $row_c['likeCount'];?></p>
 						<?php 
 							if(isset($_SESSION['nickname'])){
-								$sql_good = "SELECT ISNOT FROM good WHERE `UId` = \"$uid\" AND `CId` = \"$row_c[CId]\"";
+								$sql_good = "SELECT * FROM good WHERE `UId` = \"$uid\" AND `CId` = \"$row_c[CId]\"";
 								$result_good = mysqli_query($link,$sql_good);
 								$num = mysqli_num_rows($result_good);
+								$Link = "../Article/good.php?cid=".$row_c['CId'];
 
 								if($num>0){
-									echo '<a href = "../Article/good.php?cid='.$row_c['CId'].'">';
-									$row_good = mysqli_fetch_assoc($result_good);
-
-									if(($row_good['ISNOT']== 1)){
-										echo '<img class="img-fluid pointer gbb" src="../index/image/good-black.png" id="good-pic"></a>';
-									}else if($row_good['ISNOT'] == 0){
-										echo '<img class="img-fluid pointer gbb" src="../index/image/good-white.png" id="good-pic"></a>';
-									}
-
+									echo '<img class="good img-fluid pointer gbb" data-url="'.$Link.'" src="../index/image/good-black.png" id="good-pic">';
 								}else{
-									echo '<a href = "../Article/good.php?cid='.$row_c['CId'].'">';
-									echo '<img class="img-fluid pointer gbb" src="../index/image/good-white.png" id="good-pic"></a>';
+									echo '<img class="good img-fluid pointer gbb" data-url="'.$Link.'" src="../index/image/good-white.png" id="good-pic">';
 								}
 							}
 							else{
@@ -544,34 +526,90 @@
 	
 	<!-- 手動呼叫 -->
 	<script>
+		 function prevent_reloading(){
+			var pendingRequests = {};
+				jQuery.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
+					var key = options.url;
+					console.log(key);
+					if (!pendingRequests[key]) {
+						pendingRequests[key] = jqXHR;
+					}else{
+						//jqXHR.abort();    //放棄後觸發的提交
+						pendingRequests[key].abort();   // 放棄先觸發的提交
+					}
+					var complete = options.complete;
+					options.complete = function(jqXHR, textStatus) {
+						pendingRequests[key] = null;
+						if (jQuery.isFunction(complete)) {
+						complete.apply(this, arguments);
+						}
+					};
+				});
+			}
+
 		$(document).ready(function(){
   			$(".dropdown-toggle").dropdown();
 		});
 
-		$("#bell").click(function(){
+		$(".follow_bell").click(function(){
+			var url = $(this).data("url");
+			var eq = $(".follow_bell").index($(this));
+			
+			console.log(eq);
+
 			$.ajax({
 				type: 'POST',
-				url: '../Article/follow.php?aid=<?=$row['AId']?>',
+				url: url,
 				data: {type : "ajax"},
 				dataType :"json"
 			}).done(function( data ) {
 				console.log(data);
 				if(data['success'] == "OK"){
-						$("#bell").attr("src","../index/image/bell-black.png");
+						$(".follow_bell").eq(eq).attr("src","../index/image/bell-black.png");
 						console.log("black");
 					}else if(data['success'] == "DEL_OK"){
-						$("#bell").attr("src","../index/image/bell-white.png");
+						console.log(eq);
+						$(".follow_bell").eq(eq).attr("src","../index/image/bell-white.png");
 						console.log("white");
 					}
 			});
 		});
 
+		$(".good").click(function(){
+            var url = $(this).data("url");
+            var good = $(".good").index($(this));
+
+			prevent_reloading();
+
+            console.log(good);
+            $.ajax({
+                type: 'POST',
+				url: url,
+				data: {type : "ajax"},
+				dataType :"json"
+				
+            }).done(function(data) {
+				console.log(data);
+				if(data['success'] == "OK"){
+
+					$(".good").eq(good).attr("src","../index/image/good-black.png");
+					console.log(good);
+					// console.log(good_c);
+				}else if(data['success'] == "DEL_OK"){
+
+					// $(".Count").eq(count).html('0');
+					$(".good").eq(good).attr("src","../index/image/good-white.png");
+						// console.log("white");
+						// console.log(good_c);	
+				}
+			});
+        });
 		
 	</script>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script> -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
   </body>

@@ -1,11 +1,12 @@
 <?php 	session_start();
-		$_SESSION['local'] = '../index/index.php';
+		// $_SESSION['local'] = '../index/index.php';
 ?>
 <?php
 	$link = mysqli_connect("localhost","taigun","ELn3yv07F567MwOF","taigun");//連結伺服器//選擇資料庫
 	if(!$link){
 	echo "no connect!";
 	}
+   
 	$sql = "SELECT * FROM `article` ORDER BY `agree` DESC";
 	// 將一切都先初始化
 	$page = 'index';	$latest = 'false';	$hot = 'false';	$aid = 'flase';	$forum = 'all';
@@ -43,6 +44,12 @@
 	$category = findForum($forum);
 	// 時區宣告
 	date_default_timezone_set('Asia/Taipei');
+	// $datetime = date ("H:i:s" , mktime(date('H'), date('i'), date('s'))) ;
+	// if($datetime >= "23:33:00"){
+	// 	$sql_del ="DELETE FROM `user_ans`";
+	// 	mysqli_query($link, $sql_del);
+	// 	echo "success";
+	// }
 ?>
 
 <!doctype html>
@@ -280,7 +287,7 @@
 		<?php
 			// 追蹤文章排序
 			if($follow == 'true'){ 
-				$sql = "SELECT `AId` FROM `save` WHERE `UId` = \"$uid\"";
+				$sql = "SELECT `AId` FROM `follow` WHERE `UId` = \"$uid\" AND `AId` !='NULL'";
 			}
 			// 所有文章排序
 			else if($forum == 'all'){
@@ -319,7 +326,7 @@
 		
 		<!-- 顯示文章 -->
 		
-			<div class="art pointer" onclick="location.href='../index/index.php?page=article&aid=<?php echo $row['AId']; ?>';">
+			<div class="art pointer">
 				<!-- 簡圖內容(上) -->
 				<div class="row art-head mid">
 					<!-- 作者-->
@@ -350,29 +357,23 @@
 
 					<!-- 按讚數 --> 
 					<div class="col-md-2 col-sm-3 col-3 right">
-						<h7 style="display: inline;"><?php echo $row['agree'];?></h7>
+						<h7 style="display: inline;" class="Count"><?php echo $row['agree'];?></h7>
 						<?php 
-
-						
 							if(isset($_SESSION['nickname'])){
-								$sql_good = "SELECT ISNOT FROM good WHERE `UId` = \"$uid\" AND `AId` = \"$row[AId]\"";
+								$sql_good = "SELECT * FROM `good` WHERE `UId` = \"$uid\" AND `AId` = \"$row[AId]\"";
 								$result_good = mysqli_query($link,$sql_good);
 								$row_good = mysqli_fetch_assoc($result_good);
-									
-								if(isset($row_good['ISNOT'])){
+								$num = mysqli_num_rows($result_good);
 
-									echo '<a href = "../Article/good.php?aid='.$row['AId'].'&is_index=true">';
-									if(($row_good['ISNOT']== 1)){
-										echo '<img src="./image/good-black.png" class="img-fluid" id="good-pic"></a>';
-									}else if($row_good['ISNOT'] == 0){
-										echo '<img src="./image/good-white.png" class="img-fluid" id="good-pic"></a>';
-									}
+								$Link = "../Article/good.php?aid=".$row['AId'];
+
+								if($num > 0){
+										echo '<img src="../index/image/good-black.png" class="good_article img-fluid " data-url="'.$Link.'" id="good-pic">';
 								}else{
-									echo '<a href = "../Article/good.php?aid='.$row['AId'].'&is_index=true">';
-									echo '<img src="./image/good-white.png" class="img-fluid" id="good-pic"></a>';
+									echo '<img src="../index/image/good-white.png" class="good_article img-fluid" data-url="'.$Link.'" id="good-pic">';
 								}
 							}else{
-								echo '<img src="./image/good-white.png" class="img-fluid" id="good-pic">';
+								echo '<img src="../index/image/good-white.png" class="img-fluid" id="good-pic">';
 							}
 						?>
 						<!-- <img src="./image/good-white.png" class="img-fluid" id="good-pic"> -->
@@ -382,7 +383,7 @@
 				<!-- 簡圖內容(上) end-->
 				
 				<!-- 簡圖內容(中) -->
-				<div class="row art-body mid">
+				<div class="row art-body mid"  onclick="location.href='../index/index.php?page=article&aid=<?php echo $row['AId']; ?>';">
 					<!-- 標題 -->
 					<div class="col-md-11 col-sm-11 col-11 col-lg-11 text-truncate">
 						<p class="font-weight-bold" style='font-size:3vmin; margin:0px;'><?php echo $row['title'];?></p>
@@ -676,6 +677,38 @@
   	<!-- 右半部 end -->
 	</div>
 	<!-- row end -->
+
+	<script>
+	$(".good_article").click(function(){
+            var url = $(this).data("url");
+            var good = $(".good_article").index($(this));
+			// var count = $(".Count").index($(this));
+			// console.log(count);
+
+            console.log(good);
+            $.ajax({
+                type: 'POST',
+				url: url,
+				data: {type : "ajax"},
+				dataType :"json"
+				
+            }).done(function(data) {
+				console.log(data);
+				if(data['success'] == "OK"){
+
+					// $(".Count").eq(count).html('1');
+					$(".good_article").eq(good).attr("src","../index/image/good-black.png");
+					console.log(good);
+					// console.log(good_c);
+				}else if(data['success'] == "DEL_OK"){
+					$(".good_article").eq(good).attr("src","../index/image/good-white.png");
+					
+				}
+			});
+        });
+	
+	
+	</script>
 	
 	
     <!-- Optional JavaScript -->
