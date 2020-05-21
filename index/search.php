@@ -317,7 +317,6 @@
     </div>
     <!-- 話題end -->
     <!-- 全部按鈕end -->
-    
     <?php }?>
     
     <?php if($search == 'article'){ 
