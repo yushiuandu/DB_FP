@@ -100,7 +100,7 @@
     <div class="nickname">
         <!-- 此nickname的照片 -->
         <div>
-            <img src="../index/image/test-user.jpg" class="img-fluid rounded-circle" id="n-pic">
+            <img src="data:pic/png;base64,<?=base64_encode($row_user["profile"]);?>" class="img-fluid rounded-circle" id="n-pic">
         </div>
         <!-- 此nickname的照片 -->
         <!-- nickname名稱 -->

@@ -1,5 +1,5 @@
 <?php 	session_start();
-		// $_SESSION['local'] = '../index/index.php';
+		$_SESSION['local'] = '../index/index.php';
 ?>
 <?php
 	$link = mysqli_connect("localhost","taigun","ELn3yv07F567MwOF","taigun");//連結伺服器//選擇資料庫
@@ -292,18 +292,18 @@
 			// 所有文章排序
 			else if($forum == 'all'){
 				if($latest == "true"){ 
-				$sql = "SELECT * FROM `article` ORDER BY `post_time` DESC";
+				$sql = "SELECT * FROM `article` JOIN `member` WHERE article.UId = member.UId ORDER BY `post_time` DESC";
 				}else if($hot == "true"){
-					$sql = "SELECT * FROM `article` ORDER BY `agree` DESC";
+					$sql = "SELECT * FROM `article` JOIN `member` WHERE article.UId = member.UId ORDER BY `agree` DESC";
 				}
 			}
 			// 看板裡的文章排序
 			else{
-				$sql = "SELECT * FROM `article` WHERE `category` = \"$forum\" ORDER BY `agree` DESC";
+				$sql = "SELECT * FROM `article` JOIN `member` WHERE article.UId = member.UId AND `category` = \"$forum\" ORDER BY `agree` DESC";
 				if( $latest == 'true'){
-					$sql = "SELECT * FROM `article` WHERE `category` = \"$forum\" ORDER BY `post_time` DESC";
+					$sql = "SELECT * FROM `article` JOIN `member` WHERE article.UId = member.UId AND `category` = \"$forum\" ORDER BY `post_time` DESC";
 				}else if( $hot == 'true'){
-					$sql = "SELECT * FROM `article` WHERE `category` = \"$forum\" ORDER BY `agree` DESC";
+					$sql = "SELECT * FROM `article` JOIN `member` WHERE article.UId = member.UId AND `category` = \"$forum\" ORDER BY `agree` DESC";
 				}
 			}
 
@@ -336,7 +336,7 @@
 							if($row['anonymous'] == 1){
 								echo '<a href="../index/index.php?page=nickname&uid='.$row['UId'].'">';	
 						?>
-							<img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic"></a>
+							<img src="data:pic/png;base64,<?=base64_encode($row["profile"]);?>" class="img-fluid rounded-circle" id="writer-pic"></a>
 						<?php
 							}else{ ?>
 								<img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic">
@@ -518,9 +518,12 @@
 			<!-- 登入了 -->
 			<?php // 登入後
 				if(isset($_SESSION['user'])){
+					$sql = "SELECT `profile` FROM `member` WHERE `Nickname` = '$_SESSION[nickname]'";
+					$result = mysqli_query($link,$sql);
+					$row = mysqli_fetch_assoc($result);
 			?>
 			<div>
-				<img src="./image/test-user.jpg" class="img-fluid rounded-circle" id="user-pic" alt="image" >
+				<img src="data:pic/png;base64,<?=base64_encode($row["profile"]);?>" class="img-fluid rounded-circle" id="user-pic" alt="image" >
 			</div>
 			<div>
 				<p id='user-name' class="font-weight-bold"><?php echo $_SESSION['user'];?></p>
@@ -595,20 +598,20 @@
 					<button type="button" class="btn col-md-6">
 						<!-- 沒有跳通知的是<img src='../index/image/bell.png' title="通知">
 							  有跳通知的是<img src='../index/image/bell-shake.gif' title="通知"> -->
-						<a href="?page=bell"  style="color:white;"><img src='../index/image/bell-shake.gif' title="通知"></a>
+						<a href="../index/index.php?page=bell"  style="color:white;"><img src='../index/image/bell.png' title="通知" id="notification"></a>
 					</button>
 				</div>
 				<div class="row">
 					<button type="button" class="btn col-md-6">
-						<a href="?page=test1"  style="color:white;"><img src='../index/image/test.png' title="心理測驗"></a>
+						<a href="../index/index.php?page=test1"  style="color:white;"><img src='../index/image/test.png' title="心理測驗"></a>
 					</button>
 					<button type="button" class="btn col-md-6">
-						<a href="?page=friend"  style="color:white;"><img src='../index/image/friend.png' title="好友列表"></a>
+						<a href="../index/index.php?page=friend"  style="color:white;"><img src='../index/image/friend.png' title="好友列表"></a>
 					</button>
 				</div>
 				<div class="row justify-content-center">
 					<button type="button" class="btn btn-light font-weight-bold col-md-10" style='margin-top:10px;'>
-						<p onclick="setStyleSheet()" style='font-size:12pt; margin:0px;'>管理員模式</p>
+						<p onclick="setStyleSheet();" style='font-size:12pt; margin:0px;'>管理員模式</p>
 					</button>
 				</div>
 			</div>
@@ -706,7 +709,28 @@
 				}
 			});
         });
-	
+
+		
+		$(function(){
+			setInterval(getalarm,100)
+		});
+
+		function getalarm (){
+			$.ajax({
+				type: 'POST',                     //GET or POST
+				url: "../index/notify.php",  //請求的頁面
+				cache: false,   //是否使用快取
+				dataType : 'json'
+			}).done(function(data) {
+				console.log(data);
+				if(data['success'] == "YES"){
+					$("#notification").attr("src","../index/image/bell-shake.gif");
+				}else if(data['success'] == "NO"){
+					$("#notification").attr("src","../index/image/bell.png");
+							
+				}
+			});
+		};
 	
 	</script>
 	

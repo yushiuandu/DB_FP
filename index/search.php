@@ -124,9 +124,9 @@
                 <!-- 文章 end-->
                
                 <!-- if 有搜尋結果 end-->
-                <?php }//end while ?>
-                     <a href="../index/index.php?page=search&search=article" style="text-decoration:none"><p class='ser-fot pointer'>查看更多</p></a>
-                <?php }//end if
+                <?php }//end while 
+                        // echo '<a href="../index/index.php?page=search&search=article" style="text-decoration:none"><p class="ser-fot pointer">查看更多</p></a>';
+                        }//end if num
                         // 沒有搜尋結果
                        else{
                             echo '<p class="no-result">沒有搜尋結果</p>';
@@ -185,7 +185,7 @@
                     
                     <?php
                                 }//end while
-                                echo '<a href="../index/index.php?page=search&search=forum" style="text-decoration:none"><p class="ser-fot pointer">查看更多</p></a>';
+                                // echo '<a href="../index/index.php?page=search&search=forum" style="text-decoration:none"><p class="ser-fot pointer">查看更多</p></a>';
                             }//end num if
                             // 沒有搜尋結果
                             else if((mysqli_num_rows($result)) == 0 ){?>
@@ -244,7 +244,7 @@
                     <!------------------------------------------------------------------->
                     <?php
                             }//end while
-                            echo '<a href="../index/index.php?page=search&search=nickname" style="text-decoration:none"><p class="ser-fot pointer">查看更多</p></a>';
+                            // echo '<a href="../index/index.php?page=search&search=nickname" style="text-decoration:none"><p class="ser-fot pointer">查看更多</p></a>';
                         }//end num if
                         else{
                             echo '<p class="no-result">沒有搜尋結果</p>';
@@ -303,7 +303,7 @@
                     <!------------------------------------------------------------------->
                     <?php
                             }//end while
-                            echo '<a href="../index/index.php?page=search&search=tag" style="text-decoration:none"><p class="ser-fot pointer">查看更多</p></a>';
+                            // echo '<a href="../index/index.php?page=search&search=tag" style="text-decoration:none"><p class="ser-fot pointer">查看更多</p></a>';
                         }//end num if
                         else{
                             echo '<p class="no-result">沒有搜尋結果</p>';

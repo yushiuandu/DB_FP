@@ -18,8 +18,8 @@
   <body>
     <div class='test'>
 		<?php 
-			$random = rand(1,25);
-			echo $random;
+			// $random = rand(1,25);
+			// echo $random;
 
 			$choice = array("A","B","C","D","E","F");
 
@@ -30,7 +30,7 @@
 		
 			$sql = "SELECT * 
 					FROM `test` AS T JOIN `ans` AS A 
-					WHERE T.testid = \"$random\" AND A.testid = \"$random\"";
+					WHERE T.testid = 25 AND A.testid = 25";
 
 			$result = mysqli_query($link,$sql);
 			$num =  mysqli_num_rows($result);

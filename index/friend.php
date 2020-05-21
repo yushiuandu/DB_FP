@@ -14,11 +14,11 @@
    
     if(isset($_GET['search'])){
         $key = $_POST['name'];
-        $sql = "SELECT M.Nickname as nickname, F.otherId as FId 
+        $sql = "SELECT M.Nickname as nickname, F.otherId as FId ,M.profile as profile
                 FROM `friend` AS F JOIN `member` AS M 
                 WHERE F.otherId = M.UId AND F.UId = \"$uid\" AND M.Nickname LIKE '%$key%'";
     }else{
-        $sql = "SELECT M.Nickname as nickname, F.otherId as FId 
+        $sql = "SELECT M.Nickname as nickname, F.otherId as FId ,M.profile as profile
                 FROM `friend` AS F JOIN `member` AS M 
                 WHERE F.otherId = M.UId AND F.UId = \"$uid\"";
     }
@@ -70,7 +70,7 @@
             
         <div class="col-md-3 friend">
             <a href="../index/index.php?page=chat&other=<?php echo $row['FId'];?>" style='color:black; text-decoration:none;'>
-                <img src='../index/image/test1.jpg' style='width:90%; background-size:contain; border-radius:999em;'>
+                <img src="data:pic/png;base64,<?=base64_encode($row['profile']);?>" style='width:90%; background-size:contain; border-radius:999em;'>
                 <p style="margin:20px; font-family:jf-openhuninn; "><?php echo $row['nickname'];?></p>
             </a>
         </div>

@@ -29,6 +29,15 @@
 			ORDER BY `sendtime` ASC";
 	$result = mysqli_query($link, $sql);
 
+
+	$sql_pic = "SELECT * FROM `member` WHERE `UId` = \"$other\"";
+	$result_pic = mysqli_query($link,$sql_pic);
+	$row_pic_other = mysqli_fetch_assoc($result_pic);
+
+	$sql_pic = "SELECT * FROM `member` WHERE `UId` = \"$uid\"";
+	$result_pic = mysqli_query($link,$sql_pic);
+	$row_pic = mysqli_fetch_assoc($result_pic);
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -45,38 +54,6 @@
 		<script src="//s3-ap-northeast-1.amazonaws.com/justfont-user-script/jf-60019.js"></script>
 		<script src="//s3-ap-northeast-1.amazonaws.com/justfont-user-script/jf-60019.js"></script>
 
-		<script type="text/javascript">
-			function showSite(str)
-			{
-				if (str=="")
-				{
-					document.getElementById("txtHint").innerHTML="";
-					return;
-				} 
-				if (window.XMLHttpRequest)
-				{
-					// IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
-					xmlhttp=new XMLHttpRequest();
-				}
-				else
-				{
-					// IE6, IE5 浏览器执行代码
-					xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-				}
-				xmlhttp.onreadystatechange=function()
-				{
-					if (xmlhttp.readyState==4 && xmlhttp.status==200)
-					{
-						document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
-					}
-				}
-				xmlhttp.open("GET","getsite_mysql.php?q="+str,true);
-				xmlhttp.send();
-			}
-
-
-		</script>
-
 	</head>
   <!-- 聊天室 -->
 	<body>
@@ -89,7 +66,7 @@
 
 				<div class="col-md-6">
 					<a href="../index/index.php?page=nickname&uid=<?php echo $other;?>">
-					<img src="../index/image/test1.jpg" class="img-fluid rounded-circle" id="chat-pic">   
+					<img src="data:pic/png;base64,<?=base64_encode($row_pic_other["profile"]);?>" class="img-fluid rounded-circle" id="chat-pic">   
 					</a>      
 				</div>
 			</div>
@@ -106,7 +83,7 @@
 			<!-- 對方的對話框 -->
 			<div style='text-align:left;'>
 				<!-- 對方頭貼 -->
-				<img src="../index/image/test2.jpg" class="img-fluid rounded-circle c-pic" >
+				<img src="data:pic/png;base64,<?=base64_encode($row_pic_other["profile"]);?>" class="img-fluid rounded-circle c-pic" >
 				
 				<!-- 對方的話 -->
 				<div class="talk">
@@ -124,7 +101,7 @@
 				<pre class='talk-word'><?php echo $row['chat']; ?></pre>
 				</div>
 			<!-- 自己的頭貼 -->
-				<img src="../index/image/test1.jpg" class="img-fluid rounded-circle c-pic" >
+				<img src="data:pic/png;base64,<?=base64_encode($row_pic["profile"]);?>" class="img-fluid rounded-circle c-pic" >
 			</div>
 			<!-- 自己對話框 end -->
 					<?php 		}//end else if

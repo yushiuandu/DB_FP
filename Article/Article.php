@@ -30,7 +30,7 @@
 	}
 
 	#顯示文章
-	$sql = "SELECT * FROM `article` WHERE `AId` = \"$aid\" ";
+	$sql = "SELECT * FROM `article` JOIN `member` WHERE `AId` = \"$aid\" AND article.UId = member.UId";
 	$result = mysqli_query($link,$sql);
 	if($result){
 		$rank = 0;
@@ -67,7 +67,12 @@
 		<div class="row article-head">
 			<!-- 作者(照片+名稱) -->
 			<div class="col-md-9 col-sm-8 col-6 mid">
+				<?php
+				if($row['anonymous']==0){?>
 				<img src="../index/image/user.png" class="img-fluid rounded-circle pic" >
+				<?php } else{?>
+					<img src="data:pic/png;base64,<?=base64_encode($row["profile"]);?>" class="img-fluid rounded-circle pic" >
+				<?php }?>
 				<p style="display: inline; font-size:3vmin; margin:0px 0px 0px 5px; font-family: setofont; font-weight:600">
 				<?php
 				if($row['anonymous']==0){
@@ -363,7 +368,7 @@
 			<!-- 圖片 end-->
 			<!-- 樓層 -->
 			<div class="col-md-2 col-sm-2 col-3 cir mid" style="text-align: center;">
-				<p style='margin:0px; font-size:12pt; font-weight:400;'> 1F </p>
+				<p style='margin:0px; font-size:12pt; font-weight:400;'> <?=$row_c['floor'];?>F </p>
 			</div>
 			<!-- 樓層 end-->
 			<!-- 留言區 -->

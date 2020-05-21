@@ -20,10 +20,10 @@
             $_SESSION['nickname'] = $row['Nickname'];
             header("Location:$_SESSION[local]");
         }else{
-            // echo '<script language="javascript">';
-            // echo 'alert("帳號或密碼輸入錯誤！");';
-            // echo "window.location.href='$_SESSION[local]'";
-            // echo '</script>';
+            echo '<script language="javascript">';
+            echo 'alert("帳號或密碼輸入錯誤！");';
+            echo "window.location.href='$_SESSION[local]'";
+            echo '</script>';
         }
     }
     
