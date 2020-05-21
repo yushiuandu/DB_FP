@@ -4,7 +4,7 @@
 	echo "no connect!";
 	}
 	
-	$is_oneself = 0; //本人看自己的網頁'0'。非本人看為'1'
+	$is_oneself = 2; //本人看自己的網頁'0'。非本人看為'1'，沒登入看
 
 	$nhot = 'true';
 	if(isset($_GET['nhot'])){
@@ -22,6 +22,7 @@
 		$nhot == 'true';
 	}
 	
+	$uid_current="guest";
 	
 	// 被看網頁的人
 	$uid = "";
@@ -33,21 +34,28 @@
 	include("../index/forum.php");
 	if(isset($_SESSION['nickname'])){
 		$uid_current = finduid($_SESSION['nickname']);
+	}else{
+		
 	}
 
-	// 如果不是從個人檔案點擊進去的話
+	// 如果不是從四個框框個人檔案點擊進去的話
 	if(isset($_GET['uid'])){
 		//為本人看自己的網頁的話
 		if($uid == $uid_current){ 
 			$uid = $uid_current;
-			$sql = "SELECT * FROM member WHERE UId = \"$uid\"";		
+			$sql = "SELECT * FROM member WHERE UId = \"$uid\"";	
+			$is_oneself = 0;	
 		}else{ //非本人看自己的網頁
 			$sql = "SELECT * FROM member WHERE UId = \"$uid\"";
-			$is_oneself = 1;
+			if(isset($_SESSION['nickname'])){
+				$is_oneself = 1;
+			}
+			
 		}
 	}else{
 		$uid = $uid_current;
 		$sql = "SELECT * FROM member WHERE UId = \"$uid\"";
+		$is_oneself = 0;
 	}
 
 	$result_user = mysqli_query($link, $sql);
@@ -113,10 +121,12 @@
 				if($num == 0){ //未追蹤
 		?>
 			<a href="../Article/follow.php?followuid=<?php echo $uid;?>"><button type="button" class="btn btn-info font-weight-bold" >追蹤</button></a>
-		<?php }else{?>
+		<?php }else {?>
 			<a href="../Article/follow.php?followuid=<?php echo $uid;?>"><button type="button" class="btn btn-info font-weight-bold" >✔已追蹤</button></a>
 		<?php			}
-				} ?>
+			} else{?>
+			請先登入以便使用追蹤功能
+		<?php	}?>
     </div>
     <!-- 此nickname資料框 end-->
 

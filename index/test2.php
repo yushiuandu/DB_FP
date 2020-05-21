@@ -17,61 +17,56 @@
   <!-- 心理測驗-2 -->
   <body>
     <div class='test'>
+		<?php 
+			$random = rand(1,25);
+			echo $random;
+
+			$choice = array("A","B","C","D","E","F");
+
+			$link = mysqli_connect("localhost","taigun","ELn3yv07F567MwOF","taigun");//連結伺服器//選擇資料庫
+			if(!$link){
+			echo "no connect!";
+			}
+		
+			$sql = "SELECT * 
+					FROM `test` AS T JOIN `ans` AS A 
+					WHERE T.testid = \"$random\" AND A.testid = \"$random\"";
+
+			$result = mysqli_query($link,$sql);
+			$num =  mysqli_num_rows($result);
+			echo $num;
+			$row = mysqli_fetch_assoc($result);
+		?>
+
 		<div class='question mid'>
 			<!-- 第18題 -->
-			<p class='test2-ww'>你平常喜歡說句什麼習慣用語嗎？從你的口頭語上可以了解到你是個怎樣的人來哦！你想知道嗎，快來測測吧！</p>
+			<p class='test2-ww'><?=$row['title'];?></p>
 			<div class='choose'>
 				<div class="form-group">
-					<select class="form-control form-control-sm">
-						<option>你的選擇?</option>
-						<option>A</option>
-						<option>B</option>
-						<option>C</option>
-						<option>D</option>
-						<option>E</option>
-						<option>F</option>
-					</select>
-					<button type="submit" class="btn btn-secondary btn-sm choice">
-						<a href='../index/index.php?page=test-result' class='link-ww'>送出</a>
-					</button>
+					<form action="../index/index.php?page=test-result&tid=<?=$row['testid'];?>" method="post">
+						<select class="form-control form-control-sm" id="choice" name="choice" required>
+							<option selected disabled>你的選擇?</option>
+							<?php for($i = 0; $i < $num ; $i++ ){
+								echo '<option value="'.($i+1).'">'.$choice[$i].'</option>';}
+							?>
+						</select>
+						<button type="submit" class="btn btn-secondary btn-sm choice">送出</button>
+					</form>
 				</div>
 			</div>
 		</div>
 		<div class='row justify-content-center'>
-			<div class="col-md-6">
-				<div class='op mid a'>
-					<p class='test2-ww'>說真的，老實說，的確，不騙你</p>
+			<?php
+				for($i = 0; $i < $num ; $i++){ ?>
+				<div class="col-md-6">
+					<div class='op mid <?=$choice[$i]?>'>
+						<p class='test2-ww'><?=$row['choice'];?></p>
+					</div>
 				</div>
-			</div>
-			<div class="col-md-6">
-				<div class='op mid b'>
-					<p class='test2-ww'>應該，必須，必定會，一定要</p>
-				</div>
-			</div>
-		</div>
-		<div class='row justify-content-center'>
-			<div class="col-md-6">
-				<div class='op mid c'>
-					<p class='test2-ww'>聽說，據說，聽人講</p>
-				</div>
-			</div>
-			<div class="col-md-6">
-				<div class='op mid d'>
-					<p class='test2-ww'>可能是吧，或許是吧，大概是吧</p>
-				</div>
-			</div>
-		</div>
-		<div class='row justify-content-center'>
-			<div class="col-md-6">
-				<div class='op mid e'>
-					<p class='test2-ww'>但是，不過</p>
-				</div>
-			</div>
-			<div class="col-md-6">
-				<div class='op mid f'>
-					<p class='test2-ww'>啊，呀，這，這個，嗯</p>
-				</div>
-			</div>
+
+			<?php
+				$row = mysqli_fetch_assoc($result);} 
+			?>
 		</div>
     </div>
 	

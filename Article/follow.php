@@ -10,17 +10,39 @@
 	}
 	date_default_timezone_set('Asia/Taipei');
     $datetime = date ("Y-m-d H:i:s" , mktime(date('H'), date('i'), date('s'), date('m'), date('d'), date('Y'))) ;
-?>
 
-<?php 
 	$aid = ''; $follow ="";
 
 	if(isset($_GET['aid'])){
-        $aid = $_GET['aid'];
+		$aid = $_GET['aid'];
+		$sql = "SELECT * FROM `follow` WHERE `AId` = \"$aid\" AND `UId` = \"$uid\"";
+		$result = mysqli_query($link, $sql);
+		$num = mysqli_num_rows($result);
+
+		if($num == 0){
+			$sql = "INSERT INTO `follow` (`UId`,`AId`,`follow_time`) VALUES ('$uid', '$aid', '$datetime')";
+		}else{
+			$sql = "DELETE FROM `follow` WHERE `UId` = '$uid' AND `AId` = '$aid'";
+		}
+
+		if(mysqli_query($link,$sql)){
+			if($_POST['type'] == 'ajax'){
+				if($num == 0){
+					exit(json_encode(array("success"=>"OK")));
+				}else{
+					exit(json_encode(array("success"=>"DEL_OK")));
+				}
+			}else{
+				echo 'success';
+				header("Location:../index/index.php?page=article&aid=$aid"); 
+				exit;
+				echo 'failQQ';
+			}
+		}else{
+			echo 'failQQ';
+		}
     }
-	if(isset($_GET['follow'])){
-        $follow = $_GET['follow'];
-	}
+	
 
 	// 追蹤看板
 	if(isset($_GET['forum'])){
@@ -34,15 +56,25 @@
 		}else{
 			$sql = "INSERT INTO `follow` (`UId`,`Category`,`follow_time`) VALUES ('$uid', '$forum', '$datetime')";
 		}
+
 		if(mysqli_query($link,$sql)){
-			echo 'success';
-			header("Location:../index/index.php?page=index&id=$forum"); 
-			exit;
+			if($_POST['type'] == 'ajax'){
+				if($num == 0){
+					exit(json_encode(array("success"=>"OK")));
+				}else{
+					exit(json_encode(array("success"=>"DEL_OK")));
+				}
+			}else{
+				echo 'success';
+				header("Location:../index/index.php?page=index&id=$forum"); 
+				exit;
+				echo 'failQQ';
+			}
 		}else{
 			echo 'failQQ';
 		}
-
 	}
+
 
 	if(isset($_GET['followuid'])){
 		$follow_uid = $_GET['followuid'];
@@ -68,9 +100,18 @@
 
 		if(mysqli_query($link,$sql)){
 			mysqli_query($link,$sql_num);
-			echo 'success';
-			header("Location:../index/index.php?page=nickname&uid=$follow_uid"); 
-			exit;
+			if($_POST['type'] == 'ajax'){
+				if($num == 0){
+					exit(json_encode(array("success"=>"OK")));
+				}else{
+					exit(json_encode(array("success"=>"DEL_OK")));
+				}
+			}else{
+				echo 'success';
+				header("Location:../index/index.php?page=nickname&uid=$follow_uid"); 
+				exit;
+				echo 'failQQ';
+			}
 		}else{
 			echo 'failQQ';
 		}
@@ -88,9 +129,18 @@
 			$sql = "INSERT INTO `follow` (`UId`,`Tag`,`follow_time`) VALUES ('$uid', '$tag', '$datetime')";
 		}
 		if(mysqli_query($link,$sql)){
-			echo 'success';
-			header("Location:../index/index.php?page=tag&tag=$tag"); 
-			exit;
+			if($_POST['type'] == 'ajax'){
+				if($num == 0){
+					exit(json_encode(array("success"=>"OK")));
+				}else{
+					exit(json_encode(array("success"=>"DEL_OK")));
+				}
+			}else{
+				echo 'success';
+				header("Location:../index/index.php?page=article&aid=$aid"); 
+				exit;
+				echo 'failQQ';
+			}
 		}else{
 			echo 'failQQ';
 		}
@@ -99,17 +149,29 @@
 	if($follow == 0){
 		$sql = "INSERT INTO `follow` (`UId`,`AId`,`follow_time`) VALUES ('$uid', '$aid', '$datetime')";
 		if(mysqli_query($link,$sql)){
-			echo 'success';
-			header("Location:../index/index.php?page=article&aid=$aid"); 
-			exit;
+			if($_POST['type'] == 'ajax'){
+				exit(json_encode(array("success"=>"OK")));
+			}
+				
+			else{
+				echo 'success';
+				header("Location:../index/index.php?page=article&aid=$aid"); 
+				exit;
+				echo 'failQQ';
+			}
 		}else{
 			echo 'failQQ';
 		}
 	}else{
 		$sql = "DELETE FROM `follow` WHERE `UId` = '$uid' AND `AId` = '$aid'";
 		if(mysqli_query($link,$sql)){
-			echo 'success';
-			header("Location:../index/index.php?page=article&aid=$aid"); 
+			if($_POST['type'] == 'ajax'){
+				exit(json_encode(array("success"=>"DEL_OK")));
+			}else{
+				echo 'success';
+				header("Location:../index/index.php?page=article&aid=$aid"); 
+			}
+
 			exit;
 		}else{
 			echo 'failQQ';
