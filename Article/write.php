@@ -85,12 +85,27 @@
 			</div>
 		</div>
 
-		<!-- <div class="form-group row">
+		<div class="form-group row">
 			<label class="col-sm-3 col-form-label">傳送圖檔</label>
 			<div class="col-sm-9">
-			<input Type="File" Name="YouFile">
+				<label>
+					<img src='../index/image/add-image.png' class='write-pic'>
+					<span id="file_name"></span>
+					<input Type="File" Name="YouFile" class='write-file pointer' id='FileInput'>
+				</label>
 			</div>
-		</div> -->
+		</div>
+		<div class="from-group row">
+			<label class='col-sm-3 col-form-label'> tag</label>
+			<div class='col-sm-6' id="add">
+				<input type='text' name='tag' class='add-input'>
+				
+				<label>
+					<img src='../index/image/plus.png' class='tag-pic'>
+					<input name="tag" type="button" value="文本框" onClick="AddElement('text')" class='add-tag'/>
+				</label>
+			</div>
+		</div>
 		
 		
 		<div class='right'>
@@ -99,7 +114,38 @@
 
 		</form>
 	</div>
-		
+	
+	<!-- 抓圖檔的資訊 -->
+	<script>
+		var inputFile = document.getElementById('FileInput');
+
+		inputFile.addEventListener('change', function(e) {
+
+	  		var fileData = e.target.files[0]; // 檔案資訊
+	  		var fileName = fileData.name; // 檔案名稱
+
+			console.log(fileData); // 用開發人員工具可看到資料
+
+			document.getElementById('file_name').innerText = fileName;
+			document.getElementById('file_thumbnail').src = URL.createObjectURL(fileData);
+		}, false);
+	</script>
+	<!-- 抓圖檔的資訊end -->
+
+	<!-- 動態加input -->
+	<script> 
+		function AddElement(mytype){ 
+			var mytype,TemO=document.getElementById("add"); 
+			var newInput = document.createElement("input");  
+			newInput.type=mytype;  
+			newInput.name="tag"; 
+			newInput.className="add-input"; //class
+			TemO.appendChild(newInput); //將元素追加到某個標籤内容中
+			var newline= document.createElement("br"); //建一个BR為了換行 
+			TemO.appendChild(newline); 
+		} 
+	</script>
+	<!-- 動態加input end-->
 		
 		<!-- Optional JavaScript -->
 		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
