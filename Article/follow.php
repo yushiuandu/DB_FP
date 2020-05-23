@@ -75,7 +75,7 @@
 		}
 	}
 
-
+	// 追蹤人
 	if(isset($_GET['followuid'])){
 		$follow_uid = $_GET['followuid'];
 
@@ -102,9 +102,9 @@
 			mysqli_query($link,$sql_num);
 			if($_POST['type'] == 'ajax'){
 				if($num == 0){
-					exit(json_encode(array("success"=>"OK")));
+					exit(json_encode(array("success"=>"OK","fans_num"=>$fans_num)));
 				}else{
-					exit(json_encode(array("success"=>"DEL_OK")));
+					exit(json_encode(array("success"=>"DEL_OK","fans_num"=>$fans_num)));
 				}
 			}else{
 				echo 'success';
