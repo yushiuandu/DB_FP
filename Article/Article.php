@@ -195,12 +195,12 @@
 					//	$num - mysqli_num_rows($result_save);
 							
 					//	if($num>0){
-							// 已追蹤
+							// 已收藏
 					//		echo '<a href ="../Article/save.php?aid='.$row['AId'].'&save=1">';
 					//		echo '<img class="pointer gbb"  src="../index/image/bookmark-black.png" title="追蹤"></a>';
 
 					//	}else{
-							// 未追蹤
+							// 未收藏
 					//		echo '<a href ="../Article/save.php?aid='.$row['AId'].'&save=0">';
 					//		echo '<img class="pointer gbb"  src="../index/image/bookmark-white.png" title="追蹤"></a>';
 						}
@@ -242,7 +242,9 @@
 		<!-- 文章內容(下) end-->
 	</div>
 	<!-- article end -->
-				<?php// } //end if ?>
+				<?php 
+			// }
+			?>
 	<!-- 熱門留言區 -->
 	<?php 
 		
@@ -583,6 +585,7 @@
   			$(".dropdown-toggle").dropdown();
 		});
 
+		// 追蹤ajax
 		$(".follow_bell").click(function(){
 			var url = $(this).data("url");
 			var eq = $(".follow_bell").index($(this));

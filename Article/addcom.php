@@ -18,19 +18,25 @@
 		}
 	}else{
 
-    // 先找出UID
-    $sql = "SELECT `UId` FROM `member` WHERE `Nickname` = \"$_SESSION[nickname]\"";
-    $result = mysqli_query($link,$sql);
-    $row = mysqli_fetch_assoc($result);
-    $UId = $row['UId'];
-    
+    // 先找出輸入留言者的UID
+    include("../index/forum.php");
+    if($_SESSION['nickname']){
+        $uid = finduid($_SESSION['nickname']);
+    }
+
+    // 取得變數
     date_default_timezone_set('Asia/Taipei');
     $datetime = date ("Y-m-d H:i:s" , mktime(date('H'), date('i'), date('s'), date('m'), date('d'), date('Y'))) ;
     $content = $_POST["content"];
     $anonymous = $_POST["anonymous"];
     $aid = $_SESSION["aid"];
 
-
+    // 找出作者
+    $sql = "SELECT `UId` FROM `article` WHERE `AId` = '$aid'";
+    $result = mysqli_query($link,$sql);
+    $row = mysqli_fetch_array($result); 
+    $author = $row['UId'];
+    
     $sql = "SELECT max(floor) FROM `comment` WHERE `AId` = \"$aid\"";
     $result = mysqli_query($link,$sql);
     $row = mysqli_fetch_array($result); 
@@ -42,7 +48,11 @@
     if (!mysqli_query($link,$sql))
     {die('Error: ' . mysqli_error());}
     else{
-    header("Location:../index/index.php?page=article&aid=$aid"); 
+        $content = "你的貼文有人來留言拉，趕快去看看吧！！";
+        $sql = "INSERT INTO `notification`(`UId`,`AId`,`content`,`is_read`) VALUES ('$author', '$aid','$content', 0)";
+        mysqli_query($link,$sql);
+        
+        header("Location:../index/index.php?page=article&aid=$aid"); 
     exit;
     }}
 ?>

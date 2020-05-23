@@ -711,26 +711,26 @@
         });
 
 		
-		$(function(){
-			setInterval(getalarm,100)
-		});
+		// $(function(){
+		// 	setInterval(getalarm,100)
+		// });
 
-		function getalarm (){
-			$.ajax({
-				type: 'POST',                     //GET or POST
-				url: "../index/notify.php",  //請求的頁面
-				cache: false,   //是否使用快取
-				dataType : 'json'
-			}).done(function(data) {
-				console.log(data);
-				if(data['success'] == "YES"){
-					$("#notification").attr("src","../index/image/bell-shake.gif");
-				}else if(data['success'] == "NO"){
-					$("#notification").attr("src","../index/image/bell.png");
+		// function getalarm (){
+		// 	$.ajax({
+		// 		type: 'POST',                     //GET or POST
+		// 		url: "../index/notify.php",  //請求的頁面
+		// 		cache: false,   //是否使用快取
+		// 		dataType : 'json'
+		// 	}).done(function(data) {
+		// 		console.log(data);
+		// 		if(data['success'] == "YES"){
+		// 			$("#notification").attr("src","../index/image/bell-shake.gif");
+		// 		}else if(data['success'] == "NO"){
+		// 			$("#notification").attr("src","../index/image/bell.png");
 							
-				}
-			});
-		};
+		// 		}
+		// 	});
+		// };
 	
 	</script>
 	
