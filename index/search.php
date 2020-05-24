@@ -217,7 +217,7 @@
                                 while($row = mysqli_fetch_assoc($result)){
                     ?>
                     <!-- 一個暱稱 -->
-                    <div class='row justify-content-start art2 pointer' onclick="location.href='../index/index.php>page=nickname&uid=<?=$row['UId'];?>'">
+                    <div class='row justify-content-start art2 pointer' onclick="location.href='../index/index.php?page=nickname&uid=<?=$row['UId'];?>'">
                         <div class="col-md-8">
                             <p class='ser-ww'><?=$row['Nickname'];?></p>
                         </div>

@@ -107,7 +107,7 @@
         <p style='margin-bottom:0px; font-size:16pt; font-weight:600;'><?php echo $row_user['Nickname'];?></p>
 
         <!-- nickname的文章列表 & 追蹤人數 -->
-        <p style='margin-bottom:5px; color:white;'><?php echo $num_a;?> 篇文章 - <?php echo $row_user['Fans_num'];?> 人追蹤 - 追蹤人數 <?php echo $num_f;?></p>
+        <p style='margin-bottom:5px; color:white;'><?php echo $num_a;?> 篇文章 - <span class="num"><?php echo $row_user['Fans_num'];?> </span>人追蹤 - 追蹤人數 <?php echo $num_f;?></p>
 		
 		<!-- 如果是本人使用自己的nickname頁面 -->
 		<?php  if($is_oneself == 0){ ?>
@@ -120,9 +120,9 @@
 				$num = mysqli_num_rows($result);
 				if($num == 0){ //未追蹤
 		?>
-			<a href="../Article/follow.php?followuid=<?php echo $uid;?>"><button type="button" class="btn btn-info font-weight-bold" >追蹤</button></a>
+			<button type="button" class="btn btn-info font-weight-bold follow_nickname" >追蹤</button>
 		<?php }else {?>
-			<a href="../Article/follow.php?followuid=<?php echo $uid;?>"><button type="button" class="btn btn-info font-weight-bold" >✔已追蹤</button></a>
+			<button type="button" class="btn btn-info font-weight-bold follow_nickname" >✔已追蹤</button>
 		<?php			}
 			} else{?>
 			請先登入以便使用追蹤功能
@@ -230,7 +230,33 @@
 		<!-- 文章簡圖區 end-->
     </div>
 
+	<script>
+		$(".follow_nickname").click(function(){
+            var nickname = $(".follow_nickname").index($(this));
+
+            console.log(nickname);
+            $.ajax({
+                type: 'POST',
+				url: "../Article/follow.php?followuid=<?=$uid;?>",
+				data: {type : "ajax"},
+				dataType :"json"
+            }).done(function(data) {
+				console.log(data);
+				if(data['success'] == "OK"){
+						var num = data['fans_num'];
+						$(".follow_nickname").eq(nickname).html("✔已追蹤");
+						$(".num").html(num);
+						console.log(nickname);
+					}else if(data['success'] == "DEL_OK"){
+						var num = data['fans_num'];
+						$(".follow_nickname").eq(nickname).html("追蹤");
+						$(".num").html(num);
+						// console.log("white");
+					}
+			});
+        });
 	
+	</script>
 	
 	
     <!-- Optional JavaScript -->
