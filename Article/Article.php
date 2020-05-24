@@ -64,15 +64,17 @@
 	<!-- 文章 -->
     <div class="article">
         <!-- 文章內容(上) -->
-		<div class="row article-head">
+		<div class="row article-head justify-content-start">
 			<!-- 作者(照片+名稱) -->
 			<div class="col-md-9 col-sm-8 col-6 mid">
-				<?php
-				if($row['anonymous']==0){?>
-				<img src="../index/image/user.png" class="img-fluid rounded-circle pic" >
-				<?php } else{?>
-					<img src="data:pic/png;base64,<?=base64_encode($row["profile"]);?>" class="img-fluid rounded-circle pic" >
-				<?php }?>
+				<div class='pic-con'>
+					<?php
+					if($row['anonymous']==0){?>
+						<img src="../index/image/user.png" class="pic" >
+					<?php } else{?>
+						<img src="data:pic/png;base64,<?=base64_encode($row["profile"]);?>" class="pic" >
+					<?php }?>
+				</div>
 				<p style="display: inline; font-size:3vmin; margin:0px 0px 0px 5px; font-family: setofont; font-weight:600">
 				<?php
 				if($row['anonymous']==0){

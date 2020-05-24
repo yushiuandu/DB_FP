@@ -95,14 +95,18 @@
                 <div class="art2 pointer" onclick="location.href='../index/index.php?page=article&aid=<?=$row['AId'];?>'">
                     <div class="row art-head justify-content-start">
                         <!-- 作者-->
-                        <div class="col-md-10 col-sm-9 col-9">
+                        <div class="col-md-10 col-sm-9 col-9 mid" style='padding:0px;'>
                             <?php if($row['anonymous'] == 1){?>
                                 <!-- 作者頭像 -->
-                                <a href="../index/index.php?page=nickname&uid=<?=$row["UId"];?>"><img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic"></a>
+                                <div class='pic-container'>
+                                    <a href="../index/index.php?page=nickname&uid=<?=$row["UId"];?>"><img src="../index/image/user.png" id="writer-pic"></a>
+                                </div>
                                 <!-- 作者名稱 -->
                                 <p style="display: inline; font-size:2vmin; margin:0px;"><?=$row["post_name"];?></p>
                             <?php }else if ($row['anonymous'] == 0){?>
-                                <img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic">
+                                <div class='pic-container'>
+                                    <img src="../index/image/user.png" id="writer-pic">
+                                </div>
                                 <p style="display: inline; font-size:2vmin; margin:0px;">匿名</p>
                             <?php }?>
                         </div>
@@ -352,19 +356,23 @@
                 <div class="art2 pointer" onclick="location.href='../index/index.php?page=article&aid=<?=$row['AId'];?>'" >
                     <div class="row art-head justify-content-start">
                         <!-- 作者-->
-                        <div class="col-md-10 col-sm-9 col-9">
+                        <div class="col-md-10 col-sm-9 col-9 mid" style='padding:0px;'>
                             <!-- 匿名 -->
                             <?php if($row['anonymous'] == 0){?>
                                 <!-- 作者頭像 -->
-                                <img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic">
+                                <div class='pic-container'>
+                                    <img src="../index/image/user.png" id="writer-pic">
+                                </div>
                                 <!-- 作者名稱 -->
                                 <p style="display: inline; font-size:2vmin; margin:0px;">匿名</p>
 
                             <!-- 不匿名 -->
                             <?php }else if($row['anonymous'] == 1){ ?>
                                 <!-- 作者頭像 -->
-                                <a href="../index/index.php?page=nickname&uid=<?php echo $row['UId'];?>" >
-                                <img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic"></a>
+                                <div class='pic-container'>
+                                    <a href="../index/index.php?page=nickname&uid=<?php echo $row['UId'];?>" >
+                                    <img src="../index/image/user.png" id="writer-pic"></a>
+                                </div>
                                 <!-- 作者名稱 -->
                                 <p style="display: inline; font-size:2vmin; margin:0px;"><?php echo $row['post_name'];?></p>
                             <?php } ?>

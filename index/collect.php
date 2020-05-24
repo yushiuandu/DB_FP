@@ -67,9 +67,11 @@
                     <!-- 文章(上) -->
                     <div class="row art-head mid">
                         <!-- 作者-->
-                        <div class="col-md-10 col-sm-9 col-9">
-                            <!-- 作者頭像 -->
-                            <img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic"></a>
+                        <div class="col-md-10 col-sm-9 col-9 mid" style='padding:0px;'>
+                            <div class='pic-container'>
+                                <!-- 作者頭像 -->
+                                <img src="../index/image/user.png" id="writer-pic"></a>
+                            </div>
                             <!-- 作者名稱 -->
                             <p style="display: inline; font-size:2vmin; margin:0px;">匿名</p>
                         </div>
@@ -99,9 +101,11 @@
                     <!-- 文章(上) -->
                     <div class="row art-head mid">
                         <!-- 作者-->
-                        <div class="col-md-10 col-sm-9 col-9">
-                            <!-- 作者頭像 -->
-                            <img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic"></a>
+                        <div class="col-md-10 col-sm-9 col-9 mid" style='padding:0px;'>
+                            <div class='pic-container'>
+                                <!-- 作者頭像 -->
+                                <img src="../index/image/user.png" id="writer-pic"></a>
+                            </div>
                             <!-- 作者名稱 -->
                             <p style="display: inline; font-size:2vmin; margin:0px;">匿名</p>
                         </div>
@@ -132,9 +136,11 @@
                     <!-- 文章(上) -->
                     <div class="row art-head mid">
                         <!-- 作者-->
-                        <div class="col-md-10 col-sm-9 col-9">
-                            <!-- 作者頭像 -->
-                            <img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic"></a>
+                        <div class="col-md-10 col-sm-9 col-9 mid" style='padding:0px;'>
+                            <div class='pic-container'>
+                                <!-- 作者頭像 -->
+                                <img src="../index/image/user.png" id="writer-pic"></a>
+                            </div>
                             <!-- 作者名稱 -->
                             <p style="display: inline; font-size:2vmin; margin:0px;">匿名</p>
                         </div>
@@ -177,9 +183,11 @@
                     <!-- 文章(上) -->
                     <div class="row art-head mid">
                         <!-- 作者-->
-                        <div class="col-md-10 col-sm-9 col-9">
-                            <!-- 作者頭像 -->
-                            <img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic"></a>
+                        <div class="col-md-10 col-sm-9 col-9 mid" style='padding:0px;'>
+                            <div class='pic-container'>
+                                <!-- 作者頭像 -->
+                                <img src="../index/image/user.png" id="writer-pic"></a>
+                            </div>
                             <!-- 作者名稱 -->
                             <p style="display: inline; font-size:2vmin; margin:0px;">匿名</p>
                         </div>
@@ -209,9 +217,11 @@
                     <!-- 文章(上) -->
                     <div class="row art-head mid">
                         <!-- 作者-->
-                        <div class="col-md-10 col-sm-9 col-9">
-                            <!-- 作者頭像 -->
-                            <img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic"></a>
+                        <div class="col-md-10 col-sm-9 col-9 mid" style='padding:0px;'>
+                            <div class='pic-container'>
+                                <!-- 作者頭像 -->
+                                <img src="../index/image/user.png" id="writer-pic"></a>
+                            </div>
                             <!-- 作者名稱 -->
                             <p style="display: inline; font-size:2vmin; margin:0px;">匿名</p>
                         </div>
@@ -251,9 +261,11 @@
                     <!-- 文章(上) -->
                     <div class="row art-head mid">
                         <!-- 作者-->
-                        <div class="col-md-10 col-sm-9 col-9">
-                            <!-- 作者頭像 -->
-                            <img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic"></a>
+                        <div class="col-md-10 col-sm-9 col-9 mid" style='padding:0px;'>
+                            <div class='pic-container'>
+                                <!-- 作者頭像 -->
+                                <img src="../index/image/user.png" id="writer-pic"></a>
+                            </div>
                             <!-- 作者名稱 -->
                             <p style="display: inline; font-size:2vmin; margin:0px;">匿名</p>
                         </div>
@@ -283,9 +295,11 @@
                     <!-- 文章(上) -->
                     <div class="row art-head mid">
                         <!-- 作者-->
-                        <div class="col-md-10 col-sm-9 col-9">
-                            <!-- 作者頭像 -->
-                            <img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic"></a>
+                        <div class="col-md-10 col-sm-9 col-9 mid" style='padding:0px;'>
+                            <div class='pic-container'>
+                                <!-- 作者頭像 -->
+                                <img src="../index/image/user.png" id="writer-pic"></a>
+                            </div>
                             <!-- 作者名稱 -->
                             <p style="display: inline; font-size:2vmin; margin:0px;">匿名</p>
                         </div>

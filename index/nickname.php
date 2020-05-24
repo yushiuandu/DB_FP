@@ -99,8 +99,8 @@
 	<!-- 此nickname資料框 -->
     <div class="nickname">
         <!-- 此nickname的照片 -->
-        <div>
-            <img src="data:pic/png;base64,<?=base64_encode($row_user["profile"]);?>" class="img-fluid rounded-circle" id="n-pic">
+        <div class='n-pic-con'>
+            <img src="data:pic/png;base64,<?=base64_encode($row_user["profile"]);?>" id="n-pic">
         </div>
         <!-- 此nickname的照片 -->
         <!-- nickname名稱 -->
@@ -177,8 +177,10 @@
 			<a href="../index/index.php?page=article&aid=<?php echo $row['AId']; ?>" style="color:black; text-decoration:none;">
 			<div class="row art-head mid">
 				<!-- 作者-->
-				<div class="col-md-10 col-sm-9 col-9">
-					<img src="./image/user.png" class="img-fluid rounded-circle" id="writer-pic">
+				<div class="col-md-10 col-sm-9 col-9 mid" style='padding:0px;'>
+					<div class='pic-container'>
+						<img src="./image/user.png" id="writer-pic">
+					</div>
 					<p style="display: inline; font-size:2vmin; margin:0px;"><?php echo $row['post_name'];?></p>
 				</div>
                 <!-- 作者 end-->

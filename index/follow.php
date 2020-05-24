@@ -52,18 +52,20 @@
                     <!-- 文章(上) -->
                     <div class="row art-head mid">
                         <!-- 作者-->
-                        <div class="col-md-10 col-sm-9 col-9">
-                            <?php 
-                                if($row_follow['anonymous'] == 1){
-                                    echo '<a href="../index/index.php?page=nickname&uid='.$row_follow['UId'].'">';	
-                            ?>
-                                <img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic"></a>
-                            <?php
-                                }else{ ?>
-                                    <img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic">
-                            <?php	}//end else
-                            ?>
-                            <!-- 作者頭像 -->
+                        <div class="col-md-10 col-sm-9 col-9 mid" style='padding:0px;'>
+                            <div class='pic-container'>
+                                <?php 
+                                    if($row_follow['anonymous'] == 1){
+                                        echo '<a href="../index/index.php?page=nickname&uid='.$row_follow['UId'].'">';	
+                                ?>
+                                    <img src="../index/image/user.png" id="writer-pic"></a>
+                                <?php
+                                    }else{ ?>
+                                        <img src="../index/image/user.png" id="writer-pic">
+                                <?php	}//end else
+                                ?>
+                                <!-- 作者頭像 -->
+                            </div>
                             <!-- <img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic"></a> -->
                             <!-- 作者名稱 -->
                             <p style="display: inline; font-size:2vmin; margin:0px;">
