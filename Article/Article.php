@@ -10,6 +10,11 @@
 		echo "no connect!";
 	}
 
+	if(isset($_GET['NId'])){
+        $sql = "UPDATE `notification` SET `is_read` = 1 WHERE `NId` = '$_GET[NId]'";
+        mysqli_query($link,$sql);
+    }
+
 	#找到UId
 	include("../index/forum.php");
 	$uid = "";
@@ -628,12 +633,12 @@
             }).done(function(data) {
 				console.log(data);
 				if(data['success'] == "OK"){
-
+					var like = data['likecount'];
 					$(".good").eq(good).attr("src","../index/image/good-black.png");
 					console.log(good);
 					// console.log(good_c);
 				}else if(data['success'] == "DEL_OK"){
-
+					var like = data['likecount'];
 					// $(".Count").eq(count).html('0');
 					$(".good").eq(good).attr("src","../index/image/good-white.png");
 						// console.log("white");

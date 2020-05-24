@@ -101,7 +101,17 @@
 		if(mysqli_query($link,$sql)){
 			mysqli_query($link,$sql_num);
 			if($_POST['type'] == 'ajax'){
+
 				if($num == 0){
+					$content = "有<p style='margin:0px; font-weight:700;'>新的追隨者</p>開始追蹤你了！看來你的風格很受歡迎喔！";
+					$sql = "SELECT * FROM `notification` WHERE `UId` = '$follow_uid' AND `is_read` = 0 AND `type` = 1";
+					$result = mysqli_query($link,$sql);
+					$num_r = mysqli_num_rows($result);
+					if($num_r == 0){
+						$sql = "INSERT INTO `notification` (`UId`,`content`,`type`) values('$follow_uid','$content',1)";
+						mysqli_query($link,$sql);
+					}
+					
 					exit(json_encode(array("success"=>"OK","fans_num"=>$fans_num)));
 				}else{
 					exit(json_encode(array("success"=>"DEL_OK","fans_num"=>$fans_num)));
