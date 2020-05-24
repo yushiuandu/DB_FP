@@ -67,11 +67,15 @@ body{
   width:70%;
   height: auto;
 } /* 文章簡圖區的圖 */
-#writer-pic{
-  width: auto;
+.pic-container{
+  width: 30px;
   height: 30px;
-  border: 2px solid gray;
-  margin: 1px;
+  position: relative;
+}
+#writer-pic{
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: fill;
 } /* 文章簡圖區作者頭像 */
 #good-pic{
   width: auto;
@@ -242,6 +246,12 @@ label{
 #user-nickname{
   font-size:16px;
   margin:-5px 0px 5px 0px;
+}
+.name{
+  display: inline;
+  font-size:2vmin;
+  margin:0px;
+  float: left;
 }
 #other-page{
   display:inline-block;
