@@ -14,16 +14,19 @@
 
     // 留言按讚
     if(isset($_GET['cid'])){
+        $aid = $_SESSION['aid'];
         $cid = $_GET['cid'];
+
         $sql = "SELECT * FROM `good` WHERE `UId` = \"$uid\" AND `CId` = \"$cid\"";
         $result = mysqli_query($link,$sql);
         $num = mysqli_num_rows($result);
 
         // 取得按讚數
-        $sql_num = "SELECT `likeCount` FROM `comment` WHERE `CId` ='$cid'";
+        $sql_num = "SELECT * FROM `comment` WHERE `CId` ='$cid'";
         $result_num = mysqli_query($link,$sql_num);
         $row = mysqli_fetch_assoc($result_num);
         $agree = $row['likeCount'];
+        $author = $row["UId"];
 
         // 沒有按讚
         if($num == 0){
@@ -35,16 +38,27 @@
         if(mysqli_query($link,$sql)){
             if($_POST['type'] == 'ajax'){
                 if($num == 0){
+
+                    $sql = "SELECT * FROM `notification` WHERE `CId` = '$cid' AND `is_read` = 0 AND `type` = 7";
+					$result = mysqli_query($link,$sql);
+                    $num_r = mysqli_num_rows($result);
+                    
+					if($num_r == 0){
+                    
+                    $content = "你在「<b>".$row['title']."</b>」的留言有人來按讚囉";
+                    $sql = "INSERT INTO `notification` (`UId`,`AId`,`CId`,`content`,`type`) values('$uid','$author','$cid','$content',7)";
+                    mysqli_query($link,$sql);}
+
                     $agree = $agree + 1;
                     $sql = "UPDATE `comment` SET `likeCount` = '$agree' WHERE `CId` = '$cid'";
                     mysqli_query($link,$sql);
-                    exit(json_encode(array("success"=>"OK")));
+                    exit(json_encode(array("success"=>"OK","likecount"=>$agree)));
                 }
                 else{
                     $agree = $agree - 1;
                     $sql = "UPDATE `comment` SET `likeCount` = '$agree' WHERE `CId` = '$cid'";
                     mysqli_query($link,$sql);
-                    exit(json_encode(array("success"=>"DEL_OK")));
+                    exit(json_encode(array("success"=>"DEL_OK","likecount"=>$agree)));
                 }
                 
             }else{ echo 'failQQ';}
@@ -62,10 +76,11 @@
         $num = mysqli_num_rows($result);
 
         // 取得按讚數
-        $sql_num = "SELECT `agree` FROM `article` WHERE `AId` ='$aid'";
+        $sql_num = "SELECT * FROM `article` WHERE `AId` ='$aid'";
         $result_num = mysqli_query($link,$sql_num);
         $row = mysqli_fetch_assoc($result_num);
         $agree = $row['agree'];
+        $author = $row['UId'];
 
         // 沒有按讚
         if($num == 0){
@@ -77,16 +92,28 @@
         if(mysqli_query($link,$sql)){
             if($_POST['type'] == 'ajax'){
                 if($num == 0){
+
+					$sql = "SELECT * FROM `notification` WHERE `AId` = '$author' AND `is_read` = 0 AND `type` = 2";
+					$result = mysqli_query($link,$sql);
+                    $num_r = mysqli_num_rows($result);
+                    
+					if($num_r == 0){
+                        $content = "你的文章「<b>".$row['title']."</b>」有人來按讚囉";
+                        $sql = "INSERT INTO `notification` (`UId`,`AId`,`content`,`type`) values('$uid','$author','$content',2)";
+                        mysqli_query($link,$sql);
+                    }
+                    
+                    
                     $agree = $agree + 1;
                     $sql = "UPDATE `article` SET `agree` = '$agree' WHERE `AId` = '$aid'";
                     mysqli_query($link,$sql);
-                    exit(json_encode(array("success"=>"OK")));
+                    exit(json_encode(array("success"=>"OK","likecount"=>$agree)));
                 }
                 else{
                     $agree = $agree - 1;
                     $sql = "UPDATE `article` SET `agree` = '$agree' WHERE `AId` = '$aid'";
                     mysqli_query($link,$sql);
-                    exit(json_encode(array("success"=>"DEL_OK")));
+                    exit(json_encode(array("success"=>"DEL_OK","likecount"=>$agree)));
                 }
                 
             }else{ echo 'failQQ';}

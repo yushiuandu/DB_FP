@@ -3,6 +3,11 @@
 	if(!$link){
 	echo "no connect!";
 	}
+
+	if(isset($_GET['NId'])){
+        $sql = "UPDATE `notification` SET `is_read` = 1 WHERE `NId` = '$_GET[NId]'";
+        mysqli_query($link,$sql);
+    }
 	
 	$is_oneself = 2; //本人看自己的網頁'0'。非本人看為'1'，沒登入看
 

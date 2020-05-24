@@ -32,27 +32,46 @@
     $aid = $_SESSION["aid"];
 
     // 找出作者
-    $sql = "SELECT `UId` FROM `article` WHERE `AId` = '$aid'";
+    $sql = "SELECT article.UId as `UId` ,max(floor) as `floor`, article.title as `title`
+            FROM `article`JOIN `comment` 
+            WHERE article.AId = '$aid' AND comment.AId =\"$aid\"";
     $result = mysqli_query($link,$sql);
-    $row = mysqli_fetch_array($result); 
+    $row = mysqli_fetch_assoc($result); 
     $author = $row['UId'];
+    $floor = $row["floor"] +1;
+    $title = $row['title'];
     
-    $sql = "SELECT max(floor) FROM `comment` WHERE `AId` = \"$aid\"";
-    $result = mysqli_query($link,$sql);
-    $row = mysqli_fetch_array($result); 
-    $floor = $row["0"] +1;
+    // 看誰follow
+    $sql_follow = "SELECT `UId` FROM `follow` WHERE `AId` = '$aid'";
+    $result_f = mysqli_query($link,$sql_follow);
+    $num_f = mysqli_num_rows($result_f);
 
     $sql = "INSERT INTO `comment`(`AId`, `UId`, `content`, `likeCount`, `time`, `anonymous`, `post_name`, `floor`) 
-    VALUES('$aid', '$UId','$content',0 ,'$datetime','$anonymous', '$_SESSION[nickname]','$floor')";
+    VALUES('$aid', '$uid','$content',0 ,'$datetime','$anonymous', '$_SESSION[nickname]','$floor')";
     
     if (!mysqli_query($link,$sql))
     {die('Error: ' . mysqli_error());}
     else{
-        $content = "你的貼文有人來留言拉，趕快去看看吧！！";
-        $sql = "INSERT INTO `notification`(`UId`,`AId`,`content`,`is_read`) VALUES ('$author', '$aid','$content', 0)";
-        mysqli_query($link,$sql);
-        
+        // 通知作者
+        $content = "你的貼文「<p style='margin:0px; font-weight:700;'>".$title."</p>」有人來留言拉，趕快去看看吧！！";
+        $sql = "SELECT * FROM `notification` WHERE `AId` = '$aid' AND `is_read` = 0 AND `type` = 3";
+        $result = mysqli_query($link,$sql);
+        $num = mysqli_num_rows($result);
+
+        if($num == 0){
+            $sql = "INSERT INTO `notification`(`UId`,`AId`,`content`,`type`) VALUES ('$author', '$aid','$content', 3)";
+            mysqli_query($link,$sql);
+        }
+
+        $content = "你追蹤的貼文「<p style='margin:0px; font-weight:700;'>".$title."</p>」有新的留言拉，趕快去看看吧！！";
+        if($num_f > 0){
+            while($row = mysqli_fetch_assoc($result_f)){
+                $sql = "INSERT INTO `notification`(`UId`,`AId`,`content`,`type`) VALUES ('$row[UId]', '$aid','$content', 5)";
+                mysqli_query($link,$sql);
+            }
+        }
         header("Location:../index/index.php?page=article&aid=$aid"); 
     exit;
-    }}
+    }
+    }
 ?>

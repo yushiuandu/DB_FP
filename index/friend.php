@@ -3,7 +3,12 @@
 	$link = mysqli_connect("localhost","taigun","ELn3yv07F567MwOF","taigun");
 	if(!$link){
 		echo "no connect!";
-	}
+    }
+    
+    if(isset($_GET['NId'])){
+        $sql = "UPDATE `notification` SET `is_read` = 1 WHERE `NId` = '$_GET[NId]'";
+        mysqli_query($link,$sql);
+    }
 
 	#找到UId
 	include("../index/forum.php");

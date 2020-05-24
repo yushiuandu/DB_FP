@@ -84,7 +84,20 @@
 	if(isset($_GET['edit'])){
 		$aid = $_GET['edit'];
 		$sql = "UPDATE `article` SET `title` = \"$_POST[title]\", `content` = \"$_POST[content]\" WHERE `AId` = \"$aid\"";
+		
+		$sql_f = "SELECT `UId` FROM `follow` WHERE `AId` = '$aid'";
+		$result = mysqli_query($link,$sql_f);
+		$num = mysqli_num_rows($result);
+		$content = "你追蹤的文章「<p style='margin:0px; font-weight:700;'>".$_POST['title']."</p>」已經更新了！趕快去察看吧！」";
+		
 		if(mysqli_query($link,$sql)){
+			if($num > 0){
+				while($row = mysqli_fetch_assoc($result)){
+					$sql = "INSERT INTO `notification` (`UId`,`AId`,`content`,`type`) 
+							VALUES ('$uid', '$aid', '$content',4)";
+							mysqli_query($link,$sql);
+				}
+			}
 			header("Location:../index/index.php?page=article&aid=$aid");
 		}
 		else{
