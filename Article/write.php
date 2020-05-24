@@ -123,7 +123,7 @@
 		<div class="from-group row">
 			<label class='col-sm-3 col-form-label'> tag</label>
 			<div class='col-sm-6' id="add">
-				<input type='text' name='tag' class='add-input' placeholder="ex: #中山大學、#猴子..." pattern="^#+(?=.*[\u4e00-\u9fa5A-Za-z0-9]).{1,}$">
+				<input type='text' name='tag' class='add-input' placeholder="不用輸入hashtag" pattern="^[^#]+(?=.*[\u4e00-\u9fa5A-Za-z0-9]).{1,}$">
 				
 				<label>
 					<img src='../index/image/plus.png' class='tag-pic'>
@@ -165,8 +165,8 @@
 			newInput.type=mytype;  
 			newInput.name="tag"; 
 			newInput.className="add-input"; //class
-			newInput.placeholder="ex: #中山大學、#猴子...";
-			newInput.pattern="^#+(?=.*[\u4e00-\u9fa5A-Za-z0-9]).{1,}$";
+			newInput.placeholder="不用輸入hashtag";
+			newInput.pattern="^[^#]+(?=.*[\u4e00-\u9fa5A-Za-z0-9]).{1,}$";
 			TemO.appendChild(newInput); //將元素追加到某個標籤内容中
 			var newline= document.createElement("br"); //建一个BR為了換行 
 			TemO.appendChild(newline); 

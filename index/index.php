@@ -330,20 +330,24 @@
 				<!-- 簡圖內容(上) -->
 				<div class="row art-head mid">
 					<!-- 作者-->
-					<div class="col-md-10 col-sm-9 col-9">
+					<div class="col-md-1 col-sm-1 col-1">
 						<!-- 作者頭像 -->
-						<?php 
-							if($row['anonymous'] == 1){
-								echo '<a href="../index/index.php?page=nickname&uid='.$row['UId'].'">';	
-						?>
-							<img src="data:pic/png;base64,<?=base64_encode($row["profile"]);?>" class="img-fluid rounded-circle" id="writer-pic"></a>
-						<?php
-							}else{ ?>
-								<img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic">
-						<?php	}//end else
-						?>
+						<div class='pic-container'>
+							<?php 
+								if($row['anonymous'] == 1){
+									echo '<a href="../index/index.php?page=nickname&uid='.$row['UId'].'">';	
+							?>
+								<img src="data:pic/png;base64,<?=base64_encode($row["profile"]);?>" class="img-fluid rounded-circle" id="writer-pic"></a>
+							<?php
+								}else{ ?>
+									<img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic">
+							<?php	}//end else
+							?>
+						</div>
+					</div>
+					<div class="col-md-9 col-sm-8 col-8" style='padding:0px;'>
 						<!-- 作者名稱 -->
-						<p style="display: inline; font-size:2vmin; margin:0px;">
+						<p class='name'>
 							<?php
 								if ($row['anonymous'] == 0){
 									echo '匿名';
@@ -733,6 +737,7 @@
 		};
 	
 	</script>
+
 	
 	
     <!-- Optional JavaScript -->
