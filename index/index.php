@@ -95,44 +95,40 @@
 	</script> -->
 
     <title>抬槓</title>
-	<script src="//s3-ap-northeast-1.amazonaws.com/justfont-user-script/jf-60019.js"></script>
-	<script src="//s3-ap-northeast-1.amazonaws.com/justfont-user-script/jf-60019.js"></script>
   </head>
 
   <body>
   	<!-- 導覽列 -->
-    <div class="head-nav">
+	  <div class="head-nav">
 		
 	
-    <div class="row mid">
-		<nav class="navbar-expand-md navbar-default navbar-light">
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#forum" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-		</nav>
+		<div class="row mid">
+			<nav class="navbar-expand-md navbar-default navbar-light">
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#forum" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+			</nav>
 
-		<div class="col-md-4 col-sm-3 col-2" style="padding:0px;">
-		  	<a class="navbar-brand" href="../index/index.php">
-        		<img src="./image/Tai-gun.png" class="Tai-gun">
-      		</a>
+			<div class="col-md-4 col-sm-3 col-2" style="padding:0px;">
+				<a class="navbar-brand" href="../index/index.php">
+					<img src="./image/Tai-gun.png" class="Tai-gun">
+				</a>
+			</div>
+			
+			<div class="col-md-8 right d-none d-md-block" style="padding:0px;">
+				<form class="form-inline" method="POST" action="../index/search.php">
+					<input class="form-control mr-sm-2" type="search" placeholder="要找甚麼...." style="width:125px;" name="key">
+					<button class="btn btn-light btn-sm" type="submit">搜尋</button>
+				</form>
+			</div>
+
 		</div>
-		
-		<div class="col-md-8 right d-none d-md-block" style="padding:0px;">
-			<form class="form-inline" method="POST" action="../index/search.php">
-				<input class="form-control mr-sm-2" type="search" placeholder="要找甚麼...." style="width:125px;" name="key">
-				<button class="btn btn-light btn-sm" type="submit">搜尋</button>
-			</form>
-		</div>
-
-
-	  </div>
+		<!-- 導覽列end -->`
 	</div>
-	<!-- 導覽列end -->
-	
 	
   <div class="row">
     <!-- 左半部 -->
-    <div class="col-md-2" id="left">
+    <div class="col-lg-2 col-md-2" id="left">
       	<nav class=" navbar-expand-md navbar-default navbar-light">
 			<!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
@@ -143,7 +139,7 @@
 						<a href = "../index/index.php"><img src="./image/logo.png" width="auto" height="80"></a>
 					</li>
 					<!-- 所有看板 -->
-					<li class="nav-item dropdown" style="font-family:jf-openhuninn;">
+					<li class="nav-item dropdown" style="font-family:微軟正黑體; font-weight: 600;">
 						<div class='link-head' id="all">
 						<div id="headingOne">
 							<a class="nav-link collapsed" href="../index/index.php" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
@@ -161,7 +157,7 @@
 						</div>
 					</li><!-- 所有看板end -->
 					<!-- 訂閱看板 -->
-					<li class="nav-item dropdown" style="font-family:jf-openhuninn;">
+					<li class="nav-item dropdown" style="font-family:微軟正黑體; font-weight: 600;">
 						<div class='link-head' id="follow">
 							<div id="headingTwo">
 								<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
@@ -197,7 +193,7 @@
 					</li>
 					<!-- 訂閱看板 end-->
 					<!-- 熱門看板 -->
-					<li class="nav-item dropdown" style="font-family:jf-openhuninn;"> 
+					<li class="nav-item dropdown" style="font-family:微軟正黑體; font-weight: 600;"> 
 						<div class='link-head' id="hot">
 						<div id="headingThree">
 							<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
@@ -225,7 +221,7 @@
   	</div>
 
 	<!-- 中間(文章區) -->
-	<div class="col-md-8" id="middle">
+	<div class="col-lg-8 col-md-7 col-sm-12" id="middle">
 		<?php 
 	  	if($page == 'index'){
 
@@ -519,12 +515,12 @@
 		?>
 	</div>
 	<!-- 中間end -->
-
+	
 	<!-- 右半部 -->
-		<div class="col-md-2" id="right">
+		<div class="col-lg-2 col-md-3 col-sm-12" id="right">
 
 			<!--右上半部 會員登入格子-->
-			<div id="login">
+			<div id="login" class=" d-none d-md-block">
 
 				<!-- 登入了 -->
 				<?php // 登入後
@@ -562,7 +558,7 @@
 				<div id="other-page">
 					
 					<div class="row">
-						<button type="button" class="btn col-md-6" data-toggle="modal" data-target="#exampleModalCenter">
+						<button type="button" class="btn col-md-6 col-sm-3 col-3" data-toggle="modal" data-target="#exampleModalCenter">
 							<img src='../index/image/person.png' title="個人頁面">
 						</button>
 						<!--四個btn-->
@@ -581,21 +577,19 @@
 									
 									<div class="modal-body">
 										<div class="row">
-											<div class="col-md-6">
+											<div class="col-md-6 col-sm-3 col-3">
 												<a href="?page=collect"><img class="pointer gbb3" src="../index/image/collect.png" title="收藏的文章"></a>
 												<p class="font-weight-bold" style='font-size:12pt; margin:0px;'>收藏</p>
 											</div>
-											<div class="col-md-6">
+											<div class="col-md-6 col-sm-3 col-3">
 												<a href="?page=follow"><img class="pointer gbb3" src="../index/image/follow.png" title="追蹤的文章、tag、作者"></a>
 												<p class="font-weight-bold" style='font-size:12pt; margin:0px;'>追蹤</p>
 											</div>
-										</div>
-										<div class="row">
-											<div class="col-md-6">
+											<div class="col-md-6 col-sm-3 col-3">
 												<a href="?page=nickname"><img class="pointer gbb3" src="../index/image/nickname.png" title="我的文章"></a>
 												<p class="font-weight-bold" style='font-size:12pt; margin:0px;'>我的文章</p>
 											</div>
-											<div class="col-md-6">
+											<div class="col-md-6 col-sm-3 col-3">
 												<a href="?page=user"><img class="pointer gbb3" src="../index/image/setting.png" title="個人資料修改"></a>
 												<p class="font-weight-bold" style='font-size:12pt; margin:0px;'>個人設定</p>
 											</div>
@@ -606,32 +600,30 @@
 						</div>
 						<!--四個btn end-->
 
-						<button type="button" class="btn col-md-6">
+						<button type="button" class="btn col-md-6 col-sm-3 col-3">
 							<!-- 沒有跳通知的是<img src='../index/image/bell.png' title="通知">
 								有跳通知的是<img src='../index/image/bell-shake.gif' title="通知"> -->
 							<a href="../index/index.php?page=bell"  style="color:white;"><img src='../index/image/bell.png' title="通知" id="notification"></a>
 						</button>
-					</div>
-					<div class="row">
-						<button type="button" class="btn col-md-6">
+
+						<button type="button" class="btn col-md-6 col-sm-3 col-3">
 							<a href="../index/index.php?page=test1"  style="color:white;"><img src='../index/image/test.png' title="心理測驗"></a>
 						</button>
-						<button type="button" class="btn col-md-6">
+						<button type="button" class="btn col-md-6 col-sm-3 col-3">
 							<a href="../index/index.php?page=friend"  style="color:white;"><img src='../index/image/friend.png' title="好友列表"></a>
 						</button>
 					</div>
-					<div class="row justify-content-center">
+					<!-- <div class="row justify-content-center">
 						<button type="button" class="btn btn-light font-weight-bold col-md-10" style='margin-top:10px;'>
 							<p onclick="setStyleSheet();" style='font-size:12pt; margin:0px;'>管理員模式</p>
 						</button>
-					</div>
+					</div> -->
 				</div>
 				<!--右下半部 分頁格子 end-->
 				<?php
 					}//end if
 					else{ //沒登入
 				?>
-
 				<!--沒有登入-->
 				<div class='user-con2'>
 					<img src="./image/user.png" id="user-pic" alt="Responsive image" >
