@@ -8,7 +8,11 @@
 	if(isset($_SESSION['nickname'])){
 		$uid = finduid($_SESSION['nickname']);
     }
-?><?php 
+    $sql = "SELECT * FROM `article` WHERE `AId` ='$_SESSION[aid]'";
+    $result = mysqli_query($link,$sql);
+    $row = mysqli_fetch_assoc($result);
+    $title = $row['title'];
+ 
     $cid = ''; $aid = '';
 
 
@@ -36,7 +40,6 @@
         }
 
         if(mysqli_query($link,$sql)){
-            if($_POST['type'] == 'ajax'){
                 if($num == 0){
 
                     $sql = "SELECT * FROM `notification` WHERE `CId` = '$cid' AND `is_read` = 0 AND `type` = 7";
@@ -45,23 +48,28 @@
                     
 					if($num_r == 0){
                     
-                    $content = "你在「<b>".$row['title']."</b>」的留言有人來按讚囉";
-                    $sql = "INSERT INTO `notification` (`UId`,`AId`,`CId`,`content`,`type`) values('$uid','$author','$cid','$content',7)";
+                    $content = "你在「<b>".$title."</b>」的留言有人來按讚囉";
+                    $sql = "INSERT INTO `notification` (`UId`,`AId`,`CId`,`content`,`type`) values('$author','$_SESSION[aid]','$cid','$content',7)";
                     mysqli_query($link,$sql);}
 
                     $agree = $agree + 1;
                     $sql = "UPDATE `comment` SET `likeCount` = '$agree' WHERE `CId` = '$cid'";
                     mysqli_query($link,$sql);
-                    exit(json_encode(array("success"=>"OK","likecount"=>$agree)));
-                }
-                else{
+
+                    }else{
+
                     $agree = $agree - 1;
                     $sql = "UPDATE `comment` SET `likeCount` = '$agree' WHERE `CId` = '$cid'";
                     mysqli_query($link,$sql);
-                    exit(json_encode(array("success"=>"DEL_OK","likecount"=>$agree)));
+                    
                 }
-                
-            }else{ echo 'failQQ';}
+                if($_POST['type'] == 'ajax'){
+                    if($num != 0){
+                        exit(json_encode(array("success"=>"DEL_OK","likecount"=>$agree)));
+                    }else{
+                        exit(json_encode(array("success"=>"OK","likecount"=>$agree)));
+                    }
+                }
         }else{ echo "fail";
         }
 
@@ -90,20 +98,27 @@
         }
 
         if(mysqli_query($link,$sql)){
-            if($_POST['type'] == 'ajax'){
-                if($num == 0){
-
-					$sql = "SELECT * FROM `notification` WHERE `AId` = '$author' AND `is_read` = 0 AND `type` = 2";
-					$result = mysqli_query($link,$sql);
-                    $num_r = mysqli_num_rows($result);
+            if($num == 0){
+                $sql = "SELECT * FROM `notification` WHERE `AId` = '$_SESSION[aid]' AND `is_read` = 0 AND `type` = 2";
+                    $result = mysqli_query($link,$sql);
+                    if($result){
+                         $num_r = mysqli_num_rows($result);
+                    }else{
+                        $num_r = 0;
+                    }
+                   
                     
 					if($num_r == 0){
                         $content = "你的文章「<b>".$row['title']."</b>」有人來按讚囉";
-                        $sql = "INSERT INTO `notification` (`UId`,`AId`,`content`,`type`) values('$uid','$author','$content',2)";
-                        mysqli_query($link,$sql);
+                        $sql_a = "INSERT INTO `notification` (`UId`,`AId`,`content`,`type`) VALUES ('$author','$_SESSION[aid]','$content',2)";
+                        if((mysqli_query($link,$sql_a))){
+                            
+                        }else{mysqli_error();
+                        }
                     }
-                    
-                    
+            }
+            if($_POST['type'] == 'ajax'){
+                if($num == 0){
                     $agree = $agree + 1;
                     $sql = "UPDATE `article` SET `agree` = '$agree' WHERE `AId` = '$aid'";
                     mysqli_query($link,$sql);

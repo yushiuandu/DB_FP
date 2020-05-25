@@ -364,7 +364,7 @@
 
 					<!-- 按讚數 --> 
 					<div class="col-md-2 col-sm-3 col-3 right">
-						<h7 style="display: inline;" class="Count"><?php echo $row['agree'];?></h7>
+						<h7 style="display: inline;" class="count"><?php echo $row['agree'];?></h7>
 						<?php 
 							if(isset($_SESSION['nickname'])){
 								$sql_good = "SELECT * FROM `good` WHERE `UId` = \"$uid\" AND `AId` = \"$row[AId]\"";
@@ -681,11 +681,14 @@
 			</div>
 			<!--右上半部 會員登入格子end-->
 		</div>
-		<!-- 右半部 end -->
-		</div>
-		<!-- row end -->
+		<!--右上半部 會員登入格子end-->
+  	
+	</div>
+  	<!-- 右半部 end -->
+	</div>
+	<!-- row end -->
 
-		<script>
+	<script>
 		$(".good_article").click(function(){
 				var url = $(this).data("url");
 				var good = $(".good_article").index($(this));
@@ -713,26 +716,26 @@
 			});
 
 			
-			$(function(){
-				setInterval(getalarm,100)
-			});
+			// $(function(){
+			// 	setInterval(getalarm,100)
+			// });
 
-			function getalarm (){
-				$.ajax({
-					type: 'POST',                     //GET or POST
-					url: "../index/notify.php",  //請求的頁面
-					cache: false,   //是否使用快取
-					dataType : 'json'
-				}).done(function(data) {
-					console.log(data);
-					if(data['success'] == "YES"){
-						$("#notification").attr("src","../index/image/bell-shake.gif");
-					}else if(data['success'] == "NO"){
-						$("#notification").attr("src","../index/image/bell.png");
+			// function getalarm (){
+			// 	$.ajax({
+			// 		type: 'POST',                     //GET or POST
+			// 		url: "../index/notify.php",  //請求的頁面
+			// 		cache: false,   //是否使用快取
+			// 		dataType : 'json'
+			// 	}).done(function(data) {
+			// 		console.log(data);
+			// 		if(data['success'] == "YES"){
+			// 			$("#notification").attr("src","../index/image/bell-shake.gif");
+			// 		}else if(data['success'] == "NO"){
+			// 			$("#notification").attr("src","../index/image/bell.png");
 								
-					}
-				});
-			};
+			// 		}
+			// 	});
+			// };
 		
 		</script>
 	

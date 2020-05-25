@@ -53,7 +53,7 @@
     {die('Error: ' . mysqli_error());}
     else{
         // 通知作者
-        $content = "你的貼文「<p style='margin:0px; font-weight:700;'>".$title."</p>」有人來留言拉，趕快去看看吧！！";
+        $content = "你的貼文「<b>".$title."</b>」有人來留言拉，趕快去看看吧！！";
         $sql = "SELECT * FROM `notification` WHERE `AId` = '$aid' AND `is_read` = 0 AND `type` = 3";
         $result = mysqli_query($link,$sql);
         $num = mysqli_num_rows($result);
@@ -63,7 +63,7 @@
             mysqli_query($link,$sql);
         }
 
-        $content = "你追蹤的貼文「<p style='margin:0px; font-weight:700;'>".$title."</p>」有新的留言拉，趕快去看看吧！！";
+        $content = "你追蹤的貼文「<b style='margin:0px; font-weight:700;'>".$title."</b>」有新的留言拉，趕快去看看吧！！";
         if($num_f > 0){
             while($row = mysqli_fetch_assoc($result_f)){
                 $sql = "INSERT INTO `notification`(`UId`,`AId`,`content`,`type`) VALUES ('$row[UId]', '$aid','$content', 5)";

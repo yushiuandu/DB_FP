@@ -75,6 +75,9 @@
 	$result = mysqli_query($link,$sql_a);
 	$row_a = mysqli_fetch_assoc($result);
 	$num_a =  $row_a['total'];
+	if(!isset($num_a)){
+		$num_a = 0;
+	}
 
 	//計算他追蹤多少人
 	$sql_f = "SELECT COUNT(follow_id) AS total FROM `follow` WHERE `UID` = '$uid' GROUP BY `UId`";

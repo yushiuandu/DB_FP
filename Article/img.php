@@ -28,10 +28,10 @@
 
     if ($Received['success'] == true) {
         $Imgid = $Received['data']['id'];
-        echo $Imgid;
+        // echo $Imgid;
         // if($_POST['type'] == 'ajax'){
-            exit(json_encode(array("success"=>"OK")));
-        // }
+                exit(json_encode(array("success"=>"OK")));
+            // }
         // echo "\n".$ImgURL."\n";
     } else {
         echo "Error<br/><br/>".$Received['data']['error'];
@@ -39,6 +39,8 @@
             exit(json_encode(array("success"=>"NO")));
         // }
     }
+
+     echo $Imgid;
 
 ?>
 iRLijyf

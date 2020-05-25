@@ -31,11 +31,11 @@
 		if(!(mysqli_query($link, $sql))){
 			mysqli_error();
 		}else{
+			// 存tag
 			$sql = "SELECT AId FROM article WHERE `UId` = \"$uid\" AND `post_time` = \"$datetime\"";
 			$result = mysqli_query($link, $sql);
 			$row = mysqli_fetch_assoc($result);
 			$aid = $row['AId'];
-			echo $_POST['tag0'];
 			
 			while($i<4){
 				if($_POST[$tag[$i]] != NULL){
@@ -46,6 +46,28 @@
 				}
 				$i = $i+1;
 			}
+
+			// 找有誰follow這個作者，如果發文為匿名，則不通知
+			if($_POST['anonymous'] == 1){
+				$nickname = $_SESSION['nickname'];
+				$content = "你追蹤的作家<b>".$nickname."</b>發布了新貼文快點去看看吧";
+				$sql = "SELECT * FROM `follow` WHERE `follow_id` = '$uid'";
+				$result_a = mysqli_query($link,$sql);
+
+				$num = mysqli_num_rows($result_a);
+				if($num > 0){
+					while($row = mysqli_fetch_assoc($result_a)){
+						$follower = $row['UId'];
+						$sql_a = "INSERT INTO `notification` (`UId`,`AId`,`content`,`type`) VALUES ('$follower','$aid','$content',6)";
+						if(mysqli_query($link,$sql_a)){
+
+						}else{
+
+						}
+					}
+				}
+			}
+
 
 			header('Location:../index/index.php?page=article&aid='.$aid.'');
 			exit;
@@ -205,30 +227,52 @@
 	<!-- 動態加input end-->
 
 	<script>
-		// $( "form1" ).on( "submit", function( e ) {
-		// 	var form = $(this);
-		// 	var url = form.attr('action');
-		// 	console.log(form.serialize());
+		function prevent_reloading(){
+			var pendingRequests = {};
+				jQuery.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
+					var key = options.url;
+					console.log(key);
+					if (!pendingRequests[key]) {
+						pendingRequests[key] = jqXHR;
+					}else{
+						//jqXHR.abort();    //放棄後觸發的提交
+						pendingRequests[key].abort();   // 放棄先觸發的提交
+					}
+					var complete = options.complete;
+					options.complete = function(jqXHR, textStatus) {
+						pendingRequests[key] = null;
+						if (jQuery.isFunction(complete)) {
+						complete.apply(this, arguments);
+						}
+					};
+				});
+			}
 
-		// 	$.ajax({
-		// 		type: "POST",
-		// 		url: url,
-		// 		data:form.serialize(),
-		// 		dataType :"json"
-        //     }).done(function(data) {
-		// 		console.log(data);
-		// 		if(data['success'] == "OK"){
-		// 			$('#text').val($('#text').val() + 'hi');
-		// 				// console.log(f);
-		// 			}else if(data['success'] == "NO"){
-		// 				$('#text').val($('#text').val() + 'no');
-		// 				// console.log("white");
-		// 			}
-		// 	});
-
-		// 	e.preventDefault(); // avoid to execute the actual submit of the form.
 			
-		// });
+		$( "#form1" ).on( "submit", function( e ) {
+			var form = $(this);
+			var url = form.attr('action');
+			console.log(form.serialize());
+
+			$.ajax({
+				type: "POST",
+				url: url,
+				data:form.serialize(),
+				dataType :"json"
+            }).done(function(data) {
+				console.log(data);
+				if(data['success'] == "OK"){
+					$('#text').val($('#text').val() + 'hi');
+						// console.log(f);
+					}else if(data['success'] == "NO"){
+						$('#text').val($('#text').val() + 'no');
+						// console.log("white");
+					}
+			});
+
+			e.preventDefault(); // avoid to execute the actual submit of the form.
+			
+		});
 
 	</script>
 		
