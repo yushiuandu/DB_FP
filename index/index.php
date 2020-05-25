@@ -361,7 +361,7 @@
 
 					<!-- 按讚數 --> 
 					<div class="col-md-2 col-sm-3 col-3 right">
-						<h7 style="display: inline;" class="Count"><?php echo $row['agree'];?></h7>
+						<h7 style="display: inline;" class="count"><?php echo $row['agree'];?></h7>
 						<?php 
 							if(isset($_SESSION['nickname'])){
 								$sql_good = "SELECT * FROM `good` WHERE `UId` = \"$uid\" AND `AId` = \"$row[AId]\"";
@@ -691,9 +691,9 @@
 	$(".good_article").click(function(){
             var url = $(this).data("url");
             var good = $(".good_article").index($(this));
-			// var count = $("Count").index($(this));
-
-            console.log(good);
+			var count = $("h7").index();
+			
+            console.log(count);
             $.ajax({
                 type: 'POST',
 				url: url,

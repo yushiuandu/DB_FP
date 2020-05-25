@@ -42,6 +42,14 @@
 		// include("../index/forum.php");   //將分類變成中文
 		$row = mysqli_fetch_assoc($result);
 		$category = findForum($row['category']);
+
+	if(isset($_GET['collect'])){
+		$group = $_POST['collect'];
+		$sql_g = "INSERT INTO `save_group` (`save_group`) VALUES ('$group')";
+		if(mysqli_query($link,$sql_g)){
+			exit(json_encode(array("success"=>"OK","group"=>$group)));
+		}
+	}
 		
 ?>
 
@@ -76,7 +84,8 @@
 				if($row['anonymous']==0){?>
 				<img src="../index/image/user.png" class="img-fluid rounded-circle pic" >
 				<?php } else{?>
-					<img src="data:pic/png;base64,<?=base64_encode($row["profile"]);?>" class="img-fluid rounded-circle pic" >
+					<a href = "../index/index.php?page=nickname&uid=<?=$row['UId'];?>">
+					<img src="data:pic/png;base64,<?=base64_encode($row["profile"]);?>" class="img-fluid rounded-circle pic" ></a>
 				<?php }?>
 				<p style="display: inline; font-size:3vmin; margin:0px 0px 0px 5px; font-family: setofont; font-weight:600">
 				<?php
@@ -110,7 +119,9 @@
 			<!-- 看板+發文時間 --> 
 			<div class="col-md-12 col-sm-12 col-12 bottom">
                 <p style=' font-size:2.2vmin; margin:0px; font-family: setofont; font-weight:600;'>
+				<a href="../index/index.php?page=index&id=<?=$row['category'];?>"  style = 'color:gray;text-decoration:none;'>
 				<?php echo $category.' - '.date('Y-m-d H:i',strtotime($row['post_time'])); ?>
+				</a>
 				</p>
 			</div>
 			<!-- 看板+發文時間 end-->
@@ -160,7 +171,7 @@
 						$num = mysqli_num_rows($result_good);
 
 						$Link = "../Article/good.php?aid=".$row['AId']."";
-
+						// echo '<a href = "../Article/good.php?aid='.$row['AId'].'">';
 						if($num > 0){
 							echo '<img class="good pointer gbb" data-url="'.$Link.'" src="../index/image/good-black.png">';
 						}else{
@@ -194,53 +205,68 @@
 				?>
 				<!-- 收藏 -->
 				<?php 
-				//	if(isset($_SESSION['nickname'])){
-					//	$sql_save = "	SELECT AId FROM `save` WHERE UId = \"$uid\" AND `AId` =\"$row[AId]\"";
-					//	$result_save = mysqli_query($link, $sql_save);
-					//	$num - mysqli_num_rows($result_save);
+					if(isset($_SESSION['nickname'])){
+						$sql_save = "SELECT * FROM `save` WHERE UId = \"$uid\" AND `AId` =\"$row[AId]\"";
+						$result_save = mysqli_query($link, $sql_save);
+						$num = mysqli_num_rows($result_save);
 							
-					//	if($num>0){
+						if($num > 0){
 							// 已收藏
-					//		echo '<a href ="../Article/save.php?aid='.$row['AId'].'&save=1">';
-					//		echo '<img class="pointer gbb"  src="../index/image/bookmark-black.png" title="追蹤"></a>';
+							echo '<img id="save" class="pointer gbb"  src="../index/image/bookmark-black.png" title="追蹤">';
 
-					//	}else{
+						}else{
 							// 未收藏
-					//		echo '<a href ="../Article/save.php?aid='.$row['AId'].'&save=0">';
-					//		echo '<img class="pointer gbb"  src="../index/image/bookmark-white.png" title="追蹤"></a>';
-						}
-				//	}else{
-				//		echo '<img class="pointer gbb"  src="../index/image/bookmark-white.png" title="追蹤">';
-				//	}
 				?>
-				<img class="pointer gbb"  src="../index/image/bookmark-white.png" title="追蹤" data-toggle="modal" data-target="#collect">
-					<div class="modal fade bd-example-modal-sm match-ww middle" id="collect" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered"> <!--centered重直置中-->
-                            <div class="modal-content match-page"> 
-                                <!-- 收藏內容 -->
-                                <p class="match-title">請選擇一個收藏分類</p>
-                                <div class="modal-body">
-									<div class='collect-add'>
+						<img class="pointer gbb" id="save" src="../index/image/bookmark-white.png" title="追蹤" data-toggle="modal" data-target="#collect">
+						<!-- 彈跳視窗 -->
+						<div class="modal fade bd-example-modal-sm match-ww middle" id="collect" aria-hidden="true">
+							<div class="modal-dialog modal-dialog-centered"> <!--centered重直置中-->
+								<div class="modal-content match-page"> 
+									<!-- 收藏內容 -->
+									<p class="match-title">請選擇一個收藏分類</p>
+
+									<div class="modal-body">
 										<!-- 可以新增收藏選項並加入 -->
-										<input type='text' name='collect' placeholder='輸入分類名稱'>
-										<button type="submit" class="btn btn-sm btn-secondary">新增</button>
+										<div class='collect-add'>
+											<form action = "../Article/Article.php?collect=add" method="post" id="form2">
+												<input type='text' name='collect' placeholder='輸入分類名稱'>
+												<button type="submit" class="btn btn-sm btn-secondary">新增</button>
+											</form>
+										</div>
+										<!-- 新增選項end -->
+
+										<!-- 分類選項 -->
+										<div class='collect' id="collect_button">
+											<?php 
+												$sql = "SELECT * FROM `save_group` ";
+												$result_save = mysqli_query($link,$sql);
+												while($row_s = mysqli_fetch_assoc($result_save)){
+													$Link = "../Article/save.php?group=".$row_s['save_group'];
+												?>
+											<button type="button" data-url="<?=$Link?>" class="save_c btn collect-btn"><?=$row_s['save_group'];?></button>
+											<?php }//end while?>
+										</div>	
+										<!-- 分類end -->
+
 									</div>
-									<div class='collect'>
-										<button type="button" class="btn collect-btn">網美店</button>
-										<button type="button" class="btn collect-btn">桌布分享</button>
-										<button type="button" class="btn collect-btn">狗狗貓貓</button>
-										<button type="button" class="btn collect-btn">狗狗貓貓</button>
-										<button type="button" class="btn collect-btn">狗狗貓貓</button>
-									</div>	
-                                </div>
-                                <!--下面選項-->
-                                <div class='collect-fotter'>
-									<!-- 取消收藏 -->
-									<button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">取消</button>
-                                </div>
-                            </div>
-                        </div>
-					</div>
+									
+									<!--下面選項-->
+									<div class='collect-fotter'>
+										<!-- 取消收藏 -->
+										<button type="button" id="miss" class="btn btn-sm btn-secondary" data-dismiss="modal">取消</button>
+									</div>
+
+								</div>
+							</div>
+							<!-- 置中end -->
+						</div>
+						<!-- model end -->
+				<?php		}
+					}else{
+						echo '<img class="pointer gbb"  src="../index/image/bookmark-white.png" title="追蹤">';
+					}
+				?>
+				
 			</div>
 			<!-- 按鈕們 end -->
 		</div>
@@ -248,7 +274,7 @@
 	</div>
 	<!-- article end -->
 				<?php 
-			// }
+			}
 			?>
 	<!-- 熱門留言區 -->
 	<?php 
@@ -602,7 +628,7 @@
 				url: url,
 				data: {type : "ajax"},
 				dataType :"json"
-			}).done(function( data ) {
+			}).done(function(data) {
 				console.log(data);
 				if(data['success'] == "OK"){
 						$(".follow_bell").eq(eq).attr("src","../index/image/bell-black.png");
@@ -615,11 +641,51 @@
 			});
 		});
 
+		// 收藏文章
+		$(".save_c").click(function(){
+			var url = $(this).data("url");
+			var eq = $(".save_c").index($(this));
+			
+			console.log(eq);
+
+			$.ajax({
+				type: 'POST',
+				url: url,
+				data: {type : "ajax"},
+				dataType :"json",
+			}).done(function( data ) {
+				console.log(data);
+				if(data['success'] == "SVAE_OK"){
+						$('#miss').click();
+						$("#save").attr("src","../index/image/bookmark-black.png");
+					}else if(data['success'] == "SAVE_DEL_OK"){
+						$("#save").attr("src","../index/image/bookmark-white.png");
+					}
+			});
+		});
+
+		$("#save").click(function(){
+
+			$.ajax({
+				type: 'POST',
+				url: "../Article/save.php",
+				data: {type : "ajax"},
+				dataType :"json"
+			}).done(function(data) {
+				console.log(data);
+				if(data["success"] == "SAVE_OK"){
+						$("#save").attr("src","../index/image/bookmark-black.png");
+					}else if(data["success"] == "SAVE_DEL_OK"){
+						$("#save").attr("src","../index/image/bookmark-white.png");
+					}
+			});
+		});
+
 		$(".good").click(function(){
             var url = $(this).data("url");
             var good = $(".good").index($(this));
 
-			prevent_reloading();
+			// prevent_reloading();
 
             console.log(good);
             $.ajax({
@@ -631,19 +697,40 @@
             }).done(function(data) {
 				console.log(data);
 				if(data['success'] == "OK"){
+					console.log(data);
 					var like = data['likecount'];
 					$(".good").eq(good).attr("src","../index/image/good-black.png");
 					console.log(good);
-					// console.log(good_c);
 				}else if(data['success'] == "DEL_OK"){
 					var like = data['likecount'];
-					// $(".Count").eq(count).html('0');
 					$(".good").eq(good).attr("src","../index/image/good-white.png");
-						// console.log("white");
-						// console.log(good_c);	
 				}
 			});
         });
+
+		$("#form2").on("submit", function(e) {
+			var form = $(this);
+			var url = form.attr('action');
+			console.log(form.serialize());
+
+			$.ajax({
+				type: "POST",
+				url: url,
+				data:form.serialize(),
+				dataType :"json"
+            }).done(function(data) {
+				console.log(data);
+				if(data['success'] == "OK"){
+					var group = data['group'];
+					var content = '<button type="button" data-url="../Article/save.php?group='+group+'" class="save_c btn collect-btn">'+group+'</button>';
+					console.log(content);
+					$('#collect_button').append(content);
+				}
+			});
+
+			e.preventDefault(); // avoid to execute the actual submit of the form.
+			
+		});
 		
 	</script>
 

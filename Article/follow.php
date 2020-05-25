@@ -13,6 +13,7 @@
 
 	$aid = ''; $follow ="";
 
+	// 追蹤文章
 	if(isset($_GET['aid'])){
 		$aid = $_GET['aid'];
 		$sql = "SELECT * FROM `follow` WHERE `AId` = \"$aid\" AND `UId` = \"$uid\"";
@@ -103,12 +104,11 @@
 			if($_POST['type'] == 'ajax'){
 
 				if($num == 0){
-					$content = "有<p style='margin:0px; font-weight:700;'>新的追隨者</p>開始追蹤你了！看來你的風格很受歡迎喔！";
+					$content = "有<b>新的追隨者</b>開始追蹤你了！看來你的風格很受歡迎喔！";
 					$sql = "SELECT * FROM `notification` WHERE `UId` = '$follow_uid' AND `is_read` = 0 AND `type` = 1";
 					$result = mysqli_query($link,$sql);
 					$num_r = mysqli_num_rows($result);
 					if($num_r == 0){
-						$sql = "INSERT INTO `notification` (`UId`,`content`,`type`) values('$follow_uid','$content',1)";
 						mysqli_query($link,$sql);
 					}
 					
