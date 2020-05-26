@@ -36,14 +36,14 @@
             }
         ?>
         <div class='test'>
-            <div class='result mid'>
+            <div class='result'>
                 <p class='test2-ww'><?=$row['ans'];?></p>
             </div>
             <div class='result-btn'>
                 <div class='link-ww pointer' data-toggle="modal" data-target="#match">EXIT</div> <!--data-target後面要#!!!-->
                 <!--配對畫面-->
                 <!-- data-backdrop點背景不會關閉視窗/data-keyboard可用esc關閉 -->
-				<div class="modal fade bd-example-modal-sm match-ww" id="match" aria-hidden="true" data-backdrop="static" data-keyboard="true">
+				<div class="modal fade bd-example-modal-sm match-ww" id="match" aria-hidden="true" data-backdrop="false" data-keyboard="true">
 					<div class="modal-dialog modal-dialog-centered"> <!--centered重直置中-->
 						<div class="modal-content match-page"> 
                             <!-- 配對頁面內容 -->

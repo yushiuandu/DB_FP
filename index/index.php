@@ -1,4 +1,5 @@
-<?php 	session_start();
+<?php 	
+		session_start();
 		$_SESSION['local'] = '../index/index.php';
 ?>
 <?php
@@ -59,7 +60,7 @@
   
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -101,15 +102,14 @@
   	<!-- 導覽列 -->
 	  <div class="head-nav">
 		
-	
 		<div class="row mid">
 			<nav class="navbar-expand-md navbar-default navbar-light">
-				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#forum" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#forum" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
 			</nav>
 
-			<div class="col-md-4 col-sm-3 col-2" style="padding:0px;">
+			<div class="col-md-4 col-sm-6 col-3" style="padding:0px;">
 				<a class="navbar-brand" href="../index/index.php">
 					<img src="./image/Tai-gun.png" class="Tai-gun">
 				</a>
@@ -122,6 +122,58 @@
 				</form>
 			</div>
 
+			<div class="col-sm-4 col-6 right d-md-none">
+				<!-- 還沒登入 -->
+				<button type="button"class="btn btn-info font-weight-bold" data-toggle="modal" data-target="#login-2">
+					註冊/登入
+				</button>
+				<!-- 登入之後 -->
+				<!-- <button type="button"class="btn btn-info font-weight-bold" data-toggle="modal" data-target="#exampleModalCenter">
+					登出
+				</button> -->
+						
+				<!--登入畫面-->
+					<div class="modal fade bd-example-modal-sm middle" id="login-2" tabindex="-1" role="dialog" data-backdrop="false" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" >
+						<div class="modal-dialog modal-dialog-centered" role="document">
+							<div class="modal-content login-page">
+
+								<!--登入頭-->
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLongTitle">walcome 抬槓!</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<!--登入內容-->
+								<form method="post" action="../member/login.php" enctype="multipart/form-data">
+								<div class="modal-body">
+									<div>
+										<img src='./image/hello.png' id='login-pic' class='mar'>
+										<h5 class='mar'>帳號 
+											<input type="text" placeholder="帳號" name='Account'></h5>
+										<h5 class='mar'>密碼 
+											<input type="password" placeholder="密碼" name='Password'></h5>
+										<!-- <button type="button" class="btn btn-secondary btn-sm mar">
+											<a href='#'  style="color:white;">忘記密碼
+										</button> -->
+										<!-- 如果按還不是會員 會跳轉到 member/login.php的頁面 -->
+										<button type="button" class="btn btn-secondary btn-sm mar">
+											<a href="?page=register"  style="color:white;">還不是會員?</a>
+										</button>
+									
+									</div>
+								</div>
+								<!--登入尾-->
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary font-weight-bold" data-dismiss="modal">下次再說</button>
+									<button class="btn btn-info font-weight-bold" type="submit">送出</button>
+								</div>
+							</from>
+							</div>
+						</div>
+					</div>
+					<!-- 登入畫面end -->
+			</div>
 		</div>
 		<!-- 導覽列end -->`
 	</div>
@@ -133,8 +185,9 @@
 			<!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button> -->
+			
 			<div class="collapse navbar-collapse" id="forum">
-				<ul class="navbar-nav  flex-column">
+				<ul class="nav navbar-nav flex-column">
 					<li class="nav-item dropdown">
 						<a href = "../index/index.php"><img src="./image/logo.png" width="auto" height="80"></a>
 					</li>
@@ -207,13 +260,13 @@
 						</div>
 					</li>
 					<!-- 熱門看板 end-->
+					<li class="d-md-none mid">
+						<form class="form-inline mid" method="POST" action="../index/search.php">
+							<input class="form-control mr-sm-2" type="search" placeholder="要找甚麼...." style="width:125px; margin-right:10px;" name="key">
+							<button class="btn btn-light btn-sm" type="submit">搜尋</button>
+						</form>
+					</li>
 				</ul>
-				<div class="d-md-none" style="padding:0px;">
-					<form class="form-inline mid" method="POST" action="../index/search.php">
-						<input class="form-control mr-sm-2" type="search" placeholder="要找甚麼...." style="width:125px;" name="key">
-						<button class="btn btn-light btn-sm" type="submit">搜尋</button>
-					</form>
-				</div>
 			</div>
 			<!-- 看板end -->
 		</nav>
@@ -517,7 +570,7 @@
 	<!-- 中間end -->
 	
 	<!-- 右半部 -->
-		<div class="col-lg-2 col-md-3 col-sm-12" id="right">
+		<div class="col-lg-2 col-md-3 col-sm-12 col-12" id="right">
 
 			<!--右上半部 會員登入格子-->
 			<div id="login" class=" d-none d-md-block">
@@ -558,11 +611,11 @@
 				<div id="other-page">
 					
 					<div class="row">
-						<button type="button" class="btn col-md-6 col-sm-3 col-3" data-toggle="modal" data-target="#exampleModalCenter">
+						<button type="button" class="btn col-md-6 col-sm-3 col-3 " data-toggle="modal" data-target="#exampleModalCenter">
 							<img src='../index/image/person.png' title="個人頁面">
 						</button>
 						<!--四個btn-->
-						<div class="modal fade bd-example-modal-sm" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" >
+						<div class="modal fade bd-example-modal-sm" id="exampleModalCenter" tabindex="-1" data-backdrop="false" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 							<div class="modal-dialog modal-dialog-centered" role="document">
 								<div class="modal-content login-page">
 
@@ -577,19 +630,19 @@
 									
 									<div class="modal-body">
 										<div class="row">
-											<div class="col-md-6 col-sm-3 col-3">
+											<div class="col-md-6 col-sm-6 col-6">
 												<a href="?page=collect"><img class="pointer gbb3" src="../index/image/collect.png" title="收藏的文章"></a>
 												<p class="font-weight-bold" style='font-size:12pt; margin:0px;'>收藏</p>
 											</div>
-											<div class="col-md-6 col-sm-3 col-3">
+											<div class="col-md-6 col-sm-6 col-6">
 												<a href="?page=follow"><img class="pointer gbb3" src="../index/image/follow.png" title="追蹤的文章、tag、作者"></a>
 												<p class="font-weight-bold" style='font-size:12pt; margin:0px;'>追蹤</p>
 											</div>
-											<div class="col-md-6 col-sm-3 col-3">
+											<div class="col-md-6 col-sm-6 col-6">
 												<a href="?page=nickname"><img class="pointer gbb3" src="../index/image/nickname.png" title="我的文章"></a>
 												<p class="font-weight-bold" style='font-size:12pt; margin:0px;'>我的文章</p>
 											</div>
-											<div class="col-md-6 col-sm-3 col-3">
+											<div class="col-md-6 col-sm-6 col-6">
 												<a href="?page=user"><img class="pointer gbb3" src="../index/image/setting.png" title="個人資料修改"></a>
 												<p class="font-weight-bold" style='font-size:12pt; margin:0px;'>個人設定</p>
 											</div>
@@ -634,7 +687,7 @@
 					</button>
 						
 					<!--登入畫面-->
-					<div class="modal fade bd-example-modal-sm" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" >
+					<div class="modal fade bd-example-modal-sm" id="exampleModalCenter" tabindex="-1" role="dialog" data-backdrop="false" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" >
 						<div class="modal-dialog modal-dialog-centered" role="document">
 							<div class="modal-content login-page">
 
@@ -654,9 +707,9 @@
 											<input type="text" placeholder="帳號" name='Account'></h5>
 										<h5 class='mar'>密碼 
 											<input type="password" placeholder="密碼" name='Password'></h5>
-										<button type="button" class="btn btn-secondary btn-sm mar">
+										<!-- <button type="button" class="btn btn-secondary btn-sm mar">
 											<a href='#'  style="color:white;">忘記密碼
-										</button>
+										</button> -->
 										<!-- 如果按還不是會員 會跳轉到 member/login.php的頁面 -->
 										<button type="button" class="btn btn-secondary btn-sm mar">
 											<a href="?page=register"  style="color:white;">還不是會員?</a>
@@ -738,8 +791,9 @@
 			// };
 		
 		</script>
-	
-	
+		<script>
+			$('#selectTrainer').modal('show');
+		</script>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

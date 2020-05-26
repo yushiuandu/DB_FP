@@ -82,10 +82,14 @@
 			<div class="col-md-9 col-sm-8 col-6 mid">
 				<?php
 				if($row['anonymous']==0){?>
-				<img src="../index/image/user.png" class="pic" >
+				<div class="pic-container">
+					<img src="../index/image/user.png" class="pic">
+				</div>
 				<?php } else{?>
+				<div class="pic-container">
 					<a href = "../index/index.php?page=nickname&uid=<?=$row['UId'];?>">
 					<img src="data:pic/png;base64,<?=base64_encode($row["profile"]);?>" class="pic" ></a>
+				</div>
 				<?php }?>
 				<p style="display: inline; font-size:3vmin; margin:0px 0px 0px 5px; font-family: setofont; font-weight:600">
 				<?php
@@ -732,6 +736,8 @@
 			
 		});
 		
+	</script>
+	<script type="text/javascript">
 	</script>
 
     <!-- Optional JavaScript -->

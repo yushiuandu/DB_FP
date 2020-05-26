@@ -28,7 +28,7 @@
 		</div>
 		<div class="row justify-content-center">
 			<!-- 測驗button -->
-			<div class='col-md-2 test-btn'>
+			<div class='col-md-4 col-sm-5 col-4 test-btn'>
 				<a href='../index/index.php?page=test2' class='link-ww'>開始測驗</a>
 			</div>
 		</div>

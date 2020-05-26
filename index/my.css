@@ -51,6 +51,13 @@ body{
   width: 100%;
   margin:15px 0px 0px 0px;
 }
+.art3{
+  text-align: left;
+  background-color: #F2F2F2;
+  border-radius: 10px;
+  width: 100%;
+  margin:0px 0px 15px 0px;
+}
 .art-head{
   height:40px;
   padding:10px;
@@ -143,13 +150,23 @@ body{
   margin:20px auto 20px auto;
   background-color: white;
 }
-#u-pic{
-  height:200px;
-  width:40%;
-  margin-bottom:15px;
+.u-con{
+  width: 200px; 
+  height: 200px; 
+  border: 3px solid gray; 
   position: relative;
-  left:30%;
-  right:30%;
+  border-radius: 50%;
+  overflow: hidden;
+  margin:0px auto 10px auto;
+  background-color: white;
+}
+#u-pic{
+  max-width: 100%; 
+  max-height: 100%;
+  position: absolute; 
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%);
 }
 #register{
   display:inline-block;
@@ -250,7 +267,7 @@ body{
 .u1{
   padding:20px;
   border-radius:10px;
-  width:60%;
+  width:70%;
   margin:auto;
   background-color: rgb(193, 171, 173);
   position: relative;
@@ -411,6 +428,11 @@ button img{
 .person-btn{
   
 }
+.nickname-tit{
+  font-size:20pt;
+  font-weight:800;
+  margin:0px;
+}
 .nickname{
   padding:20px;
   border-radius:10px;
@@ -461,11 +483,16 @@ button img{
 }
 .friend{
   display:inline-block;
+  border-radius: 10px;
   background-color:rgb(193, 171, 173);
-  margin:30px 20px 0px 20px;
+  margin:30px 2vw 0px 2vw;
   text-align: center;
   padding:20px 10px 0px 10px;
   float: left;
+}
+.friend-ww{
+  margin:2vh auto 2vh auto;
+  font-family: "jf-openhuninn";
 }
 .chat-head{
   text-align: right;
@@ -480,8 +507,8 @@ button img{
   background-color: #F2F2F2;
   width: 90%;
   margin:0px auto 0px auto;
-  min-height: 380px;
-  max-height: 380px;
+  min-height: 60vh;
+  max-height: 60vh;
   overflow-y: auto;
   padding:10px 20px 10px 20px;
 }
@@ -496,16 +523,29 @@ button img{
 #chat{
   font-size: 14px;
   border-radius: 10px;
-  width: 90%;
+  width: 80%;
   background: rgb(233, 230, 230) url('../index/image/pen.png') no-repeat 3px 3px;
   padding: 5px 5px 5px 35px;
   margin:auto;
   background-size:3%;
 }
+.chat-con{
+  width: 12vh; 
+  height: 12vh;  
+  border: 2px solid gray; 
+  position: relative;
+  border-radius: 50%;
+  overflow: hidden;
+  margin:5px 10px 5px auto;
+  background-color: white;
+}
 #chat-pic{
-  height:90px;
-  width:30%;
-  margin:10px 0px 10px 0px;
+  max-width: 100%; 
+  max-height: 100%;
+  position: absolute; 
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%);
 }
 .talk{
   display:inline-block;
@@ -567,7 +607,7 @@ button img{
 .long{
   background-color: #F2F2F2;
   border-radius: 10px;
-  width: 100%;
+  width: 95%;
   margin:0px auto 20px auto;
   height: 240px;
   padding: 0px;
@@ -679,7 +719,6 @@ button img{
 .bell{
   background-color: #F2F2F2;
   text-align: left;
-  width:100%;
   padding: 10px;
   border-radius: 10px;
   margin:10px;
@@ -797,23 +836,30 @@ button img{
   text-align: center;
   margin: 20px;
   font-family: '標楷體';
-  font-size: 16pt;
+  font-size: 4vmin;
 }
 .test-btn{
   background-color: #90656F;
   color: white;
   border-radius: 10px;
   padding:8px;
-  font-size: 14pt;
-  position: absolute;
-  bottom:100px;
+  font-size: 3.5vmin;
+  position: relative;
+  bottom: -20px;
 }
 .question{
   width: 80%;
-  max-height:35%;
-  min-height: 35%;
-  margin: 20px auto 0px auto;
+  max-height:20%;
+  min-height: 20%;
+  margin: 0px auto 0px auto;
   padding: 10px;
+  overflow-x: auto;
+}
+.q2{
+  width: 80%;
+  max-height:10%;
+  min-height: 10%;
+  margin: 10px auto 0px auto;
 }
 .A{
   background:url(../index/image/A.png) no-repeat center;
@@ -867,17 +913,28 @@ button img{
   margin:0px; 
   font-size:12pt;
   text-align: left;
+  padding:30px 10px 0px 10px;
+}
+.test3-ww{
+  font-family: "jf-openhuninn";
+  font-weight:400;
+  word-break: break-all;
+  word-wrap:break-word;
+  white-space:pre-wrap;
+  margin:0px; 
+  font-size:12pt;
+  text-align: left;
   padding: 20px;
 }
 .choice{
-  position: absolute;
-  right: -50px;
-  top: 0px;
+  position: relative;
+  top: -30px;
+  left: 80%;
 }
 .choose{
-  position: absolute;
-  top: 34%;
-  right:25%;
+  position: relative;
+  top: 0px;
+  right: 10%;
 }
 .link-ww{
   color: white;
@@ -894,6 +951,7 @@ button img{
   border-radius: 10px;
   margin:50px auto 0px auto;
   background-color: rgb(234,230,223);
+  overflow-x: auto;
 }
 .result-btn{
   background-color: #90656F;
@@ -961,6 +1019,8 @@ button img{
   padding-bottom: 20px;
   margin: 0px 10px 0px 10px;
   text-align: left;
+  max-height: 300px;
+  overflow-x: auto;
 }
 .collect-btn{
   margin:10px 5px 0px 5px;
@@ -1010,6 +1070,9 @@ button img{
   width:15%;
   height: auto;
 }
+.modal{
+  background-color: rgb(0,0,0,0.5);
+}
 @media (max-width: 767px) {
   #right{
     text-align: left;
@@ -1019,6 +1082,7 @@ button img{
     bottom: 0;
     vertical-align: text-top;
     padding:10px;
+    max-height: 15vh;
   }
   #other-page{
     display:inline-block;
@@ -1028,6 +1092,7 @@ button img{
     position: relative;
     background-color: rgb(199,199,187);
     padding: 0px;
+    margin:0px;
   }
   button img {
     max-width: 50px;
@@ -1036,4 +1101,68 @@ button img{
     border-radius: 10%;
     background: rgb(234,230,223);
   }
+  .modal{
+    background-color: rgb(0,0,0,0.5);
+  }
+  #middle{
+    max-height: 75vh;
+    overflow-x: auto;
+  }
+  .test{
+    text-align: center;
+    padding:2%;
+    vertical-align:top;
+    background-color: rgb(193, 171, 173);
+    height:70vh;
+    border-radius: 10px;
+  }
+  .op{
+    margin:10px auto 0px auto;
+  }
+  .test2-ww{
+    padding:10px;
+  }
+  #search{
+    background-size:5%;
+  }
+  #left{
+    padding: 0px;
+  }
+  .delete-pic{
+    width:10%;
+    height: auto;
+  }
+  .u1{
+    width:70%;
+    padding: 10px;
+    margin: auto;
+  }
+  .u-con{
+    width: 80px; 
+    height: 80px; 
+  }
+  .nickname-tit{
+    font-size:14pt;
+    font-weight:800;
+    margin:0px;
+  }
+}
+@media (max-width: 1000px) {
+  #re2{
+    width:100%;
+    height:500px;
+    padding:0px 20px 0px 20px;
+    float:left;
+    font-size: 14px;
+  }
+  #form{
+    left: 0%;
+    padding:0px 20px 0px 20px;
+  }
+  .bo{
+    width:90%;
+  }
+  /* #re1{
+    display: n;
+  } */
 }
