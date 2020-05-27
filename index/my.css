@@ -1146,6 +1146,14 @@ button img{
     font-weight:800;
     margin:0px;
   }
+  .chat-body{
+    min-height: 45vh;
+    max-height: 45vh;
+  }
+  #chat{
+    width: 70%;
+    background-size:5%;
+  }
 }
 @media (max-width: 1000px) {
   #re2{
