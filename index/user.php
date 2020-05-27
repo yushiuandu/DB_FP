@@ -35,7 +35,9 @@
   <body>
   <!-- 修改個人資料(我覺得可以抓他已經填過的資料進來讓他修改) -->
   <div class='u1'>
-    <img src="data:pic/png;base64,<?=base64_encode($row["profile"]);?>" class="img-fluid rounded-circle" id="u-pic">
+	<div class="u-con">
+		<img src="data:pic/png;base64,<?=base64_encode($row["profile"]);?>" id="u-pic">
+	</div>
     <form method="post" action="../index/user.php?modifyuser=true" enctype="multipart/form-data">
     	<div class="form-row">
         <!-- 綽號 -->

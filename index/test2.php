@@ -38,13 +38,15 @@
 			$row = mysqli_fetch_assoc($result);
 		?>
 
-		<div class='question mid'>
+		<div class='question'>
 			<!-- 第18題 -->
 			<p class='test2-ww'><?=$row['title'];?></p>
-			<div class='choose'>
+		</div>
+		<div class='q2'>
+			<div class='choose row justify-content-end'>
 				<div class="form-group">
 					<form action="../index/index.php?page=test-result&tid=<?=$row['testid'];?>" method="post">
-						<select class="form-control form-control-sm" id="choice" name="choice" required>
+						<select class="form-control form-control-sm " id="choice" name="choice" required style=" width: 100px;">
 							<option selected disabled>你的選擇?</option>
 							<?php for($i = 0; $i < $num ; $i++ ){
 								echo '<option value="'.($i+1).'">'.$choice[$i].'</option>';}
@@ -58,9 +60,9 @@
 		<div class='row justify-content-center'>
 			<?php
 				for($i = 0; $i < $num ; $i++){ ?>
-				<div class="col-md-6">
+				<div class="col-md-6 col-sm-6 col-6">
 					<div class='op mid <?=$choice[$i]?>'>
-						<p class='test2-ww'><?=$row['choice'];?></p>
+						<p class='test3-ww'><?=$row['choice'];?></p>
 					</div>
 				</div>
 

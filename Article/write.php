@@ -204,26 +204,27 @@
 	<!-- 抓圖檔的資訊end -->
 
 	<!-- 動態加input -->
-	<script> 
-	var tag = new Array("tagtwo", "tagthree", "tagfour","tagfive");
-	var i = 0 ;
+	<script>
+		var count = 1;
+		var countMax = 5;
 
-	if(i<3){
-		function AddElement(mytype){ 
-			var mytype,TemO=document.getElementById("add"); 
-			var newInput = document.createElement("input");  
-			newInput.type=mytype;  
-			newInput.name=tag[i]; 
-			newInput.className="add-input"; //class
-			newInput.placeholder="不用輸入hashtag";
-			newInput.pattern="^[^#]+(?=.*[\u4e00-\u9fa5A-Za-z0-9]).{1,}$";
-			TemO.appendChild(newInput); //將元素追加到某個標籤内容中
-			var newline= document.createElement("br"); //建一个BR為了換行 
-			TemO.appendChild(newline); 
-			i = i + 1;
-		} 
-	}
-		
+		function AddElement(mytype){
+			if(count < countMax){
+				var mytype,TemO=document.getElementById("add"); 
+				var newInput = document.createElement("input");  
+				newInput.type=mytype;
+				newInput.name="input"+"count";
+				newInput.className="add-input"; //class
+				newInput.placeholder="不用輸入hashtag";
+				newInput.pattern="^[^#]+(?=.*[\u4e00-\u9fa5A-Za-z0-9]).{1,}$";
+				TemO.appendChild(newInput); //將元素追加到某個標籤内容中
+				var newline= document.createElement("br"); //建一个BR為了換行 
+				TemO.appendChild(newline);
+				count++;
+			}else{
+				alert("最多只能五個tag");
+			}
+		}
 	</script>
 	<!-- 動態加input end-->
 

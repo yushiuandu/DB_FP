@@ -139,11 +139,11 @@
     <!-- 此nickname資料框 end-->
 
 	<!-- 區塊title -->
-    <div class="row" style='width:90%; margin:30px auto 0px auto;'>
-        <div class="col-md-9">
-            <p style="font-size:20pt; font-weight:800; margin:0px;">文章區</P>
+    <div class="row" style="width:90%; margin:30px auto 5px auto;">
+        <div class="col-md-6 col-sm-6 col-5">
+            <p class="nickname-tit">文章區</P>
         </div>
-        <div class="col-md-3 right">
+        <div class="col-md-6 col-sm-6 col-7 right">
 			<!-- 熱門文章 -->
             <a href = "../index/index.php?page=nickname&uid=<?php echo $uid;?>&nhot=true">
 				<button type="button" class="btn btn-sm btn-info <?php if($nhot == true){echo 'active';}?>">HOT</button>
@@ -168,8 +168,6 @@
 
     <!-- 文章區 -->
     <div class="nickname" style='margin-top:0px;'>
-        <div class="art">
-
 			<?php 
 				if(isset($row['AId'])){
 					// 照熱門、最新功能待測
@@ -181,50 +179,53 @@
 					$result = mysqli_query($link,$sql);
 					while($row = mysqli_fetch_assoc($result)){
 			?>
+		
 			<!-- 簡圖內容(上) -->
 			<a href="../index/index.php?page=article&aid=<?php echo $row['AId']; ?>" style="color:black; text-decoration:none;">
-			<div class="row art-head mid">
-				<!-- 作者-->
-				<div class="col-md-10 col-sm-9 col-9 mid" style='padding:0px;'>
-					<div class='pic-container'>
-						<img src="./image/user.png" id="writer-pic">
+			<div class="art3">
+				<div class="row art-head mid">
+					<!-- 作者-->
+					<div class="col-md-10 col-sm-9 col-7 mid" style='padding:0px;'>
+						<div class='pic-container'>
+							<img src="./image/user.png" id="writer-pic">
+						</div>
+						<p style="display: inline; font-size:2vmin; margin:0px;"><?php echo $row['post_name'];?></p>
 					</div>
-					<p style="display: inline; font-size:2vmin; margin:0px;"><?php echo $row['post_name'];?></p>
+					<!-- 作者 end-->
+					
+					<!-- 按讚數 --> 
+					<div class="col-md-2 col-sm-3 col-5 right">
+						<h7 style="display: inline;"><?php echo $row['agree'];?></h7>
+						<img src="./image/good-white.png" class="img-fluid" id="good-pic">
+					</div>
+					<!-- 按讚數 end-->
 				</div>
-                <!-- 作者 end-->
-                
-				<!-- 按讚數 --> 
-				<div class="col-md-2 col-sm-3 col-3">
-					<h7 style="display: inline;"><?php echo $row['agree'];?></h7>
-					<img src="./image/good-white.png" class="img-fluid" id="good-pic">
+				<!-- 簡圖內容(上) end-->
+					
+				<!-- 簡圖內容(中) -->
+				<div class="row art-body mid">
+					<!-- 標題 -->
+					<div class="col-md-11 col-sm-11 col-11 col-lg-11 text-truncate">
+						<p class="font-weight-bold" style='font-size:3vmin; margin:0px;'><?php echo $row['title'];?></p>
+						<p style="color:gray; font-size:2vmin; margin:0px;font-family:jf-openhuninn;"><?php echo $row['excerpt'];?>
+						</p>
+					</div>
+					<!-- 標題 end -->
 				</div>
-				<!-- 按讚數 end-->
-			</div>
-			<!-- 簡圖內容(上) end-->
-				
-			<!-- 簡圖內容(中) -->
-			<div class="row art-body mid">
-				<!-- 標題 -->
-				<div class="col-md-11 col-sm-11 col-11 col-lg-11 text-truncate">
-					<p class="font-weight-bold" style='font-size:3vmin; margin:0px;'><?php echo $row['title'];?></p>
-					<p style="color:gray; font-size:2vmin; margin:0px;font-family:jf-openhuninn;"><?php echo $row['excerpt'];?>
-					</p>
+				<!-- 簡圖內容(中) end-->
+					
+				<!-- 簡圖內容(下) -->
+				<div class="row art-fotter mid">
+					<!-- 看板 - 發文時間 -->
+					<div class="col-md-12 col-sm-12 col-12">
+						<p style=' font-size:1.75vmin; margin:0px; color:gray;'>
+							感情版 - 5月12日 13:45
+						</p>
+					</div>
+					<!-- 看板 - 發文時間 end -->
 				</div>
-				<!-- 標題 end -->
-			</div>
-			<!-- 簡圖內容(中) end-->
-				
-			<!-- 簡圖內容(下) -->
-			<div class="row art-fotter mid">
-				<!-- 看板 - 發文時間 -->
-				<div class="col-md-12 col-sm-12 col-12">
-					<p style=' font-size:1.75vmin; margin:0px; color:gray;'>
-						感情版 - 5月12日 13:45
-					</p>
+				<!-- 簡圖內容(下) end-->
 				</div>
-				<!-- 看板 - 發文時間 end -->
-			</div>
-			<!-- 簡圖內容(下) end-->
 			</a>
 			<?php 
 						}//end while
@@ -236,7 +237,7 @@
 			<?php
 				}
 				?>
-        </div>
+        
 		<!-- 文章簡圖區 end-->
     </div>
 

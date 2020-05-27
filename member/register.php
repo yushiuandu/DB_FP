@@ -22,7 +22,7 @@
   <!-- 註冊頁面 -->
     <div id='register' >
     <!-- 左半邊 -->
-      <div id='re1'>
+      <div id='re1' class='d-none d-md-block'>
         <img src='./image/test.png' id="test-pic">
         <div id="slogan">想要交到契合的朋友嗎?</div>
         <div id="slogan">來抬槓用心理測驗</div>

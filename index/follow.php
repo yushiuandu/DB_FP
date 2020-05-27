@@ -107,7 +107,7 @@
     <!-- 追蹤人、TAG -->
     <div class="row justify-content-center">
         <!-- 追蹤的人 -->
-        <div class="col-md-6">
+        <div class="col-md-6" style="margin-bottom:20px;">
             <!-- title -->
             <div class='tit'>
                 <p class='ww'>追蹤的人</p>

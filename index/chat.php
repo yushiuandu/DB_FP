@@ -64,15 +64,17 @@
 		<!-- 聊天室的頭 -->
 		
 		<div class="chat-head">
-			<div class="row">
-				<div class="col-md-6">
-					<p style='position:relative; top:35px; font-size:18pt; font-weight:600;'><?php echo $other_name; ?></p>
+			<div class="row mid">
+				<div class="col-md-6 col-sm-6 col-6">
+					<p style='font-size:18pt; font-weight:600; margin:0px;'><?php echo $other_name; ?></p>
 				</div>
 
-				<div class="col-md-6">
-					<a href="../index/index.php?page=nickname&uid=<?php echo $other;?>">
-					<img src="data:pic/png;base64,<?=base64_encode($row_pic_other["profile"]);?>" class="img-fluid rounded-circle" id="chat-pic">   
-					</a>      
+				<div class="col-md-6 col-sm-6 col-6 right">
+					<div class="chat-con">
+						<a href="../index/index.php?page=nickname&uid=<?php echo $other;?>">
+						<img src="data:pic/png;base64,<?=base64_encode($row_pic_other["profile"]);?>" id="chat-pic">   
+						</a>
+					</div>    
 				</div>
 			</div>
 		</div>
@@ -122,9 +124,9 @@
 		<!-- 聊天室的中間段(對話區) -->
 		<!-- 聊天室的尾段(輸入區) -->
 		<div class="chat-fotter">
-			<form method="post" >
+			<form method="post" style="position: relative; left: 15px;">
 				<input id="chat" name="chat" type="text" placeholder='說點什麼吧...'>
-				<button type="submit" data-url="../index/addchat.php?send=<?php echo $other;?>" class="btn btn-secondary btn-sm my-1" id="chat_sub">傳送</button>
+				<button type="submit" data-url="../index/addchat.php?send=<?php echo $other;?>" style="margin-left: 10px;" class="btn btn-secondary btn-sm my-1" id="chat_sub">傳送</button>
 			</form>
 		</div>
 		<!-- 聊天室的尾段(輸入區) -->

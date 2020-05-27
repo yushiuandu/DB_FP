@@ -87,7 +87,7 @@
 
         <!-- 全部收藏 -->
         <div class="row justify-content-center">
-            <div class="col-md-12 long">
+            <div class="col-lg-6 col-md-12" style="margin-bottom:20px;">
                 <div class='tit'>
                     <p class='ww'>全部收藏</p>
                 </div>
