@@ -9,7 +9,46 @@
     include("../index/forum.php");
 	$uid = "";
 	if(isset($_SESSION['nickname'])){
-		$uid = finduid($_SESSION['nickname']);
+        $uid = finduid($_SESSION['nickname']);
+    }
+
+    if(isset($_GET['NId'])){
+        $sql = "UPDATE `notification` SET `is_read` = 1 WHERE `NId` = '$_GET[NId]'";
+        mysqli_query($link,$sql);
+        header("Location:../index/index.php?page=bell");
+    }
+
+    if(isset($_GET['delfriend'])){
+        session_start();
+        $delfriend = $_GET['delfriend'];
+        if(isset($_SESSION['nickname'])){
+            $uid = finduid($_SESSION['nickname']);
+        }
+        echo $delfriend;
+        echo $uid;
+
+        $sql = "DELETE FROM `friend` WHERE `UId` = '$uid' and `otherid` = '$delfriend'";
+        if(!(mysqli_query($link,$sql))){
+            mysqli_error();
+        }
+
+        $sql = "DELETE FROM `friend` WHERE `UId` = '$delfriend' and `otherid` = '$uid'";
+        if(!(mysqli_query($link,$sql))){
+            mysqli_error();
+        }
+
+        $content = "嗚嗚嗚。。你的對象不選擇跟你繼續聊天。。";
+        $sql = "UPDATE `notification` SET `content`='$content', `type` = 10 , `is_read` = 0
+                WHERE `UId`= '$delfriend' AND `type` = 9 AND `friendid` = '$uid'";
+        if(!(mysqli_query($link,$sql))){
+            mysqli_error();
+        }       
+
+        if(isset($_GET['NId'])){
+            $sql = "UPDATE `notification` SET `is_read` = 1 WHERE `NId` = '$_GET[NId]'";
+            mysqli_query($link,$sql);
+            header("Location:../index/index.php?page=bell");
+        }
     }
 
     
@@ -64,21 +103,34 @@
                         $image = "../index/image/article.png";
                     }//end type 6
                     
-                    if($row['type'] == 8){
+                    if($row['type'] == 8 ){
                         $link_url = "../index/index.php?page=friend&NId=".$row['NId'];
                         $image = "../index/image/new-friend.png";
                     }//end type 8
+                    if($row['type'] == 9){
+                        $image = "../index/image/new-friend.png";
+                    }
+                    if($row['type'] == 10){
+                        $link_url = "../index/index.php?page=bell";
+                        $image = "../index/image/sad.png";
+                    }//end type 6
         ?>
         <!-- 一則通知 -->
         
-        <div class="bell pointer notify" onclick="location.href='<?=$link_url;?>';">
+        <div class="bell pointer notify" <?php if($row['type'] != 9){?>onclick="location.href='<?=$link_url;?>';"<?php }?>>
         <a href="../index/bell.php?nid=<?=$row["NId"];?>"> </a>            <!-- 有新的追蹤者 -->
             <div class="row justify-content-center">
                 <div class="col-md-2">
                     <img src='<?=$image;?>' style='width:50px; height:50px;'>
                 </div>
                 <div class="col-md-10 mid">
-                    <p style='margin:0px;'><?=$row['content'];?></p>
+                    <?php if($row['type'] == 9){
+                        $friendid = $row['friendid'];
+                        $NId = $row['NId'];
+                        echo '<p style="margin:0px;" data-toggle="modal" data-target="#match">'.$row['content'].'</p>';
+                    }else{
+                        echo '<p style="margin:0px;">'.$row['content'].'</p>';
+                    } ?>
                 </div>
             </div>
             <!-- 有新的追蹤者 end -->
@@ -98,7 +150,87 @@
         </div>
         <?php }
         ?>
+        <!--配對畫面-->
+        <?php
+        if(isset($friendid)){
+            $sql = "SELECT COUNT(article.AId) as anum ,member.Nickname as nickname ,COUNT(`follow_id`) as follow
+                            ,member.profile as profile , member.Name as name, member.Fans_num as fans_num
+                    FROM `member` JOIN `article` JOIN `follow`
+                    WHERE member.UId = '$friendid' and  article.UId = '$friendid' and  follow.UId = '$friendid'  ";
+            $result = mysqli_query($link,$sql);
+            $row = mysqli_fetch_assoc($result);
+        }
+            
+        ?>
+                <!-- data-backdrop點背景不會關閉視窗/data-keyboard可用esc關閉 -->
+				<div class="modal fade bd-example-modal-sm match-ww" id="match" aria-hidden="true" data-backdrop="static" data-keyboard="true">
+					<div class="modal-dialog modal-dialog-centered"> <!--centered重直置中-->
+						<div class="modal-content match-page"> 
+                            <!-- 配對頁面內容 -->
+                            <p class="match-title">夢中情人</p>
+							<div class="modal-body match-con">
+                                <div class="row justify-content-center">
+                                    <!-- 配對到的人照片 -->
+                                    <div class="col-md-7 mid">
+                                        <img class='match-pic' src='data:pic/png;base64,<?=base64_encode($row["profile"]);?>'>
+                                    </div>
+                                    <!-- 配對到的人簡介 -->
+                                    <div class="col-md-5 match-intro left">
+                                        <p class='match-ww'>姓名：　　<?=$row['name'];?></p>
+                                        <p class='match-ww'>暱稱：　　<?=$row['nickname'];?></p>
+                                        <p class='match-ww'>文章：　　<?=$row['anum'];?>篇</p>
+                                        <p class='match-ww'>追蹤者：　<?=$row['follow'];?>個</p>
+                                        <p class='match-ww'>追隨者：　<?=$row['fans_num'];?>個</p>
+                                    </div>
+                                </div>
+							</div>
+							<!--下面選項-->
+							<div class='match-fotter'>
+                                <!-- 開始聊天 -->
+								<button class="btn btn-secondary">
+                                    <a href='../index/index.php?page=chat&other=<?=$friendid;?>&NId=<?=$NId;?>' class='link-ww'>開始聊天</a>
+                                </button>
+                                <!-- 拒絕聊天 -->
+                                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#match2">下次再說...</button>
+                                <div class="modal fade bd-example-modal-sm match-ww" id="match2" aria-hidden="true" data-backdrop="static" data-keyboard="true">
+                                    <div class="modal-dialog modal-dialog-centered"> <!--centered重直置中-->
+                                        <div class="modal-content match-page"> 
+                                            <!-- 配對頁面內容 -->
+                                            <p class="match-title">Oh...No...</p>
+                                            <div class="modal-body match-con">
+                                                <img src='../index/image/cry.png' class='sorry-pic'></img>
+                                                <p class='match-ww'>你錯過進一步認識他/她的機會</p>
+                                            </div>
+                                            <!--下面選項-->
+                                            <div class='match-fotter'>
+                                                <!-- bye -->
+                                                <button type="button" id="byebye" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+						</div>
+					</div>
+				</div>
+				<!--配對頁面end-->
     </div>
+    <script>
+    
+        $("#byebye").click(function(){
+			var url = "../index/bell.php?delfriend=<?=$friendid;?>&NId=<?=$NId;?>";
+			
+			console.log(url);
+
+			$.ajax({
+				type: 'POST',
+				url: url,
+				data: {type : "ajax"},
+				dataType :"json",
+			});
+		});
+    
+    </script>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

@@ -83,7 +83,8 @@
 <?php
 	if(isset($_GET['edit'])){
 		$aid = $_GET['edit'];
-		$sql = "UPDATE `article` SET `title` = \"$_POST[title]\", `content` = \"$_POST[content]\" WHERE `AId` = \"$aid\"";
+		$excerpt = substr( $_POST['content'] , 0 , 200 );
+		$sql = "UPDATE `article` SET `title` = \"$_POST[title]\", `content` = \"$_POST[content]\", excerpt = \"$excerpt\" WHERE `AId` = \"$aid\"";
 		
 		$sql_f = "SELECT `UId` FROM `follow` WHERE `AId` = '$aid'";
 		$result = mysqli_query($link,$sql_f);
