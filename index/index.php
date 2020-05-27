@@ -331,7 +331,7 @@
 						if($follow == 'true'){
 							if($forum!="all"){
 								echo '<a class="dropdown-item" href="../index/index.php?page=index&id='.$forum.'&follow=true&hot=true">熱門</a>';
-								echo '<a class="dropdown-item" href="../index/index.php?page=index&id='.$forum.'follow=true&latest=true">最新</a>';
+								echo '<a class="dropdown-item" href="../index/index.php?page=index&id='.$forum.'&follow=true&latest=true">最新</a>';
 							}else{
 								echo '<a class="dropdown-item" href="../index/index.php?page=index&follow=true&hot=true">熱門</a>';
 								echo '<a class="dropdown-item" href="../index/index.php?page=index&follow=true&latest=true">最新</a>';
@@ -368,7 +368,7 @@
 					if($latest == 'true'){
 						$sql = 	"SELECT *
 								FROM `follow` JOIN `article` JOIN `member`
-								WHERE follow.UId = \"$uid\" AND follow.AId = article.AId AND article.UId = member.UId AND article.category = '$fourm'
+								WHERE follow.UId = \"$uid\" AND follow.AId = article.AId AND article.UId = member.UId AND article.category = '$forum'
 								ORDER BY article.post_time DESC";
 					}else if($hot == 'true'){
 						$sql = 	"SELECT *
