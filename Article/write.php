@@ -1,5 +1,5 @@
 <?php
-	
+	$img = 0;
 	// 設定時間
 	date_default_timezone_set('Asia/Taipei');
 
@@ -16,6 +16,8 @@
 
 	
 	if($write == 'true'){
+		$imgur = $_GET['img'];
+		
 		$tag = array("tag","tagtwo", "tagthree", "tagfour", "tagfive");
 		$i  = 0;
 
@@ -105,7 +107,7 @@
 		<p class='board'>寫篇文章吧</p>
 	</div>
 	<div class='write'>
-		<form method='post' action='../Article/write.php?write=true'>
+		<form method='post' action='../Article/write.php?write=true&img=<?=$img;?>'>
 			<div class="form-group row">
 				<label class="col-sm-3 col-form-label">選擇名稱</label>
 				<div class="col-sm-9">
@@ -163,21 +165,21 @@
 			</div>
 
 		</form>
-		<form id = "form1" action="../Article/img.php" method="POST" enctype="multipart/form-data">
+		<!-- <form id = "form1" action="../Article/img.php" method="POST" enctype="multipart/form-data"> -->
 			<div class="form-group row">
 				<label class="col-sm-3 col-3 col-form-label">傳送圖檔</label>
 				<div class="col-sm-9 col-9">
 					<label>
 						<img src='../index/image/add-image.png' class='write-pic'>
 						<span id="file_name"></span>
-						<input Type="File" Name="YouFile" class='write-file pointer' id='FileInput'>
+						<input Type="File" name="YouFile" class='write-file pointer' id='FileInput'>
 					</label>
 				</div>
 			</div>
 			<div class='right'>
-				<button id="sub" type="submit" class="btn btn-info font-weight-bold">發送</button>
+				<button id="sub" data-url="../Article/img.php" class="btn btn-info font-weight-bold">發送</button>
 			</div>
-		</form>
+		<!-- </form> -->
 
 		<p id="check"></p>
 	</div>
@@ -249,32 +251,42 @@
 			}
 
 			
-		$( "#form1" ).on( "submit", function( e ) {
-			var form = $(this);
-			var url = form.attr('action');
-			console.log(form.serialize());
+		$("#sub").click( function(e){
+			var url = $(this).data("url");
 
+			var file_data = $('#FileInput').prop('files')[0];   //取得上傳檔案屬性
+			var form_data = new FormData();  //建構new FormData()
+			// console.log(form_data);
+			form_data.append('YouFile', file_data);  //吧物件加到file後面
+			console.log(form_data);
 			$.ajax({
 				type: "POST",
 				url: url,
-				data:form.serialize(),
-				dataType :"json"
+				data:form_data,
+				dataType :"json",
+				cache: false,
+                contentType: false,
+                processData: false,
             }).done(function(data) {
 				console.log(data);
 				if(data['success'] == "OK"){
-					$('#text').val($('#text').val() + 'hi');
-						// console.log(f);
-					}else if(data['success'] == "NO"){
-						$('#text').val($('#text').val() + 'no');
-						// console.log("white");
-					}
+					<?php $img = $img + 1;?>
+					var imgid = data['imgid'];
+					var content = '<blockquote  class="imgur-embed-pub" lang="en" data-id="'+imgid+'"><a href="//imgur.com//'+imgid+'"></a></blockquote>';
+					
+					$('#text').val($('#text').val() + content);
+				}else if(data['success'] == "NO"){
+					$('#text').val($('#text').val() + '圖片未上傳成功');
+						
+				}
 			});
-
-			e.preventDefault(); // avoid to execute the actual submit of the form.
 			
 		});
 
 	</script>
+		
+
+		
 		
 		<!-- Optional JavaScript -->
 		<!-- jQuery first, then Popper.js, then Bootstrap JS -->

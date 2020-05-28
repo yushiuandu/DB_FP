@@ -16,14 +16,30 @@
 	if(isset($_GET['group'])){
 		$group = $_GET['group'];
 		
-		$sql = "INSERT INTO `save`(`UId`,`AId`,`save_group`) VALUES ('$uid', '$_SESSION[aid]','$group')";
+		$sql = "INSERT INTO `save` (`UId`,`AId`,`save_group`) VALUES ('$uid','$_SESSION[aid]','$group')";
 		if(mysqli_query($link,$sql)){
 			if($_POST['type'] == 'ajax'){
-				exit(json_encode(array("success"=>"SAVE_OK")));
+				exit(json_encode(array("success"=>"OK")));
 			}
 		}else{
 			echo 'failQQ';
 		}
+	}else if(isset($_GET['delgroup'])){
+		$group = $_GET['delgroup'];
+
+		$sql = "DELETE FROM `save_group` WHERE `UId` = '$uid' AND `save_group` = '$group'";
+		
+		if(mysqli_query($link,$sql)){
+			$sql = "DELETE FROM `save` WHERE `UId` = '$uid' AND `save_group` = '$group'";
+			
+			if(mysqli_query($link,$sql)){
+				header("Location:../index/index.php?page=collect");
+				exit;
+			}
+		}else{
+			echo 'failQQ';
+		}
+
 	}else{ // 從收藏刪除
 		$sql = "DELETE FROM `save` WHERE `UId` = '$uid' AND `AId` = '$_SESSION[aid]'";
 		if(mysqli_query($link,$sql)){

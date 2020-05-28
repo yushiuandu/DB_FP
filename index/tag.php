@@ -43,8 +43,6 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <link href="../index/my.css" rel="stylesheet" type="text/css">
         <title>抬槓</title>
-        <script src="//s3-ap-northeast-1.amazonaws.com/justfont-user-script/jf-60019.js"></script>
-        <script src="//s3-ap-northeast-1.amazonaws.com/justfont-user-script/jf-60019.js"></script>
 
     </head>
 
@@ -123,20 +121,22 @@
 				<!-- 簡圖內容(上) -->
 				<div class="row art-head mid">
 					<!-- 作者-->
-					<div class="col-md-10 col-sm-9 col-9">
+					<div class="col-md-10 col-sm-9 col-9" style='padding:0px;'>
 						<!-- 作者頭像 -->
+						<div class='pic-container'>
 						<?php 
 							if($row['anonymous'] == 1){
 								echo '<a href="../index/index.php?page=nickname&uid='.$row['UId'].'">';	
 						?>
-							<img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic"></a>
+							<img src="data:pic/png;base64,<?=base64_encode($row["profile"]);?>"` id="writer-pic"></a>
 						<?php
 							}else{ ?>
-								<img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic">
+								<img src="../index/image/user.png"` id="writer-pic">
 						<?php	}//end else
 						?>
+						</div>
 						<!-- 作者名稱 -->
-						<p style="display: inline; font-size:2vmin; margin:0px;">
+						<p class='name'>
 							<?php
 								if ($row['anonymous'] == 0){
 									echo '匿名';
@@ -155,26 +155,22 @@
 
 						
 							if(isset($_SESSION['nickname'])){
-								$sql_good = "SELECT ISNOT FROM good WHERE `UId` = \"$uid\" AND `AId` = \"$row[AId]\"";
+								$sql_good = "SELECT * FROM `good` WHERE `UId` = \"$uid\" AND `AId` = \"$row[AId]\"";
 								$result_good = mysqli_query($link,$sql_good);
 								$row_good = mysqli_fetch_assoc($result_good);
-									
-								if(isset($row_good['ISNOT'])){
+								$num = mysqli_num_rows($result_good);
 
-									echo '<a href = "../Article/good.php?aid='.$row['AId'].'&is_index=true">';
-									if(($row_good['ISNOT']== 1)){
-										echo '<img src="./image/good-black.png" class="img-fluid" id="good-pic"></a>';
-									}else if($row_good['ISNOT'] == 0){
-										echo '<img src="./image/good-white.png" class="img-fluid" id="good-pic"></a>';
-									}
-								}else{
-									echo '<a href = "../Article/good.php?aid='.$row['AId'].'&is_index=true">';
-									echo '<img src="./image/good-white.png" class="img-fluid" id="good-pic"></a>';
-								}
+								$Link = "../Article/good.php?aid=".$row['AId'];
+								
+								if($num > 0){
+									echo '<img src="../index/image/good-black.png" class="good_article img-fluid " data-url="'.$Link.'" id="good-pic">';
 							}else{
-								echo '<img src="./image/good-white.png" class="img-fluid" id="good-pic">';
+								echo '<img src="../index/image/good-white.png" class="good_article img-fluid" data-url="'.$Link.'" id="good-pic">';
 							}
-						?>
+						}else{
+							echo '<img src="../index/image/good-white.png" class="img-fluid" id="good-pic">';
+						}
+					?>
 						<!-- <img src="./image/good-white.png" class="img-fluid" id="good-pic"> -->
 					</div>
 					<!-- 按讚數 end-->
@@ -208,6 +204,7 @@
 					<div class="col-md-12 col-sm-12 col-12">
 						<p style=' font-size:1.75vmin; margin:0px; color:gray;'>
 							<?php
+								$category = findForum($row['category']);
 								echo "<a href = '../index/index.php?page=index&id=".$row['category']."' style = 'color:gray;text-decoration:none;'>".$category."</a>";
 								echo ' - ';
 								echo date('Y-m-d H:i',strtotime($row['post_time']));

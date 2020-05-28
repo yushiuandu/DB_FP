@@ -45,6 +45,7 @@
 	$category = findForum($forum);
 	// 時區宣告
 	date_default_timezone_set('Asia/Taipei');
+	// 每過一天就刪除心理測驗結果
 	// $datetime = date ("H:i:s" , mktime(date('H'), date('i'), date('s'))) ;
 	// if($datetime >= "23:33:00"){
 	// 	$sql_del ="DELETE FROM `user_ans`";
@@ -180,7 +181,7 @@
 					<!-- 登入畫面end -->
 			</div>
 		</div>
-		<!-- 導覽列end -->`
+		<!-- 導覽列end -->
 	</div>
 	
   <div class="row">
@@ -399,11 +400,16 @@
 				<div class='mid'>
 					<!-- 全部文章 -->
 					<a href="../index/index.php?page=index&id=all&hot=true">
-						<button type="button" class="btn btn-sm btn-info <?php if($forum == 'all'){echo 'active';}?>">全部文章</button> 
+						<button type="button" class="btn btn-sm btn-info <?php if($follow == 'false'){echo 'active';}?>">全部文章</button> 
 					</a> 
 					<?php if(isset($_SESSION['nickname'])){?>
 					<!-- 追蹤文章 -->
-					<a href="../index/index.php?page=index&follow=true&hot=true&id=follow">
+					<?php if($forum == 'all'){?>
+						<a href="../index/index.php?page=index&follow=true&hot=true">
+					<?php }else{ ?>
+						<a href="../index/index.php?page=index&id=<?=$forum;?>&follow=true&hot=true">
+					<?php }?>
+					
 						<button type="button" class="btn btn-sm btn-info <?php if($follow == 'true'){echo 'active';}?>">追蹤文章</button>
 					</a>
 					<?php }?>
@@ -412,9 +418,17 @@
 						排序</button>
 					<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
 					<?php
-						if(!(isset($forum))){
+						if($follow == 'true'){
+							if($forum!="all"){
+								echo '<a class="dropdown-item" href="../index/index.php?page=index&id='.$forum.'&follow=true&hot=true">熱門</a>';
+								echo '<a class="dropdown-item" href="../index/index.php?page=index&id='.$forum.'&follow=true&latest=true">最新</a>';
+							}else{
+								echo '<a class="dropdown-item" href="../index/index.php?page=index&follow=true&hot=true">熱門</a>';
+								echo '<a class="dropdown-item" href="../index/index.php?page=index&follow=true&latest=true">最新</a>';
+							}
+						}else if(!(isset($forum))){
 							echo '<a class="dropdown-item" href="../index/index.php?page=index&id=all&hot=true">熱門</a>';
-							echo '<a class="dropdown-item" href="../index/index.php?page=index&id=all&latestt=true">熱門</a>';
+							echo '<a class="dropdown-item" href="../index/index.php?page=index&id=all&latest=true">最新</a>';
 						}else{
 							echo '<a class="dropdown-item" href="../index/index.php?page=index&id='.$forum.'&hot=true">熱門</a>';
 							echo '<a class="dropdown-item" href="../index/index.php?page=index&id='.$forum.'&latest=true">最新</a>';
@@ -435,7 +449,30 @@
 		<?php
 			// 追蹤文章排序
 			if($follow == 'true'){ 
-				$sql = "SELECT `AId` FROM `follow` WHERE `UId` = \"$uid\" AND `AId` !='NULL'";
+				$sql = "SELECT *
+						FROM `follow` JOIN `article` JOIN `member`
+						WHERE follow.UId = \"$uid\" AND follow.AId = article.AId AND article.UId = member.UId
+						ORDER BY article.agree DESC";
+
+				if($forum != 'all'){
+					if($latest == 'true'){
+						$sql = 	"SELECT *
+								FROM `follow` JOIN `article` JOIN `member`
+								WHERE follow.UId = \"$uid\" AND follow.AId = article.AId AND article.UId = member.UId AND article.category = '$forum'
+								ORDER BY article.post_time DESC";
+					}else if($hot == 'true'){
+						$sql = 	"SELECT *
+								FROM `follow` JOIN `article` JOIN `member`
+								WHERE follow.UId = \"$uid\" AND follow.AId = article.AId AND article.UId = member.UId AND article.category = '$forum'
+								ORDER BY article.agree DESC";
+					}
+				}else if($latest == "true"){
+					$sql = 	"SELECT *
+							FROM `follow` JOIN `article` JOIN `member`
+							WHERE follow.UId = \"$uid\" AND follow.AId = article.AId AND article.UId = member.UId 
+							ORDER BY article.post_time DESC";
+				}
+				
 			}
 			// 所有文章排序
 			else if($forum == 'all'){
@@ -444,6 +481,7 @@
 				}else if($hot == "true"){
 					$sql = "SELECT * FROM `article` JOIN `member` WHERE article.UId = member.UId ORDER BY `agree` DESC";
 				}
+				
 			}
 			// 看板裡的文章排序
 			else{
@@ -463,11 +501,11 @@
 					$aid = $row['AId'];
 					#找到UId
 
-					if($follow == 'true'){
-						$sql_follow = "SELECT * FROM `article` WHERE `AId` = \"$aid\"";
-						$result_follow = mysqli_query($link,$sql_follow);
-						$row = mysqli_fetch_assoc($result_follow);
-					}
+					// if($follow == 'true'){
+					// 	$sql_follow = "SELECT * FROM `article` WHERE `AId` = \"$aid\"";
+					// 	$result_follow = mysqli_query($link,$sql_follow);
+					// 	$row = mysqli_fetch_assoc($result_follow);
+					// }
 					$category = findForum($row['category']);
 		?>
 		<!-- 文章簡圖區 -->
@@ -855,9 +893,13 @@
 						// $(".Count").eq(count).html("1");
 						$(".good_article").eq(good).attr("src","../index/image/good-black.png");
 						console.log(good);
+						var count = data['likecount'];
+						$(".count").eq(good).html(count);
 						// console.log(good_c);
 					}else if(data['success'] == "DEL_OK"){
 						$(".good_article").eq(good).attr("src","../index/image/good-white.png");
+						var count = data['likecount'];
+						$(".count").eq(good).html(count);
 						
 					}
 				});
@@ -899,5 +941,16 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" rel="stylesheet"  />
 </body>
+  </body>
+  <!-- iRLijyf
+RCDrTZQ
+KuTKOqE
+B5rugAA
+0POa4oS 
+VuMgGoG
+rqrxJuL
+1EGea02
+fSvSan9
+-->
   
 </html>

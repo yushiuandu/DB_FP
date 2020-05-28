@@ -34,6 +34,15 @@
 		$cid = $_GET['edit'];
 	}
 
+	// 收藏文章新增分類
+	if(isset($_GET['collect'])){
+		$group = $_POST['collect'];
+		$sql = "INSERT INTO `save_group`( `UId`, `save_group`) VALUES (\"$uid\",'$group')";
+		if(mysqli_query($link,$sql)){
+			exit(json_encode(array("success"=>"OK","group"=>$group,"UId"=>$uid)));
+		}
+	}
+
 	#顯示文章
 	$sql = "SELECT * FROM `article` JOIN `member` WHERE `AId` = \"$aid\" AND article.UId = member.UId";
 	$result = mysqli_query($link,$sql);
@@ -42,14 +51,6 @@
 		// include("../index/forum.php");   //將分類變成中文
 		$row = mysqli_fetch_assoc($result);
 		$category = findForum($row['category']);
-
-	if(isset($_GET['collect'])){
-		$group = $_POST['collect'];
-		$sql_g = "INSERT INTO `save_group` (`save_group`) VALUES ('$group')";
-		if(mysqli_query($link,$sql_g)){
-			exit(json_encode(array("success"=>"OK","group"=>$group)));
-		}
-	}
 		
 ?>
 
@@ -166,7 +167,7 @@
 			<!-- 按鈕們-->
 			<div class="col-md-12 col-sm-12 col-12">
 				<!-- 文章按讚數 -->
-				<p style="display: inline; margin:0px; font-size:16pt; position:relative; top:5px; left:5px;"><?php echo $row['agree'];?></p>
+				<p class="count" style="display: inline; margin:0px; font-size:16pt; position:relative; top:5px; left:5px;"><?php echo $row['agree'];?></p>
 				<?php 
 					if(isset($_SESSION['nickname'])){
 						$sql_good = "SELECT * FROM `good` WHERE `UId` = \"$uid\" AND `AId` = \"$row[AId]\"";
@@ -222,6 +223,7 @@
 							// 未收藏
 				?>
 						<img class="pointer gbb" id="save" src="../index/image/bookmark-white.png" title="追蹤" data-toggle="modal" data-target="#collect">
+						<?php		} //end num if?>
 						<!-- 彈跳視窗 -->
 						<div class="modal fade bd-example-modal-sm match-ww middle" id="collect" aria-hidden="true">
 							<div class="modal-dialog modal-dialog-centered"> <!--centered重直置中-->
@@ -241,13 +243,14 @@
 
 										<!-- 分類選項 -->
 										<div class='collect' id="collect_button">
+										<button type="button" data-url="../Article/save.php?group=ALL" class="save_c btn collect-btn" data-dismiss="modal">全部</button>
 											<?php 
-												$sql = "SELECT * FROM `save_group` ";
+												$sql = "SELECT * FROM `save_group` WHERE `UId` = '$uid'";
 												$result_save = mysqli_query($link,$sql);
 												while($row_s = mysqli_fetch_assoc($result_save)){
 													$Link = "../Article/save.php?group=".$row_s['save_group'];
 												?>
-											<button type="button" data-url="<?=$Link?>" class="save_c btn collect-btn"><?=$row_s['save_group'];?></button>
+											<button type="button" data-url="<?=$Link?>" class="save_c btn collect-btn" data-dismiss="modal"><?=$row_s['save_group'];?></button>
 											<?php }//end while?>
 										</div>	
 										<!-- 分類end -->
@@ -265,7 +268,7 @@
 							<!-- 置中end -->
 						</div>
 						<!-- model end -->
-				<?php		}
+				<?php		
 					}else{
 						echo '<img class="pointer gbb"  src="../index/image/bookmark-white.png" title="追蹤">';
 					}
@@ -357,7 +360,7 @@
 
 					<!-- 熱門按讚數 --> 
 					<div class="col-md-3 col-sm-3 col-5 right" id = 'test'>
-						<p style="display: inline; font-size:2.5vmin; font-weight:400; font-family:jf-openhuninn;"><?php echo $row_hot['likeCount'];?></p>
+						<p class="count" style="display: inline; font-size:2.5vmin; font-weight:400; font-family:jf-openhuninn;"><?php echo $row_hot['likeCount'];?></p>
 						<?php 
 							if(isset($_SESSION['nickname'])){
 								$sql_good = "SELECT * FROM good WHERE `UId` = \"$uid\" AND `CId` = \"$row_hot[CId]\"";
@@ -471,7 +474,7 @@
 					<!-- 留言按讚數 --> 
 					<div class="col-md-3 col-sm-3 col-5">
 					<?php if($row_c['anonymous']!=2){?>
-						<p style="display: inline; font-size:2.5vmin; font-weight:400; font-family:jf-openhuninn;"><?php echo $row_c['likeCount'];?></p>
+						<p class="count" style="display: inline; font-size:2.5vmin; font-weight:400; font-family:jf-openhuninn;"><?php echo $row_c['likeCount'];?></p>
 						<?php 
 							if(isset($_SESSION['nickname'])){
 								$sql_good = "SELECT * FROM good WHERE `UId` = \"$uid\" AND `CId` = \"$row_c[CId]\"";
@@ -659,11 +662,14 @@
 				dataType :"json",
 			}).done(function( data ) {
 				console.log(data);
-				if(data['success'] == "SVAE_OK"){
-						$('#miss').click();
-						$("#save").attr("src","../index/image/bookmark-black.png");
-					}else if(data['success'] == "SAVE_DEL_OK"){
-						$("#save").attr("src","../index/image/bookmark-white.png");
+				if(data["success"] == "OK"){
+					console.log(data);
+					$("#save").attr("src","../index/image/bookmark-black.png");
+					}else if(data["success"] == "SAVE_DEL_OK"){
+						$("#save").attr({
+							"src":"../index/image/bookmark-white.png",
+							"data-toggle":"modal",
+							"data-target":"#collect"});
 					}
 			});
 		});
@@ -680,7 +686,10 @@
 				if(data["success"] == "SAVE_OK"){
 						$("#save").attr("src","../index/image/bookmark-black.png");
 					}else if(data["success"] == "SAVE_DEL_OK"){
-						$("#save").attr("src","../index/image/bookmark-white.png");
+						$("#save").attr({
+							"src":"../index/image/bookmark-white.png",
+							"data-toggle":"modal",
+							"data-target":"#collect"});
 					}
 			});
 		});
@@ -702,12 +711,14 @@
 				console.log(data);
 				if(data['success'] == "OK"){
 					console.log(data);
-					var like = data['likecount'];
 					$(".good").eq(good).attr("src","../index/image/good-black.png");
+					var count = data['likecount'];
+					$(".count").eq(good).html(count);
 					console.log(good);
 				}else if(data['success'] == "DEL_OK"){
-					var like = data['likecount'];
 					$(".good").eq(good).attr("src","../index/image/good-white.png");
+					var count = data['likecount'];
+					$(".count").eq(good).html(count);
 				}
 			});
         });
@@ -726,7 +737,7 @@
 				console.log(data);
 				if(data['success'] == "OK"){
 					var group = data['group'];
-					var content = '<button type="button" data-url="../Article/save.php?group='+group+'" class="save_c btn collect-btn">'+group+'</button>';
+					var content = '<button type="button" data-url="../Article/save.php?group='+group+'" data-dismiss="modal" class="save_c btn collect-btn">'+group+'</button>';
 					console.log(content);
 					$('#collect_button').append(content);
 				}

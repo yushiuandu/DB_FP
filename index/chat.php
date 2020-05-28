@@ -15,13 +15,18 @@
 	}
 	if(isset($_GET['other'])){
 		$other = $_GET['other'];
+
 	}
 
+	if(isset($_GET['NId'])){
+        $sql = "UPDATE `notification` SET `is_read` = 1 WHERE `NId` = '$_GET[NId]'";
+        mysqli_query($link,$sql);
+	}
 	// 找到對方的綽號
-	$sql = "SELECT `nickName` FROM `member` WHERE `UId` = \"$other\"";
+	$sql = "SELECT `Nickname` FROM `member` WHERE `UId` = \"$other\"";
 	$result = mysqli_query($link,$sql);
 	$row = mysqli_fetch_assoc($result);
-	$other_name = $row['nickName'];
+	$other_name = $row['Nickname'];
 
 	//找尋聊天紀錄
 	$sql = "SELECT * FROM `chat` 
@@ -53,11 +58,11 @@
 		<title>抬槓</title>
 		<script src="//s3-ap-northeast-1.amazonaws.com/justfont-user-script/jf-60019.js"></script>
 		<script src="//s3-ap-northeast-1.amazonaws.com/justfont-user-script/jf-60019.js"></script>
-
 	</head>
   <!-- 聊天室 -->
 	<body>
 		<!-- 聊天室的頭 -->
+		
 		<div class="chat-head">
 			<div class="row mid">
 				<div class="col-md-6 col-sm-6 col-6">
@@ -75,11 +80,16 @@
 		</div>
 		<!-- 聊天室的頭 end -->
 		<!-- 聊天室的中間段(對話區) -->
-		<div class="chat-body">
+		<div class="chat-body" id="chatting">
 
 			<?php 
 				if((mysqli_num_rows($result)) > 0 ){
 					while($row = mysqli_fetch_assoc($result)){
+						if($row['is_read'] == 0){
+							$sql_2 = "UPDATE `chat` SET `is_read` = 1 WHERE `CId` = '$row[CId]'";
+							mysqli_query($link,$sql_2);
+						}
+						
 						if($row['UId'] == $other){
 			?>
 			<!-- 對方的對話框 -->
@@ -114,13 +124,90 @@
 		<!-- 聊天室的中間段(對話區) -->
 		<!-- 聊天室的尾段(輸入區) -->
 		<div class="chat-fotter">
-			<form action="../index/chat.php?send=<?php echo $other;?>" method="post" style="position: relative; left: 15px;">
+			<form method="post" style="position: relative; left: 15px;">
 				<input id="chat" name="chat" type="text" placeholder='說點什麼吧...'>
-				<button type="submit" class="btn btn-secondary btn-sm my-1" style="margin-left: 10px;">傳送</button>
+				<button type="submit" data-url="../index/addchat.php?send=<?php echo $other;?>" style="margin-left: 10px;" class="btn btn-secondary btn-sm my-1" id="chat_sub">傳送</button>
 			</form>
 		</div>
 		<!-- 聊天室的尾段(輸入區) -->
 		
+		<script>
+
+			$(function(){
+				setInterval(getalarm_chat,100)
+			});
+
+			function getalarm_chat (){
+				var url = "../index/notify.php?other=<?php echo $other;?>";
+
+				$.ajax({
+					type: 'POST',                     //GET or POST
+					url: url,  //請求的頁面
+					cache: false,   //是否使用快取
+					dataType : 'json'
+				}).done(function(data) {
+					console.log(data);
+					if(data['success'] == "YES"){
+						var content_chat = data["content"];
+						console.log(content_chat);
+						var chat = "<div style='text-align:left;'>"+'<img src="data:pic/png;base64,<?=base64_encode($row_pic_other["profile"]);?>" class="img-fluid rounded-circle c-pic" >'+
+									'<div class="talk">'+"<pre class='talk-word'>"+content_chat+"</pre>" + "</div></div>";
+						console.log(chat); 
+						$("#chatting").append(chat);
+					}
+				});
+			};
+
+
+			function prevent_reloading(){
+			var pendingRequests = {};
+				jQuery.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
+					var key = options.url;
+					console.log(key);
+					if (!pendingRequests[key]) {
+						pendingRequests[key] = jqXHR;
+					}else{
+						//jqXHR.abort();    //放棄後觸發的提交
+						pendingRequests[key].abort();   // 放棄先觸發的提交
+					}
+					var complete = options.complete;
+					options.complete = function(jqXHR, textStatus) {
+						pendingRequests[key] = null;
+						if (jQuery.isFunction(complete)) {
+						complete.apply(this, arguments);
+						}
+					};
+				});
+			}
+
+			$("#chat_sub").click( function(e){
+				var url = $(this).data("url");
+
+				$.ajax({
+					type: "POST",
+					url: url,
+					data: { //傳送資料
+						chat: $("#chat").val(), 
+					},
+					dataType :"json"
+				}).done(function(data) {
+					console.log(data);
+					if(data['success'] == "OK"){
+						var chat = data['content'];
+						var content = "<div style='text-align:right;'><div class='talk'><pre class='talk-word'>"+chat+"</pre></div>"
+									+'<img src="data:pic/png;base64,<?=base64_encode($row_pic["profile"]);?>" class="img-fluid rounded-circle c-pic" ></div>';
+						console.log(content);
+						$("#chatting").append(content);
+						$("#chat").val();
+					}
+				});
+
+				e.preventDefault(); // avoid to execute the actual submit of the form.
+			
+		});
+		
+		
+		</script>
 		
 		<!-- Optional JavaScript -->
 		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -129,23 +216,3 @@
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 	</body>
 </html>
-
-<?php
-
-	if(isset($_GET['send'])){
-		session_start();
-		include("../index/forum.php");
-		$uid = "";
-		if(isset($_SESSION['nickname'])){
-			$uid = finduid($_SESSION['nickname']);
-		}
-		$content = $_POST['chat'];
-		$sql = "INSERT INTO `chat` (`UId`,`other`,`chat`,`sendtime`) VALUES ('$uid','$_GET[send]','$content','$datetime')";
-		if(mysqli_query($link, $sql)){
-			header("Location:../index/index.php?page=chat&other=$_GET[send]");
-		}else{
-			mysqli_error();
-		}
-	}
-
-?>
