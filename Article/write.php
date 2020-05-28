@@ -1,5 +1,4 @@
 <?php
-	$img = 0;
 	// 設定時間
 	date_default_timezone_set('Asia/Taipei');
 
@@ -16,7 +15,6 @@
 
 	
 	if($write == 'true'){
-		$imgur = $_GET['img'];
 		
 		$tag = array("tag","tagtwo", "tagthree", "tagfour", "tagfive");
 		$i  = 0;
@@ -27,8 +25,15 @@
 
 		$datetime = date ("Y-m-d H:i:s" , mktime(date('H'), date('i'), date('s'), date('m'), date('d'), date('Y'))) ;
 		$excerpt = substr( $_POST['content'] , 0 , 200 );
-		$sql = "INSERT INTO article (`category`,`UId`, `title`, `content`, `excerpt`, `post_time`, `anonymous`, `post_name`) 
+		echo $_POST['address'];
+		if(!(isset($_POST['address']))){
+			$sql = "INSERT INTO article (`category`,`UId`, `title`, `content`, `excerpt`, `post_time`, `anonymous`, `post_name`) 
 				VALUES ('$_POST[forum]', '$uid', '$_POST[title]', '$_POST[content]', '$excerpt', '$datetime', '$_POST[anonymous]','$_SESSION[nickname]')";
+		}else{
+			$sql = "INSERT INTO article (`category`,`UId`, `title`, `content`, `excerpt`, `post_time`, `anonymous`, `post_name`,`ismap`,`address`) 
+				VALUES ('$_POST[forum]', '$uid', '$_POST[title]', '$_POST[content]', '$excerpt', '$datetime', '$_POST[anonymous]','$_SESSION[nickname]',1,'$_POST[address]')";
+		}
+		
 
 		if(!(mysqli_query($link, $sql))){
 			mysqli_error();
@@ -100,6 +105,12 @@
 				textarea.style.height=adjustedHeight+'px';}
 		}
 	</script>
+	<style>
+     	#map {
+            height: 100%;
+            width: 100%;
+        }
+    </style>
 </head>
 	<!-- 撰寫文章 -->
 <body>
@@ -107,7 +118,7 @@
 		<p class='board'>寫篇文章吧</p>
 	</div>
 	<div class='write'>
-		<form method='post' action='../Article/write.php?write=true&img=<?=$img;?>'>
+		<form method='post' action='../Article/write.php?write=true'>
 			<div class="form-group row">
 				<label class="col-sm-3 col-form-label">選擇名稱</label>
 				<div class="col-sm-9">
@@ -159,6 +170,24 @@
 					</label>
 				</div>
 			</div>
+
+			<!-- google map api-->
+			<div id="app">
+				<div class="form-group row">
+					<label class="col-sm-3 col-form-label">請輸入地址</label>
+					<div class="col-sm-9">
+						<input type="text" ref="site" v-model="site" class="form-control" name="address">
+					</div>
+				</div>
+				<!-- 放google map的div -->
+				<div class="row justify-content-end">
+					<div class="col-sm-9">
+						<!-- <h5>Google Map：</h5> -->
+						<div id="map" class="embed-responsive embed-responsive-16by9"></div>
+					</div>
+				</div>
+			</div>
+			<!-- google map end -->
 			
 			<div class='right'>
 				<button type="submit" class="btn btn-info font-weight-bold">發送</button>
@@ -182,8 +211,13 @@
 		<!-- </form> -->
 
 		<p id="check"></p>
+
+		
 	</div>
 	
+	<!-- google map api -->
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAY6YGC3VgWJA-ZKtrOHgMe_6PKXTdM6pA&libraries=places"></script>
+
 	<!-- 抓圖檔的資訊 -->
 	<script>
 		var inputFile = document.getElementById('FileInput');
@@ -229,62 +263,160 @@
 	<!-- 動態加input end-->
 
 	<script>
-		function prevent_reloading(){
-			var pendingRequests = {};
-				jQuery.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
-					var key = options.url;
-					console.log(key);
-					if (!pendingRequests[key]) {
-						pendingRequests[key] = jqXHR;
-					}else{
-						//jqXHR.abort();    //放棄後觸發的提交
-						pendingRequests[key].abort();   // 放棄先觸發的提交
-					}
-					var complete = options.complete;
-					options.complete = function(jqXHR, textStatus) {
-						pendingRequests[key] = null;
-						if (jQuery.isFunction(complete)) {
-						complete.apply(this, arguments);
-						}
-					};
-				});
-			}
+		// var imageProc = function (input) {
+		// 	if (input.files && input.files[0]) {
+		// 		// 建立一個 FileReader 物件
+		// 		var reader = new FileReader();
+		// 		// 當檔案讀取完後，所要進行的動作
+		// 		reader.onload = function (e) {
+		// 			// 顯示圖片
+		// 			var content = "<img src='" + e.target.result + "'>";
+		// 			$('#text').val($('#text').val() + content);
+		// 			// $('#show_image').attr("src", e.target.result).css("height", "500px").css("width", "500px");
+		// 			// 將 DataURL 放到表單中
+		// 			// $("input[name='imagestring']").val(e.target.result);
+		// 		};
+		// 		reader.readAsDataURL(input.files[0]);
+		// 		}
+		// 	}	
+		// 	$(document).ready(function() {
+		// 	// 綁定事件
+		// 	$("#YouFile").change(function () {
+		// 	readImage(this);
+		// 	});
+		// });
+		// function prevent_reloading(){
+		// 	var pendingRequests = {};
+		// 		jQuery.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
+		// 			var key = options.url;
+		// 			console.log(key);
+		// 			if (!pendingRequests[key]) {
+		// 				pendingRequests[key] = jqXHR;
+		// 			}else{
+		// 				//jqXHR.abort();    //放棄後觸發的提交
+		// 				pendingRequests[key].abort();   // 放棄先觸發的提交
+		// 			}
+		// 			var complete = options.complete;
+		// 			options.complete = function(jqXHR, textStatus) {
+		// 				pendingRequests[key] = null;
+		// 				if (jQuery.isFunction(complete)) {
+		// 				complete.apply(this, arguments);
+		// 				}
+		// 			};
+		// 		});
+		// 	}
 
 			
-		$("#sub").click( function(e){
-			var url = $(this).data("url");
+		// $("#sub").click( function(e){
+		// 	var url = $(this).data("url");
 
-			var file_data = $('#FileInput').prop('files')[0];   //取得上傳檔案屬性
-			var form_data = new FormData();  //建構new FormData()
-			// console.log(form_data);
-			form_data.append('YouFile', file_data);  //吧物件加到file後面
-			console.log(form_data);
-			$.ajax({
-				type: "POST",
-				url: url,
-				data:form_data,
-				dataType :"json",
-				cache: false,
-                contentType: false,
-                processData: false,
-            }).done(function(data) {
-				console.log(data);
-				if(data['success'] == "OK"){
-					<?php $img = $img + 1;?>
-					var imgid = data['imgid'];
-					var content = '<blockquote  class="imgur-embed-pub" lang="en" data-id="'+imgid+'"><a href="//imgur.com//'+imgid+'"></a></blockquote>';
+		// 	var file_data = $('#FileInput').prop('files')[0];   //取得上傳檔案屬性
+		// 	var form_data = new FormData();  //建構new FormData()
+		// 	// console.log(form_data);
+		// 	form_data.append('YouFile', file_data);  //吧物件加到file後面
+		// 	console.log(form_data);
+		// 	$.ajax({
+		// 		type: "POST",
+		// 		url: url,
+		// 		data:form_data,
+		// 		dataType :"json",
+		// 		cache: false,
+        //         contentType: false,
+        //         processData: false,
+        //     }).done(function(data) {
+		// 		console.log(data);
+		// 		if(data['success'] == "OK"){
+		// 			var imgid = data['imgid'];
+		// 			var content = '<blockquote  class="imgur-embed-pub" lang="en" data-id="'+imgid+'"><a href="//imgur.com//'+imgid+'"></a></blockquote>';
 					
-					$('#text').val($('#text').val() + content);
-				}else if(data['success'] == "NO"){
-					$('#text').val($('#text').val() + '圖片未上傳成功');
+		// 			$('#text').val($('#text').val() + content);
+		// 		}else if(data['success'] == "NO"){
+		// 			$('#text').val($('#text').val() + '圖片未上傳成功');
 						
-				}
-			});
+		// 		}
+		// 	});
 			
-		});
+		// });
 
 	</script>
-		
+
+	<!-- 引用vue.js -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+
+	<!-- google map -->
+	<script>
+        const googleMap = new Vue({
+        	el: '#app',
+            data: {
+                map: null,
+                autocomplete: null, // google map Autocomplete method
+                site: '', // place API要綁定的搜尋框
+                place: null // 存place確定後回傳的資料
+            },
+            methods: {
+                // init google map
+                initMap() {
+
+                let location = {
+                    lat: 22.628477,
+                    lng: 120.264994
+                };
+
+                this.map = new google.maps.Map(document.getElementById('map'), {
+                    center: location,
+                    zoom: 16
+                });
+                
+                },
+                // 地址自動完成 + 地圖的中心移到輸入結果的地址上
+                siteAuto() {
+
+                let options = {
+                    componentRestrictions: { country: 'tw' } // 限制在台灣範圍
+                };
+                this.autocomplete = new google.maps.places.Autocomplete(this.$refs.site, options);
+                
+                // 地址的輸入框，值有變動時執行
+                this.autocomplete.addListener('place_changed', () => {
+                    this.place = this.autocomplete.getPlace(); // 地點資料存進place
+                    
+                    // 確認回來的資料有經緯度
+                    if(this.place.geometry) {
+                    
+                    // 改變map的中心點
+                    let searchCenter = this.place.geometry.location;
+                    
+                    // panTo是平滑移動、setCenter是直接改變地圖中心
+                    this.map.panTo(searchCenter);
+
+                    // 在搜尋結果的地點上放置標記
+                    let marker = new google.maps.Marker({
+                        position: searchCenter,
+                        map: this.map
+                    });
+
+                    // info window
+                    let infowindow = new google.maps.InfoWindow({
+                        content: this.place.formatted_address
+                    });
+                    infowindow.open(this.map, marker);
+
+                    }
+                    
+                });
+                }
+            },
+            mounted() {
+                window.addEventListener('load', () => {
+
+                this.initMap();
+                this.siteAuto();
+
+                });
+            }
+        })
+
+        </script>
 
 		
 		
