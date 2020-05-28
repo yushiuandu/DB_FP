@@ -94,8 +94,7 @@
 		doc_head.appendChild(link_style);
 		};
 	</script> -->
-
-    <title>抬槓</title>
+	<title>抬槓</title>
   </head>
 
   <body>
@@ -122,17 +121,23 @@
 				</form>
 			</div>
 
+			
 			<div class="col-sm-4 col-6 right d-md-none">
+			<?php if(!(isset($_SESSION['nickname']))){?>
 				<!-- 還沒登入 -->
 				<button type="button"class="btn btn-info font-weight-bold" data-toggle="modal" data-target="#login-2">
 					註冊/登入
 				</button>
+				<?php }else{?>
+
 				<!-- 登入之後 -->
-				<!-- <button type="button"class="btn btn-info font-weight-bold" data-toggle="modal" data-target="#exampleModalCenter">
+				<button type="button"class="btn btn-info font-weight-bold" data-toggle="modal" data-target="#exampleModalCenter">
 					登出
-				</button> -->
+				</button>
+				<?php }?>
 						
 				<!--登入畫面-->
+				
 					<div class="modal fade bd-example-modal-sm middle" id="login-2" tabindex="-1" role="dialog" data-backdrop="false" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" >
 						<div class="modal-dialog modal-dialog-centered" role="document">
 							<div class="modal-content login-page">
@@ -189,7 +194,7 @@
 			<div class="collapse navbar-collapse" id="forum">
 				<ul class="nav navbar-nav flex-column">
 					<li class="nav-item dropdown">
-						<a href = "../index/index.php"><img src="./image/logo.png" width="auto" height="80"></a>
+						<a href = "../index/index.php"><img src="./image/logo.png" width="auto" height="80" class="animated fadeInUpBig"></a>
 					</li>
 					<!-- 所有看板 -->
 					<li class="nav-item dropdown" style="font-family:微軟正黑體; font-weight: 600;">
@@ -279,6 +284,91 @@
 	  	if($page == 'index'){
 
 		?>
+		<!-- 方向錯了的限時動態 (可是不知道會不會用到 先留著) -->
+		<!-- <div class="time-limit">
+			<div class="li-con">
+				<div class="li2-con">
+					<div class="limi">
+						<a href="../index/index.php?page=view" data-toggle="modal" data-target="#limit">
+							<img src="../index/image/test1.jpg" class="li-pic">
+		  				</a>
+					</div>
+					<div class="modal fade middle modal2" id="limit" tabindex="-1" role="dialog" data-backdrop="false" aria-hidden="true" >
+						<div class="modal-dialog modal-dialog-centered" role="document">
+							<div class="modal-content"  id="sad">-->
+								<!-- po文的人 -->
+								<!-- <div class="modal-header">
+									<div>user</div>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>-->
+								<!--限時照片-->
+								<!--<div class="modal-body">-->
+									<!-- 照片 -->
+									<!--<div class="sad-con">
+										<img src="../index/image/test1.jpg" class="sad-pic">
+									</div>
+									<button class="btn btn-info font-weight-bold" type="good">讚</button>						
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div> -->
+		<!-- 限時動態 end-->
+		<!-- 限時動態 -->
+		<!-- 外框 -->
+		<div class="time-limit">
+			
+			<div class="li-con">
+				<div class="li2-con">
+					<!-- 有登入可以加入限時 -->
+					<!-- 新增限時 -->
+					<div class="limi">
+						<a href="../index/index.php?page=add-time">
+							<img src="../index/image/add_gray.png" class="add-pic" onmouseout="this.src='../index/image/add_gray.png';" onmouseover="this.src='../index/image/add_white.png';">
+		  				</a>
+					</div>
+					<!-- 新增限時 end -->
+		
+					<!-- 一則限時 -->
+					<div class="limi">
+						<a href="../index/time.php">
+							<img src="../index/image/test1.jpg" class="li-pic">
+		  				</a>
+					</div>
+					<!-- 一則限時 end -->
+
+					<!-- 一則限時 -->
+					<div class="limi">
+						<a href="../index/time.php">
+							<img src="../index/image/test2.jpg" class="li-pic">
+		  				</a>
+					</div>
+					<!-- 一則限時 end -->
+
+					<!-- 一則限時 -->
+					<div class="limi">
+						<a href="../index/time.php">
+							<img src="../index/image/test3.jpg" class="li-pic">
+		  				</a>
+					</div>
+					<!-- 一則限時 end -->
+
+					<!-- 一則限時 -->
+					<div class="limi">
+						<a href="../index/time.php">
+							<img src="../index/image/test4.jpg" class="li-pic">
+		  				</a>
+					</div>
+					<!-- 一則限時 end -->
+
+				</div>
+			</div>
+		</div>
+		<!-- 限時動態 end -->
 		<!-- 上面的按鈕 -->
 		<div class="row mid">
 			<div class="col-md-6 col-sm-6 col-6">
@@ -305,7 +395,7 @@
 		</div>
 
   		<div class="row mid">
-			<div class="btn-group col-md-8 col-sm-8 col-11 p0" role="group" aria-label="Button group with nested dropdown">
+			<div class="btn-group col-md-8 col-sm-8 col-10 p0" role="group" aria-label="Button group with nested dropdown">
 				<div class='mid'>
 					<!-- 全部文章 -->
 					<a href="../index/index.php?page=index&id=all&hot=true">
@@ -530,6 +620,11 @@
 			if($page == 'collect'){
 			$page = 'index';
 			include("../index/collect.php"); }
+		?>
+		<?php //增加限時
+			if($page == 'add-time'){
+			$page = 'index';
+			include("../index/add-time.php"); }
 		?>
 		<?php //文章編輯頁面
 			if($page == 'edit'){
@@ -792,13 +887,17 @@
 		
 		</script>
 		<script>
-			$('#selectTrainer').modal('show');
+			// $('#selectTrainer').modal('show');
+			function view(){
+				setInterval(function(){alert("Hello")},3000);
+			}
 		</script>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-  </body>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" rel="stylesheet"  />
+</body>
   
 </html>
