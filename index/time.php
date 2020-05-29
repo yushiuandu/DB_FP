@@ -9,10 +9,12 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="../index/my1.css" rel="stylesheet" type="text/css">
-
+    <link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
+    <script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="jqueryui/style.css">
     <title>抬槓</title>
-	<script src="//s3-ap-northeast-1.amazonaws.com/justfont-user-script/jf-60019.js"></script>
-    <script src="//s3-ap-northeast-1.amazonaws.com/justfont-user-script/jf-60019.js"></script>
+    <link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
     <script>
             var num=["1","2","3","4"];
             var i=0;
@@ -23,8 +25,9 @@
             var temp=0; //暫存下面還要有多久
 
             window.onload= view();
+            window.onload=$().getFuc();
 
-            function count(){ //數到時間到 換頁 
+            function count(){ //數時間到 換頁 
                 second=((new Date()).getSeconds()+60)%60; //現在秒數
                 if( second<done ){
                     time2=setTimeout(function(){count()},1000);
@@ -34,33 +37,37 @@
             }
 
            function lest(){
-                done=((new Date()).getSeconds()+63)%60; //換頁秒數
+                done=((new Date()).getSeconds()+65)%60; //換頁秒數
                 count();
                 i=(i-1+4)%4;
                 document.getElementById('change').src="../index/image/test"+num[i]+".jpg";
                 // time=setTimeout(function(){next()},2000);
             }
             function next(){
-                done=((new Date()).getSeconds()+63)%60; //換頁秒數
+                done=((new Date()).getSeconds()+65)%60; //換頁秒數
                 count();
                 i=(i+1+4)%4;
-			    document.getElementById('change').src="../index/image/test"+num[i]+".jpg";
+                document.getElementById('change').src="../index/image/test"+num[i]+".jpg";
                 // time=setTimeout(function(){next()},2000);
             }
             
             function view(){
-                done=((new Date()).getSeconds()+63)%60;
+                done=((new Date()).getSeconds()+65)%60;
                 count();
-                // time=setTimeout(function(){next()},2000);
-            }
-            function stop(){
-                clearTimeout(time2);
-            }
 
+                //進度條
+                $().getFuc();
+            }
+            function stop(){ //停止倒數
+                clearTimeout(time2);
+                clearTimeout(time);
+            }
+            //右翻
             function right(){
                 stop();
                 next();
             }
+            //左翻
             function left(){
                 stop();
                 lest();
@@ -86,32 +93,72 @@
             function up(e) {
                 done=((new Date()).getSeconds()+60 +temp)%60;
                 count();
+                //進度條
+                $().getFuc();
                 status.textContent = `${e.buttons} (mouseup)`
             }
+            //輸入文字時暫停
+            function input(){
+                subtraction();
+                stop();
+            }
+            //傳送後繼續
+            function enter(){
+                done=((new Date()).getSeconds()+60 +temp)%60;
+                count();
+            }
+            //進度條
+            $(function() {
+                $.fn.getFuc=function(){
+                    var progressbar = $( "#progressbar" ),
+                    progressLabel = $( ".progress-label" );
+                
+                    progressbar.progressbar({
+                    value: false,
+                    change: function() {
+                        
+                    },
+                    complete: function() {
+                        
+                    }
+                    });
+                
+                    function progress() {
+                    var val = progressbar.progressbar( "value" ) || 0;
+                
+                    progressbar.progressbar( "value", val + 2 );
+                
+                    if ( val < 99 ) {
+                        time=setTimeout( progress, 100 );
+                    }
+                    }
+                
+                    setTimeout( progress, 0000 );
+                }
+            });
         </script>
   </head>
   <body>
     <div class="view">
         <!-- head -->
         <div class="time-head">
-            <div>123123</div>
-            <div class="row justify-content-start mid">
-                <div class="col-lg-2 col-md-3 col-sm-4 col-4">
-                    <div class="user-con">
-                        <img src="../index/image/test1.jpg" id="user-pic">
+            <div id="progressbar"><div class="progress-label"></div></div>
+                <div class="row justify-content-start mid">
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-4">
+                        <div class="user-con">
+                            <img src="../index/image/test1.jpg" id="user-pic">
+                        </div>
                     </div>
+                    <div class="col-lg-10 col-md-9 col-sm-8 col-8 p0">
+                        <p class="time-ww">匿名</p>
+                        <p class="time-ww">2020年5月28日 1:11</p>
+                    </div>
+                    <button type="button" class="close">
+                        <a href="../index/index.php" class="link-ww">
+                            <span aria-hidden="true">&times;</span>
+                        </a>
+                    </button>
                 </div>
-                <div class="col-lg-10 col-md-9 col-sm-8 col-8 p0">
-                    <p class="time-ww">匿名</p>
-                    <p class="time-ww">2020年5月28日 1:11</p>
-                </div>
-                <button type="button" class="close">
-                    <a href="../index/index.php" class="link-ww">
-                        <span aria-hidden="true">&times;</span>
-                    </a>
-				</button>
-            </div>
-
         </div>
         <!-- body -->
         <div class="time-body status">
@@ -128,31 +175,41 @@
         <!-- footer -->
         <div class="time-footer">
             <form action="" method="post" style="">
-                <div class="emoji">
-                    <div class="row justify-content-center">
-                        <div class="col-md-2 col-sm-2 col-2">
-                            <div class="pointer" id="laugh">😂</div>
-                        </div>
-                        <div class="col-md-2 col-sm-2 col-2">
-                            <div class="pointer" id="wow">😮</div>
-                        </div>
-                        <div class="col-md-2 col-sm-2 col-2">
-                            <div class="pointer" id="cry">😢</div>
-                        </div>
-                        <div class="col-md-2 col-sm-2 col-2">
-                            <div class="pointer" id="love">🥰</div>
-                        </div>
-                        <div class="col-md-2 col-sm-2 col-2">
-                            <div class="pointer" id="clap">👏</div>
-                        </div>
-                        <div class="col-md-2 col-sm-2 col-2">
-                            <div class="pointer" id="hundred">💯</div>
+                <!-- emoji -->
+                <div class="row justify-content-start"> 
+                    <div class="col-md-10 col-sm-8 col-8 p0 emoji">
+                        <div class="row justify-content-center">
+                            <div class="col-md-2 col-sm-2 col-2 p0">
+                                <div class="pointer" id="laugh">😂</div>
+                            </div>
+                            <div class="col-md-2 col-sm-2 col-2 p0">
+                                <div class="pointer" id="wow">😮</div>
+                            </div>
+                            <div class="col-md-2 col-sm-2 col-2 p0">
+                                <div class="pointer" id="cry">😢</div>
+                            </div>
+                            <div class="col-md-2 col-sm-2 col-2 p0">
+                                <div class="pointer" id="love">🥰</div>
+                            </div>
+                            <div class="col-md-2 col-sm-2 col-2 p0">
+                                <div class="pointer" id="clap">👏</div>
+                            </div>
+                            <div class="col-md-2 col-sm-2 col-2 p0">
+                                <div class="pointer" id="hundred">💯</div>
+                            </div>
                         </div>
                     </div>
                 </div>
-				<input id="time-ww" type="text" placeholder='說點什麼吧...'>
-				<button type="submit" class="btn btn-secondary btn-sm my-1" style="margin-left: 10px;">傳送</button>
-			</form>
+                <!-- emoji end-->
+                <div class="row justify-content-start">
+                    <div class="col-md-10 col-sm-8 col-8 p0">
+                        <input id="time-ww" type="text" placeholder='說點什麼吧...' onclick="input();">
+                    </div>
+				    <div class="col-md-2 col-sm-4 col-4 p0">
+                        <div type="submit" class="time-btn" onclick="enter();">傳送</div>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
     <script>
@@ -172,7 +229,7 @@
     </script>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
   </body>

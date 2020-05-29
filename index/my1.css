@@ -34,7 +34,7 @@ body{
   padding: 0px;
 }
 .time-body{
-  height: 75vh;
+  height: 70vh;
   /* border-bottom: white 2px solid; */
 
 }
@@ -44,7 +44,7 @@ body{
   padding: 15px;
 }
 #time-ww{
-  width: 70%;
+  width: 90%;
   background-color: rgba(248, 248, 248, 0.863);
   border-radius: 10px;
 }
@@ -68,7 +68,7 @@ body{
 }
 .share-con{
   width: 40vw;
-  height: 75vh;
+  height: 70vh;
   min-width: 250px;
   position: relative;
   overflow: hidden;
@@ -122,12 +122,33 @@ body{
   position: relative;
 }
 .emoji{
-  width:70%;
-  margin: 0px auto 0px auto;
+  width: 70%;
+  margin: 0px 0px 10px 0px;
 }
 .pointer{
   cursor: pointer;
 }
 .status{
   user-select: none;
+}
+.time-btn{
+  background-color: gray;
+  color: white;
+  border-radius: 10px;
+  width: 90%;
+  position: relative;
+  left: 0;
+}
+.ui-progressbar {
+  position: relative;
+}
+.progress-label {
+  position: absolute;
+  left: 50%;
+  top: 4px;
+  font-weight: bold;
+  text-shadow: 1px 1px 0 #fff;
+}
+#progressbar{
+  height: 1em;
 }
