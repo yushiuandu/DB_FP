@@ -23,6 +23,7 @@
             var second; //數秒數
             var done=0; //結束秒數
             var temp=0; //暫存下面還要有多久
+            var oh=0;
 
             window.onload= view();
 
@@ -38,6 +39,7 @@
            function lest(){
                 done=((new Date()).getSeconds()+65)%60; //換頁秒數
                 count();
+                oh=0;
                 go();
                 i=(i-1+4)%4;
                 document.getElementById('change').src="../index/image/test"+num[i]+".jpg";
@@ -46,6 +48,7 @@
             function next(){
                 done=((new Date()).getSeconds()+65)%60; //換頁秒數
                 count();
+                oh=0;
                 go();
                 i=(i+1+4)%4;
                 document.getElementById('change').src="../index/image/test"+num[i]+".jpg";
@@ -61,6 +64,7 @@
             function stop(){ //停止倒數
                 clearTimeout(time2);
                 clearTimeout(time);
+                clearTimeout(time3);
             }
             //右翻
             function right(){
@@ -72,12 +76,16 @@
                 stop();
                 lest();
             }
+            //剩餘秒數
             function subtraction(){
                 if(done>second){
                     temp=done-second;
                 }else{
                     temp=second-done;
                 }
+            }
+            function pro(){
+                oh=(5-temp)*20;
             }
 
             const status = document.querySelector('.status');
@@ -86,6 +94,7 @@
             function down(e) {
                 subtraction();
                 stop();
+                pro();
                 status.textContent = `${e.buttons} (mousedown)`;
             }
             //放開
@@ -94,17 +103,20 @@
                 done=((new Date()).getSeconds()+60 +temp)%60;
                 count();
                 //進度條
+                go();
                 status.textContent = `${e.buttons} (mouseup)`
             }
             //輸入文字時暫停
             function input(){
                 subtraction();
                 stop();
+                pro();
             }
             //傳送後繼續
             function enter(){
                 done=((new Date()).getSeconds()+60 +temp)%60;
                 count();
+                go();
             }
             //進度條
             function go(){
@@ -123,17 +135,17 @@
                     });
                 
                     function progress() {
-
-                    var val = progressbar.progressbar( "value" ) || 0;
+                    
+                    var val = progressbar.progressbar( "value" ) || oh;
                 
                     progressbar.progressbar( "value", val + 1 );
                 
-                    if ( val < 99 ) {
-                        time=setTimeout( progress, 50 );
-                    }
+                        if ( val < 99 ) {
+                            time=setTimeout( progress, 50 );
+                        }
                     }
                 
-                    setTimeout( progress, 0000 );
+                    time3=setTimeout( progress, 0000 );
                 });
             }
         </script>
