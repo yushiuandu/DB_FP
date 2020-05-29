@@ -25,20 +25,20 @@
             var temp=0; //暫存下面還要有多久
 
             window.onload= view();
-            window.onload=$().getFuc();
 
             function count(){ //數時間到 換頁 
                 second=((new Date()).getSeconds()+60)%60; //現在秒數
                 if( second<done ){
                     time2=setTimeout(function(){count()},1000);
                 }else{
-                    next();
+                    right();
                 }
             }
 
            function lest(){
                 done=((new Date()).getSeconds()+65)%60; //換頁秒數
                 count();
+                go();
                 i=(i-1+4)%4;
                 document.getElementById('change').src="../index/image/test"+num[i]+".jpg";
                 // time=setTimeout(function(){next()},2000);
@@ -46,6 +46,7 @@
             function next(){
                 done=((new Date()).getSeconds()+65)%60; //換頁秒數
                 count();
+                go();
                 i=(i+1+4)%4;
                 document.getElementById('change').src="../index/image/test"+num[i]+".jpg";
                 // time=setTimeout(function(){next()},2000);
@@ -54,9 +55,8 @@
             function view(){
                 done=((new Date()).getSeconds()+65)%60;
                 count();
-
                 //進度條
-                $().getFuc();
+                go();
             }
             function stop(){ //停止倒數
                 clearTimeout(time2);
@@ -94,7 +94,6 @@
                 done=((new Date()).getSeconds()+60 +temp)%60;
                 count();
                 //進度條
-                $().getFuc();
                 status.textContent = `${e.buttons} (mouseup)`
             }
             //輸入文字時暫停
@@ -108,8 +107,8 @@
                 count();
             }
             //進度條
-            $(function() {
-                $.fn.getFuc=function(){
+            function go(){
+                $(function() {
                     var progressbar = $( "#progressbar" ),
                     progressLabel = $( ".progress-label" );
                 
@@ -124,18 +123,19 @@
                     });
                 
                     function progress() {
+
                     var val = progressbar.progressbar( "value" ) || 0;
                 
-                    progressbar.progressbar( "value", val + 2 );
+                    progressbar.progressbar( "value", val + 1 );
                 
                     if ( val < 99 ) {
-                        time=setTimeout( progress, 100 );
+                        time=setTimeout( progress, 50 );
                     }
                     }
                 
                     setTimeout( progress, 0000 );
-                }
-            });
+                });
+            }
         </script>
   </head>
   <body>
