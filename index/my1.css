@@ -1,565 +1,154 @@
-
-div.link-head:hover > div.link-body /*停在hover上會有懸空的東西or連接*/
-{
-  display:block;/*區塊(會換行)*/
-}
-.link-body{ /*保留空間，但先隱藏起來*/
-	display:none;
-}
 body{
   font-family:"微軟正黑體";
-  background-color: rgb(219, 212, 193);
+  background-color: rgb(0,0,0);
   text-align: center;
-  position: relative;
-  top:60px;
 }
-#left{
-  /* display:inline-block; */
-   /*建立一堆區塊自動填滿瀏覽器*/
-  text-align: left;
-	/* width:10%; */
-	padding:2%;
-	vertical-align:top;
-  background-color: rgb(199,199,187);
-  position:relative;
- }
-#middle{
-  /* display:inline-block; */
-   /*建立一堆區塊自動填滿瀏覽器*/
-  text-align: left;
-	/* width:10%; */
-	padding:2%;
-	vertical-align:top;
-  background-color: rgb(234,230,223);
-  position: relative;
-  height:calc(100vh - 60px);
-  top:0px;
-  overflow-y: auto;
-}
-.board{
-  font-weight:400;
-  font-family:"jf-openhuninn";
-  font-size: 20pt;
-  width: 90%;
-  margin:10px 0px 10px 0px;
-}
-/* 文章簡圖區 */
-.art{
-  text-align: left;
-  background-color: #404447;
-  border-radius: 10px;
-  width: 100%;
-  margin:15px 0px 0px 0px;
-}
-.art-head{
-  height:40px;
-  padding:10px;
-} /* 文章簡圖區的上半部 */
-.art-body{
-  padding-left: 10px;
-  height:10vh;
-} /* 文章簡圖區的中半部 */
-.art-fotter{
-  height:5vh;
-  padding:5px 10px 10px 10px;
-} /* 文章簡圖區的下半部 */
-#article-pic{
-  width:70%;
-  height: auto;
-} /* 文章簡圖區的圖 */
-#writer-pic{
-  width: auto;
-  height: 30px;
-  border: 2px solid gray;
-  margin: 1px;
-} /* 文章簡圖區作者頭像 */
-#good-pic{
-  width: auto;
-  height: 25px;
-}
+.view{
+  height: 100vh;
+  width: 40vw;
+  min-width: 250px;
 
-#right{
-  /* display:inline-block; */
-   /*建立一堆區塊自動填滿瀏覽器*/
-  text-align: center;
-	/* width:10%; */
-	padding:2%;
-	vertical-align:top;
-  background-color: rgb(199,199,187);
-  position:relative;
-  top:0px;
-  right:0px;
-}
-.row{
-  margin:0px;
-}
-#login{
-  /* display:inline-block; */
-  text-align: center;
-  border-radius:10px;
-  width:100%;
-  padding:25px 5px 0px 5px;
-  min-height:250px; /*最小高度 */
-  background-color: #1D4851;
-  position: relative;
-}
-#user-pic{
-  height:110px;
-  width:75%;
-  margin-bottom:15px;
-}
-#u-pic{
-  height:200px;
-  width:40%;
-  margin-bottom:15px;
-  position: relative;
-  left:30%;
-  right:30%;
-}
-#register{
-  display:inline-block;
-  border-radius:10px;
-  width:95%;
-  margin:10px 20px 10px 20px;
-  padding:25px 5px 0px 5px;
-  /*min-height:550px; 最小高度*/
-  background-color: rgb(193, 171, 173);
-  position: relative;
-}
-/* article */
-.article{
-  text-align: left;
-  background-color: #404447;
-  border-radius: 10px;
-  width: 100%;
-  margin:15px 0px 0px 0px;
-}
-.article-head{
-  height:15vh;
-  padding:10px;
-  border-bottom: 1px black solid;
-} /* 文章上半部 */
-.article-body{
-  word-break:normal;
-} /* 文章中半部 */
-.article-fotter{
-  padding:20px;
-} /* 文章下半部 */
-/* hot-message */
-.hmes-head{ 
-  padding:10px;
-}
-.hmes-body{
-  background-color: rgb(234,230,223);
-  padding:10px;
-  border-radius: 10px;
-}
-.hmes{
-  font-size:2.5vmin;
-  margin:0px;
-  font-weight:400;
-  font-family:"jf-openhuninn";
-  word-break: break-all;
-  word-wrap:break-word;
-  white-space:pre-wrap;
-}
-.mes{
-  border-bottom: 1px black solid;
-  padding:20px 0px 20px 0px;
-}
-.mes-head{
-  font-size:3vmin;
-  margin:20px 10px 5px 10px;
-  font-family:"jf-openhuninn";
-}
-.article-word{
-  /* font-size:2.5vmin; */
-  margin:0px 30px 0px 30px;
-  font-family: "jf-openhuninn";
-  font-weight:400;
-  word-break: break-all;
-  word-wrap:break-word;
-  white-space:pre-wrap;
-}
-.pic{
-  width: auto;
-  height: 6vh;
-  margin: 1px;
-}
-#re1{
-  width:40%;
-  height:500px;
-  padding:30px;
-  border-right:3px black dashed;
-  float:left;
-}
-#re2{
-  width:60%;
-  height:500px;
-  padding:0px 20px 0px 20px;
-  float:left;
-  font-size: 14px;
-}
-.u1{
-  padding:20px;
-  border-radius:10px;
-  width:60%;
-  margin:auto;
-  background-color: rgb(193, 171, 173);
-  position: relative;
-  font-size: 14px;
-}
-#form{
   position: absolute;
-  left:40%;
-  padding: 0px 20px 0px 20px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+
+  /* border: white 2px solid; */
 }
-.form-control{
-  font-size:0.8rem;
+.time-head{
+  height: 15vh;
+  /* border-bottom: white 2px solid; */
+  background-color: rgb(172, 172, 172,0.5);
 }
-.form-group{
-  margin-bottom: 0.5rem;
-}
-label{
-  margin:0px;
-}
-#slogan{
-  font-family:"標楷體";
-  text-align: center;
-  font-size: 18px;
-  margin:0px;
-}
-#test-pic{
-  width:100%;
-  height:auto;
-  padding:100px 30px 15px 30px;
-}
-#user-name{
-  font-size:20px;
-  position:relative;
-  margin:0px 0px 0px 0px;
-}
-#user-nickname{
-  font-size:16px;
-  margin:-5px 0px 5px 0px;
-}
-#other-page{
-  display:inline-block;
-  text-align: center;
-  border-radius:10px;
-  width:100%;
-  padding:25px 5px 20px 5px;
-  /* min-height:200px; 最小高度*/ 
-  background-color: #1D4851;
-  position: relative;
-  margin-top: 20px;
-}
-button img{
-  max-width:50px;
-  min-height:50px;
-  padding: 10px;
-  border-radius:10%;
-  background: rgb(210,191,166);
-}
-.mar{
-  margin-bottom:15px;
-}
-#login-pic{
-  width: auto;
-  height: 125px;
-}
-.login-page{
-  background-color: rgb(208, 192, 166);
-}
-.head-nav{
-  width:100%;
-  position:fixed; /*固定位置定位*/
-  top:0; /*距離上方 0 像素*/
-  z-index:1; /*重疊時會在其他元素之上*/
-  background-color: #1D4851;
-  padding: 10px;
-  text-align:left;
-}
-.Tai-gun{
-  width:auto;
-  height: 32px;
+.time-ww{
+  color: white;
+  text-align: left;
+  margin: 0px;
+  font-size: 10pt;
 }
 .mid{
   display: flex;
   align-items: center;
-  font-family: "微軟正黑體";
 }
+.p0{
+  padding: 0px;
+}
+.time-body{
+  height: 70vh;
+  /* border-bottom: white 2px solid; */
 
-.bottom{
-  display: flex;
-  align-items: flex-end;
+}
+.time-footer{
+  height: 15vh;
+  background-color: rgb(172, 172, 172,0.5);
+  padding: 15px;
+}
+#time-ww{
+  width: 90%;
+  background-color: rgba(248, 248, 248, 0.863);
+  border-radius: 10px;
+}
+.user-con{
+  width: 50px; 
+  height: 50px; 
+  border: 2px solid gray; 
+  position: relative;
+  border-radius: 50%;
+  overflow: hidden;
+  margin:10px auto 10px auto;
+  background-color: white;
+}
+#user-pic{
+  max-width: 100%; 
+  max-height: 100%;
+  position: absolute; 
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%);
+}
+.share-con{
+  width: 40vw;
+  height: 70vh;
+  min-width: 250px;
+  position: relative;
+  overflow: hidden;
+  margin:0px;
+  background-color: rgb(172, 172, 172,0.5);
+}
+.share-pic{
+  max-width: 100%; 
+  max-height: 100%;
+  position: absolute; 
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%);
+}
+.link-ww{
+  color: white;
+  text-decoration: none;
+}
+.link-ww:hover{
+  color: black;
+  text-decoration: none;
+}
+.close{
+  color: white;
+  position: absolute;
+  right: 10px;
+}
+.left{
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  z-index: 1;
+  padding: 0px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 .right{
-  text-align: right;
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  z-index: 1;
+  padding: 0px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.5);
 }
-.w{
-  display: inline;
-  font-size:3vmin;
-  margin:0px;
-  font-weight:400;
-  font-family:"jf-openhuninn";
-  text-decoration:underline;
+.body-con{
+  position: relative;
 }
-.article-word img{
-  text-align: left;
-  width:90%;
-  height:auto;
+.emoji{
+  width: 70%;
+  margin: 0px 0px 10px 0px;
 }
 .pointer{
   cursor: pointer;
 }
-.gbb{
-  height: 30px;
-  width: 30px;
-  margin:10px;
+.status{
+  user-select: none;
 }
-.gbb2{
-  height: 20px;
-  width: 20px;
-  margin:0px 20px 0px 20px;
-}
-.gbb3{
-  width:50%;
-  height:auto;
-  margin:10px;
-  background-color: #a7a9ac;
-  border-radius: 10%;
-  padding: 10px;
-}
-.gbb3:hover{
-  background-color: #58656b;
-}
-.user{
-  text-align: center;
-  background-color: #404447;
-  border-radius: 10px;
-  width: 100%;
-  margin:15px 0px 0px 0px;
-}
-.person-btn{
-  
-}
-.nickname{
-  padding:20px;
-  border-radius:10px;
-  width:90%;
-  margin:20px auto 20px auto;
-  background-color: rgb(193, 171, 173);
-  position: relative;
-  font-size: 14px;
-  text-align: center;
-}
-#n-pic{
-  height:100px;
-  width:15%;
-  margin-bottom: 10px;
-}
-.cir{
-  text-align: center;
-  border-radius: 50%;
-  border: #939699 3px ridge;
-  margin:auto;
-  max-width:50px;
-  height: 50px;
-}
-.middle{
-  text-align: center;
-}
-#search{
-  font-size: 16px;
-  border-radius: 10px;
-  width: 100%;
-  background: rgb(233, 230, 230) url('../index/image/search.png') no-repeat 3px 3px;
-  padding: 5px 5px 5px 35px;
-  margin:auto;
-  background-size:3%;
-}
-.friend{
-  display:inline-block;
-  background-color:rgb(193, 171, 173);
-  margin:50px 35px 0px 35px;
-  text-align: center;
-  padding:20px 10px 0px 10px;
-  float: left;
-}
-.chat-head{
-  text-align: right;
-  background-color: #404447;
-  border-radius: 10px 10px 0px 0px;
-  width: 90%;
-  margin:15px auto 0px auto;
-  border-bottom: 1px black solid;
-  
-}
-.chat-body{
-  background-color: #404447;
-  width: 90%;
-  margin:0px auto 0px auto;
-  min-height: 380px;
-  max-height: 380px;
-  overflow-y: auto;
-  padding:10px 20px 10px 20px;
-}
-.chat-fotter{
-  text-align: left;
-  background-color: #404447;
-  border-radius: 0px 0px 10px 10px;
-  width: 90%;
-  margin:0px auto 0px auto;
-  padding: 10px 20px 10px 20px;
-}
-#chat{
-  font-size: 14px;
-  border-radius: 10px;
-  width: 100%;
-  background: rgb(233, 230, 230) url('../index/image/pen.png') no-repeat 3px 3px;
-  padding: 5px 5px 5px 35px;
-  margin:auto;
-  background-size:3%;
-}
-#chat-pic{
-  height:90px;
-  width:30%;
-  margin:10px 0px 10px 0px;
-}
-.talk{
-  display:inline-block;
-  text-align: left;
-  margin:10px 5px 0px 10px;
-  padding:5px 10px 5px 10px;
-  border-radius: 10px;
-  background-color: rgb(193, 171, 173);
-
-  min-height: 40px;
-  max-width: 70%;
-}
-.talk-word{
-  font-family: "jf-openhuninn";
-  font-weight:400;
-  word-break: break-all;
-  word-wrap:break-word;
-  white-space:pre-wrap;
-  margin:0px; 
-  font-size:12pt;
-}
-.c-pic{
-  width: 40px;
-  height: 40px;
-}
-.write{
-  display:inline-block;
-  text-align: left;
-  margin:auto;
-  padding:20px;
-  border-radius: 10px;
-  background-color:#404447;
-  width: 90%;
-  position: relative;
-  left: 5%;
-  right: 5%;
-}
-.write-head{
-  display:inline-block;
-  text-align: left;
-  margin:10px auto 0px auto;
+.time-btn{
+  background-color: gray;
+  color: white;
   border-radius: 10px;
   width: 90%;
   position: relative;
-  left: 5%;
-  right: 5%;
+  left: 0;
 }
-.long{
-  background-color: #404447;
-  border-radius: 10px;
-  width: 100%;
-  margin:0px auto 20px auto;
-  height: 240px;
-  padding: 0px;
-  float: left;
+.ui-progressbar {
+  position: relative;
 }
-.tit{
-  text-align: center;
-  background-color: rgb(199,199,187);
-  border-radius: 10px 10px 0px 0px;
-  margin:0px;
-  height: 60px;
-  padding: 10px;
-  font-family:"jf-openhuninn";
+.progress-label {
+  position: absolute;
+  left: 50%;
+  top: 4px;
+  font-weight: bold;
+  text-shadow: 1px 1px 0 #fff;
 }
-.con{
-  text-align: center;
-  background-color: #404447;
-  border-radius: 0px 0px 10px 10px;
-  margin:0px;
-  padding: 10px;
-  overflow-y: auto;
-  max-height: 200px;
-}
-.con2{
-  text-align: center;
-  background-color: #404447;
-  border-radius: 0px 0px 10px 10px;
-  margin:0px;
-  padding: 10px;
-  overflow-y: auto;
-  max-height: 180px;
-}
-.bo{
-  background-color: white;
-  width:45%;
-  margin:10px 15px 0px 15px;
-  float: left;
-  text-align: left;
-  border-radius: 10px;
-}
-.bo2{
-  background-color: white;
-  width:100%;
-  margin:10px auto 0px auto;
-  float: left;
-  text-align: left;
-  border-radius: 10px;
-}
-.ww{
-  margin: 0px;
-  font-weight:400;
-  font-family:"jf-openhuninn";
-  font-size: 20pt;
-}
-.cc{
-  margin:20px 0px 0px 20px;
-  float: left;
-}
-.tag{
-  text-align: center;
-  background-color: white;
-  border-radius: 10px;
-  margin:10px auto 0px auto;
-  padding: 5px;
-  max-width: 80%;
-  font-family:"setofont";
-  font-weight:600;
-}
-.card-body{
-  padding: 0.5rem;
-}
-.card{
-  border-radius: 10px;
-}
-.ss{
-  margin: 0px;
-  font-weight:400;
-  font-size: 14pt;
-  text-decoration:none;
-  text-align: center;
-}
-.edit-pic{
-  width:20px;
-  height:20px;
-  cursor: pointer;
+#progressbar{
+  height: 1em;
 }

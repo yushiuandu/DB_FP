@@ -39,7 +39,7 @@ body{
 .board{
   font-weight: 550;
   font-family:"微軟正黑體";
-  font-size: 20pt;
+  font-size: 4vmin;
   width: 90%;
   margin:10px 0px 10px 0px;
 }
@@ -279,7 +279,7 @@ body{
   padding: 0px 20px 0px 20px;
 }
 .p0{
-  padding: 0px;
+  padding-left: 10px;
 }
 .form-control{
   font-size:0.8rem;
@@ -1073,6 +1073,110 @@ button img{
 .modal{
   background-color: rgb(0,0,0,0.5);
 }
+.modal2{
+  background-color: rgb(0,0,0,0.8);
+}
+.time-limit{
+  background-color: #F2F2F2;
+  border-radius: 10px;
+  min-height: 21vh;
+  max-height: 21vh;
+}
+.li-con{
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+.li2-con{
+  height: 20vh;
+  white-space: nowrap;
+}
+.limi{
+  background-color: rgb(187, 187, 187);
+  border-radius: 10px;
+  border: 2px solid rgb(172, 171, 171);
+  /* 滾輪 (紅塵呀滾滾 癡癡呀情深)  */
+  white-space: normal;
+  word-wrap: break-word;
+  word-break: break-all;
+  overflow: hidden;
+
+  width:9vw;
+  height: 90%;
+  display: inline-block;
+  margin: 10px 0px 10px 10px;
+  min-width: 100px;
+
+  position: relative;
+  overflow: hidden;
+}
+.li-pic{
+  max-width: 100%; 
+  max-height: 100%;
+  position: absolute; 
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%);
+}
+.add-pic{
+  max-width: 30%; 
+  max-height: 30%;
+  position: absolute; 
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%);
+}
+.add-time{
+  display:inline-block;
+  text-align: left;
+  margin:auto;
+  padding:20px;
+  border-radius: 10px;
+  background-color:#F2F2F2;
+  width: 100%;
+  position: relative;
+  left: 5%;
+  right: 5%;
+  max-width: 80vh;
+  min-width: 80vh;
+}
+#sad{
+  width: 50vw;
+  max-width: 600px;
+  height: 100vh;
+  padding: 0px;
+  max-height: 90vh;
+  margin: auto;
+  background-color: rgb(0,0,0,0.5);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+.sad-con{
+  width: 45vw;
+  max-width: 520px; 
+  height: 70vh;
+  position: relative;
+  overflow: hidden;
+  margin:0px auto 0px auto;
+}
+.sad-pic{
+  max-height: 100%;
+  max-width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.view{
+  background-color: black;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
 @media (max-width: 767px) {
   #right{
     text-align: left;
@@ -1103,6 +1207,9 @@ button img{
   }
   .modal{
     background-color: rgb(0,0,0,0.5);
+  }
+  .modal2{
+    background-color: rgb(0,0,0,0.8);
   }
   #middle{
     max-height: 75vh;
@@ -1153,6 +1260,18 @@ button img{
   #chat{
     width: 70%;
     background-size:5%;
+  }
+  .limi{
+    width: 15vw;
+    min-width: 80px;
+  }
+  #sad{
+    width: 90vw;
+    max-width: 400px;
+  }
+  .sad-con{
+    width: 80vw;
+    max-width: 350px;
   }
 }
 @media (max-width: 1000px) {
