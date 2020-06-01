@@ -326,6 +326,7 @@
 			<div class="li-con">
 				<div class="li2-con">
 					<!-- 有登入可以加入限時 -->
+					<?php if(isset($_SESSION['nickname'])){ ?>
 					<!-- 新增限時 -->
 					<div class="limi">
 						<a href="../index/index.php?page=add-time">
@@ -333,37 +334,55 @@
 		  				</a>
 					</div>
 					<!-- 新增限時 end -->
-		
+					<?php } //end session if?>
+
+					<?php
+
+						$sql_ig = "SELECT * FROM `instagram`";
+						$result_ig = mysqli_query($link,$sql_ig);
+						$num_ig = mysqli_num_rows($result_ig);
+						$now = date ("Y-m-d H:i:s" , mktime(date('H'), date('i'), date('s'), date('m'), date('d'), date('Y'))) ;
+						if($num_ig > 0){
+							while($row_ig = mysqli_fetch_assoc($result_ig)){
+								$time = strtotime($now)-strtotime($row_ig['post_time']);
+								if($time < 86400){
+					?>
 					<!-- 一則限時 -->
 					<div class="limi">
-						<a href="../index/time.php">
-							<img src="../index/image/test1.jpg" class="li-pic">
+						<a href="../index/time.php?igid=<?=$row_ig['igid'];?>">
+							<img src="data:pic/png;base64,<?=base64_encode($row_ig["img"]);?>" class="li-pic">
 		  				</a>
 					</div>
 					<!-- 一則限時 end -->
 
+					<?php 
+							}//end time reduce	
+						}//end while
+					}//end if
+					?>
+
 					<!-- 一則限時 -->
-					<div class="limi">
+					<!-- <div class="limi">
 						<a href="../index/time.php">
 							<img src="../index/image/test2.jpg" class="li-pic">
 		  				</a>
-					</div>
+					</div> -->
 					<!-- 一則限時 end -->
 
 					<!-- 一則限時 -->
-					<div class="limi">
+					<!-- <div class="limi">
 						<a href="../index/time.php">
 							<img src="../index/image/test3.jpg" class="li-pic">
 		  				</a>
-					</div>
+					</div> -->
 					<!-- 一則限時 end -->
 
 					<!-- 一則限時 -->
-					<div class="limi">
+					<!-- <div class="limi">
 						<a href="../index/time.php">
 							<img src="../index/image/test4.jpg" class="li-pic">
 		  				</a>
-					</div>
+					</div> -->
 					<!-- 一則限時 end -->
 
 				</div>

@@ -72,11 +72,11 @@
 			<!-- 信箱 -->
 			<div class="form-group">
 				<label>信箱</label>
-				<input type="text" class="form-control" placeholder="@example.com" name="email">
+				<input type="text" class="form-control" placeholder="@example.com" name="email" required>
 			</div>
 			<div class="form-group">
 				<label>你的照片</label> <br>
-				<input id="upload" Type="File" Name="YouFile" accept="image/*" @change="showFile">
+				<input id="upload" Type="File" Name="YouFile" accept="image/*" @change="showFile" required>
 			</div>
         	<button type="submit" class="btn btn-info font-weight-bold">註冊</button>
       </form>

@@ -1,3 +1,40 @@
+<?php 
+	if(isset($_GET['submit'])){
+		// 圖檔
+		$f = "0x".bin2hex(fread( fopen( $_FILES["YouFile"]["tmp_name"] , "r") ,  filesize( $_FILES["YouFile"]["tmp_name"]) ));
+		// connect to sql
+		$link = mysqli_connect("localhost","taigun","ELn3yv07F567MwOF","taigun");//連結伺服器//選擇資料庫
+		if(!$link){
+			echo "no connect!";
+		}
+
+		// find uid
+		include("../index/forum.php"); #匯入function
+		if(isset($_SESSION['nickname'])){
+			$uid = finduid($_SESSION['nickname']);
+		}
+
+		// set time
+		date_default_timezone_set('Asia/Taipei');
+		$datetime = date ("Y-m-d H:i:s" , mktime(date('H'), date('i'), date('s'), date('m'), date('d'), date('Y'))) ;
+
+		// add to sql 
+		$sql = "INSERT INTO `instagram` (`UId`,`category`,`post_time`,`img`,`anonymous`) VALUE
+				('$uid','$_POST[forum]','$datetime',$f,'$_POST[anonymous]')";
+
+		if(mysqli_query($link,$sql)){
+			echo '成功';
+			header("Location:../index/index.php");
+		}else{
+			echo '<script language="javascript">';
+			echo 'alert("檔案大小不得超過1MB！");';
+			echo "window.location.href='../index/index.php'";
+            echo '</script>';
+		}
+
+	}
+
+?>
 <!doctype html>
 <html lang="en">
     <head>
@@ -20,7 +57,7 @@
 		<p class='board'>限時動態</p>
 	</div>
 	<div class='write'>
-		<form method='post' action='../Article/write.php?write=true'>
+		<form action="../index/index.php?page=add-time&submit=true" method="POST" enctype="multipart/form-data">
 			<div class="form-group row">
 				<label class="col-sm-3 col-form-label">選擇名稱</label>
 				<div class="col-sm-9">
@@ -46,22 +83,17 @@
 				</div>
 			</div>
 
-        </form>
-        
-		<form id = "form1" action="../Article/img.php" method="POST" enctype="multipart/form-data">
 			<div class="form-group row">
 				<label class="col-sm-3 col-3 col-form-label">傳送圖檔</label>
 				<div class="col-sm-9 col-9">
 					<label>
 						<img src='../index/image/add-image.png' class='write-pic'>
 						<span id="file_name"></span>
-                        <input Type="File" Name="YouFile" class='write-file pointer' id='FileInput'>
+                        <input Type="File" Name="YouFile" class='write-file pointer' id='FileInput' required>
                     </label>
 				</div>
 			</div>
-        </form>
 
-        <form id = "form1"  method="POST">
 			<div class="form-group row">
 				<label class="col-sm-3 col-3 col-form-label">縮圖</label>
 				<div class="col-sm-9 col-9">
@@ -70,11 +102,12 @@
                     </figure>
 				</div>
 			</div>
-        </form>
+        
 
-        <div class='right'>
-			<button id="sub" type="submit" class="btn btn-info font-weight-bold">發送</button>
-		</div>
+			<div class='right'>
+				<button id="sub" type="submit" class="btn btn-info font-weight-bold">發送</button>
+			</div>
+		</form>
 	</div>
 
 	<!-- 抓圖檔的資訊 -->

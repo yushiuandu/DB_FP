@@ -72,6 +72,12 @@
 	<!-- <script src="//code.jquery.com/jquery-1.10.2.js"></script> -->
 	<script src="//s3-ap-northeast-1.amazonaws.com/justfont-user-script/jf-60019.js"></script>
 	<script src="//s3-ap-northeast-1.amazonaws.com/justfont-user-script/jf-60019.js"></script>
+	<style>
+		#map {
+            height: 100%;
+            width: 100%;
+        }
+	</style>
   </head>
 
   <body>
@@ -140,7 +146,62 @@
 				<p class="font-weight-bold" style='font-size:5vmin; margin:20px 10px 20px 10px; font-family: 微軟正黑體; font-weight:400;'>
                 <?php echo $row['title'];?></p>
 				<!-- 文章內容 -->
-				<p class='article-word'><?php echo $row['content'];?></p>				
+				<p class='article-word'><?php echo $row['content'];?></p>
+
+				<!-- 假如有放google 地圖 -->
+				<?php if($row['ismap'] == 1){
+					
+					$address = $row['address'];
+					function geocode($address){
+						/*用來將字串編碼，在資料傳遞的時候，如果直接傳遞中文會出問題，所以在傳遞資料時，通常會使用urlencode先編碼之後再傳遞*/
+						$address = urlencode($address);
+			
+						/*可參閱：(https://developers.google.com/maps/documentation/geocoding/intro)*/
+						// $url = "https://maps.google.com/maps/api/geocode/json?address={$address}&key=AIzaSyAY6YGC3VgWJA-ZKtrOHgMe_6PKXTdM6pA&language=zh-TW";
+			
+						/*取得回傳的json值*/
+						$response_json = file_get_contents($url);
+			
+						/*處理json轉為變數資料以便程式處理*/
+						$response = json_decode($response_json, true);
+			
+						/*如果能夠進行地理編碼，則status會回傳OK*/ 
+						if($response['status']='OK'){
+							//取得需要的重要資訊
+							$latitude_data = $response['results'][0]['geometry']['location']['lat']; //緯度
+							$longitude_data = $response['results'][0]['geometry']['location']['lng']; //精度
+							$data_address = $response['results'][0]['formatted_address'];
+			
+							if($latitude_data && $longitude_data && $data_address){
+			
+								$data_array = array();            
+								
+								//一個或多個單元加入陣列末尾
+								array_push(
+									$data_array,
+									$latitude_data, //$data_array[0]
+									$longitude_data, //$data_array[1]
+									'<b>地址: </b> '.$data_address //$data_array[2]
+								);
+			
+								return $data_array; //回傳$data_array
+			
+							}else{
+								return false;
+							}
+			
+						}else{
+							return false;
+						}
+					}
+
+					$data_array = geocode($address);
+					$latitude = $data_array[0];
+					$longitude = $data_array[1];
+					$data_address = $data_array[2];
+					echo $data_address;
+					echo '<div id="map" class="embed-responsive embed-responsive-16by9"></div>';
+				}?>		
   				<!-- 文章tag -->
 				<div style="margin:10px 10px 0px 10px; font-family: setofont; font-weight:600;">
 					<?php 
@@ -161,7 +222,6 @@
 			</div>		
 		</div>
 		<!-- 文章內容(中) end-->
-				
 		<!-- 文章內容(下) -->
 		<div class="row article-fotter right">
 			<!-- 按鈕們-->
@@ -170,7 +230,7 @@
 				<p class="count" style="display: inline; margin:0px; font-size:16pt; position:relative; top:5px; left:5px;"><?php echo $row['agree'];?></p>
 				<?php 
 					if(isset($_SESSION['nickname'])){
-						$sql_good = "SELECT * FROM `good` WHERE `UId` = \"$uid\" AND `AId` = \"$row[AId]\"";
+						$sql_good = "SELECT * FROM `good` WHERE `UId` = \"$uid\" AND `AId` = \"$row[AId]\" ";
 						$result_good = mysqli_query($link,$sql_good);
 						$row_good = mysqli_fetch_assoc($result_good);
 						$num = mysqli_num_rows($result_good);
@@ -286,7 +346,7 @@
 	<!-- 熱門留言區 -->
 	<?php 
 		
-			$sql_hot = "SELECT * FROM `comment` WHERE `AId` = \"$aid\" ORDER BY `likeCount` DESC";
+			$sql_hot = "SELECT * FROM `comment` WHERE `AId` = \"$aid\" AND `anonymous`!=2 ORDER BY `likeCount` DESC";
 			$result_hot = mysqli_query($link,$sql_hot);
 			$row_hot = $row_hot = mysqli_fetch_assoc($result_hot);
 			if(isset($row_hot)){
@@ -596,7 +656,24 @@
 
 	</div>
 	
+	
+	
 	<!-- 手動呼叫 -->
+	<!-- google map -->
+	<script>
+		function initMap() {
+			var uluru = {lat: <?=$latitude;?>, lng: <?=$longitude;?>}; //經緯度
+			var map = new google.maps.Map(document.getElementById('map'), {
+				zoom: 16,
+				center: uluru
+			});
+			var marker = new google.maps.Marker({
+			position: uluru,
+			map: map
+			});
+		}
+	</script>
+	<!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAY6YGC3VgWJA-ZKtrOHgMe_6PKXTdM6pA&callback=initMap"></script> -->
 	<script>
 		 function prevent_reloading(){
 			var pendingRequests = {};
@@ -748,8 +825,9 @@
 		});
 		
 	</script>
-	<script type="text/javascript">
-	</script>
+
+	
+
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
