@@ -25,7 +25,7 @@
 
 		$datetime = date ("Y-m-d H:i:s" , mktime(date('H'), date('i'), date('s'), date('m'), date('d'), date('Y'))) ;
 		$excerpt = substr( $_POST['content'] , 0 , 200 );
-		echo $_POST['address'];
+		
 		if(!(isset($_POST['address']))){
 			$sql = "INSERT INTO article (`category`,`UId`, `title`, `content`, `excerpt`, `post_time`, `anonymous`, `post_name`) 
 				VALUES ('$_POST[forum]', '$uid', '$_POST[title]', '$_POST[content]', '$excerpt', '$datetime', '$_POST[anonymous]','$_SESSION[nickname]')";
@@ -216,7 +216,7 @@
 	</div>
 	
 	<!-- google map api -->
-	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAY6YGC3VgWJA-ZKtrOHgMe_6PKXTdM6pA&libraries=places"></script>
+	<!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAY6YGC3VgWJA-ZKtrOHgMe_6PKXTdM6pA&libraries=places"></script> -->
 
 	<!-- 抓圖檔的資訊 -->
 	<script>

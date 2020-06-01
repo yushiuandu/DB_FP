@@ -157,7 +157,7 @@
 						$address = urlencode($address);
 			
 						/*可參閱：(https://developers.google.com/maps/documentation/geocoding/intro)*/
-						$url = "https://maps.google.com/maps/api/geocode/json?address={$address}&key=AIzaSyAY6YGC3VgWJA-ZKtrOHgMe_6PKXTdM6pA&language=zh-TW";
+						// $url = "https://maps.google.com/maps/api/geocode/json?address={$address}&key=AIzaSyAY6YGC3VgWJA-ZKtrOHgMe_6PKXTdM6pA&language=zh-TW";
 			
 						/*取得回傳的json值*/
 						$response_json = file_get_contents($url);
@@ -673,7 +673,7 @@
 			});
 		}
 	</script>
-	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAY6YGC3VgWJA-ZKtrOHgMe_6PKXTdM6pA&callback=initMap"></script>
+	<!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAY6YGC3VgWJA-ZKtrOHgMe_6PKXTdM6pA&callback=initMap"></script> -->
 	<script>
 		 function prevent_reloading(){
 			var pendingRequests = {};
