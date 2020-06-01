@@ -188,8 +188,8 @@
         <div class="time-footer">
             <form action="" method="post" style="">
                 <!-- emoji -->
-                <div class="row justify-content-start"> 
-                    <div class="col-md-10 col-sm-8 col-8 p0 emoji">
+                <div class="row justify-content-center"> 
+                    <div class="col-md-8 col-sm-8 col-8 p0 emoji">
                         <div class="row justify-content-center">
                             <div class="col-md-2 col-sm-2 col-2 p0">
                                 <div class="pointer" id="laugh">😂</div>
@@ -206,11 +206,14 @@
                             <div class="col-md-2 col-sm-2 col-2 p0">
                                 <div class="pointer" id="clap">👏</div>
                             </div>
-                            <div class="col-md-2 col-sm-2 col-2 p0">
-                                <div class="pointer" id="hundred">💯</div>
-                            </div>
                         </div>
                     </div>
+                    <div class="col-md-3 col-sm-3 col-3 p0 r">
+                        <p class="good-ww">20000</p>
+                    </div>
+
+                    <img src="../index/image/good-white.png" class="good pointer" onmouseout="this.src='../index/image/good-white.png';" onmouseover="this.src='../index/image/good-black.png';"/>
+
                 </div>
                 <!-- emoji end-->
                 <div class="row justify-content-start">
@@ -230,14 +233,14 @@
         var cry = '\u{1F622}'; //哭
         var love = '\u{1F970}'; //愛
         var clap = '\u{1F44F}'; //拍手
-        var hundred = '\u{1F4AF}'; //一百分
+        var good = '\u{1F44D}'; //按讚
 
         document.getElementById("laugh").innerHTML = laugh;
         document.getElementById("wow").innerHTML = wow;
         document.getElementById("cry").innerHTML = cry;
         document.getElementById("love").innerHTML = love;
         document.getElementById("clap").innerHTML = clap;
-        document.getElementById("hundred").innerHTML = hundred;
+        document.getElementById("good").innerHTML = good;
     </script>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
