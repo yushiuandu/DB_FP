@@ -280,21 +280,27 @@
                             <div class="row justify-content-center">
                                 <div class="col-md-2 col-sm-2 col-2 p0">
                                     <div class="pointer laugh" data-url="<?=$Link."&emoji=laugh";?>" id="laugh">😂</div>
+                                    <p class="emoji-ww">500</p>
                                 </div>
                                 <div class="col-md-2 col-sm-2 col-2 p0">
                                     <div class="pointer wow" data-url="<?=$Link."&emoji=wow";?>" id="wow">😮</div>
+                                    <p class="emoji-ww">500</p>
                                 </div>
                                 <div class="col-md-2 col-sm-2 col-2 p0">
                                     <div class="pointer cry" data-url="<?=$Link."&emoji=cry";?>" id="cry">😢</div>
+                                    <p class="emoji-ww">500</p>
                                 </div>
                                 <div class="col-md-2 col-sm-2 col-2 p0">
                                     <div class="pointer love" data-url="<?=$Link."&emoji=love";?>" id="love">🥰</div>
+                                    <p class="emoji-ww">500</p>
                                 </div>
                                 <div class="col-md-2 col-sm-2 col-2 p0">
                                     <div class="pointer clap" data-url="<?=$Link."&emoji=clap";?>" id="clap">👏</div>
+                                    <p class="emoji-ww">500</p>
                                 </div>
                                 <div class="col-md-2 col-sm-2 col-2 p0">
                                     <div class="pointer hundred" data-url="<?=$Link."&emoji=hundred";?>" id="hundred">💯</div>
+                                    <p class="emoji-ww">500</p>
                                 </div>
                             </div>
                         </div>

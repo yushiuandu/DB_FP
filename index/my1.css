@@ -152,17 +152,40 @@ body{
 #progressbar{
   height: 1em;
 }
-.good-ww{
+.emoji-ww{
   color: white;
   margin: 0px;
 }
 .r{
   text-align: right;
 }
-.good{
-  position: absolute;
-  right: 18px;
-  bottom: 12%;
-  width: 40px;
-  height: 40px;
+@media (max-width: 767px) {
+  .time-head{
+    height: 18vh;
+    /* border-bottom: white 2px solid; */
+    background-color: rgb(172, 172, 172,0.5);
+  }
+  #time-ww{
+    width: 90%;
+    background-color: rgba(248, 248, 248, 0.863);
+    border-radius: 10px;
+  }
+  .time-body{
+    height: 57vh;
+    /* border-bottom: white 2px solid; */
+  }
+  .time-footer{
+    height: 25vh;
+    background-color: rgb(172, 172, 172,0.5);
+    padding: 15px;
+  }
+  .share-con{
+    width: 40vw;
+    height: 57vh;
+    min-width: 250px;
+  }
+  .user-con{
+    width: 40px; 
+    height: 40px; 
+  }
 }
