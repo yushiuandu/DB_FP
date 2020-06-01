@@ -193,26 +193,26 @@
                         <div class="row justify-content-center">
                             <div class="col-md-2 col-sm-2 col-2 p0">
                                 <div class="pointer" id="laugh">😂</div>
+                                <p class="emoji-ww">500</p>
                             </div>
                             <div class="col-md-2 col-sm-2 col-2 p0">
                                 <div class="pointer" id="wow">😮</div>
+                                <p class="emoji-ww">500</p>
                             </div>
                             <div class="col-md-2 col-sm-2 col-2 p0">
                                 <div class="pointer" id="cry">😢</div>
+                                <p class="emoji-ww">500</p>
                             </div>
                             <div class="col-md-2 col-sm-2 col-2 p0">
                                 <div class="pointer" id="love">🥰</div>
+                                <p class="emoji-ww">500</p>
                             </div>
                             <div class="col-md-2 col-sm-2 col-2 p0">
                                 <div class="pointer" id="clap">👏</div>
+                                <p class="emoji-ww">500</p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3 col-sm-3 col-3 p0 r">
-                        <p class="good-ww">20000</p>
-                    </div>
-
-                    <img src="../index/image/good-white.png" class="good pointer" onmouseout="this.src='../index/image/good-white.png';" onmouseover="this.src='../index/image/good-black.png';"/>
 
                 </div>
                 <!-- emoji end-->
