@@ -337,15 +337,15 @@
 					<?php } //end session if?>
 
 					<?php
-
-						$sql_ig = "SELECT * FROM `instagram`";
+						$now = date ("Y-m-d H:i:s" , mktime(date('H'), date('i'), date('s'), date('m'), date('d'), date('Y'))) ;
+						$yesterday = date ("Y-m-d H:i:s" , mktime(date('H'), date('i'), date('s'), date('m'), date('d')-1, date('Y'))) ;
+			
+						$sql_ig = "SELECT * FROM `instagram` WHERE `post_time` BETWEEN \"$yesterday\" AND \"$now\"";
 						$result_ig = mysqli_query($link,$sql_ig);
 						$num_ig = mysqli_num_rows($result_ig);
-						$now = date ("Y-m-d H:i:s" , mktime(date('H'), date('i'), date('s'), date('m'), date('d'), date('Y'))) ;
+						
 						if($num_ig > 0){
 							while($row_ig = mysqli_fetch_assoc($result_ig)){
-								$time = strtotime($now)-strtotime($row_ig['post_time']);
-								if($time < 86400){
 					?>
 					<!-- 一則限時 -->
 					<div class="limi">
@@ -356,34 +356,9 @@
 					<!-- 一則限時 end -->
 
 					<?php 
-							}//end time reduce	
 						}//end while
 					}//end if
 					?>
-
-					<!-- 一則限時 -->
-					<!-- <div class="limi">
-						<a href="../index/time.php">
-							<img src="../index/image/test2.jpg" class="li-pic">
-		  				</a>
-					</div> -->
-					<!-- 一則限時 end -->
-
-					<!-- 一則限時 -->
-					<!-- <div class="limi">
-						<a href="../index/time.php">
-							<img src="../index/image/test3.jpg" class="li-pic">
-		  				</a>
-					</div> -->
-					<!-- 一則限時 end -->
-
-					<!-- 一則限時 -->
-					<!-- <div class="limi">
-						<a href="../index/time.php">
-							<img src="../index/image/test4.jpg" class="li-pic">
-		  				</a>
-					</div> -->
-					<!-- 一則限時 end -->
 
 				</div>
 			</div>
@@ -897,7 +872,6 @@
 		$(".good_article").click(function(){
 				var url = $(this).data("url");
 				var good = $(".good_article").index($(this));
-				// var count = $("Count").index($(this));
 
 				console.log(good);
 				$.ajax({

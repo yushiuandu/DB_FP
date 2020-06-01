@@ -1,5 +1,9 @@
 <?php session_start();
-    // connect to sql
+   
+    date_default_timezone_set('Asia/Taipei');
+    $datetime = date ("Y-m-d H:i:s" , mktime(date('H'), date('i'), date('s'), date('m'), date('d'), date('Y'))) ;
+    $yesterday = date ("Y-m-d H:i:s" , mktime(date('H'), date('i'), date('s'), date('m'), date('d')-1, date('Y'))) ;
+     // connect to sql
 	$link = mysqli_connect("localhost","taigun","ELn3yv07F567MwOF","taigun");//連結伺服器//選擇資料庫
 	if(!$link){
 		echo "no connect!";
@@ -8,14 +12,30 @@
         $igid = $_GET['igid'];
     }
 
-    $sql = "SELECT * FROM `instagram` ";
+    $sql = "SELECT * FROM `instagram` WHERE `post_time` BETWEEN \"$yesterday\" AND \"$datetime\"";
     $result = mysqli_query($link,$sql);
+    $row = mysqli_fetch_assoc($result);
     $num = mysqli_num_rows($result);
+    $head = $row['igid'];
+    while($row = mysqli_fetch_assoc($result)){
+        $tail = $row['igid'];
+    }
 
     include("../index/forum.php"); #匯入function
 	if(isset($_SESSION['nickname'])){
 		$uid = finduid($_SESSION['nickname']);
-	}
+    }
+    
+    if(isset($_GET['chat'])){
+        $other = $_GET['chat'];
+        $content = $_SESSION['nickname']."已回復您的限實動態：<br>".$_POST['chat'];
+		$sql = "INSERT INTO `chat` (`UId`,`other`,`chat`,`sendtime`) VALUES ('$_GET[chat]','$uid','$content','$datetime')";
+		if(mysqli_query($link, $sql)){
+			exit(json_encode(array("success"=>"OK","content"=>$content)));
+		}else{
+			mysqli_error();
+		}
+    }
     
 ?>
 <!doctype html>
@@ -45,7 +65,7 @@
             var temp=0; //暫存下面還要有多久
             var oh=0;
 
-            window.onload= view();
+            window.onload = view();
 
             function count(){ //數時間到 換頁 
                 second=((new Date()).getSeconds()+60)%60; //現在秒數
@@ -73,8 +93,8 @@
                 go();
                 i=(i+1+4)%4;
                 <?php
-                    if($igid == $num){
-                        $next = 1;
+                    if($igid == $head){
+                        $next = $head;
                     }else{
                         $next = $igid + 1;
                     }
@@ -182,7 +202,8 @@
 
     <body>
         <?php
-            $sql = "SELECT * FROM `instagram` JOIN `member` WHERE instagram.UId = member.UId AND instagram.igid = '$igid'";
+            $sql = "SELECT * FROM `instagram` JOIN `member` 
+                    WHERE instagram.UId = member.UId AND instagram.igid = '$igid' ";
             $result = mysqli_query($link,$sql);
 
             if($num > 0){
@@ -194,14 +215,14 @@
                     $Link = "../index/ig.php?igid=".$row['igid'];
 
                     // 計算按往左的頁數
-                    if($igid != 1){
-                        $left = $igid - 1;
+                    if($igid == $head){
+                        $left = $head;
                     }else{
-                        $left = 1;
+                        $left = $igid - 1;
                     }
                     // 計算往右的頁數是多少
-                    if($num == $igid){
-                        $right = 1;
+                    if($tail == $igid){
+                        $right = $head;
                     }else{
                         $right = $igid + 1;
                     }
@@ -287,10 +308,10 @@
                     ?>
                     <div class="row justify-content-start">
                         <div class="col-md-10 col-sm-8 col-8 p0">
-                            <input name="chat" id="time-ww" type="text" placeholder='說點什麼吧...' onclick="input();">
+                            <input id="chat" name="chat" id="time-ww" type="text" placeholder='說點什麼吧...' onclick="input();">
                         </div>
                         <div class="col-md-2 col-sm-4 col-4 p0">
-                            <div type="submit" class="time-btn" onclick="enter();">傳送</div>
+                            <div id="igsub" data-url="../index/time.php?chat=<?=$row['UId'];?>" type="submit" class="time-btn" onclick="enter();">傳送</div>
                         </div>
                     </div>
                     <?php }//end friend num ?>
@@ -323,8 +344,7 @@
         <script>
             $(".laugh").click(function(){
 				var url = $(this).data("url");
-				// var good = $(".good_article").index($(this));
-				// var count = $("Count").index($(this));
+				
 
 				console.log(url);
 				$.ajax({
@@ -334,19 +354,11 @@
 					dataType :"json"
 					
 				});
-                // .done(function(data) {
-				// 	console.log(data);
-				// 	if(data['success'] == "OK"){
-
-				// 	}else if(data['success'] == "DEL_OK"){
-				// 	}
-				// });
 			});
 
             $(".wow").click(function(){
 				var url = $(this).data("url");
-				// var good = $(".good_article").index($(this));
-				// var count = $("Count").index($(this));
+				
 
 				console.log(url);
 				$.ajax({
@@ -360,8 +372,7 @@
 
             $(".love").click(function(){
 				var url = $(this).data("url");
-				// var good = $(".good_article").index($(this));
-				// var count = $("Count").index($(this));
+				
 
 				console.log(url);
 				$.ajax({
@@ -375,8 +386,7 @@
 
             $(".wow").click(function(){
 				var url = $(this).data("url");
-				// var good = $(".good_article").index($(this));
-				// var count = $("Count").index($(this));
+				
 
 				console.log(url);
 				$.ajax({
@@ -390,8 +400,7 @@
 
             $(".cry").click(function(){
 				var url = $(this).data("url");
-				// var good = $(".good_article").index($(this));
-				// var count = $("Count").index($(this));
+				
 
 				console.log(url);
 				$.ajax({
@@ -405,8 +414,6 @@
 
             $(".clap").click(function(){
 				var url = $(this).data("url");
-				// var good = $(".good_article").index($(this));
-				// var count = $("Count").index($(this));
 
 				console.log(url);
 				$.ajax({
@@ -420,8 +427,7 @@
 
             $(".hundred").click(function(){
 				var url = $(this).data("url");
-				// var good = $(".good_article").index($(this));
-				// var count = $("Count").index($(this));
+				
 
 				console.log(url);
 				$.ajax({
@@ -432,6 +438,29 @@
 					
 				});
             });
+
+            // 提交回復
+            $("#igsub").click( function(e){
+				var url = $(this).data("url");
+
+				$.ajax({
+					type: "POST",
+					url: url,
+					data: { //傳送資料
+						chat: $("#chat").val(), 
+					},
+					dataType :"json"
+				}).done(function(data) {
+					console.log(data);
+                    if(data['success'] == "OK"){
+                        alert("已成功傳送");
+                        window.location.href="../index/time.php?igid=<?=$right;?>";
+                    }
+				});
+
+				e.preventDefault(); // avoid to execute the actual submit of the form.
+			
+			});
 
         </script>
         <!-- Optional JavaScript -->

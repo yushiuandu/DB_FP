@@ -204,7 +204,7 @@
 
 				e.preventDefault(); // avoid to execute the actual submit of the form.
 			
-		});
+			});
 		
 		
 		</script>
