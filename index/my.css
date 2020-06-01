@@ -511,7 +511,6 @@ button img{
   max-height: 55vh;
   padding:10px 20px 10px 20px;
   overflow-y:scroll;
-  overflow-x:scroll;
 }
 .chat-fotter{
   text-align: left;
