@@ -507,10 +507,11 @@ button img{
   background-color: #F2F2F2;
   width: 90%;
   margin:0px auto 0px auto;
-  min-height: 60vh;
-  max-height: 60vh;
-  overflow-y: auto;
+  min-height: 55vh;
+  max-height: 55vh;
   padding:10px 20px 10px 20px;
+  overflow-y:scroll;
+  overflow-x:scroll;
 }
 .chat-fotter{
   text-align: left;
@@ -557,6 +558,19 @@ button img{
 
   min-height: 40px;
   max-width: 70%;
+}
+.talk2{
+  display:inline-block;
+  text-align: left;
+  margin:10px 5px 0px 10px;
+  padding:5px 10px 5px 10px;
+  border-radius: 10px;
+  background-color: rgb(193, 171, 173);
+
+  min-height: 40px;
+  max-width: 70%;
+  position: relative;
+  left: 110px;
 }
 .talk-word{
   font-family: "jf-openhuninn";
@@ -1082,6 +1096,35 @@ button img{
   min-height: 21vh;
   max-height: 21vh;
 }
+.time-ww1{
+  color: gray;
+  margin: 0px;
+  position: relative;
+  left: 50px;
+  width: fit-content;
+  font-size: 8pt;
+}
+.time-ww2{
+  color: gray;
+  margin: 0px;
+  font-size: 8pt;
+}
+.u{
+  display:inline-block;
+  position: relative;
+  bottom: -25px;
+  right: 10px;
+  text-align: left;
+  margin: 0px;
+  padding: 0px;
+  border-radius: 10px;
+
+  min-height: 40px;
+  max-width: 70%;
+}
+.uu{
+  text-align: right;
+}
 .li-con{
   width: 100%;
   overflow-x: auto;
@@ -1256,6 +1299,7 @@ button img{
   .chat-body{
     min-height: 45vh;
     max-height: 45vh;
+    overflow:auto;
   }
   #chat{
     width: 70%;
