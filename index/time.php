@@ -275,7 +275,7 @@
                 <?php if(isset($_SESSION['nickname'])){ ?>
                 <form action="" method="post" style="">
                     <!-- emoji -->
-                    <div class="row justify-content-start"> 
+                    <div class="row justify-content-center"> 
                         <div class="col-md-10 col-sm-8 col-8 p0 emoji">
                             <div class="row justify-content-center">
                                 <div class="col-md-2 col-sm-2 col-2 p0">
@@ -314,7 +314,7 @@
                     ?>
                     <div class="row justify-content-start">
                         <div class="col-md-10 col-sm-8 col-8 p0">
-                            <input id="chat" name="chat" id="time-ww" type="text" placeholder='說點什麼吧...' onclick="input();">
+                            <input name="chat" id="time-ww" type="text" placeholder='說點什麼吧...' onclick="input();">
                         </div>
                         <div class="col-md-2 col-sm-4 col-4 p0">
                             <div id="igsub" data-url="../index/time.php?chat=<?=$row['UId'];?>" type="submit" class="time-btn" onclick="enter();">傳送</div>
