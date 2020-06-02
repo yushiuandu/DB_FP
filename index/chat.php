@@ -58,6 +58,12 @@
 		<title>抬槓</title>
 		<script src="//s3-ap-northeast-1.amazonaws.com/justfont-user-script/jf-60019.js"></script>
 		<script src="//s3-ap-northeast-1.amazonaws.com/justfont-user-script/jf-60019.js"></script>
+		<script type="text/javascript">
+		$(document).ready(function(){
+			$('#chatting').scrollTop( $('#chatting')[0].scrollHeight);
+			$('#chatting').scrollLeft( $('#chatting')[0].scrollWidth);
+		});
+		</script>
 	</head>
   <!-- 聊天室 -->
 	<body>
@@ -101,16 +107,20 @@
 				<div class="talk">
 					<pre class='talk-word'><?php echo $row['chat']; ?></pre>
 				</div>
+				<p class="time-ww1">2020/06/02 上午12:29</p>
 			</div>
 			<!-- 對方的對話框 end -->
 			<?php }//end if 
 					else if($row['UId'] == $uid){?>
 
 			<!-- 自己的對話框 -->
-			<div style='text-align:right;'>
+			<div class="uu">
 				<!-- 自己的話 -->
-				<div class="talk"> 
-				<pre class='talk-word'><?php echo $row['chat']; ?></pre>
+				<div class="talk2"> 
+					<pre class='talk-word'><?php echo $row['chat']; ?></pre>
+				</div>
+				<div class="u"> 
+					<p class="time-ww2">2020/06/02 上午12:29</p>
 				</div>
 			<!-- 自己的頭貼 -->
 				<img src="data:pic/png;base64,<?=base64_encode($row_pic["profile"]);?>" class="img-fluid rounded-circle c-pic" >
@@ -119,7 +129,7 @@
 					<?php 		}//end else if
 					}//end while
 				}//end if?>
-			
+			<div><a id="msg_end" name="1" href="#1">&nbsp</a></div>
 		</div>
 		<!-- 聊天室的中間段(對話區) -->
 		<!-- 聊天室的尾段(輸入區) -->
@@ -132,7 +142,7 @@
 		<!-- 聊天室的尾段(輸入區) -->
 		
 		<script>
-
+			
 			$(function(){
 				setInterval(getalarm_chat,100)
 			});

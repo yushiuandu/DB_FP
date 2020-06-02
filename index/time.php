@@ -275,7 +275,7 @@
                 <?php if(isset($_SESSION['nickname'])){ ?>
                 <form action="" method="post" style="">
                     <!-- emoji -->
-                    <div class="row justify-content-start"> 
+                    <div class="row justify-content-center"> 
                         <div class="col-md-10 col-sm-8 col-8 p0 emoji">
                             <div class="row justify-content-center">
                                 <div class="col-md-2 col-sm-2 col-2 p0">

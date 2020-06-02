@@ -87,7 +87,7 @@
 
         <!-- 全部收藏 -->
         <div class="row justify-content-center">
-            <div class="col-lg-6 col-md-12" style="margin-bottom:20px;">
+            <div class="col-lg-12 col-md-12 long" style="margin-bottom:20px;">
                 <div class='tit'>
                     <p class='ww'>全部收藏</p>
                 </div>
@@ -161,7 +161,7 @@
                     while($row = mysqli_fetch_assoc($result)){
             ?>
             <!-- 單個分類(1) -->
-            <div class="col-md-6" style="margin-bottom:20px;">
+            <div class="col-lg-6 col-md-12" style="margin-bottom:20px;">
                 <div class='tit'>
                     <p class='ww'><?=$row['save_group'];?></p>
                 </div>
