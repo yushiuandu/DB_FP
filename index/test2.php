@@ -20,6 +20,8 @@
 		<?php 
 			// $random = rand(1,25);
 			// echo $random;
+			date_default_timezone_set('Asia/Taipei');
+			$datetime = date ("Y-m-d H:i:s" , mktime(date('H'), date('i'), date('s'), date('m'), date('d'), date('Y'))) ;
 
 			$choice = array("A","B","C","D","E","F");
 

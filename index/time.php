@@ -93,7 +93,7 @@
                 go();
                 i=(i+1+4)%4;
                 <?php
-                    if($igid == $head){
+                    if($igid == $tail){
                         $next = $head;
                     }else{
                         $next = $igid + 1;
@@ -314,7 +314,7 @@
                     ?>
                     <div class="row justify-content-start">
                         <div class="col-md-10 col-sm-8 col-8 p0">
-                            <input id="chat" name="chat" id="time-ww" type="text" placeholder='說點什麼吧...' onclick="input();">
+                            <input id="time-ww" name="chat" type="text" placeholder='說點什麼吧...' onclick="input();">
                         </div>
                         <div class="col-md-2 col-sm-4 col-4 p0">
                             <div id="igsub" data-url="../index/time.php?chat=<?=$row['UId'];?>" type="submit" class="time-btn" onclick="enter();">傳送</div>
@@ -453,7 +453,7 @@
 					type: "POST",
 					url: url,
 					data: { //傳送資料
-						chat: $("#chat").val(), 
+						chat: $("#time-ww").val(), 
 					},
 					dataType :"json"
 				}).done(function(data) {
