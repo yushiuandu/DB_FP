@@ -16,7 +16,8 @@
     $result = mysqli_query($link,$sql);
     $row = mysqli_fetch_assoc($result);
     $num = mysqli_num_rows($result);
-    $head = $row['igid'];
+    $head = $row['igid'];//最頭的igid
+    // 算尾巴的igid
     while($row = mysqli_fetch_assoc($result)){
         $tail = $row['igid'];
     }
@@ -58,8 +59,8 @@
         <script>
             var num=["1","2","3","4"];
             var i=0;
-            var time;
-            var time2; //算時間
+            var time = 0;
+            var time2 = 0; //算時間
             var second; //數秒數
             var done=0; //結束秒數
             var temp=0; //暫存下面還要有多久
@@ -70,7 +71,7 @@
             function count(){ //數時間到 換頁 
                 second=((new Date()).getSeconds()+60)%60; //現在秒數
                 if( second<done ){
-                    time2=setTimeout(function(){count()},1000);
+                    time2 = setTimeout(function(){count()},2000);
                 }else{
                     right();
                 }
@@ -99,9 +100,10 @@
                         $next = $igid + 1;
                     }
                 ?>
+                time = setTimeout(function(){next()},2000);
                 location.href="../index/time.php?igid=<?=$next;?>";
                 // document.getElementById('change').src="../index/image/test"+num[i]+".jpg";
-                time=setTimeout(function(){next()},2000);
+                
             }
             
             function view(){
@@ -280,27 +282,27 @@
                             <div class="row justify-content-center">
                                 <div class="col-md-2 col-sm-2 col-2 p0">
                                     <div class="pointer laugh" data-url="<?=$Link."&emoji=laugh";?>" id="laugh">😂</div>
-                                    <p class="emoji-ww">500</p>
+                                    <p class="emoji-ww" id="laugh_count"><?=$row['laugh'];?></p>
                                 </div>
                                 <div class="col-md-2 col-sm-2 col-2 p0">
                                     <div class="pointer wow" data-url="<?=$Link."&emoji=wow";?>" id="wow">😮</div>
-                                    <p class="emoji-ww">500</p>
+                                    <p class="emoji-ww" id="wow_count"><?=$row['wow'];?></p>
                                 </div>
                                 <div class="col-md-2 col-sm-2 col-2 p0">
                                     <div class="pointer cry" data-url="<?=$Link."&emoji=cry";?>" id="cry">😢</div>
-                                    <p class="emoji-ww">500</p>
+                                    <p class="emoji-ww" id="cry_count"><?=$row['cry'];?></p>
                                 </div>
                                 <div class="col-md-2 col-sm-2 col-2 p0">
                                     <div class="pointer love" data-url="<?=$Link."&emoji=love";?>" id="love">🥰</div>
-                                    <p class="emoji-ww">500</p>
+                                    <p class="emoji-ww" id="love_count"><?=$row['love'];?></p>
                                 </div>
                                 <div class="col-md-2 col-sm-2 col-2 p0">
                                     <div class="pointer clap" data-url="<?=$Link."&emoji=clap";?>" id="clap">👏</div>
-                                    <p class="emoji-ww">500</p>
+                                    <p class="emoji-ww" id="clap_count"><?=$row['clap'];?></p>
                                 </div>
                                 <div class="col-md-2 col-sm-2 col-2 p0">
                                     <div class="pointer hundred" data-url="<?=$Link."&emoji=hundred";?>" id="hundred">💯</div>
-                                    <p class="emoji-ww">500</p>
+                                    <p class="emoji-ww" id="hundred_count"><?=$row['hundred'];?></p>
                                 </div>
                             </div>
                         </div>
@@ -359,6 +361,11 @@
 					data: {type : "ajax"},
 					dataType :"json"
 					
+				}).done(function(data) {
+					console.log(data);
+                    if(data['success'] == "OK"){
+                        $("#laugh_count").html(data['count']);
+                    }
 				});
 			});
 
@@ -373,6 +380,11 @@
 					data: {type : "ajax"},
 					dataType :"json"
 					
+				}).done(function(data) {
+					console.log(data);
+                    if(data['success'] == "OK"){
+                        $("#wow_count").html(data['count']);
+                    }
 				});
             });
 
@@ -387,6 +399,11 @@
 					data: {type : "ajax"},
 					dataType :"json"
 					
+				}).done(function(data) {
+					console.log(data);
+                    if(data['success'] == "OK"){
+                        $("#love_count").html(data['count']);
+                    }
 				});
             });
 
@@ -401,6 +418,11 @@
 					data: {type : "ajax"},
 					dataType :"json"
 					
+				}).done(function(data) {
+					console.log(data);
+                    if(data['success'] == "OK"){
+                        $("#wow_count").html(data['count']);
+                    }
 				});
             });
 
@@ -415,6 +437,11 @@
 					data: {type : "ajax"},
 					dataType :"json"
 					
+				}).done(function(data) {
+					console.log(data);
+                    if(data['success'] == "OK"){
+                        $("#cry_count").html(data['count']);
+                    }
 				});
             });
 
@@ -428,6 +455,11 @@
 					data: {type : "ajax"},
 					dataType :"json"
 					
+				}).done(function(data) {
+					console.log(data);
+                    if(data['success'] == "OK"){
+                        $("#clap_count").html(data['count']);
+                    }
 				});
             });
 
@@ -442,6 +474,11 @@
 					data: {type : "ajax"},
 					dataType :"json"
 					
+				}).done(function(data) {
+					console.log(data);
+                    if(data['success'] == "OK"){
+                        $("#hundred_count").html(data['count']);
+                    }
 				});
             });
 

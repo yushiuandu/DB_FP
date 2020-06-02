@@ -14,9 +14,12 @@
     if(isset($_GET['send'])){
 		$other = $_GET['send'];
 		$content = $_POST['chat'];
+
 		$sql = "INSERT INTO `chat` (`UId`,`other`,`chat`,`sendtime`) VALUES ('$uid','$_GET[send]','$content','$datetime')";
+		$datetime = date('Y/m/d H:i',strtotime($datetime));
+		
 		if(mysqli_query($link, $sql)){
-			exit(json_encode(array("success"=>"OK","content"=>$content)));
+			exit(json_encode(array("success"=>"OK","content"=>$content,"date"=>$datetime)));
 		}else{
 			mysqli_error();
 		}

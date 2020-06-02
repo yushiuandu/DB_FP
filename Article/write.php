@@ -16,7 +16,7 @@
 	
 	if($write == 'true'){
 		
-		$tag = array("tag","tagtwo", "tagthree", "tagfour", "tagfive");
+		$tag = array("tag","tag1", "tag2", "tag3", "tag4");
 		$i  = 0;
 
 		include("../index/forum.php");
@@ -44,7 +44,7 @@
 			$row = mysqli_fetch_assoc($result);
 			$aid = $row['AId'];
 			
-			while($i<4){
+			while($i<5){
 				if($_POST[$tag[$i]] != NULL){
 					$TAG = $_POST[$tag[$i]];
 					echo $TAG;
@@ -182,18 +182,12 @@
 				<!-- 放google map的div -->
 				<div class="row justify-content-end">
 					<div class="col-sm-9">
-						<!-- <h5>Google Map：</h5> -->
 						<div id="map" class="embed-responsive embed-responsive-16by9"></div>
 					</div>
 				</div>
 			</div>
 			<!-- google map end -->
-			
-			<div class='right'>
-				<button type="submit" class="btn btn-info font-weight-bold">發送</button>
-			</div>
-
-		</form>
+		<!-- </form> -->
 		<!-- <form id = "form1" action="../Article/img.php" method="POST" enctype="multipart/form-data"> -->
 			<div class="form-group row">
 				<label class="col-sm-3 col-3 col-form-label">傳送圖檔</label>
@@ -206,9 +200,9 @@
 				</div>
 			</div>
 			<div class='right'>
-				<button id="sub" data-url="../Article/img.php" class="btn btn-info font-weight-bold">發送</button>
+				<button type="submit" class="btn btn-info font-weight-bold">發送</button>
 			</div>
-		<!-- </form> -->
+		</form>
 
 		<p id="check"></p>
 
@@ -216,7 +210,7 @@
 	</div>
 	
 	<!-- google map api -->
-	<!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAY6YGC3VgWJA-ZKtrOHgMe_6PKXTdM6pA&libraries=places"></script> -->
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAY6YGC3VgWJA-ZKtrOHgMe_6PKXTdM6pA&libraries=places"></script>
 
 	<!-- 抓圖檔的資訊 -->
 	<script>
@@ -247,7 +241,7 @@
 				var mytype,TemO=document.getElementById("add"); 
 				var newInput = document.createElement("input");  
 				newInput.type=mytype;
-				newInput.name="input"+"count";
+				newInput.name="tag"+count;
 				newInput.className="add-input"; //class
 				newInput.placeholder="不用輸入hashtag";
 				newInput.pattern="^[^#]+(?=.*[\u4e00-\u9fa5A-Za-z0-9]).{1,}$";

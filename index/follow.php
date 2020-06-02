@@ -117,17 +117,17 @@
             <div class='con'>
                 <!-- user -->
                 <?php 
-                    $sql = "SELECT M.UId, M.Nickname 
+                    $sql = "SELECT M.UId, M.Nickname ,M.profile
                             FROM `follow` AS F JOIN `member` AS M
                             WHERE F.follow_id = M.UId AND F.UId = \"$uid\"";
                     $result = mysqli_query($link, $sql);
                     $row = mysqli_fetch_assoc($result);
                     while($row){
                 ?>
-                <a href='#' style='color:black;'>
+                <a href='../index/index.php?page=nickname&uid=<?=$row['UId'];?>' style='color:black;'>
                     <div class='cc'>
                         <div class="card" style="width: 9rem;">
-                            <img class="card-img-top" src="../index/image/test1.jpg" alt="user">
+                            <img class="card-img-top" src="data:pic/png;base64,<?=base64_encode($row["profile"]);?>" alt="user">
                             <div class="card-body">
                                 <p class='ss'><?php echo $row['Nickname'];?></p>
                             </div>

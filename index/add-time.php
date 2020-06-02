@@ -1,5 +1,6 @@
 <?php 
 	if(isset($_GET['submit'])){
+		session_start();
 		// 圖檔
 		$f = "0x".bin2hex(fread( fopen( $_FILES["YouFile"]["tmp_name"] , "r") ,  filesize( $_FILES["YouFile"]["tmp_name"]) ));
 		// connect to sql
@@ -23,15 +24,14 @@
 				('$uid','$_POST[forum]','$datetime',$f,'$_POST[anonymous]')";
 
 		if(mysqli_query($link,$sql)){
-			echo '成功';
 			header("Location:../index/index.php");
+			exit;
 		}else{
 			echo '<script language="javascript">';
 			echo 'alert("檔案大小不得超過1MB！");';
 			echo "window.location.href='../index/index.php'";
             echo '</script>';
 		}
-
 	}
 
 ?>
@@ -57,7 +57,7 @@
 		<p class='board'>限時動態</p>
 	</div>
 	<div class='write'>
-		<form action="../index/index.php?page=add-time&submit=true" method="POST" enctype="multipart/form-data">
+		<form action="../index/add-time.php?submit=true" method="POST" enctype="multipart/form-data">
 			<div class="form-group row">
 				<label class="col-sm-3 col-form-label">選擇名稱</label>
 				<div class="col-sm-9">

@@ -50,14 +50,14 @@
 		<div class="form-group row">
 			<label class="col-sm-2 col-form-label">標題</label>
 			<div class="col-sm-10">
-			<input name="title" type="text" class="form-control" value="<?php echo $row['title'];?>" require>
+			<input name="title" type="text" class="form-control" value="<?php echo $row['title'];?>" required>
 			</div>
 		</div>
 		<div class="form-group row">
 			<label class="col-sm-2 col-form-label">文章內容</label>
 			<!-- 自動變長 -->
 			<div class="col-sm-10">
-			<textarea name="content" type="text" class="form-control" cols="90" rows="12" onkeyup="autogrow(this);" require><?php echo $row['content'];?></textarea>
+			<textarea name="content" type="text" class="form-control" cols="90" rows="12" onkeyup="autogrow(this);" required><?php echo $row['content'];?></textarea>
 			</div>
 		</div>
 		<!-- <div class="form-group row">

@@ -1,5 +1,5 @@
 <?php
-    $client_id="21620b882fef7ec";
+    
     $image = base64_encode(fread( @fopen( $_FILES["YouFile"]["tmp_name"] , "r") ,  filesize( $_FILES["YouFile"]["tmp_name"]) ));
     $curl_post_array = [
         'image' => $image,

@@ -11,11 +11,65 @@
 		$modifyuser = $_GET['modifyuser'];
 	}
 
-	$sql = "SELECT * FROM member WHERE `Nickname` = \"$_SESSION[nickname]\"";
-		$result = mysqli_query($link,$sql);
-		if($result){
-			$row = mysqli_fetch_assoc($result);
+	include("../index/forum.php");
+	$uid = finduid($_SESSION['nickname']);
+	
+
+	if($modifyuser == 'true'){
+
+		$nickname = $_POST['nickname'];
+		$email = $_POST['email'];
+		$pass = $_POST['pass'];
+		$birthdate = $_POST['birthdate'];
+		
+		//綽號沒有被更改
+		if(($_SESSION['nickname']) == $_POST['nickname']){
+			
+				$sql_m = "UPDATE `member` SET `Email` = '$email' , `Password` = '$pass' 
+				, `Birth_date` = '$birthdate' WHERE `UId` = '$uid'";
+
+				if(mysqli_query($link,$sql_m)){
+					header('Location:../index/index.php?page=user');
+					exit;
+				}else{
+					mysqli_error();
+				}
+
+		}else{//綽號有更改
+			$sql_check = "SELECT * FROM `member` WHERE `Nickname` = '$nickname'";
+			$result_check = mysqli_query($link, $sql_check);
+			$row_check = mysqli_fetch_assoc($result_check);
+
+			if(isset($row_check['UId'])){
+				echo '<script language="javascript">';
+				echo 'alert("此綽號已有他人使用");';
+				echo "window.location.href='../index/index.php?page=user'";
+				echo '</script>';
+			}else{
+				// UPDATE `member` SET`Password`=[value-5],`Email`=[value-6],`Birth_date`=[value-7],`MId`=[value-8],`Nickname`=[value-9],`Fans_num`=[value-10] WHERE 1
+				$sql_m = "UPDATE member SET `Email` = \"$email\" , `Password` = \"$pass\" , `Birth_date` = \"$birthdate\" , `Nickname` = \"$nickname\" WHERE `UId` = \"$uid\"";
+					
+				if(mysqli_query($link,$sql_m)){
+					$_SESSION['nickname'] = $nickname;
+					header('Location:../index/index.php?page=user');
+					$_SESSION['nickname'] = $nickname;
+					$modifyuser = 'false';
+					exit;
+				}else{
+					mysqli_error();
+				}	
+			}
 		}
+		
+	}
+
+
+	$sql = "SELECT * FROM `member` WHERE `Nickname` = \"$_SESSION[nickname]\"";
+	$result = mysqli_query($link,$sql);
+	if($result){
+		$row = mysqli_fetch_assoc($result);
+	}
+	
 ?>
 <!doctype html>
 <html lang="en">
@@ -78,56 +132,5 @@
 
 
 <?php 
-	include("../index/forum.php");
-	$uid = finduid($_SESSION['nickname']);
 	
-
-	if($modifyuser == 'true'){
-
-		$nickname = $_POST['nickname'];
-		$email = $_POST['email'];
-		$pass = $_POST['pass'];
-		$birthdate = $_POST['birthdate'];
-		
-		//綽號沒有被更改
-		if(($_SESSION['nickname']) == $_POST['nickname']){
-			
-				$sql_m = "UPDATE `member` SET `Email` = '$email' AND `Password` = '$pass' 
-				AND `Birth_date` = '$birthdate' WHERE `UId` = '$uid'";
-
-				if(mysqli_query($link,$sql_m)){
-					header('Location:../index/index.php?=user');
-					exit;
-				}else{
-					mysqli_error();
-				}
-
-		}else{//綽號有更改
-			$sql_check = "SELECT * FROM `member` WHERE `Nickname` = '$nickname'";
-			$result_check = mysqli_query($link, $sql_check);
-			$row_check = mysqli_fetch_assoc($result_check);
-
-			if(isset($row_check['UId'])){
-				echo '已有人使用此暱稱！';
-			}else{
-				
-					// UPDATE `member` SET`Password`=[value-5],`Email`=[value-6],`Birth_date`=[value-7],`MId`=[value-8],`Nickname`=[value-9],`Fans_num`=[value-10] WHERE 1
-					$sql_m = "UPDATE member SET `Email` = \"$email\" , `Password` = \"$pass\" , `Birth_date` = \"$birthdate\" , `Nickname` = \"$nickname\" WHERE `UId` = \"$uid\"";
-					
-					if(mysqli_query($link,$sql_m)){
-						$_SESSION['nickname'] = $nickname;
-						header('Location:../index/index.php?page=user');
-						exit;
-					}else{
-						mysqli_error();
-					}
-				
-			}
-
-		}
-		$_SESSION['nickname'] = $nickname;
-		$modifyuser = 'false';
-	}
-
-
 ?>

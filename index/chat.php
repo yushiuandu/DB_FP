@@ -59,10 +59,15 @@
 		<script src="//s3-ap-northeast-1.amazonaws.com/justfont-user-script/jf-60019.js"></script>
 		<script src="//s3-ap-northeast-1.amazonaws.com/justfont-user-script/jf-60019.js"></script>
 		<script type="text/javascript">
-		$(document).ready(function(){
-			$('#chatting').scrollTop( $('#chatting')[0].scrollHeight);
-			$('#chatting').scrollLeft( $('#chatting')[0].scrollWidth);
-		});
+			$(document).ready(function(){
+				$('#chatting').scrollTop( $('#chatting')[0].scrollHeight);
+				$('#chatting').scrollLeft( $('#chatting')[0].scrollWidth);
+			});
+			function add(){
+				var now = new Date();
+				var div = document.getElementById('chatting');
+				div.scrollTop = div.scrollHeight;
+			}
 		</script>
 	</head>
   <!-- 聊天室 -->
@@ -107,7 +112,7 @@
 				<div class="talk">
 					<pre class='talk-word'><?php echo $row['chat']; ?></pre>
 				</div>
-				<p class="time-ww1">2020/06/02 上午12:29</p>
+				<p class="time-ww1"><?=date('Y/m/d H:i',strtotime($row['sendtime']));?></p>
 			</div>
 			<!-- 對方的對話框 end -->
 			<?php }//end if 
@@ -120,9 +125,9 @@
 					<pre class='talk-word'><?php echo $row['chat']; ?></pre>
 				</div>
 				<div class="u"> 
-					<p class="time-ww2">2020/06/02 上午12:29</p>
+					<p class="time-ww2"><?=date('Y/m/d H:i',strtotime($row['sendtime']));?></p>
 				</div>
-			<!-- 自己的頭貼 -->
+				<!-- 自己的頭貼 -->
 				<img src="data:pic/png;base64,<?=base64_encode($row_pic["profile"]);?>" class="img-fluid rounded-circle c-pic" >
 			</div>
 			<!-- 自己對話框 end -->
@@ -161,7 +166,7 @@
 						var content_chat = data["content"];
 						console.log(content_chat);
 						var chat = "<div style='text-align:left;'>"+'<img src="data:pic/png;base64,<?=base64_encode($row_pic_other["profile"]);?>" class="img-fluid rounded-circle c-pic" >'+
-									'<div class="talk">'+"<pre class='talk-word'>"+content_chat+"</pre>" + "</div></div>";
+									'<div class="talk">'+"<pre class='talk-word'>"+content_chat+"</pre>" + "</div><p class='time-ww2>"+data['date']+"<p></p></div>";
 						console.log(chat); 
 						$("#chatting").append(chat);
 					}
@@ -204,11 +209,13 @@
 					console.log(data);
 					if(data['success'] == "OK"){
 						var chat = data['content'];
-						var content = "<div style='text-align:right;'><div class='talk'><pre class='talk-word'>"+chat+"</pre></div>"
-									+'<img src="data:pic/png;base64,<?=base64_encode($row_pic["profile"]);?>" class="img-fluid rounded-circle c-pic" ></div>';
+						var content = "<div style='text-align:right;'><div class='talk2'><pre class='talk-word'>"+chat+"</pre></div>"
+									+'<div class="u"> <p class="time-ww2">'+data['date']+'</p></div>'+
+									'<img src="data:pic/png;base64,<?=base64_encode($row_pic["profile"]);?>" class="img-fluid rounded-circle c-pic" ></div>';
 						console.log(content);
 						$("#chatting").append(content);
-						$("#chat").val();
+						$("#chat").val('');
+						add();
 					}
 				});
 

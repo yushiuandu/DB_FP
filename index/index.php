@@ -129,13 +129,13 @@
 				<button type="button"class="btn btn-info font-weight-bold" data-toggle="modal" data-target="#login-2">
 					註冊/登入
 				</button>
-				<?php }else{?>
+			<?php }else{?>
 
 				<!-- 登入之後 -->
-				<button type="button"class="btn btn-info font-weight-bold" data-toggle="modal" data-target="#exampleModalCenter">
-					登出
+				<button type="button"class="btn btn-info font-weight-bold" data-toggle="modal">
+					<a href="../index/index.php?page=logout" style='text-decoration:none; color:white;'>登出</a>
 				</button>
-				<?php }?>
+			<?php }?>
 						
 				<!--登入畫面-->
 				
@@ -471,18 +471,21 @@
 			// 所有文章排序
 			else if($forum == 'all'){
 				if($latest == "true"){ 
-				$sql = "SELECT * FROM `article` JOIN `member` WHERE article.UId = member.UId ORDER BY `post_time` DESC";
+					$sql = "SELECT * FROM `article` JOIN `member` WHERE article.UId = member.UId ORDER BY `post_time` DESC";
 				}else if($hot == "true"){
+					$sql = "SELECT * FROM `article` JOIN `member` WHERE article.UId = member.UId ORDER BY `agree` DESC";
+				}else{
 					$sql = "SELECT * FROM `article` JOIN `member` WHERE article.UId = member.UId ORDER BY `agree` DESC";
 				}
 				
 			}
 			// 看板裡的文章排序
 			else{
-				$sql = "SELECT * FROM `article` JOIN `member` WHERE article.UId = member.UId AND `category` = \"$forum\" ORDER BY `agree` DESC";
 				if( $latest == 'true'){
 					$sql = "SELECT * FROM `article` JOIN `member` WHERE article.UId = member.UId AND `category` = \"$forum\" ORDER BY `post_time` DESC";
 				}else if( $hot == 'true'){
+					$sql = "SELECT * FROM `article` JOIN `member` WHERE article.UId = member.UId AND `category` = \"$forum\" ORDER BY `agree` DESC";
+				}else{
 					$sql = "SELECT * FROM `article` JOIN `member` WHERE article.UId = member.UId AND `category` = \"$forum\" ORDER BY `agree` DESC";
 				}
 			}
@@ -494,12 +497,6 @@
 				while($row = mysqli_fetch_assoc($result)){
 					$aid = $row['AId'];
 					#找到UId
-
-					// if($follow == 'true'){
-					// 	$sql_follow = "SELECT * FROM `article` WHERE `AId` = \"$aid\"";
-					// 	$result_follow = mysqli_query($link,$sql_follow);
-					// 	$row = mysqli_fetch_assoc($result_follow);
-					// }
 					$category = findForum($row['category']);
 		?>
 		<!-- 文章簡圖區 -->
@@ -720,14 +717,6 @@
 				<div>
 					<button type="button"class="btn btn-info font-weight-bold col-md-6" >
 						<a href="../index/index.php?page=logout" style='text-decoration:none; color:white;'>登出</a>
-						<?php 
-							if($page == 'logout'){
-								unset($_SESSION['user']);
-								unset($_SESSION['nickname']);
-								session_destroy();
-								header("Location:../index/index.php");
-							}
-						?>
 					</button>
 				</div>
 			</div>

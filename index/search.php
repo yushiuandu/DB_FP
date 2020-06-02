@@ -35,8 +35,6 @@
     if(isset($_SESSION['key'])){
         $key = $_SESSION['key'];
     }
-
-    echo $key;
     
 ?>
 <!doctype html>
@@ -175,10 +173,10 @@
                                 }else{
                                 $num  = 0;}
 
-                                if($num == 0){
+                                if($num == 0 and isset($_SESSION['nickname'])){
                             ?>
                             <div class='ser-btn pointer follow_forum' data-url="<?=$Link?>">Follow</div>
-                            <?php }else{ ?>
+                            <?php }else if (isset($_SESSION['nickname'])){ ?>
                                 <div class='follow_forum ser-btn pointer' data-url="<?=$Link?>">Following</div>
                             <?php }?>
                         </div>
@@ -233,11 +231,12 @@
                                     $result_n = mysqli_query($link,$sql_n);
                                     $num = mysqli_num_rows($result_n);
                                 }else{$num  = 0;}
-                                if($num == 0){
-                                    if($uid != $row["UId"]){
+
+                                if($num == 0 and isset($_SESSION['nickname'])){
+                                    if(($uid != $row["UId"]) ){
                             ?>
                             <div class='ser-btn pointer follow_nickname'data-url="<?=$Link;?>">Follow</div>
-                            <?php } }else{ ?>
+                            <?php } }else if( isset($_SESSION['nickname'])){ ?>
                                 <div class='follow_nickname ser-btn pointer' data-url="<?=$Link;?>">Following</div>
                             <?php }?>
                         </div>
@@ -293,10 +292,10 @@
                                     }else{
                                     $num  = 0;}
 
-                                    if($num == 0){
+                                    if($num == 0 and isset($_SESSION['nickname'])){
                             ?>
                             <div class='follow ser-btn pointer' data-url="<?=$Link?>">Follow</div>
-                            <?php }else{ ?>
+                            <?php }else if (isset($_SESSION['nickname'])){ ?>
                                 <div class='follow ser-btn pointer' data-url="<?=$Link?>">Following</div>
                             <?php }?>
                         </div>
@@ -443,10 +442,10 @@
                             }else{
                             $num  = 0;}
 
-                            if($num == 0){
+                            if($num == 0 and isset($_SESSION['nickname'])){
                         ?>
                         <div class='ser-btn pointer follow_forum' data-url="<?=$Link?>">Follow</div>
-                        <?php }else{ ?>
+                        <?php }else if(isset($_SESSION['nickname'])){ ?>
                             <div class='follow_forum ser-btn pointer' data-url="<?=$Link?>">Following</div>
                         <?php }?>
                     </div>
@@ -502,11 +501,11 @@
                                 $result_n = mysqli_query($link,$sql_n);
                                 $num = mysqli_num_rows($result_n);
                             }else{$num  = 0;}
-                            if($num == 0){
+                            if($num == 0 and isset($_SESSION['nickname'])){
                                 if($uid != $row["UId"]){
                         ?>
                         <div class='ser-btn pointer follow_nickname'data-url="<?=$Link;?>">Follow</div>
-                        <?php } }else{ ?>
+                        <?php } }else if(isset($_SESSION['nickname'])){ ?>
                             <div class='follow_nickname ser-btn pointer' data-url="<?=$Link;?>">Following</div>
                         <?php }?>
                     </div>
@@ -551,7 +550,7 @@
                 <div class='row justify-content-start art2 pointer'>
                     <div class="col-md-8">
                         <a href="../index/index.php?page=tag&tag=<?=$row['tag'];?>">
-                        <p class='ser-ww'>#<?php echo $row['tag'];?></p>
+                        <p class='ser-ww'>#<?php echo $row['tag'];?></p></a>
                     </div>
                     <div class="col-md-4 right">
                         <?php   $Link = "../Article/follow.php?tag=".$row['tag']; 
@@ -562,10 +561,10 @@
                                 }else{
                                 $num  = 0;}
 
-                                if($num == 0){
+                                if($num == 0 and isset($_SESSION['nickname'])){
                         ?>
                         <div class='follow ser-btn pointer' data-url="<?=$Link?>">Follow</div>
-                        <?php }else{ ?>
+                        <?php }else if( isset($_SESSION['nickname'])){ ?>
                             <div class='follow ser-btn pointer' data-url="<?=$Link?>">Following</div>
                         <?php }?>
                     </div>

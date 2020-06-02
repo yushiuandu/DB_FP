@@ -11,20 +11,16 @@
 	
 	$is_oneself = 2; //本人看自己的網頁'0'。非本人看為'1'，沒登入看
 
-	$nhot = 'true';
 	if(isset($_GET['nhot'])){
 		$nhot = $_GET['nhot'];
+	}else{
+		$nhot = 'false';
 	}
 
-	$nlatest = 'false';
 	if(isset($_GET['nlatest'])){
 		$nlatest = $_GET['nlatest'];
-	}
-
-	if($nlatest == 'true'){
-		$nhot == 'false';
 	}else{
-		$nhot == 'true';
+		$nlatest = 'false';
 	}
 	
 	$uid_current="guest";
@@ -146,21 +142,29 @@
         <div class="col-md-6 col-sm-6 col-7 right">
 			<!-- 熱門文章 -->
             <a href = "../index/index.php?page=nickname&uid=<?php echo $uid;?>&nhot=true">
-				<button type="button" class="btn btn-sm btn-info <?php if($nhot == true){echo 'active';}?>">HOT</button>
+				<button type="button" class="btn btn-sm btn-info <?php if($nhot == 'true'){echo 'active';}?>">HOT</button>
 			</a>    <!--啟用狀態(active)-->
 			<!-- 最新文章 -->
 			<a href = "../index/index.php?page=nickname&uid=<?php echo $uid;?>&nlatest=true">
-				<button type="button" class="btn btn-sm btn-info" <?php if($nlatest == true){echo 'active';}?>>NEW</button>
+				<button type="button" class="btn btn-sm btn-info <?php if($nlatest == 'true'){echo 'active';}?>">NEW</button>
 			</a>
         </div>
     </div>
 	<!-- 區塊title end -->
 
-	<?php 
+	<?php
 		if($is_oneself == 1){
-			$sql = "SELECT * FROM article WHERE `UID` = \"$uid\" AND `anonymous` = 1";
+			if ($nhot == 'true'){
+				$sql = "SELECT * FROM `article` WHERE `UID` = \"$uid\" AND `anonymous` = 1 ORDER BY `agree` DESC";
+			}else{
+				$sql = "SELECT * FROM `article` WHERE `UID` = \"$uid\" AND `anonymous` = 1 ORDER BY `post_time` DESC";
+			}
 		}else if($is_oneself == 0){
-			$sql = "SELECT * FROM article WHERE `UID` = \"$uid\"";
+			if ($nhot == 'true'){
+				$sql = "SELECT * FROM `article` WHERE `UID` = \"$uid\" ORDER BY `agree` DESC";
+			}else{
+				$sql = "SELECT * FROM `article` WHERE `UID` = \"$uid\" ORDER BY `post_time` DESC";
+			}
 		}
 		$result = mysqli_query($link,$sql);
 		$row = mysqli_fetch_assoc($result);
@@ -170,14 +174,11 @@
     <div class="nickname" style='margin-top:0px;'>
 			<?php 
 				if(isset($row['AId'])){
-					// 照熱門、最新功能待測
-					if ($nhot == 'true'){
-						$sql = "SELECT * FROM article WHERE `UID` = \"$uid\" AND `anonymous` = 1 ORDER BY `agree` DESC";
-					}else{
-						$sql = "SELECT * FROM article WHERE `UID` = \"$uid\" AND `anonymous` = 1 ORDER BY `post_time` DESC";
-					}
+					
 					$result = mysqli_query($link,$sql);
 					while($row = mysqli_fetch_assoc($result)){
+						$category = findForum($row['category']);
+
 			?>
 		
 			<!-- 簡圖內容(上) -->
@@ -189,7 +190,11 @@
 						<div class='pic-container'>
 							<img src="./image/user.png" id="writer-pic">
 						</div>
+						<?php if($row['anonymous']!=0){?>
 						<p style="display: inline; font-size:2vmin; margin:0px;"><?php echo $row['post_name'];?></p>
+						<?php }else{ ?>
+						<p style="display: inline; font-size:2vmin; margin:0px;">匿名</p>
+						<?php }?>
 					</div>
 					<!-- 作者 end-->
 					
@@ -219,7 +224,7 @@
 					<!-- 看板 - 發文時間 -->
 					<div class="col-md-12 col-sm-12 col-12">
 						<p style=' font-size:1.75vmin; margin:0px; color:gray;'>
-							感情版 - 5月12日 13:45
+							<?=$category;?> - <?=date('Y-m-d H:i',strtotime($row['post_time']));?>
 						</p>
 					</div>
 					<!-- 看板 - 發文時間 end -->
