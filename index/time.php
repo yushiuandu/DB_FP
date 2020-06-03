@@ -12,6 +12,7 @@
         $igid = $_GET['igid'];
     }
 
+    // 刪除限時，
     if(isset($_GET['delete'])){
         $sql = "DELETE FROM `instagram` WHERE `igid` = '$_GET[delete]'";
         if(mysqli_query($link,$sql)){
@@ -34,6 +35,7 @@
     $right = $head;
     $sql = "SELECT * FROM `instagram` WHERE `post_time` BETWEEN \"$yesterday\" AND \"$datetime\"";
     $result = mysqli_query($link,$sql);
+
     // 如果有下一個的話
     while($row = mysqli_fetch_assoc($result)){
         if($row['igid'] == $igid){
@@ -70,11 +72,18 @@
 		$uid = finduid($_SESSION['nickname']);
     }
     
+    // 限時動態的回覆
     if(isset($_GET['chat'])){
+
         $other = $_GET['chat'];
         $content = $_SESSION['nickname']."已回復您的限實動態：<br>".$_POST['chat'];
-		$sql = "INSERT INTO `chat` (`UId`,`other`,`chat`,`sendtime`) VALUES ('$_GET[chat]','$uid','$content','$datet``ime')";
+
+		$sql = "INSERT INTO `chat` (`UId`,`other`,`chat`,`igid`, `sendtime`) VALUES ('$_GET[chat]','$uid','$content', '$_GET[igid]' ,'$datetime')";
 		if(mysqli_query($link, $sql)){
+            $content = $_SESSION["nickname"]."已回復你新增的限時動態";
+            $sql = "INSERT INTO `notification` (`UId`, `friendid`, `content`,`type`)
+                    VALUES ('$_GET[chat]', '$uid', '$content', 11)";
+            mysqli_query($link, $sql);
 			exit(json_encode(array("success"=>"OK","content"=>$content)));
 		}else{
 			mysqli_error();
@@ -279,7 +288,8 @@
                             <?php }?>
                             <p class="time-ww"><?=$date?></p>
                         </div>
-                        <?php if($row['UId'] == $uid){?>
+                        <?php if(isset($_SESSION['nickname'])){
+                                    if($row['UId'] == $uid){?>
                         <div class="col-lg-4 col-md-2 col-sm-2 col-2 p0">
 							<img src='../index/image/delete.png' data-toggle="modal" data-target="#sure" class="bttn pointer" onclick="delet();">
 						    <div class="modal fade bd-example-modal-sm" id="sure" tabindex="-1" data-backdrop="false" role="dialog" aria-hidden="true">
@@ -296,7 +306,9 @@
                                 </div>
 						    </div>
                         </div>
-                        <?php    }?>
+                        <?php    }//end if 
+                            }//end session if
+                        ?>
                         <button type="button" class="close">
                             <a href="../index/index.php" class="link-ww">
                                 <span aria-hidden="true">&times;</span>
@@ -364,7 +376,7 @@
                             <input id="time-ww" name="chat" type="text" placeholder='說點什麼吧...' onclick="input();">
                         </div>
                         <div class="col-md-2 col-sm-4 col-4 p0">
-                            <div id="igsub" data-url="../index/time.php?chat=<?=$row['UId'];?>" type="submit" class="time-btn" onclick="enter();">傳送</div>
+                            <div id="igsub" data-url="../index/time.php?chat=<?=$row['UId'];?>&igid=<?=$row['igid'];?>" type="submit" class="time-btn" onclick="enter();">傳送</div>
                         </div>
                     </div>
                     <?php }//end friend num ?>

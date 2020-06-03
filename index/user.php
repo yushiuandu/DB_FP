@@ -22,11 +22,20 @@
 		$pass = $_POST['pass'];
 		$birthdate = $_POST['birthdate'];
 		
+		if(!(empty($_FILES["YouFile"]["tmp_name"]))){
+			$image = "0x".bin2hex(fread( fopen( $_FILES["YouFile"]["tmp_name"] , "r") ,  filesize( $_FILES["YouFile"]["tmp_name"]) ));
+		}
+		
 		//綽號沒有被更改
 		if(($_SESSION['nickname']) == $_POST['nickname']){
 			
 				$sql_m = "UPDATE `member` SET `Email` = '$email' , `Password` = '$pass' 
 				, `Birth_date` = '$birthdate' WHERE `UId` = '$uid'";
+
+				if(isset($image)){
+					$sql_m = "UPDATE `member` SET `Email` = '$email' , `Password` = '$pass' 
+					, `Birth_date` = '$birthdate' ,`profile` = $image WHERE `UId` = '$uid'";
+				}
 
 				if(mysqli_query($link,$sql_m)){
 					echo '<script language="javascript">';
@@ -50,7 +59,12 @@
 			}else{
 				// UPDATE `member` SET`Password`=[value-5],`Email`=[value-6],`Birth_date`=[value-7],`MId`=[value-8],`Nickname`=[value-9],`Fans_num`=[value-10] WHERE 1
 				$sql_m = "UPDATE member SET `Email` = \"$email\" , `Password` = \"$pass\" , `Birth_date` = \"$birthdate\" , `Nickname` = \"$nickname\" WHERE `UId` = \"$uid\"";
-					
+				
+				if(isset($image)){
+					$sql_m = "UPDATE member SET `Email` = \"$email\" , `Password` = \"$pass\" , 
+					`Birth_date` = \"$birthdate\" , `Nickname` = \"$nickname\" , `profile` = $image WHERE `UId` = \"$uid\"";
+				}
+
 				if(mysqli_query($link,$sql_m)){
 					$_SESSION['nickname'] = $nickname;
 					echo '<script language="javascript">';
@@ -95,17 +109,18 @@
   <body>
   <!-- 修改個人資料(我覺得可以抓他已經填過的資料進來讓他修改) -->
   <div class='u1 middle'>
-	<label>
-		<div class="u-con pointer">
-			<img src="data:pic/png;base64,<?=base64_encode($row["profile"]);?>" class="u-pic" id="old">
-				<span id="file_name" style="opacity: 0;"></span>
-				<figure>
-					<img id="file_thumbnail" class="u-pic pointer">
-                </figure>
-			<input Type="File" name="YouFile" class='pic-file' id='picInput'>
-		</div>
-	</label>
-    <form method="post" action="../index/user.php?modifyuser=true" enctype="multipart/form-data">
+  <form method="post" action="../index/user.php?modifyuser=true" enctype="multipart/form-data">
+		<label>
+			<div class="u-con pointer">
+				<img src="data:pic/png;base64,<?=base64_encode($row["profile"]);?>" class="u-pic" id="old">
+					<span id="file_name" style="opacity: 0;"></span>
+					<figure>
+						<img id="file_thumbnail" class="u-pic pointer">
+					</figure>
+				<input Type="File" name="YouFile" class='pic-file' id='picInput'>
+			</div>
+		</label>
+    
     	<div class="form-row">
         <!-- 綽號 -->
         <div class="form-group col-md-6">

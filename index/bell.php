@@ -48,6 +48,7 @@
             $sql = "UPDATE `notification` SET `is_read` = 1 WHERE `NId` = '$_GET[NId]'";
             mysqli_query($link,$sql);
             header("Location:../index/index.php?page=bell");
+            exit;
         }
     }
 
@@ -113,7 +114,11 @@
                     if($row['type'] == 10){
                         $link_url = "../index/index.php?NId=".$row['NId'];
                         $image = "../index/image/sad.png";
-                    }//end type 6
+                    }//end type 10
+                    if($row['type'] == 11){
+                        $link_url = "../index/chat.php?NId=".$row['NId']."&other=".$row['friendid'];
+                        $image = "../index/image/design.png";
+                    }
         ?>
         <!-- 一則通知 -->
         

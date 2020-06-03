@@ -163,7 +163,8 @@
                     </div>
                 </a>
                 <!-- tag end -->
-                <?php $row = mysqli_fetch_assoc($result);
+                <?php
+                $row = mysqli_fetch_assoc($result_tag);
                         }?>
             </div>
             <!-- body -->

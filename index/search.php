@@ -81,7 +81,9 @@
                 <!-- if 有搜尋結果 -->
                 <!-- 文章 -->
                 <?php 
-                    $sql = "SELECT * FROM `article` WHERE `title` LIKE '%$key%' ORDER BY `post_time` DESC LIMIT 3";
+                    $sql = "SELECT * FROM `article` JOIN `member`
+                            WHERE article.title LIKE '%$key%' AND article.UId = member.UId
+                            ORDER BY article.post_time DESC LIMIT 3";
                     $result = mysqli_query($link, $sql);
                     $num = 0;
                     if($result){
@@ -97,10 +99,11 @@
                             <?php if($row['anonymous'] == 1){?>
                                 <!-- 作者頭像 -->
                                 <div class='pic-container'>
-                                    <a href="../index/index.php?page=nickname&uid=<?=$row["UId"];?>"><img src="../index/image/user.png" id="writer-pic"></a>
+                                    <a href="../index/index.php?page=nickname&uid=<?=$row["UId"];?>">
+                                    <img src="data:pic/png;base64,<?=base64_encode($row["profile"]);?>" id="writer-pic"></a>
                                 </div>
                                 <!-- 作者名稱 -->
-                                <p style="display: inline; font-size:2vmin; margin:0px;"><?=$row["post_name"];?></p>
+                                <p style="display: inline; font-size:2vmin; margin:0px;"><?=$row["Nickname"];?></p>
                             <?php }else if ($row['anonymous'] == 0){?>
                                 <div class='pic-container'>
                                     <img src="../index/image/user.png" id="writer-pic">
@@ -219,9 +222,10 @@
                                 while($row = mysqli_fetch_assoc($result)){
                     ?>
                     <!-- 一個暱稱 -->
-                    <div class='row justify-content-start art2 pointer' onclick="location.href='../index/index.php?page=nickname&uid=<?=$row['UId'];?>'">
+                    <div class='row justify-content-start art2 pointer' >
                         <div class="col-md-8">
-                            <p class='ser-ww'><?=$row['Nickname'];?></p>
+                            <a href="../index/index.php?page=nickname&uid=<?=$row['UId'];?>">
+                            <p class='ser-ww'><?=$row['Nickname'];?></p></a>
                         </div>
                         <div class="col-md-4 right">
                             <?php 
@@ -343,9 +347,13 @@
                 <!-- 文章 -->
                 <?php 
                     if(isset($_GET['hot'])){
-                        $sql = "SELECT * FROM `article` WHERE `title` LIKE '%$key%' ORDER BY `agree` DESC";
+                        $sql = "SELECT * FROM `article` JOIN `member`
+                                WHERE article.title LIKE '%$key%' and member.UId = article.UId
+                                ORDER BY article.agree DESC";
                     }else{
-                        $sql = "SELECT * FROM `article` WHERE `title` LIKE '%$key%' ORDER BY `post_time` DESC";
+                        $sql = "SELECT * FROM `article` JOIN `member`
+                                WHERE article.title LIKE '%$key%' and member.UId = article.UId
+                                ORDER BY article.post_time DESC";
                     }
                     $result = mysqli_query($link, $sql);
                     if($result){
@@ -370,10 +378,10 @@
                                 <!-- 作者頭像 -->
                                 <div class='pic-container'>
                                     <a href="../index/index.php?page=nickname&uid=<?php echo $row['UId'];?>" >
-                                    <img src="../index/image/user.png" id="writer-pic"></a>
+                                    <img src="data:pic/png;base64,<?=base64_encode($row["profile"]);?>" id="writer-pic"></a>
                                 </div>
                                 <!-- 作者名稱 -->
-                                <p style="display: inline; font-size:2vmin; margin:0px;"><?php echo $row['post_name'];?></p>
+                                <p style="display: inline; font-size:2vmin; margin:0px;"><?php echo $row['Nickname'];?></p>
                             <?php } ?>
                         </div>
                         <!-- 作者 end-->

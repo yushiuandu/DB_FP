@@ -89,18 +89,21 @@
 		$sql_f = "SELECT `UId` FROM `follow` WHERE `AId` = '$aid'";
 		$result = mysqli_query($link,$sql_f);
 		$num = mysqli_num_rows($result);
-		$content = "你追蹤的文章「<p style='margin:0px; font-weight:700;'>".$_POST['title']."</p>」已經更新了！趕快去察看吧！」";
-		
+		$content = "你追蹤的文章「<b>".$_POST['title']."</b>」已經更新了！趕快去察看吧！";
 		if(mysqli_query($link,$sql)){
 			if($num > 0){
 				while($row = mysqli_fetch_assoc($result)){
-					$sql = "INSERT INTO `notification` (`UId`,`AId`,`content`,`type`) 
-							VALUES ('$uid', '$aid', '$content',4)";
-							mysqli_query($link,$sql);
+					$sql_add = "INSERT INTO `notification` (`UId`,`AId`,`content`,`type`) 
+								VALUES ('$row[UId]', '$aid', '$content',4)";
+					mysqli_query($link,$sql_add);
 				}
+				// header("Location:../index/index.php?page=article&aid=$aid");
+				exit;
+			}else{
+				// header("Location:../index/index.php?page=article&aid=$aid");
+				exit;
 			}
-			header("Location:../index/index.php?page=article&aid=$aid");
-			exit;
+			
 		}
 		else{
 			mysqli_error();

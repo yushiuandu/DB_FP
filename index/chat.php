@@ -19,8 +19,10 @@
 	}
 
 	if(isset($_GET['NId'])){
-        $sql = "UPDATE `notification` SET `is_read` = 1 WHERE `NId` = '$_GET[NId]'";
-        mysqli_query($link,$sql);
+		$sql = "UPDATE `notification` SET `is_read` = 1 WHERE `NId` = '$_GET[NId]'";
+		mysqli_query($link,$sql);
+		header("Location:../index/index.php?page=chat&other=$_GET[other]");
+        exit;
 	}
 	// 找到對方的綽號
 	$sql = "SELECT `Nickname` FROM `member` WHERE `UId` = \"$other\"";
@@ -131,7 +133,22 @@
 				<img src="data:pic/png;base64,<?=base64_encode($row_pic["profile"]);?>" class="img-fluid rounded-circle c-pic" >
 			</div>
 			<!-- 自己對話框 end -->
-					<?php 		}//end else if
+			<!-- 假如回覆限時-->
+			<?php if(isset($row['igid'])){
+				$sql_ig = "SELECT * FROM `instagram`";
+				$result_ig = mysqli_query($link,$sql_ig);
+				$row_ig = mysqli_fetch_assoc($result_ig);
+			?>	
+				<div class="uu">
+					<div class="talk2"> 
+						<img style="width:50%;float:right;" src="data:pic/png;base64,<?=base64_encode($row_ig["img"]);?>">
+					</div>
+					<!-- 自己的頭貼 -->
+					<img src="data:pic/png;base64,<?=base64_encode($row_pic["profile"]);?>" class="img-fluid rounded-circle c-pic" >
+				</div>
+			<?php	} //end ig if?>
+			<!-- 假如回覆限時 end-->
+			<?php 		}//end else if
 					}//end while
 				}//end if?>
 			<div><a id="msg_end" name="1" href="#1">&nbsp</a></div>

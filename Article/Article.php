@@ -58,7 +58,7 @@
 	
 
 	#顯示文章
-	$sql = "SELECT * FROM `article` JOIN `member` WHERE `AId` = \"$aid\" AND article.UId = member.UId";
+	$sql = "SELECT * FROM `article` JOIN `member` WHERE article.AId = \"$aid\" AND article.UId = member.UId";
 	$result = mysqli_query($link,$sql);
 	if($result){
 		$rank = 0;
@@ -122,7 +122,7 @@
 				if($row['anonymous']==0){
 					echo '匿名';
 				}else{
-					echo $row['post_name'];
+					echo $row['Nickname'];
 				}
 				?></p>
 			</div>
@@ -373,7 +373,9 @@
 	<!-- 熱門留言區 -->
 	<?php 
 		
-			$sql_hot = "SELECT * FROM `comment` WHERE `AId` = \"$aid\" AND `anonymous`!=2 ORDER BY `likeCount` DESC";
+			$sql_hot = "SELECT * FROM `comment` JOIN `member`
+						WHERE comment.AId = \"$aid\" AND comment.anonymous!=2 AND comment.UId = member.UId AND comment.likeCount > 30
+						ORDER BY comment.likeCount DESC";
 			$result_hot = mysqli_query($link,$sql_hot);
 			$row_hot = $row_hot = mysqli_fetch_assoc($result_hot);
 			if(isset($row_hot)){
@@ -381,7 +383,9 @@
 					
 	?>
 	<?php 
-		$sql_hot = "SELECT * FROM `comment` WHERE `AId` = \"$aid\" ORDER BY `likeCount` DESC";
+		$sql_hot = "SELECT * FROM `comment` JOIN `member`
+					WHERE comment.AId = \"$aid\" AND comment.anonymous!=2 AND comment.UId = member.UId AND comment.likeCount > 30
+					ORDER BY comment.likeCount DESC";
 		$result_hot = mysqli_query($link,$sql_hot);
 		$num = mysqli_num_rows($result_hot);
 
@@ -423,9 +427,9 @@
 							<?php 
 								// 如果不是匿名
 								if($row_hot['anonymous'] == 1){
-									echo '<a href="../index/index.php?page=nickname&uid='.$row['UId'].'">';	
+									echo '<a href="../index/index.php?page=nickname&uid='.$row_hot['UId'].'">';	
 							?>
-								<img src="data:pic/png;base64,<?=base64_encode($row["profile"]);?>" class="img-fluid rounded-circle" id="writer-pic"></a>
+								<img src="data:pic/png;base64,<?=base64_encode($row_hot["profile"]);?>" class="img-fluid rounded-circle" id="writer-pic"></a>
 							<?php
 								}else{ ?>
 									<img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic">
@@ -441,7 +445,7 @@
 							echo '匿名';
 						}
 						else if ($row_hot['anonymous'] == 1){
-							echo $row_hot['post_name'];
+							echo $row_hot['Nickname'];
 						}
 						?></p>
 					</div>
@@ -508,7 +512,9 @@
 
 		<?php 
 		
-			$sql_c = "SELECT * FROM `comment` WHERE `AId` = \"$aid\" ORDER BY `time` ASC";
+			$sql_c = "SELECT * FROM `comment` JOIN `member`
+					WHERE comment.AId = \"$aid\" and member.UId = comment.UId
+					ORDER BY comment.time ASC";
 			$result_c = mysqli_query($link,$sql_c);
 			if($result_c){
 				
@@ -536,9 +542,9 @@
 						<?php 
 							// 如果不是匿名
 							if($row_c['anonymous'] == 1){
-								echo '<a href="../index/index.php?page=nickname&uid='.$row['UId'].'">';	
+								echo '<a href="../index/index.php?page=nickname&uid='.$row_c['UId'].'">';	
 						?>
-							<img src="data:pic/png;base64,<?=base64_encode($row["profile"]);?>" id="writer-pic"></a>
+							<img src="data:pic/png;base64,<?=base64_encode($row_c["profile"]);?>" id="writer-pic"></a>
 						<?php
 							}else{ ?>
 								<img src="../index/image/user.png" id="writer-pic">
@@ -553,7 +559,7 @@
 							if($row_c['anonymous'] == 0){
 								echo '匿名';
 							}else if ($row_c['anonymous'] == 1){
-								echo $row_c['post_name'];
+								echo $row_c['Nickname'];
 							}else{
 								echo '掰掰用戶';
 							}
