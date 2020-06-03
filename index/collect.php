@@ -215,7 +215,7 @@
                         <div class="row art-body mid">
                             <!-- 標題 -->
                             <div class="col-md-11 col-sm-11 col-11 col-lg-11 text-truncate">
-                                <p class="font-weight-bold" style='font-size:3vmin; margin:0px;'><?=$row_a['title'];?>夢。</p>
+                                <p class="font-weight-bold" style='font-size:3vmin; margin:0px;'><?=$row_a['title'];?></p>
                                 <p style="color:gray; font-size:2vmin; margin:0px;font-family:jf-openhuninn;"><?=$row_a['excerpt'];?></p>
                             </div>
                             <!-- 標題 end -->
