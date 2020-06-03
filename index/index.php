@@ -3,11 +3,17 @@
 		$_SESSION['local'] = '../index/index.php';
 ?>
 <?php
+
 	$link = mysqli_connect("localhost","taigun","ELn3yv07F567MwOF","taigun");//連結伺服器//選擇資料庫
 	if(!$link){
 	echo "no connect!";
 	}
-   
+	
+	if(isset($_GET['NId'])){
+		$sql = "UPDATE `notification` SET `is_read` = 1 WHERE `NId` = '$_GET[NId]'";
+		mysqli_query($link,$sql);
+		header("Location:../index/index.php");
+	}
 	$sql = "SELECT * FROM `article` ORDER BY `agree` DESC";
 	// 將一切都先初始化
 	$page = 'index';	$latest = 'false';	$hot = 'false';	$aid = 'flase';	$forum = 'all';
@@ -527,7 +533,7 @@
 								if ($row['anonymous'] == 0){
 									echo '匿名';
 								}else{
-									echo $row['post_name'];
+									echo $row['Nickname'];
 								}
 							?>
 						</p>
@@ -888,26 +894,26 @@
 			});
 
 			
-			// $(function(){
-			// 	setInterval(getalarm,100)
-			// });
+			$(function(){
+				setInterval(getalarm,100)
+			});
 
-			// function getalarm (){
-			// 	$.ajax({
-			// 		type: 'POST',                     //GET or POST
-			// 		url: "../index/notify.php",  //請求的頁面
-			// 		cache: false,   //是否使用快取
-			// 		dataType : 'json'
-			// 	}).done(function(data) {
-			// 		console.log(data);
-			// 		if(data['success'] == "YES"){
-			// 			$("#notification").attr("src","../index/image/bell-shake.gif");
-			// 		}else if(data['success'] == "NO"){
-			// 			$("#notification").attr("src","../index/image/bell.png");
+			function getalarm (){
+				$.ajax({
+					type: 'POST',                     //GET or POST
+					url: "../index/notify.php",  //請求的頁面
+					cache: false,   //是否使用快取
+					dataType : 'json'
+				}).done(function(data) {
+					console.log(data);
+					if(data['success'] == "YES"){
+						$("#notification").attr("src","../index/image/bell-shake.gif");
+					}else if(data['success'] == "NO"){
+						$("#notification").attr("src","../index/image/bell.png");
 								
-			// 		}
-			// 	});
-			// };
+					}
+				});
+			};
 		
 		</script>
 		<script>

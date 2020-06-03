@@ -79,27 +79,27 @@
             if($num>0){
                 while($row = mysqli_fetch_assoc($result)){
                     if($row['type'] == 1){
-                        $link_url = "../index/index.php?page=nickname&uid=".$row['UId']."&NId=".$row['NId'];
+                        $link_url = "../Article/Article.php?page=nickname&uid=".$row['UId']."&NId=".$row['NId'];
                         $image = "../index/image/follower.png";
                     }//end type 1 
 
                     if($row['type'] == 2 OR $row['type'] == 7){
-                        $link_url = "../index/index.php?page=article&aid=".$row['AId']."&NId=".$row['NId'];
+                        $link_url = "../Article/Article.php?aid=".$row['AId']."&NId=".$row['NId'];
                         $image = "../index/image/like.png";
                     }//end type 2
 
                     if($row['type'] == 3 OR $row['type'] == 5){
-                        $link_url = "../index/index.php?page=article&aid=".$row['AId']."&NId=".$row['NId'];
+                        $link_url = "../Article/Article.php?aid=".$row['AId']."&NId=".$row['NId'];
                         $image = "../index/image/message.png";
                     }//end type 3
 
                     if($row['type'] == 4){
-                        $link_url = "../index/index.php?page=article&aid=".$row['AId']."&NId=".$row['NId'];
+                        $link_url = "../Article/Article.php?aid=".$row['AId']."&NId=".$row['NId'];
                         $image = "../index/image/design.png";
                     }//end type 4
 
                     if($row['type'] == 6){
-                        $link_url = "../index/index.php?page=article&aid=".$row['AId']."&NId=".$row['NId'];
+                        $link_url = "../Article/Article.php?aid=".$row['AId']."&NId=".$row['NId'];
                         $image = "../index/image/article.png";
                     }//end type 6
                     
@@ -111,14 +111,14 @@
                         $image = "../index/image/new-friend.png";
                     }
                     if($row['type'] == 10){
-                        $link_url = "../index/index.php?page=bell";
+                        $link_url = "../index/index.php?NId=".$row['NId'];
                         $image = "../index/image/sad.png";
                     }//end type 6
         ?>
         <!-- 一則通知 -->
         
         <div class="bell pointer notify" <?php if($row['type'] != 9){?>onclick="location.href='<?=$link_url;?>';"<?php }?>>
-        <a href="../index/bell.php?nid=<?=$row["NId"];?>"> </a>            <!-- 有新的追蹤者 -->
+        <!-- <a href="../index/bell.php?nid=<?=$row["NId"];?>"> </a>            有新的追蹤者 -->
             <div class="row justify-content-center">
                 <div class="col-md-2">
                     <img src='<?=$image;?>' style='width:50px; height:50px;'>
@@ -204,7 +204,8 @@
                                             <!--下面選項-->
                                             <div class='match-fotter'>
                                                 <!-- bye -->
-                                                <button type="button" id="byebye" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                                                <a href="../index/index.php?NId=<?=$NId;?>">
+                                                <button type="button" id="byebye" class="btn btn-secondary" >關閉</button></a>
                                             </div>
                                         </div>
                                     </div>

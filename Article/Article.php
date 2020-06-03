@@ -408,19 +408,17 @@
 				<div class="row mid">
 					<!-- 作者照片-->
 					<div class="col-md-1 col-sm-1 col-2" style="margin:0px; padding:0px;">
-						<div class="pic-container">
-							<?php 
-								// 如果不是匿名
-								if($row_hot['anonymous'] == 1){
-									echo '<a href="../index/index.php?page=nickname&uid='.$row['UId'].'">';	
-							?>
-								<img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic"></a>
-							<?php
-								}else{ ?>
-									<img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic">
-							<?php	}//end else
-							?>
-						</div>
+						<?php 
+							// 如果不是匿名
+							if($row_hot['anonymous'] == 1){
+								echo '<a href="../index/index.php?page=nickname&uid='.$row['UId'].'">';	
+						?>
+							<img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic"></a>
+						<?php
+							}else{ ?>
+								<img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic">
+						<?php	}//end else
+						?>
 					</div>
 					<!-- 作者照片 end-->
 					<!-- 作者-->
@@ -521,19 +519,18 @@
 				<div class="row mid ">
 					<!-- 作者照片-->
 					<div class="col-md-1 col-sm-1 col-2" style="margin:0px; padding:0px;">
-						<div class="pic-container">
-							<?php 
-								// 如果不是匿名
-								if($row_c['anonymous'] == 1){
-									echo '<a href="../index/index.php?page=nickname&uid='.$row['UId'].'">';	
-							?>
-								<img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic"></a>
-							<?php
-								}else{ ?>
-									<img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic">
-							<?php	}//end else
-							?>
-						</div>
+					
+						<?php 
+							// 如果不是匿名
+							if($row_c['anonymous'] == 1){
+								echo '<a href="../index/index.php?page=nickname&uid='.$row['UId'].'">';	
+						?>
+							<img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic"></a>
+						<?php
+							}else{ ?>
+								<img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic">
+						<?php	}//end else
+						?>
 					</div>
 					<!-- 作者照片 end-->
 					<!-- 作者-->
