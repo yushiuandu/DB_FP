@@ -414,7 +414,7 @@
 					</div>
 					<!-- 作者照片 end-->
 					<!-- 作者-->
-					<div class="col-md-8 col-sm-8 col-5" style="margin:0px; padding:0px;">
+					<div class="col-md-6 col-sm-6 col-5" style="margin:0px; padding:0px;">
 						<p class='w'><?php 
 						if($row_hot['anonymous'] == 0){
 							echo '匿名';
@@ -427,7 +427,7 @@
 					<!-- 作者 end-->
 
 					<!-- 熱門按讚數 --> 
-					<div class="col-md-3 col-sm-3 col-5 right" id = 'test'>
+					<div class="col-md-5 col-sm-5 col-5 right" id = 'test'>
 						<p class="count" style="display: inline; font-size:2.5vmin; font-weight:400; font-family:jf-openhuninn;"><?php echo $row_hot['likeCount'];?></p>
 						<?php 
 							if(isset($_SESSION['nickname'])){
@@ -502,8 +502,8 @@
 			</div> -->
 			<!-- 圖片 end-->
 			<!-- 樓層 -->
-			<div class="col-md-2 col-sm-2 col-3 cir mid" style="text-align: center;">
-				<p style='margin:0px; font-size:12pt; font-weight:400;'> <?=$row_c['floor'];?>F </p>
+			<div class="col-md-2 col-sm-2 col-3 cir mid" style="text-align: center; padding: 0px;">
+				<p style='margin:auto; font-size:12pt; font-weight:400;'> <?=$row_c['floor'];?>F </p>
 			</div>
 			<!-- 樓層 end-->
 			<!-- 留言區 -->
@@ -526,7 +526,7 @@
 					</div>
 					<!-- 作者照片 end-->
 					<!-- 作者-->
-					<div class="col-md-8 col-sm-8 col-5" style="margin:0px; padding:0px;">
+					<div class="col-md-6 col-sm-6 col-5" style="margin:0px; padding:0px;">
 						<p class='w'><?php 
 							if($row_c['anonymous'] == 0){
 								echo '匿名';
@@ -540,7 +540,7 @@
 					<!-- 作者 end-->
 					
 					<!-- 留言按讚數 --> 
-					<div class="col-md-3 col-sm-3 col-5">
+					<div class="col-md-5 col-sm-5 col-5 right">
 					<?php if($row_c['anonymous']!=2){?>
 						<p class="count" style="display: inline; font-size:2.5vmin; font-weight:400; font-family:jf-openhuninn;"><?php echo $row_c['likeCount'];?></p>
 						<?php 
