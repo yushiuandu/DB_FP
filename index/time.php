@@ -157,6 +157,10 @@
                 go();
                 status.textContent = `${e.buttons} (mouseup)`
             }
+            function delet(){
+                subtraction();
+                stop();
+            }
             //輸入文字時暫停
             function input(){
                 subtraction();
@@ -235,7 +239,7 @@
             <div class="time-head">
                 <div id="progressbar"><div class="progress-label"></div></div>
                     <div class="row justify-content-start mid">
-                        <div class="col-lg-2 col-md-3 col-sm-4 col-4">
+                        <div class="col-lg-2 col-md-3 col-sm-3 col-2">
                             <div class="user-con">
                                 <?php if($row['anonymous'] == 1){?>
                                     <img src="data:pic/png;base64,<?=base64_encode($row["profile"]);?>" id="user-pic">
@@ -244,13 +248,28 @@
                                 <?php }?>
                             </div>
                         </div>
-                        <div class="col-lg-10 col-md-9 col-sm-8 col-8 p0">
+                        <div class="col-lg-6 col-md-6 col-sm-5 col-5 p0">
                             <?php if($row['anonymous'] == 1){?>
                                 <p class="time-ww"><?=$row['Nickname'];?></p>
                             <?php }else{?>
                                 <p class="time-ww">匿名</p>
                             <?php }?>
                             <p class="time-ww"><?=$date?></p>
+                        </div>
+                        <div class="col-lg-4 col-md-2 col-sm-2 col-2 p0">
+							<img src='../index/image/delete.png' data-toggle="modal" data-target="#sure" class="bttn pointer" onclick="delet();">
+						    <div class="modal fade bd-example-modal-sm" id="sure" tabindex="-1" data-backdrop="false" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content login-page">
+
+                                        <div class="modal-body">
+                                            <p>你確定要刪除嗎?</p>
+                                            <button type="button" class="btn">確定</button>
+                                            <button type="button" class="btn" data-dismiss="modal">取消</button>
+                                        </div>
+                                    </div>
+                                </div>
+						    </div>
                         </div>
                         <button type="button" class="close">
                             <a href="../index/index.php" class="link-ww">

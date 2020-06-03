@@ -159,7 +159,17 @@ body{
 .r{
   text-align: right;
 }
-@media (max-width: 767px) {
+.bttn{
+  width: 40px;
+  height: 40px;
+  padding: 5px;
+  background-color: gray;
+  border-radius: 10px;
+}
+.modal {
+  background-color: rgb(0,0,0,0.5);
+}
+@media (max-width: 1000px) {
   .time-head{
     height: 18vh;
     /* border-bottom: white 2px solid; */
@@ -185,7 +195,14 @@ body{
     min-width: 250px;
   }
   .user-con{
-    width: 40px; 
-    height: 40px; 
+    width: 30px; 
+    height: 30px; 
+  }
+  .time-ww{
+    font-size: 8pt;
+  }
+  .bttn{
+    width: 30px;
+    height: 30px;
   }
 }
