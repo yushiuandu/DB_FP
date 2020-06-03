@@ -69,11 +69,14 @@
 		$sql_a = "SELECT COUNT(AId) as total FROM `article` WHERE `UId` =\"$uid\" GROUP BY `UId`";
 	}
 	$result = mysqli_query($link,$sql_a);
-	$row_a = mysqli_fetch_assoc($result);
-	$num_a =  $row_a['total'];
+	if($result){
+		$row_a = mysqli_fetch_assoc($result);
+		$num_a =  $row_a['total'];
+	}
 	if(!isset($num_a)){
 		$num_a = 0;
 	}
+	
 
 	//計算他追蹤多少人
 	$sql_f = "SELECT COUNT(follow_id) AS total FROM `follow` WHERE `UID` = '$uid' GROUP BY `UId`";
@@ -155,15 +158,23 @@
 	<?php
 		if($is_oneself == 1 or $is_oneself == 2){
 			if ($nhot == 'true'){
-				$sql = "SELECT * FROM `article` WHERE `UID` = \"$uid\" AND `anonymous` = 1 ORDER BY `agree` DESC";
+				$sql = "SELECT * FROM `article` JOIN `member`
+				WHERE article.UID = \"$uid\" AND article.anonymous = 1 AND article.UId = member.UId
+				ORDER BY article.agree DESC";
 			}else{
-				$sql = "SELECT * FROM `article` WHERE `UID` = \"$uid\" AND `anonymous` = 1 ORDER BY `post_time` DESC";
+				$sql = "SELECT * FROM `article` JOIN `member`
+				WHERE article.UID = \"$uid\" AND article.anonymous = 1 AND article.UId = member.UId
+				ORDER BY article.post_time DESC";
 			}
 		}else if($is_oneself == 0){
 			if ($nhot == 'true'){
-				$sql = "SELECT * FROM `article` WHERE `UID` = \"$uid\" ORDER BY `agree` DESC";
+				$sql = "SELECT * FROM `article` JOIN `member`
+				WHERE article.UID = \"$uid\"  AND article.UId = member.UId
+				ORDER BY article.agree DESC";
 			}else{
-				$sql = "SELECT * FROM `article` WHERE `UID` = \"$uid\" ORDER BY `post_time` DESC";
+				$sql = "SELECT * FROM `article` JOIN `member`
+				WHERE article.UID = \"$uid\"  AND article.UId = member.UId
+				ORDER BY article.post_time DESC";
 			}
 		}
 		$result = mysqli_query($link,$sql);
@@ -182,26 +193,48 @@
 			?>
 		
 			<!-- 簡圖內容(上) -->
-			<a href="../index/index.php?page=article&aid=<?php echo $row['AId']; ?>" style="color:black; text-decoration:none;">
+			
 			<div class="art3">
 				<div class="row art-head mid">
 					<!-- 作者-->
 					<div class="col-md-10 col-sm-9 col-7 mid" style='padding:0px;'>
 						<div class='pic-container'>
-							<img src="./image/user.png" id="writer-pic">
+							<?php if($row['anonymous']!=0){?>
+								<img src="data:pic/png;base64,<?=base64_encode($row["profile"]);?>" id="user-pic" alt="image">
+							<?php }else{ ?>
+								<img src="./image/user.png" id="writer-pic">
+							<?php }?>
 						</div>
+
 						<?php if($row['anonymous']!=0){?>
-						<p style="display: inline; font-size:2vmin; margin:0px;"><?php echo $row['post_name'];?></p>
+							<p style="display: inline; font-size:2vmin; margin:0px;"><?php echo $row['Nickname'];?></p>
 						<?php }else{ ?>
-						<p style="display: inline; font-size:2vmin; margin:0px;">匿名</p>
+							<p style="display: inline; font-size:2vmin; margin:0px;">匿名</p>
 						<?php }?>
 					</div>
 					<!-- 作者 end-->
 					
 					<!-- 按讚數 --> 
 					<div class="col-md-2 col-sm-3 col-5 right">
-						<h7 style="display: inline;"><?php echo $row['agree'];?></h7>
-						<img src="./image/good-white.png" class="img-fluid" id="good-pic">
+						<h7 style="display: inline;" class="count"><?php echo $row['agree'];?></h7>
+						<?php 
+							if(isset($_SESSION['nickname'])){
+								$sql_good = "SELECT * FROM `good` WHERE `UId` = \"$uid_current\" AND `AId` = \"$row[AId]\" ";
+								$result_good = mysqli_query($link,$sql_good);
+								$row_good = mysqli_fetch_assoc($result_good);
+								$num_good = mysqli_num_rows($result_good);
+
+								$Link = "../Article/good.php?aid=".$row['AId']."";
+								// echo '<a href = "../Article/good.php?aid='.$row['AId'].'">';
+								if($num_good > 0){
+									echo '<img class="img-fluid pointer gbb good_nick" data-url="'.$Link.'" src="../index/image/good-black.png" id="good-pic">';
+								}else{
+									echo '<img class="img-fluid pointer gbb good_nick" data-url="'.$Link.'" src="../index/image/good-white.png" id="good-pic">';
+								}
+							}else{
+								echo '<img class="img-fluid pointer gbb" src="../index/image/good-white.png" id="good-pic">';
+							}
+						?>
 					</div>
 					<!-- 按讚數 end-->
 				</div>
@@ -211,7 +244,9 @@
 				<div class="row art-body mid">
 					<!-- 標題 -->
 					<div class="col-md-11 col-sm-11 col-11 col-lg-11 text-truncate">
-						<p class="font-weight-bold" style='font-size:3vmin; margin:0px;'><?php echo $row['title'];?></p>
+						<a href="../index/index.php?page=article&aid=<?php echo $row['AId']; ?>" style="color:black; text-decoration:none;">
+							<p class="font-weight-bold" style='font-size:3vmin; margin:0px;'><?php echo $row['title'];?></p>
+						</a>
 						<p style="color:gray; font-size:2vmin; margin:0px;font-family:jf-openhuninn;"><?php echo $row['excerpt'];?>
 						</p>
 					</div>
@@ -224,14 +259,16 @@
 					<!-- 看板 - 發文時間 -->
 					<div class="col-md-12 col-sm-12 col-12">
 						<p style=' font-size:1.75vmin; margin:0px; color:gray;'>
-							<?=$category;?> - <?=date('Y-m-d H:i',strtotime($row['post_time']));?>
+						<?php
+							echo "<a href = '../index/index.php?page=index&id=".$row['category']."' style = 'color:gray;text-decoration:none;'>".$category."</a>";
+						?>- <?=date('Y-m-d H:i',strtotime($row['post_time']));?>
 						</p>
 					</div>
 					<!-- 看板 - 發文時間 end -->
 				</div>
 				<!-- 簡圖內容(下) end-->
 				</div>
-			</a>
+			
 			<?php 
 						}//end while
 					}//end if
@@ -272,6 +309,34 @@
 			});
         });
 	
+		$(".good_nick").click(function(){
+				var url = $(this).data("url");
+				var good = $(".good_nick").index($(this));
+
+				console.log(good);
+				$.ajax({
+					type: 'POST',
+					url: url,
+					data: {type : "ajax"},
+					dataType :"json"
+					
+				}).done(function(data) {
+					console.log(data);
+					if(data['success'] == "OK"){
+						$(".good_nick").eq(good).attr("src","../index/image/good-black.png");
+						console.log(good);
+						var count = data['likecount'];
+						$(".count").eq(good).html(count);
+					}else if(data['success'] == "DEL_OK"){
+						$(".good_nick").eq(good).attr("src","../index/image/good-white.png");
+						var count = data['likecount'];
+						$(".count").eq(good).html(count);
+						
+					}
+				});
+			});
+
+			
 	</script>
 	
 	

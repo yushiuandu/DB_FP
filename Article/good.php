@@ -99,7 +99,7 @@
 
         if(mysqli_query($link,$sql)){
             if($num == 0){
-                $sql = "SELECT * FROM `notification` WHERE `AId` = '$_SESSION[aid]' AND `is_read` = 0 AND `type` = 2";
+                $sql = "SELECT * FROM `notification` WHERE `AId` = '$aid' AND `is_read` = 0 AND `type` = 2";
                     $result = mysqli_query($link,$sql);
                     if($result){
                          $num_r = mysqli_num_rows($result);
@@ -110,7 +110,7 @@
                     
 					if($num_r == 0){
                         $content = "你的文章「<b>".$row['title']."</b>」有人來按讚囉";
-                        $sql_a = "INSERT INTO `notification` (`UId`,`AId`,`content`,`type`) VALUES ('$author','$_SESSION[aid]','$content',2)";
+                        $sql_a = "INSERT INTO `notification` (`UId`,`AId`,`content`,`type`) VALUES ('$author','$aid','$content',2)";
                         if((mysqli_query($link,$sql_a))){
                             
                         }else{mysqli_error();

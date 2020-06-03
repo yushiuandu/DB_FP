@@ -142,7 +142,7 @@
 								if ($row['anonymous'] == 0){
 									echo '匿名';
 								}else{
-									echo $row['post_name'];
+									echo $row['Nickname'];
 								}
 							?>
 						</p>

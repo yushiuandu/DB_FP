@@ -32,7 +32,9 @@
 
 	if(isset($_GET['NId'])){
         $sql = "UPDATE `notification` SET `is_read` = 1 WHERE `NId` = '$_GET[NId]'";
-        mysqli_query($link,$sql);
+		mysqli_query($link,$sql);
+		$aid = $_GET['aid'];
+		header("Location:../index/index.php?page=article&aid=$aid");
     }
 
 	
@@ -111,7 +113,7 @@
 				if($row['anonymous']==0){
 					echo '匿名';
 				}else{
-					echo $row['post_name'];
+					echo $row['Nickname'];
 				}
 				?></p>
 			</div>
@@ -362,7 +364,9 @@
 	<!-- 熱門留言區 -->
 	<?php 
 		
-			$sql_hot = "SELECT * FROM `comment` WHERE `AId` = \"$aid\" AND `anonymous`!=2 ORDER BY `likeCount` DESC";
+			$sql_hot = "SELECT * FROM `comment` JOIN `member`
+						WHERE comment.AId = \"$aid\" AND comment.anonymous != 2 AND member.UId = comment.UId AND  comment.likeCount >30
+						ORDER BY comment.likeCount DESC";
 			$result_hot = mysqli_query($link,$sql_hot);
 			$row_hot = $row_hot = mysqli_fetch_assoc($result_hot);
 			if(isset($row_hot)){
@@ -413,7 +417,7 @@
 							if($row_hot['anonymous'] == 1){
 								echo '<a href="../index/index.php?page=nickname&uid='.$row['UId'].'">';	
 						?>
-							<img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic"></a>
+							<img src="data:pic/png;base64,<?=base64_encode($row["profile"]);?>" class="img-fluid rounded-circle" id="writer-pic"></a>
 						<?php
 							}else{ ?>
 								<img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic">
@@ -428,7 +432,9 @@
 							echo '匿名';
 						}
 						else if ($row_hot['anonymous'] == 1){
-							echo $row_hot['post_name'];
+							echo '<a href="../index/index.php?page=nickname&uid='.$row['UId'].'" class="w">';
+							echo $row_hot['Nickname'];
+							echo '</a>';
 						}
 						?></p>
 					</div>
@@ -495,7 +501,9 @@
 
 		<?php 
 		
-			$sql_c = "SELECT * FROM `comment` WHERE `AId` = \"$aid\" ORDER BY `time` ASC";
+			$sql_c = "SELECT * FROM `comment` JOIN `member`
+						WHERE comment.AId = \"$aid\" AND comment.anonymous != 2 AND member.UId = comment.UId 
+						ORDER BY comment.time ASC";
 			$result_c = mysqli_query($link,$sql_c);
 			if($result_c){
 				
@@ -539,7 +547,9 @@
 							if($row_c['anonymous'] == 0){
 								echo '匿名';
 							}else if ($row_c['anonymous'] == 1){
-								echo $row_c['post_name'];
+								echo '<a href="../index/index.php?page=nickname&uid='.$row['UId'].'" class="w">';
+								echo $row_c['Nickname'];
+								echo '</a>';
 							}else{
 								echo '掰掰用戶';
 							}
