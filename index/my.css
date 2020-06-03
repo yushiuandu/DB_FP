@@ -580,7 +580,7 @@ button img{
   min-height: 40px;
   max-width: 70%;
   position: relative;
-  left: 110px;
+  left: 90px;
 }
 .talk-word{
   font-family: "jf-openhuninn";
@@ -590,6 +590,7 @@ button img{
   white-space:pre-wrap;
   margin:0px; 
   font-size:12pt;
+  padding: 0px;
 }
 .c-pic{
   width: 40px;
