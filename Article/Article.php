@@ -32,9 +32,7 @@
 
 	if(isset($_GET['NId'])){
         $sql = "UPDATE `notification` SET `is_read` = 1 WHERE `NId` = '$_GET[NId]'";
-		mysqli_query($link,$sql);
-		$aid = $_GET['aid'];
-		header("Location:../index/index.php?page=article&aid=$aid");
+        mysqli_query($link,$sql);
     }
 
 	
@@ -113,7 +111,7 @@
 				if($row['anonymous']==0){
 					echo '匿名';
 				}else{
-					echo $row['Nickname'];
+					echo $row['post_name'];
 				}
 				?></p>
 			</div>
@@ -364,9 +362,7 @@
 	<!-- 熱門留言區 -->
 	<?php 
 		
-			$sql_hot = "SELECT * FROM `comment` JOIN `member`
-						WHERE comment.AId = \"$aid\" AND comment.anonymous != 2 AND member.UId = comment.UId AND  comment.likeCount >30
-						ORDER BY comment.likeCount DESC";
+			$sql_hot = "SELECT * FROM `comment` WHERE `AId` = \"$aid\" AND `anonymous`!=2 ORDER BY `likeCount` DESC";
 			$result_hot = mysqli_query($link,$sql_hot);
 			$row_hot = $row_hot = mysqli_fetch_assoc($result_hot);
 			if(isset($row_hot)){
@@ -412,17 +408,19 @@
 				<div class="row mid">
 					<!-- 作者照片-->
 					<div class="col-md-1 col-sm-1 col-2" style="margin:0px; padding:0px;">
-						<?php 
-							// 如果不是匿名
-							if($row_hot['anonymous'] == 1){
-								echo '<a href="../index/index.php?page=nickname&uid='.$row['UId'].'">';	
-						?>
-							<img src="data:pic/png;base64,<?=base64_encode($row["profile"]);?>" class="img-fluid rounded-circle" id="writer-pic"></a>
-						<?php
-							}else{ ?>
-								<img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic">
-						<?php	}//end else
-						?>
+						<div class="pic-container">
+							<?php 
+								// 如果不是匿名
+								if($row_hot['anonymous'] == 1){
+									echo '<a href="../index/index.php?page=nickname&uid='.$row['UId'].'">';	
+							?>
+								<img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic"></a>
+							<?php
+								}else{ ?>
+									<img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic">
+							<?php	}//end else
+							?>
+						</div>
 					</div>
 					<!-- 作者照片 end-->
 					<!-- 作者-->
@@ -432,9 +430,7 @@
 							echo '匿名';
 						}
 						else if ($row_hot['anonymous'] == 1){
-							echo '<a href="../index/index.php?page=nickname&uid='.$row['UId'].'" class="w">';
-							echo $row_hot['Nickname'];
-							echo '</a>';
+							echo $row_hot['post_name'];
 						}
 						?></p>
 					</div>
@@ -501,9 +497,7 @@
 
 		<?php 
 		
-			$sql_c = "SELECT * FROM `comment` JOIN `member`
-						WHERE comment.AId = \"$aid\" AND comment.anonymous != 2 AND member.UId = comment.UId 
-						ORDER BY comment.time ASC";
+			$sql_c = "SELECT * FROM `comment` WHERE `AId` = \"$aid\" ORDER BY `time` ASC";
 			$result_c = mysqli_query($link,$sql_c);
 			if($result_c){
 				
@@ -527,18 +521,19 @@
 				<div class="row mid ">
 					<!-- 作者照片-->
 					<div class="col-md-1 col-sm-1 col-2" style="margin:0px; padding:0px;">
-					
+					<div class="pic-container">
 						<?php 
 							// 如果不是匿名
 							if($row_c['anonymous'] == 1){
 								echo '<a href="../index/index.php?page=nickname&uid='.$row['UId'].'">';	
 						?>
-							<img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic"></a>
+							<img src="../index/image/user.png" id="writer-pic"></a>
 						<?php
 							}else{ ?>
-								<img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic">
+								<img src="../index/image/user.png" id="writer-pic">
 						<?php	}//end else
 						?>
+					</div>
 					</div>
 					<!-- 作者照片 end-->
 					<!-- 作者-->
@@ -547,9 +542,7 @@
 							if($row_c['anonymous'] == 0){
 								echo '匿名';
 							}else if ($row_c['anonymous'] == 1){
-								echo '<a href="../index/index.php?page=nickname&uid='.$row['UId'].'" class="w">';
-								echo $row_c['Nickname'];
-								echo '</a>';
+								echo $row_c['post_name'];
 							}else{
 								echo '掰掰用戶';
 							}
@@ -627,10 +620,12 @@
 		<!-- 留言輸入區 -->
 		<div class = "row mid hmes-head justify-content-end">
 			<div class="col-md-10 col-sm-10 col-9 hmes-body ">
-				<div class="row mid "> 
+				<div class="row"> 
 					<!-- 作者照片-->
 					<div class="col-md-1 col-sm-1 col-2" style="margin:0px; padding:0px;">
-						<img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic">
+						<div class="pic-container">
+							<img src="../index/image/user.png" id="writer-pic">
+						</div>
 					</div>
 					<!-- 作者照片 end-->
 
