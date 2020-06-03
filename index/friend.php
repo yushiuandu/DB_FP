@@ -75,7 +75,10 @@
             
         <div class="col-md-3 col-sm-3 col-3 friend">
             <a href="../index/index.php?page=chat&other=<?php echo $row['FId'];?>" style='color:black; text-decoration:none;'>
-                <img src="data:pic/png;base64,<?=base64_encode($row['profile']);?>" style='width:100%; background-size:contain; border-radius:999em;'>
+                <div class="friend-con">
+                    <!--style='width:100%;  border-radius:999em;'-->
+                    <img src="data:pic/png;base64,<?=base64_encode($row['profile']);?>" class="friend-pic">
+                </div>
                 <p class="friend-ww"><?php echo $row['nickname'];?></p>
             </a>
         </div>
