@@ -153,7 +153,7 @@
 	<!-- 區塊title end -->
 
 	<?php
-		if($is_oneself == 1){
+		if($is_oneself == 1 or $is_oneself == 2){
 			if ($nhot == 'true'){
 				$sql = "SELECT * FROM `article` WHERE `UID` = \"$uid\" AND `anonymous` = 1 ORDER BY `agree` DESC";
 			}else{

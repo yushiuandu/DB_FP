@@ -15,7 +15,13 @@
 
 	
 	if($write == 'true'){
+
+		if(!(empty($_FILES["YouFile"]["tmp_name"]))){
+			echo $_FILES["YouFile"]["tmp_name"];
+			$image = "0x".bin2hex(fread( fopen( $_FILES["YouFile"]["tmp_name"] , "r") ,  filesize( $_FILES["YouFile"]["tmp_name"]) ));
+		}
 		
+		// 計算tag
 		$tag = array("tag","tag1", "tag2", "tag3", "tag4");
 		$i  = 0;
 
@@ -26,12 +32,12 @@
 		$datetime = date ("Y-m-d H:i:s" , mktime(date('H'), date('i'), date('s'), date('m'), date('d'), date('Y'))) ;
 		$excerpt = substr( $_POST['content'] , 0 , 200 );
 		
-		if(!(isset($_POST['address']))){
-			$sql = "INSERT INTO article (`category`,`UId`, `title`, `content`, `excerpt`, `post_time`, `anonymous`, `post_name`) 
-				VALUES ('$_POST[forum]', '$uid', '$_POST[title]', '$_POST[content]', '$excerpt', '$datetime', '$_POST[anonymous]','$_SESSION[nickname]')";
+		if(!(empty($_FILES["YouFile"]["tmp_name"]))){
+			$sql = "INSERT INTO article (`category`,`UId`, `title`, `content`, `excerpt`, `post_time`, `anonymous`, `post_name`,`address`,`img`) 
+					VALUES ('$_POST[forum]', '$uid', '$_POST[title]', '$_POST[content]', '$excerpt', '$datetime', '$_POST[anonymous]','$_SESSION[nickname]','$_POST[address]',$image)";
 		}else{
-			$sql = "INSERT INTO article (`category`,`UId`, `title`, `content`, `excerpt`, `post_time`, `anonymous`, `post_name`,`ismap`,`address`) 
-				VALUES ('$_POST[forum]', '$uid', '$_POST[title]', '$_POST[content]', '$excerpt', '$datetime', '$_POST[anonymous]','$_SESSION[nickname]',1,'$_POST[address]')";
+			$sql = "INSERT INTO article (`category`,`UId`, `title`, `content`, `excerpt`, `post_time`, `anonymous`, `post_name`,`address`) 
+					VALUES ('$_POST[forum]', '$uid', '$_POST[title]', '$_POST[content]', '$excerpt', '$datetime', '$_POST[anonymous]','$_SESSION[nickname]','$_POST[address]')";
 		}
 		
 
@@ -39,7 +45,7 @@
 			mysqli_error();
 		}else{
 			// 存tag
-			$sql = "SELECT AId FROM article WHERE `UId` = \"$uid\" AND `post_time` = \"$datetime\"";
+			$sql = "SELECT `AId` FROM `article` WHERE `UId` = \"$uid\" AND `post_time` = \"$datetime\"";
 			$result = mysqli_query($link, $sql);
 			$row = mysqli_fetch_assoc($result);
 			$aid = $row['AId'];
@@ -118,7 +124,7 @@
 		<p class='board'>寫篇文章吧</p>
 	</div>
 	<div class='write'>
-		<form method='post' action='../Article/write.php?write=true'>
+		<form method='post' action='../Article/write.php?write=true' enctype="multipart/form-data">
 			<div class="form-group row">
 				<label class="col-sm-3 col-form-label">選擇名稱</label>
 				<div class="col-sm-9">
@@ -410,7 +416,7 @@
             }
         })
 
-        </script>
+    </script>
 
 		
 		

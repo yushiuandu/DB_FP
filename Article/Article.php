@@ -149,7 +149,7 @@
 				<p class='article-word'><?php echo $row['content'];?></p>
 
 				<!-- 假如有放google 地圖 -->
-				<?php if($row['ismap'] == 1){
+				<?php if(!(empty($row['address']))){
 					
 					$address = $row['address'];
 					function geocode($address){
@@ -203,7 +203,13 @@
 					echo '<div id="map" class="embed-responsive embed-responsive-16by9"></div>';?>
 				
 					<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAY6YGC3VgWJA-ZKtrOHgMe_6PKXTdM6pA&callback=initMap"></script>
-				<?php	}?>		
+				<?php	}?>	
+				<!--圖片  -->
+				<?php 
+					if(!(empty($row['img']))){
+						echo '<img style="width:70%;" src="data:pic/png;base64,'.base64_encode($row["img"]).'">';
+					}
+				?>
   				<!-- 文章tag -->
 				<div style="margin:10px 10px 0px 10px; font-family: setofont; font-weight:600;">
 					<?php 
