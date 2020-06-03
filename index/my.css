@@ -624,6 +624,35 @@ button img{
   position: relative;
   left: 90px;
 }
+.talk3{
+  display:inline-block;
+  text-align: left;
+  margin:10px 5px 0px 10px;
+  padding:5px 10px 5px 10px;
+  border-radius: 10px;
+  background-color: rgb(193, 171, 173);
+
+  min-height: 40px;
+  max-width: 70%;
+  position: relative;
+}
+.chat-con2{
+  width: 15vw; 
+  height:  15vw;
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  margin:0px auto 00px auto;
+  background-color: rgb(193, 171, 173);
+}
+.chat-pic{
+  max-width: 100%; 
+  max-height: 100%;
+  position: absolute; 
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%);
+}
 .talk-word{
   font-family: "jf-openhuninn";
   font-weight:400;

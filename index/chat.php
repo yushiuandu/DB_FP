@@ -140,8 +140,11 @@
 				$row_ig = mysqli_fetch_assoc($result_ig);
 			?>	
 				<div class="uu">
-					<div class="talk2"> 
-						<img style="width:50%;float:right;" src="data:pic/png;base64,<?=base64_encode($row_ig["img"]);?>">
+					<div class="talk3">
+						<div class="chat-con2">
+							<!-- style="width:50%;float:right;" -->
+							<img class="chat-pic" src="data:pic/png;base64,<?=base64_encode($row_ig["img"]);?>">
+						</div>
 					</div>
 					<!-- 自己的頭貼 -->
 					<img src="data:pic/png;base64,<?=base64_encode($row_pic["profile"]);?>" class="img-fluid rounded-circle c-pic" >
