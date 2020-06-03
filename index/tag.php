@@ -57,6 +57,7 @@
 		
 			<div class="col-md-2 col-sm-2 col-2 right mid">
 				<?php 
+				if(isset($_SESSION['nickname'])){
 					$sql_tag = "SELECT * FROM `follow` WHERE `UId`=\"$uid\" AND `Tag` = \"$tag\"";
 					$result_tag = mysqli_query($link, $sql_tag);
 					$num = mysqli_num_rows($result_tag);
@@ -69,7 +70,7 @@
 				?>
 					<a href="../Article/follow.php?tag=<?php echo $tag;?>">
 					<button type="button" class="btn btn-sm btn-info">✔已追蹤</button></a>
-					<?php }?>
+					<?php }}?>
 		  	</div>
 		  	
 		</div>
