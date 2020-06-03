@@ -71,7 +71,7 @@
             function count(){ //數時間到 換頁 
                 second=((new Date()).getSeconds()+60)%60; //現在秒數
                 if( second<done ){
-                    time2 = setTimeout(function(){count()},2000);
+                    time2 = setTimeout(function(){count()},1000);
                 }else{
                     right();
                 }
@@ -100,7 +100,7 @@
                         $next = $igid + 1;
                     }
                 ?>
-                time = setTimeout(function(){next()},2000);
+                time = setTimeout(function(){next()},1000);
                 location.href="../index/time.php?igid=<?=$next;?>";
                 // document.getElementById('change').src="../index/image/test"+num[i]+".jpg";
                 
