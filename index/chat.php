@@ -107,34 +107,54 @@
 			?>
 			<!-- 對方的對話框 -->
 			<div style='text-align:left;'>
+				<!-- 假如回覆限時-->
+				<?php if($row['igid'] != 0){
+					$sql_ig = "SELECT * FROM `instagram`";
+					$result_ig = mysqli_query($link,$sql_ig);
+					$row_ig = mysqli_fetch_assoc($result_ig);
+				?>	
+					<div class="uu_left">
+						<!-- 自己的頭貼 -->
+						<img src="data:pic/png;base64,<?=base64_encode($row_pic_other["profile"]);?>" class="img-fluid rounded-circle c-pic" >
+						<div class="talk3">
+							<div class="chat-con2">
+								<img class="chat-pic" src="data:pic/png;base64,<?=base64_encode($row_ig["img"]);?>">
+							</div>
+						</div>
+					</div>
+				<?php	} //end ig if?>
+				<!-- 假如回覆限時 end-->
+
+				<!-- 假如限時被刪除 -->
+				<?php if($row['igid'] == 0){
+				?>	
+					<div class="uu_left">
+						<!-- 自己的頭貼 -->
+						<img src="data:pic/png;base64,<?=base64_encode($row_pic_other["profile"]);?>" class="img-fluid rounded-circle c-pic" >
+						<div class="talk">
+							<pre class='talk-word'>該限時已被刪除</pre>
+						</div>
+					</div>
+				<?php	} //end ig if?>
+				<!-- 假如限時被刪除 -->
+
 				<!-- 對方頭貼 -->
 				<img src="data:pic/png;base64,<?=base64_encode($row_pic_other["profile"]);?>" class="img-fluid rounded-circle c-pic" >
-				
 				<!-- 對方的話 -->
 				<div class="talk">
 					<pre class='talk-word'><?php echo $row['chat']; ?></pre>
 				</div>
-				<p class="time-ww1"><?=date('Y/m/d H:i',strtotime($row['sendtime']));?></p>
+				
 			</div>
+				
+			<p class="time-ww1"><?=date('Y/m/d H:i',strtotime($row['sendtime']));?></p>
+
 			<!-- 對方的對話框 end -->
-			<?php }//end if 
+			<?php }//end if 對方
 					else if($row['UId'] == $uid){?>
 
-			<!-- 自己的對話框 -->
-			<div class="uu">
-				<!-- 自己的話 -->
-				<div class="talk2"> 
-					<pre class='talk-word'><?php echo $row['chat']; ?></pre>
-				</div>
-				<div class="u"> 
-					<p class="time-ww2"><?=date('Y/m/d H:i',strtotime($row['sendtime']));?></p>
-				</div>
-				<!-- 自己的頭貼 -->
-				<img src="data:pic/png;base64,<?=base64_encode($row_pic["profile"]);?>" class="img-fluid rounded-circle c-pic" >
-			</div>
-			<!-- 自己對話框 end -->
 			<!-- 假如回覆限時-->
-			<?php if(isset($row['igid'])){
+			<?php if($row['igid'] != 0){
 				$sql_ig = "SELECT * FROM `instagram`";
 				$result_ig = mysqli_query($link,$sql_ig);
 				$row_ig = mysqli_fetch_assoc($result_ig);
@@ -151,6 +171,38 @@
 				</div>
 			<?php	} //end ig if?>
 			<!-- 假如回覆限時 end-->
+
+			<!-- 假如限時被刪除 -->
+			<?php if($row['igid'] == 0){
+			?>	
+				<div class="uu">
+					<!-- 自己的話 -->
+					<div class="talk2"> 
+						<pre class='talk-word'>該限時已被刪除</pre>
+					</div>
+					<div class="u"> 
+						<p class="time-ww2"><?=date('Y/m/d H:i',strtotime($row['sendtime']));?></p>
+					</div>
+					<!-- 自己的頭貼 -->
+					<img src="data:pic/png;base64,<?=base64_encode($row_pic["profile"]);?>" class="img-fluid rounded-circle c-pic" >
+				</div>
+			<?php	} //end ig if?>
+			<!-- 假如限時被刪除 -->
+
+			<!-- 自己的對話框 -->
+			<div class="uu">
+				<!-- 自己的話 -->
+				<div class="talk2"> 
+					<pre class='talk-word'><?php echo $row['chat']; ?></pre>
+				</div>
+				<div class="u"> 
+					<p class="time-ww2"><?=date('Y/m/d H:i',strtotime($row['sendtime']));?></p>
+				</div>
+				<!-- 自己的頭貼 -->
+				<img src="data:pic/png;base64,<?=base64_encode($row_pic["profile"]);?>" class="img-fluid rounded-circle c-pic" >
+			</div>
+			<!-- 自己對話框 end -->
+
 			<?php 		}//end else if
 					}//end while
 				}//end if?>

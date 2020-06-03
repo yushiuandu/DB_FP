@@ -84,12 +84,13 @@
 	if(isset($_GET['edit'])){
 		$aid = $_GET['edit'];
 		$excerpt = substr( $_POST['content'] , 0 , 200 );
-		$sql = "UPDATE `article` SET `title` = \"$_POST[title]\", `content` = \"$_POST[content]\", excerpt = \"$excerpt\" WHERE `AId` = \"$aid\"";
-		
+		$sql = "UPDATE `article` SET `title` = \"$_POST[title]\", `content` = \"$_POST[content]\", `excerpt` = \"$excerpt\" WHERE `AId` = \"$aid\"";
+
 		$sql_f = "SELECT `UId` FROM `follow` WHERE `AId` = '$aid'";
 		$result = mysqli_query($link,$sql_f);
 		$num = mysqli_num_rows($result);
-		$content = "你追蹤的文章「<b>".$_POST['title']."</b>」已經更新了！趕快去察看吧！";
+		$content = "你追蹤的文章「<b>".$_POST['title']."</b>」已經更新了！趕快去查看吧！";
+
 		if(mysqli_query($link,$sql)){
 			if($num > 0){
 				while($row = mysqli_fetch_assoc($result)){
@@ -97,10 +98,10 @@
 								VALUES ('$row[UId]', '$aid', '$content',4)";
 					mysqli_query($link,$sql_add);
 				}
-				// header("Location:../index/index.php?page=article&aid=$aid");
+				header("Location:../index/index.php?page=article&aid=$aid");
 				exit;
 			}else{
-				// header("Location:../index/index.php?page=article&aid=$aid");
+				header("Location:../index/index.php?page=article&aid=$aid");
 				exit;
 			}
 			
@@ -115,6 +116,25 @@
 		$aid = $_GET['delete'];
 		$sql = "DELETE FROM `article` WHERE `AId` = \"$aid\"";
 		if(mysqli_query($link,$sql)){
+			// 留言
+			$sql = "DELETE FROM `comment` WHERE `AId` = \"$aid\"";
+			mysqli_query($link,$sql);
+			// tag
+			$sql = "DELETE FROM `article_tag` WHERE `AId` = \"$aid\"";
+			mysqli_query($link,$sql);
+			// 追蹤
+			$sql = "DELETE FROM `follow` WHERE `AId` = \"$aid\"";
+			mysqli_query($link,$sql);
+			// 按讚
+			$sql = "DELETE FROM `good` WHERE `AId` = \"$aid\"";
+			mysqli_query($link,$sql);
+			// 通知
+			$sql = "DELETE FROM `notification` WHERE `AId` = \"$aid\"";
+			mysqli_query($link,$sql);
+			// 收藏
+			$sql = "DELETE FROM `save` WHERE `AId` = \"$aid\"";
+			mysqli_query($link,$sql);
+
 			header("Location:../index/index.php");
 			exit;
 		}
@@ -130,6 +150,10 @@
 		$sql = "UPDATE `comment` SET `content` = \"$content\" , `anonymous` = 2 , `likeCount` = 0 WHERE `CId` = \"$_GET[deletec]\"";
 
 		if(mysqli_query($link,$sql)){
+			// 按讚
+			$sql = "DELETE FROM `good` WHERE `CId` = \"$_GET[deletec]\"";
+			mysqli_query($link,$sql);
+
 			header("Location:../index/index.php?page=article&aid=$aid");
 			exit;
 		}else{

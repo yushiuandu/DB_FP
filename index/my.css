@@ -1215,6 +1215,9 @@ button img{
 .uu{
   text-align: right;
 }
+.uu_left{
+  text-align: left;
+}
 .li-con{
   width: 100%;
   overflow-x: auto;

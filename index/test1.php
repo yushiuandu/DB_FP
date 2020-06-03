@@ -1,3 +1,9 @@
+<?php
+	$link = mysqli_connect("localhost","taigun","ELn3yv07F567MwOF","taigun");//連結伺服器//選擇資料庫
+	if(!$link){
+		echo "no connect!";
+	}
+?>
 <!doctype html>
 <html lang="en">
   <head>

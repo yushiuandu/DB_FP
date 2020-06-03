@@ -16,6 +16,12 @@
     if(isset($_GET['delete'])){
         $sql = "DELETE FROM `instagram` WHERE `igid` = '$_GET[delete]'";
         if(mysqli_query($link,$sql)){
+            $sql = "UPDATE `chat` SET `igid` = 0 WHERE `igid` = '$_GET[delete]'";
+            mysqli_query($link,$sql);
+
+            // $sql = "DELETE FROM `notification` WHERE `igid` = '$_GET[delete]'";
+
+            
             header("Location:../index/index.php");
             exit;
         }
@@ -76,7 +82,7 @@
     if(isset($_GET['chat'])){
 
         $other = $_GET['chat'];
-        $content = $_SESSION['nickname']."已回復您的限實動態：<br>".$_POST['chat'];
+        $content = $_SESSION['nickname']."已回復您的限時動態：<br>".$_POST['chat'];
 
 		$sql = "INSERT INTO `chat` (`UId`,`other`,`chat`,`igid`, `sendtime`) VALUES ('$_GET[chat]','$uid','$content', '$_GET[igid]' ,'$datetime')";
 		if(mysqli_query($link, $sql)){
