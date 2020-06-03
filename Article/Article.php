@@ -422,7 +422,7 @@
 					</div>
 					<!-- 作者照片 end-->
 					<!-- 作者-->
-					<div class="col-md-8 col-sm-8 col-5" style="margin:0px; padding:0px;">
+					<div class="col-md-6 col-sm-6 col-5" style="margin:0px; padding:0px;">
 						<p class='w'><?php 
 						if($row_hot['anonymous'] == 0){
 							echo '匿名';
@@ -435,7 +435,7 @@
 					<!-- 作者 end-->
 
 					<!-- 熱門按讚數 --> 
-					<div class="col-md-3 col-sm-3 col-5 right" id = 'test'>
+					<div class="col-md-5 col-sm-5 col-5 right" id = 'test'>
 						<p class="count" style="display: inline; font-size:2.5vmin; font-weight:400; font-family:jf-openhuninn;"><?php echo $row_hot['likeCount'];?></p>
 						<?php 
 							if(isset($_SESSION['nickname'])){
@@ -510,8 +510,8 @@
 			</div> -->
 			<!-- 圖片 end-->
 			<!-- 樓層 -->
-			<div class="col-md-2 col-sm-2 col-3 cir mid" style="text-align: center;">
-				<p style='margin:0px; font-size:12pt; font-weight:400;'> <?=$row_c['floor'];?>F </p>
+			<div class="col-md-2 col-sm-2 col-3 cir mid" style="text-align: center; padding: 0px;">
+				<p style='margin:auto; font-size:12pt; font-weight:400;'> <?=$row_c['floor'];?>F </p>
 			</div>
 			<!-- 樓層 end-->
 			<!-- 留言區 -->
@@ -534,7 +534,7 @@
 					</div>
 					<!-- 作者照片 end-->
 					<!-- 作者-->
-					<div class="col-md-8 col-sm-8 col-5" style="margin:0px; padding:0px;">
+					<div class="col-md-6 col-sm-6 col-5" style="margin:0px; padding:0px;">
 						<p class='w'><?php 
 							if($row_c['anonymous'] == 0){
 								echo '匿名';
@@ -548,7 +548,7 @@
 					<!-- 作者 end-->
 					
 					<!-- 留言按讚數 --> 
-					<div class="col-md-3 col-sm-3 col-5">
+					<div class="col-md-5 col-sm-5 col-5 right">
 					<?php if($row_c['anonymous']!=2){?>
 						<p class="count" style="display: inline; font-size:2.5vmin; font-weight:400; font-family:jf-openhuninn;"><?php echo $row_c['likeCount'];?></p>
 						<?php 
@@ -615,7 +615,7 @@
 		?>
 
 		<!-- 留言輸入區 -->
-		<div class = "row mid hmes-head justify-content-center">
+		<div class = "row mid hmes-head justify-content-end">
 			<div class="col-md-10 col-sm-10 col-9 hmes-body ">
 				<div class="row mid "> 
 					<!-- 作者照片-->
@@ -630,10 +630,12 @@
 					<!-- 留言內容-->
 					<div class="col-md-11 col-sm-11 col-11" style="margin:0px; padding:0px;">
 						<form method="post" action="../Article/addcom.php">
-						<div class="form-row">
-							<div class="col-md-4">
+						<div class="form-row justifyed-content-start" style="margin-bottom:5px;">
+							<div class="col-lg-2 col-md-3 col-sm-3">
 								<label for="inputState">是否匿名</label>
-								<select id="inputState" class="form-control" name="anonymous">
+							</div>
+							<div class="col-lg-10 col-md-9 col-sm-9">
+								<select id="inputState" class="form-control what" name="anonymous">
 									<option selected value = "0">匿名</option>
 									<option value = "1">顯示暱稱</option>
 								</select>
@@ -641,9 +643,15 @@
 						</div>
 
 						<div class="form-row">
-							<div class="col-md-10 mb-5">
+							<div class="col-lg-2 col-md-3 col-sm-3">
 								<label for="comment" class = "hmes">請輸入留言</label>
+							</div>
+							<div class="col-lg-10 col-md-9 col-sm-9">
 								<textarea class="form-control" id="comment" placeholder="請輸入留言" required name="content"></textarea>
+							</div>
+						</div>
+						<div class="form-row justify-content-end">
+							<div class="offset-lg-10 col-lg-2 offset-md-9 col-md-3  offset-sm-9 col-sm-3">
 								<button type="submit" class="btn btn-secondary btn-sm my-1">Submit</button>	
 							</div>
 						</div>

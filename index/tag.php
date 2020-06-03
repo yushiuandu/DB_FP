@@ -75,7 +75,7 @@
 		</div>
 
   		<div class="row mid">
-			<div class="btn-group col-md-3 col-sm-3 col-5" role="group" aria-label="Button group with nested dropdown">
+			<div class="btn-group col-md-2 col-sm-3 col-3" role="group" aria-label="Button group with nested dropdown">
 				<!-- 排序 -->
 				<button id="btnGroupDrop1" type="button" class="btn btn-sm btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
   					排序</button>
@@ -121,7 +121,7 @@
 				<!-- 簡圖內容(上) -->
 				<div class="row art-head mid">
 					<!-- 作者-->
-					<div class="col-md-10 col-sm-9 col-9" style='padding:0px;'>
+					<div class="col-md-10 col-sm-9 col-9 mid" style='padding:0px;'>
 						<!-- 作者頭像 -->
 						<div class='pic-container'>
 						<?php 

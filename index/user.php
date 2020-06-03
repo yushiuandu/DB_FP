@@ -94,10 +94,17 @@
 	</head>
   <body>
   <!-- 修改個人資料(我覺得可以抓他已經填過的資料進來讓他修改) -->
-  <div class='u1'>
-	<div class="u-con">
-		<img src="data:pic/png;base64,<?=base64_encode($row["profile"]);?>" id="u-pic">
-	</div>
+  <div class='u1 middle'>
+	<label>
+		<div class="u-con pointer">
+			<img src="data:pic/png;base64,<?=base64_encode($row["profile"]);?>" class="u-pic" id="old">
+				<span id="file_name" style="opacity: 0;"></span>
+				<figure>
+					<img id="file_thumbnail" class="u-pic pointer">
+                </figure>
+			<input Type="File" name="YouFile" class='pic-file' id='picInput'>
+		</div>
+	</label>
     <form method="post" action="../index/user.php?modifyuser=true" enctype="multipart/form-data">
     	<div class="form-row">
         <!-- 綽號 -->
@@ -127,7 +134,25 @@
         </div>
    </form>
   </div>
-     
+    <!-- 抓圖檔的資訊 -->
+	<script>
+		var picture = document.getElementById('picInput');
+		picture.addEventListener('change', function(e) {
+			check=1;
+	  		var fileData = e.target.files[0]; // 檔案資訊
+	  		var fileName = fileData.name; // 檔案名稱
+			
+			console.log(fileName);
+			console.log(fileData); // 用開發人員工具可看到資料
+			document.getElementById('file_name').innerText = fileName;
+			document.getElementById('file_thumbnail').src = URL.createObjectURL(fileData);
+			document.getElementById('old').style.display="none";
+		}, false);
+
+		
+	</script>
+	<!-- 抓圖檔的資訊end -->
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

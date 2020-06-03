@@ -132,7 +132,7 @@
 			<?php }else{?>
 
 				<!-- 登入之後 -->
-				<button type="button"class="btn btn-info font-weight-bold" data-toggle="modal">
+				<button type="button"class="btn btn-info font-weight-bold">
 					<a href="../index/index.php?page=logout" style='text-decoration:none; color:white;'>登出</a>
 				</button>
 			<?php }?>
