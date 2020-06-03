@@ -93,6 +93,31 @@ body{
   transform: translate(-50%, -50%);
   background-color: white;
 } /* 文章簡圖區作者頭像 */
+.cry{
+  float: left;
+  margin: 0px 0px 10px 0px;
+}
+.card-con{
+  width: 10vw;
+  height: 15vh;
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.card-pic{
+  max-width: 100%; 
+  max-height: 100%; 
+  position: absolute; 
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%);
+  background-color: white;
+}
+.card-ww{
+  width: 10vw;
+  height: 5vh;
+  text-align: center;
+}
 #good-pic{
   width: auto;
   height: 25px;
@@ -741,18 +766,20 @@ button img{
   font-family:"setofont";
   font-weight:600;
 }
-.card-body{
-  padding: 0.5rem;
-}
-.card{
+.car{
+  height: 20vh;
+  width: 10vw;
   border-radius: 10px;
+  background-color: white;
 }
 .ss{
   margin: 0px;
   font-weight:400;
-  font-size: 14pt;
+  font-size: 10pt;
   text-decoration:none;
   text-align: center;
+  width: 10vw;
+  padding: 5px;
 }
 .edit-pic{
   width:20px;
@@ -1354,6 +1381,25 @@ button img{
   .friend-con{
     width: 18vw; 
     height: 18vw;
+  }
+  .card-con{
+    width: 29vh;
+    height: 25vh;
+  }
+  .card-ww{
+    width: 29vh;
+    height: 5vh;
+    text-align: center;
+  }
+  .car{
+    height: 30vh;
+    width: 29vh;
+    min-height: 150px;
+    min-width: 30px;
+  }
+  .ss{
+    width: 29vh;
+    padding: 5px;
   }
 }
 @media (max-width: 1000px) {
