@@ -122,6 +122,23 @@ body{
   background-color: rgb(239, 237, 231);
   position: relative;
 }
+.friend-con{
+  width: 11vw; 
+  height: 11vw;
+  position: relative;
+  border-radius: 50%;
+  overflow: hidden;
+  margin:0px auto 10px auto;
+  background-color: white;
+}
+.friend-pic{
+  max-width: 100%; 
+  max-height: 100%;
+  position: absolute; 
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%);
+}
 .user-con{
   width: 125px; 
   height: 125px; 
@@ -498,7 +515,7 @@ button img{
   background-color:rgb(193, 171, 173);
   margin:30px 2vw 0px 2vw;
   text-align: center;
-  padding:20px 10px 0px 10px;
+  padding:20px 0px 0px 0px;
   float: left;
 }
 .friend-ww{
@@ -1333,6 +1350,10 @@ button img{
   .sad-con{
     width: 80vw;
     max-width: 350px;
+  }
+  .friend-con{
+    width: 18vw; 
+    height: 18vw;
   }
 }
 @media (max-width: 1000px) {
