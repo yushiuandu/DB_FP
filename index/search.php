@@ -92,7 +92,7 @@
                     if($num>0){
                         while($row = mysqli_fetch_assoc($result)){
                 ?>
-                <div class="art2 pointer" onclick="location.href='../index/index.php?page=article&aid=<?=$row['AId'];?>'">
+                <div class="art2 pointer" >
                     <div class="row art-head justify-content-start">
                         <!-- 作者-->
                         <div class="col-md-10 col-sm-9 col-9 mid" style='padding:0px;'>
@@ -125,9 +125,9 @@
                                     $Link = "../Article/good.php?aid=".$row['AId'];
 
                                     if($num > 0){
-                                            echo '<img src="../index/image/good-black.png" class="good_article img-fluid " data-url="'.$Link.'" id="good-pic">';
+                                            echo '<img src="../index/image/good-black.png" class="good_search img-fluid " data-url="'.$Link.'" id="good-pic">';
                                     }else{
-                                        echo '<img src="../index/image/good-white.png" class="good_article img-fluid" data-url="'.$Link.'" id="good-pic">';
+                                        echo '<img src="../index/image/good-white.png" class="good_search img-fluid" data-url="'.$Link.'" id="good-pic">';
                                     }
                                 }else{
                                     echo '<img src="../index/image/good-white.png" class="img-fluid" id="good-pic" onclick="no();">';
@@ -140,7 +140,7 @@
                     <!-- 簡圖內容(上) end-->
                     
                     <!-- 簡圖內容(中) -->
-                    <div class="row art-body justify-content-start">
+                    <div class="row art-body justify-content-start" onclick="location.href='../index/index.php?page=article&aid=<?=$row['AId'];?>'">
                         <div class="col-md-11 col-sm-11 col-11 col-lg-11 text-truncate">
                             <!-- 標題 -->
                             <p class="font-weight-bold" style='font-size:3vmin; margin:0px;'><?=$row['title'];?></p>
@@ -384,7 +384,7 @@
                         if((mysqli_num_rows($result)) > 0 ){
                             while($row = mysqli_fetch_assoc($result)){
                 ?>
-                <div class="art2 pointer" onclick="location.href='../index/index.php?page=article&aid=<?=$row['AId'];?>'" >
+                <div class="art2 pointer" >
                     <div class="row art-head justify-content-start">
                         <!-- 作者-->
                         <div class="col-md-10 col-sm-9 col-9 mid" style='padding:0px;'>
@@ -437,7 +437,7 @@
                     <!-- 簡圖內容(上) end-->
                     
                     <!-- 簡圖內容(中) -->
-                    <div class="row art-body justify-content-start">
+                    <div class="row art-body justify-content-start" onclick="location.href='../index/index.php?page=article&aid=<?=$row['AId'];?>'">
                         <div class="col-md-11 col-sm-11 col-11 col-lg-11 text-truncate">
                             <!-- 標題 -->
                             <p class="font-weight-bold" style='font-size:3vmin; margin:0px;'><?php echo $row['title'];?></p>
@@ -712,6 +712,36 @@
 					}
 			});
         });
+
+        // 按讚文章
+        $(".good_search").click(function(){
+				var url = $(this).data("url");
+				var good = $(".good_search").index($(this));
+
+				console.log(good);
+				$.ajax({
+					type: 'POST',
+					url: url,
+					data: {type : "ajax"},
+					dataType :"json"
+					
+				}).done(function(data) {
+					console.log(data);
+					if(data['success'] == "OK"){
+						// $(".Count").eq(count).html("1");
+						$(".good_search").eq(good).attr("src","../index/image/good-black.png");
+						console.log(good);
+						var count = data['likecount'];
+						$(".count").eq(good).html(count);
+						// console.log(good_c);
+					}else if(data['success'] == "DEL_OK"){
+						$(".good_search").eq(good).attr("src","../index/image/good-white.png");
+						var count = data['likecount'];
+						$(".count").eq(good).html(count);
+						
+					}
+				});
+			});
 
    <?php  }?>
     </script>

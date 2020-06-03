@@ -29,7 +29,7 @@
         }else{
             $sql = "UPDATE `chat` SET `is_read` = 1 WHERE `CId` = '$row[CId]'";
             mysqli_query($link,$sql);
-            exit(json_encode(array("success"=>"YES","content"=>$row['chat'])));
+            exit(json_encode(array("success"=>"YES","content"=>$row['chat'],"date"=>$row['sendtime'])));
         }
     }else{
         $sql = "SELECT * FROM `notification` WHERE `UId` = '$uid' AND `is_read` = 0";

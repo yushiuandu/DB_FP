@@ -193,7 +193,7 @@
 							<div class='match-fotter'>
                                 <!-- 開始聊天 -->
 								<button class="btn btn-secondary">
-                                    <a href='../index/index.php?page=chat&other=<?=$friendid;?>&NId=<?=$NId;?>' class='link-ww'>開始聊天</a>
+                                    <a href='../index/chat.php?NId=<?=$NId;?>&other=<?=$friendid;?>' class='link-ww'>開始聊天</a>
                                 </button>
                                 <!-- 拒絕聊天 -->
                                 <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#match2">下次再說...</button>

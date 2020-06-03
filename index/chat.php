@@ -126,15 +126,15 @@
 				<!-- 假如回覆限時 end-->
 
 				<!-- 假如限時被刪除 -->
-				<?php if($row['igid'] == 0){
+				<?php if($row['igid'] == -1){
 				?>	
-					<div class="uu_left">
+					<!-- <div class="uu_left"> -->
 						<!-- 自己的頭貼 -->
-						<img src="data:pic/png;base64,<?=base64_encode($row_pic_other["profile"]);?>" class="img-fluid rounded-circle c-pic" >
+						<!-- <img src="data:pic/png;base64,<?=base64_encode($row_pic_other["profile"]);?>" class="img-fluid rounded-circle c-pic" >
 						<div class="talk">
 							<pre class='talk-word'>該限時已被刪除</pre>
 						</div>
-					</div>
+					</div> -->
 				<?php	} //end ig if?>
 				<!-- 假如限時被刪除 -->
 
@@ -175,17 +175,17 @@
 			<!-- 假如限時被刪除 -->
 			<?php if($row['igid'] == 0){
 			?>	
-				<div class="uu">
+				<!-- <div class="uu"> -->
 					<!-- 自己的話 -->
-					<div class="talk2"> 
+					<!-- <div class="talk2"> 
 						<pre class='talk-word'>該限時已被刪除</pre>
 					</div>
 					<div class="u"> 
 						<p class="time-ww2"><?=date('Y/m/d H:i',strtotime($row['sendtime']));?></p>
-					</div>
+					</div> -->
 					<!-- 自己的頭貼 -->
-					<img src="data:pic/png;base64,<?=base64_encode($row_pic["profile"]);?>" class="img-fluid rounded-circle c-pic" >
-				</div>
+					<!-- <img src="data:pic/png;base64,<?=base64_encode($row_pic["profile"]);?>" class="img-fluid rounded-circle c-pic" >
+				</div> -->
 			<?php	} //end ig if?>
 			<!-- 假如限時被刪除 -->
 
@@ -238,9 +238,10 @@
 						var content_chat = data["content"];
 						console.log(content_chat);
 						var chat = "<div style='text-align:left;'>"+'<img src="data:pic/png;base64,<?=base64_encode($row_pic_other["profile"]);?>" class="img-fluid rounded-circle c-pic" >'+
-									'<div class="talk">'+"<pre class='talk-word'>"+content_chat+"</pre>" + "</div><p class='time-ww2>"+data['date']+"<p></p></div>";
+									'<div class="talk">'+"<pre class='talk-word'>"+content_chat+"</pre>" + "</div></div><p class='time-ww2'>"+data['date']+"</p>";
 						console.log(chat); 
 						$("#chatting").append(chat);
+						add();
 					}
 				});
 			};
