@@ -99,18 +99,18 @@
             
             if($tlatest == "true" ){
                 $sql = "SELECT *
-                FROM `article_tag` AS T JOIN `article` AS A
-                WHERE T.AId = A.AId AND T.tag = \"$tag\"
+                FROM `article_tag` AS T JOIN `article` AS A JOIN `member`
+                WHERE T.AId = A.AId AND T.tag = \"$tag\" AND member.UId = A.UId
                 ORDER BY A.post_time DESC";
             }else if($thot == "true"){
                 $sql = "SELECT *
-                FROM `article_tag` AS T JOIN `article` AS A
-				WHERE T.AId = A.AId AND T.tag = \"$tag\"
+                FROM `article_tag` AS T JOIN `article` AS A JOIN `member`
+				WHERE T.AId = A.AId AND T.tag = \"$tag\" AND member.UId = A.UId
 				ORDER BY A.agree DESC";
             }else{
                 $sql = "SELECT *
-                FROM `article_tag` AS T JOIN `article` AS A
-                WHERE T.AId = A.AId AND T.tag = \"$tag\"
+                FROM `article_tag` AS T JOIN `article` AS A JOIN `member`
+                WHERE T.AId = A.AId AND T.tag = \"$tag\" AND member.UId = A.UId
                 ORDER BY A.agree DESC";
             }
 

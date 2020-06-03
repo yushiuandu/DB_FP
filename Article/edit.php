@@ -100,6 +100,7 @@
 				}
 			}
 			header("Location:../index/index.php?page=article&aid=$aid");
+			exit;
 		}
 		else{
 			mysqli_error();
@@ -112,6 +113,7 @@
 		$sql = "DELETE FROM `article` WHERE `AId` = \"$aid\"";
 		if(mysqli_query($link,$sql)){
 			header("Location:../index/index.php");
+			exit;
 		}
 		else{
 			mysqli_error();

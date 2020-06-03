@@ -12,6 +12,14 @@
         $igid = $_GET['igid'];
     }
 
+    if(isset($_GET['delete'])){
+        $sql = "DELETE FROM `instagram` WHERE `igid` = '$_GET[delete]'";
+        if(mysqli_query($link,$sql)){
+            header("Location:../index/index.php");
+            exit;
+        }
+    }
+
     $sql = "SELECT * FROM `instagram` WHERE `post_time` BETWEEN \"$yesterday\" AND \"$datetime\"";
     $result = mysqli_query($link,$sql);
     $row = mysqli_fetch_assoc($result);
@@ -22,6 +30,41 @@
         $tail = $row['igid'];
     }
 
+    // 算下一個的igid
+    $right = $head;
+    $sql = "SELECT * FROM `instagram` WHERE `post_time` BETWEEN \"$yesterday\" AND \"$datetime\"";
+    $result = mysqli_query($link,$sql);
+    // 如果有下一個的話
+    while($row = mysqli_fetch_assoc($result)){
+        if($row['igid'] == $igid){
+            if( $row = mysqli_fetch_assoc($result)){
+                $right = $row['igid'];
+            }
+        }
+    }
+    
+
+    
+    // 算前一個igid
+    $left = $head;
+    $sql = "SELECT * FROM `instagram` WHERE `post_time` BETWEEN \"$yesterday\" AND \"$datetime\"";
+    $result = mysqli_query($link,$sql);
+    $row = mysqli_fetch_assoc($result);
+    if($row['igid']!=$igid){
+        while($row["igid"] != $igid){
+            $left = $row['igid'];
+            $row = mysqli_fetch_assoc($result);
+        }
+    }else{
+        $left = $row['igid'];
+    }
+
+
+    $sql = "SELECT * FROM `instagram` WHERE `post_time` BETWEEN \"$yesterday\" AND \"$datetime\"";
+    $result = mysqli_query($link,$sql);
+    $row = mysqli_fetch_assoc($result);
+    
+
     include("../index/forum.php"); #匯入function
 	if(isset($_SESSION['nickname'])){
 		$uid = finduid($_SESSION['nickname']);
@@ -30,7 +73,7 @@
     if(isset($_GET['chat'])){
         $other = $_GET['chat'];
         $content = $_SESSION['nickname']."已回復您的限實動態：<br>".$_POST['chat'];
-		$sql = "INSERT INTO `chat` (`UId`,`other`,`chat`,`sendtime`) VALUES ('$_GET[chat]','$uid','$content','$datetime')";
+		$sql = "INSERT INTO `chat` (`UId`,`other`,`chat`,`sendtime`) VALUES ('$_GET[chat]','$uid','$content','$datet``ime')";
 		if(mysqli_query($link, $sql)){
 			exit(json_encode(array("success"=>"OK","content"=>$content)));
 		}else{
@@ -71,7 +114,7 @@
             function count(){ //數時間到 換頁 
                 second=((new Date()).getSeconds()+60)%60; //現在秒數
                 if( second<done ){
-                    time2 = setTimeout(function(){count()},2000);
+                    time2 = setTimeout(function(){count()},1000);
                 }else{
                     right();
                 }
@@ -93,15 +136,8 @@
                 oh=0;
                 go();
                 i=(i+1+4)%4;
-                <?php
-                    if($igid == $tail){
-                        $next = $head;
-                    }else{
-                        $next = $igid + 1;
-                    }
-                ?>
-                time = setTimeout(function(){next()},2000);
-                location.href="../index/time.php?igid=<?=$next;?>";
+                time = setTimeout(function(){next()},1000);
+                location.href="../index/time.php?igid=<?=$right;?>";
                 // document.getElementById('change').src="../index/image/test"+num[i]+".jpg";
                 
             }
@@ -219,19 +255,6 @@
                     include("../index/forum.php"); #匯入function
                     $category = findForum($row['category']);
                     $Link = "../index/ig.php?igid=".$row['igid'];
-
-                    // 計算按往左的頁數
-                    if($igid == $head){
-                        $left = $head;
-                    }else{
-                        $left = $igid - 1;
-                    }
-                    // 計算往右的頁數是多少
-                    if($tail == $igid){
-                        $right = $head;
-                    }else{
-                        $right = $igid + 1;
-                    }
                     
         ?>
         <div class="view">
@@ -256,6 +279,7 @@
                             <?php }?>
                             <p class="time-ww"><?=$date?></p>
                         </div>
+                        <?php if($row['UId'] == $uid){?>
                         <div class="col-lg-4 col-md-2 col-sm-2 col-2 p0">
 							<img src='../index/image/delete.png' data-toggle="modal" data-target="#sure" class="bttn pointer" onclick="delet();">
 						    <div class="modal fade bd-example-modal-sm" id="sure" tabindex="-1" data-backdrop="false" role="dialog" aria-hidden="true">
@@ -264,13 +288,15 @@
 
                                         <div class="modal-body">
                                             <p>你確定要刪除嗎?</p>
-                                            <button type="button" class="btn">確定</button>
+                                            <a href="../index/time.php?delete=<?=$row['igid'];?>">
+                                            <button type="button" class="btn">確定</button></a>
                                             <button type="button" class="btn" data-dismiss="modal">取消</button>
                                         </div>
                                     </div>
                                 </div>
 						    </div>
                         </div>
+                        <?php    }?>
                         <button type="button" class="close">
                             <a href="../index/index.php" class="link-ww">
                                 <span aria-hidden="true">&times;</span>

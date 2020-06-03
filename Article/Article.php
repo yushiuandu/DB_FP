@@ -31,8 +31,14 @@
 	}
 
 	if(isset($_GET['NId'])){
-        $sql = "UPDATE `notification` SET `is_read` = 1 WHERE `NId` = '$_GET[NId]'";
-        mysqli_query($link,$sql);
+		echo $_GET['NId'];
+		$aid = $_GET['aid'];
+		echo $aid;
+		$sql = "UPDATE `notification` SET `is_read` = 1 WHERE `NId` = '$_GET[NId]'";
+		if(mysqli_query($link,$sql)){
+			header("Location:../index/index.php?page=article&aid=$aid");
+			exit;
+		}
     }
 
 	
