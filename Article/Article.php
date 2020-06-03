@@ -607,7 +607,7 @@
 		?>
 
 		<!-- 留言輸入區 -->
-		<div class = "row mid hmes-head justify-content-center">
+		<div class = "row mid hmes-head justify-content-end">
 			<div class="col-md-10 col-sm-10 col-9 hmes-body ">
 				<div class="row mid "> 
 					<!-- 作者照片-->
@@ -622,10 +622,12 @@
 					<!-- 留言內容-->
 					<div class="col-md-11 col-sm-11 col-11" style="margin:0px; padding:0px;">
 						<form method="post" action="../Article/addcom.php">
-						<div class="form-row">
-							<div class="col-md-4">
+						<div class="form-row justifyed-content-start" style="margin-bottom:5px;">
+							<div class="col-lg-2 col-md-3 col-sm-3">
 								<label for="inputState">是否匿名</label>
-								<select id="inputState" class="form-control" name="anonymous">
+							</div>
+							<div class="col-lg-10 col-md-9 col-sm-9">
+								<select id="inputState" class="form-control what" name="anonymous">
 									<option selected value = "0">匿名</option>
 									<option value = "1">顯示暱稱</option>
 								</select>
@@ -633,9 +635,15 @@
 						</div>
 
 						<div class="form-row">
-							<div class="col-md-10 mb-5">
+							<div class="col-lg-2 col-md-3 col-sm-3">
 								<label for="comment" class = "hmes">請輸入留言</label>
+							</div>
+							<div class="col-lg-10 col-md-9 col-sm-9">
 								<textarea class="form-control" id="comment" placeholder="請輸入留言" required name="content"></textarea>
+							</div>
+						</div>
+						<div class="form-row justify-content-end">
+							<div class="offset-lg-10 col-lg-2 offset-md-9 col-md-3  offset-sm-9 col-sm-3">
 								<button type="submit" class="btn btn-secondary btn-sm my-1">Submit</button>	
 							</div>
 						</div>

@@ -176,6 +176,9 @@ body{
   left: 50%; 
   transform: translate(-50%, -50%);
 }
+.what{
+  width: 50%;
+}
 #register{
   display:inline-block;
   border-radius:10px;
