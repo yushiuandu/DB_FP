@@ -80,6 +80,11 @@
 	<!-- <script src="//code.jquery.com/jquery-1.10.2.js"></script> -->
 	<script src="//s3-ap-northeast-1.amazonaws.com/justfont-user-script/jf-60019.js"></script>
 	<script src="//s3-ap-northeast-1.amazonaws.com/justfont-user-script/jf-60019.js"></script>
+	<script>
+		function no(){
+			alert("想要這個功能嗎?註冊一下，登入之後就可以囉~");
+		}
+	</script>
 	<style>
 		#map {
             height: 100%;
@@ -259,7 +264,7 @@
 							echo '<img class="good pointer gbb" data-url="'.$Link.'" src="../index/image/good-white.png">';
 						}
 					}else{
-						echo '<img class="pointer gbb" src="../index/image/good-white.png">';
+						echo '<img class="pointer gbb" src="../index/image/good-white.png" onclick="no();">';
 					}
 				?>
 				<!-- 追蹤 -->
@@ -281,7 +286,7 @@
 							echo '<img class="pointer gbb follow_bell"  data-url="'.$Link.'" src="../index/image/bell-white.png" title="追蹤">';
 						}
 					}else{
-						echo '<img class="pointer gbb"  src="../index/image/bell-white.png" title="追蹤">';
+						echo '<img class="pointer gbb"  src="../index/image/bell-white.png" title="追蹤" onclick="no();">';
 					}
 				?>
 				<!-- 收藏 -->
@@ -346,7 +351,7 @@
 						<!-- model end -->
 				<?php		
 					}else{
-						echo '<img class="pointer gbb"  src="../index/image/bookmark-white.png" title="追蹤">';
+						echo '<img class="pointer gbb"  src="../index/image/bookmark-white.png" title="追蹤" onclick="no();">';
 					}
 				?>
 				
@@ -453,7 +458,7 @@
 									echo '<img class="good img-fluid pointer gbb" data-url="'.$Link.'" src="../index/image/good-white.png" id="good-pic">';
 								}
 							}else{
-								echo '<img class="img-fluid pointer gbb" src="../index/image/good-white.png" id="good-pic">';
+								echo '<img class="img-fluid pointer gbb" src="../index/image/good-white.png" id="good-pic" onclick="no();">';
 							}
 						?>
 						<?php if($row_hot['UId'] == $uid AND $row_hot['anonymous']!=2){?>
@@ -568,7 +573,7 @@
 								}
 							}
 							else{
-								echo '<img class="img-fluid pointer gbb" src="../index/image/good-white.png" id="good-pic">';
+								echo '<img class="img-fluid pointer gbb" src="../index/image/good-white.png" id="good-pic" onclick="no();">';
 							}
 						?>
 
