@@ -530,7 +530,7 @@
 			<!-- 圖片 end-->
 			<!-- 樓層 -->
 			<div class="col-md-2 col-sm-2 col-3 cir mid" style="text-align: center; padding: 0px;">
-				<p style='margin:auto; font-size:12pt; font-weight:400;'> <?=$row_c['floor'];?>F </p>
+				<p style='margin:auto; font-size:12pt; font-weight:400;'><?=$row_c['floor'];?>F </p>
 			</div>
 			<!-- 樓層 end-->
 			<!-- 留言區 -->
