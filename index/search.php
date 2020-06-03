@@ -112,6 +112,30 @@
                             <?php }?>
                         </div>
                         <!-- 作者 end-->
+                        <!-- 按讚數 --> 
+                        <div class="col-md-2 col-sm-3 col-3 right">
+                            <h7 style="display: inline;" class="count"><?php echo $row['agree'];?></h7>
+                            <?php 
+                                if(isset($_SESSION['nickname'])){
+                                    $sql_good = "SELECT * FROM `good` WHERE `UId` = \"$uid\" AND `AId` = \"$row[AId]\"";
+                                    $result_good = mysqli_query($link,$sql_good);
+                                    $row_good = mysqli_fetch_assoc($result_good);
+                                    $num = mysqli_num_rows($result_good);
+
+                                    $Link = "../Article/good.php?aid=".$row['AId'];
+
+                                    if($num > 0){
+                                            echo '<img src="../index/image/good-black.png" class="good_article img-fluid " data-url="'.$Link.'" id="good-pic">';
+                                    }else{
+                                        echo '<img src="../index/image/good-white.png" class="good_article img-fluid" data-url="'.$Link.'" id="good-pic">';
+                                    }
+                                }else{
+                                    echo '<img src="../index/image/good-white.png" class="img-fluid" id="good-pic" onclick="no();">';
+                                }
+                            ?>
+                            <!-- <img src="./image/good-white.png" class="img-fluid" id="good-pic"> -->
+                        </div>
+                        <!-- 按讚數 end-->
                     </div>
                     <!-- 簡圖內容(上) end-->
                     
@@ -385,6 +409,30 @@
                             <?php } ?>
                         </div>
                         <!-- 作者 end-->
+                        <!-- 按讚數 --> 
+                        <div class="col-md-2 col-sm-3 col-3 right">
+                            <h7 style="display: inline;" class="count"><?php echo $row['agree'];?></h7>
+                            <?php 
+                                if(isset($_SESSION['nickname'])){
+                                    $sql_good = "SELECT * FROM `good` WHERE `UId` = \"$uid\" AND `AId` = \"$row[AId]\"";
+                                    $result_good = mysqli_query($link,$sql_good);
+                                    $row_good = mysqli_fetch_assoc($result_good);
+                                    $num = mysqli_num_rows($result_good);
+
+                                    $Link = "../Article/good.php?aid=".$row['AId'];
+
+                                    if($num > 0){
+                                            echo '<img src="../index/image/good-black.png" class="good_article img-fluid " data-url="'.$Link.'" id="good-pic">';
+                                    }else{
+                                        echo '<img src="../index/image/good-white.png" class="good_article img-fluid" data-url="'.$Link.'" id="good-pic">';
+                                    }
+                                }else{
+                                    echo '<img src="../index/image/good-white.png" class="img-fluid" id="good-pic" onclick="no();">';
+                                }
+                            ?>
+                            <!-- <img src="./image/good-white.png" class="img-fluid" id="good-pic"> -->
+                        </div>
+					<!-- 按讚數 end-->
                     </div>
                     <!-- 簡圖內容(上) end-->
                     
