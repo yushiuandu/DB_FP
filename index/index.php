@@ -101,6 +101,11 @@
 		doc_head.appendChild(link_style);
 		};
 	</script> -->
+	<script>
+		function no(){
+			alert("想要這個功能嗎?註冊一下，登入之後就可以囉~");
+		}
+	</script>
 	<title>抬槓</title>
   </head>
 
@@ -558,7 +563,7 @@
 									echo '<img src="../index/image/good-white.png" class="good_article img-fluid" data-url="'.$Link.'" id="good-pic">';
 								}
 							}else{
-								echo '<img src="../index/image/good-white.png" class="img-fluid" id="good-pic">';
+								echo '<img src="../index/image/good-white.png" class="img-fluid" id="good-pic" onclick="no();">';
 							}
 						?>
 						<!-- <img src="./image/good-white.png" class="img-fluid" id="good-pic"> -->
