@@ -20,8 +20,8 @@
 		$datetime = date ("Y-m-d H:i:s" , mktime(date('H'), date('i'), date('s'), date('m'), date('d'), date('Y'))) ;
 
 		// add to sql 
-		$sql = "INSERT INTO `instagram` (`UId`,`category`,`post_time`,`img`,`anonymous`) VALUE
-				('$uid','$_POST[forum]','$datetime',$f,'$_POST[anonymous]')";
+		$sql = "INSERT INTO `instagram` (`UId`,`post_time`,`img`,`anonymous`) VALUE
+				('$uid','$datetime',$f,'$_POST[anonymous]')";
 
 		if(mysqli_query($link,$sql)){
 			header("Location:../index/index.php");
@@ -64,21 +64,6 @@
 				<select id="inputState" class="form-control" name = "anonymous">
 					<option selected value = '1'>綽號</option>
 					<option value = '0'>匿名</option>
-				</select>
-				</div>
-			</div>
-
-			<div class="form-group row">
-				<label class="col-sm-3 col-form-label">選擇看板</label>
-				<div class="col-sm-9">
-				<select id="inputState" class="form-control" name = "forum">
-					<option selected value="funny">	有趣版</option>
-					<option value = "relationship">	感情版</option>
-					<option value = "makeup">		美妝穿搭版</option>
-					<option value = "trending">		新聞版</option>
-					<option value = "food">			美食版</option>
-					<option value = "travel">		旅遊版</option>
-					<option value = "talk">			其他版</option>
 				</select>
 				</div>
 			</div>

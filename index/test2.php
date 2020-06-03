@@ -36,7 +36,6 @@
 
 			$result = mysqli_query($link,$sql);
 			$num =  mysqli_num_rows($result);
-			echo $num;
 			$row = mysqli_fetch_assoc($result);
 		?>
 

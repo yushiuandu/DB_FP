@@ -3,6 +3,26 @@
 	if(!$link){
 		echo "no connect!";
 	}
+
+	include("../index/forum.php"); #匯入function
+	if(isset($_SESSION['nickname'])){
+		$uid = finduid($_SESSION['nickname']);
+	}
+
+	$sql = "SELECT * FROM `user_ans` WHERE `UId` = '$uid'";
+	$result = mysqli_query($link,$sql);
+	if($result){
+		$num = mysqli_num_rows($result);
+	}else{
+		$num = 0;
+	}
+
+	if($num > 0){
+		echo '<script language="javascript">';
+        echo 'alert("您今天已做過心理測驗");';
+        echo "window.location.href='../index/index.php'";
+        echo '</script>';
+	}
 ?>
 <!doctype html>
 <html lang="en">

@@ -154,7 +154,7 @@
                     
                     <!-- if 有搜尋結果 -->
                     <?php
-                         $sql = "SELECT `category`,`eng` FROM `forumid` WHERE `category` LIKE '%$key%'";
+                         $sql = "SELECT `category`,`eng` FROM `forumid` WHERE `category` LIKE '%$key%' LIMIT 3";
                          $result = mysqli_query($link, $sql);
                          if($result){
                              if((mysqli_num_rows($result)) > 0 ){
@@ -349,11 +349,11 @@
                     if(isset($_GET['hot'])){
                         $sql = "SELECT * FROM `article` JOIN `member`
                                 WHERE article.title LIKE '%$key%' and member.UId = article.UId
-                                ORDER BY article.agree DESC";
+                                ORDER BY article.agree DESC LIMIT 20";
                     }else{
                         $sql = "SELECT * FROM `article` JOIN `member`
                                 WHERE article.title LIKE '%$key%' and member.UId = article.UId
-                                ORDER BY article.post_time DESC";
+                                ORDER BY article.post_time DESC LIMIT 20";
                     }
                     $result = mysqli_query($link, $sql);
                     if($result){

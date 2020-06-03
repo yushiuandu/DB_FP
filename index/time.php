@@ -267,8 +267,6 @@
                 while($row = mysqli_fetch_assoc($result)){
                     $date = date('Y年m月d日 H:i',strtotime($row['post_time']));
                     // find forum 
-                    include("../index/forum.php"); #匯入function
-                    $category = findForum($row['category']);
                     $Link = "../index/ig.php?igid=".$row['igid'];
                     
         ?>

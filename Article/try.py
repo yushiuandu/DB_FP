@@ -22,7 +22,7 @@ header = {
     'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.110 Safari/537.36'
 }
 
-forum = ['food', 'makeup', 'travel', 'trending', 'funny', 'relationship', 'talk']
+forum = ['food', 'makeup', 'travel', 'trending', 'funny', 'relationship', 'talk', 'dressup','mood','youtuber']
 
 
 #將換行字元換成html語法，將圖片檔換成連結
@@ -79,7 +79,7 @@ def find_Comments(ids):
 delete = '嗚嗚嗚。。該留言已遭刪除。。'
 
 
-for m in range (0,7):
+for m in range (0,10):
     
     url = "https://www.dcard.tw/_api/forums/"+forum[m]+"/posts?popular=true"
     orgin_req = requests.get(url, headers = header)
@@ -114,10 +114,19 @@ for m in range (0,7):
         likecount = reqjson["likeCount"]
         category = reqjson["forumAlias"]
 
+        if(category == "dressup"):
+            category = "makeup"
+
+        if(category == "mood"):
+            category = "talk"
+        
+        if(category == "youtuber"):
+            category = "talk"
+
         if(db):
             sql = "INSERT INTO article(AId, category, UId, agree, content, title, excerpt, post_time, anonymous) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)"
             try:
-                cursor.execute(sql,(ids,category,'0',likecount,content,title,excerpt,date,'0'))
+                cursor.execute(sql,(ids,category,'35',likecount,content,title,excerpt,date,'0'))
                 db.commit()
                 print('article_success!')
 
@@ -166,7 +175,7 @@ for m in range (0,7):
                     if(db):
                         sql = "INSERT INTO comment(AId, UId, content, likeCount, time, anonymous, floor) VALUES (%s,%s,%s,%s,%s,%s,%s)"
                         try:
-                            cursor.execute(sql,(ids,'0',content,likecount,date,'0',floor))
+                            cursor.execute(sql,(ids,'35',content,likecount,date,'0',floor))
                             db.commit()
                             print('comment_success!')
 
@@ -180,7 +189,7 @@ for m in range (0,7):
                         if(db):
                             sql = "INSERT INTO comment(AId, UId, content, likeCount, time, anonymous, floor) VALUES (%s,%s,%s,%s,%s,%s,%s)"
                             try:
-                                cursor.execute(sql,(ids,'0',delete,0,date,'2',floor))
+                                cursor.execute(sql,(ids,'35',delete,0,date,'2',floor))
                                 db.commit()
                                 print('comment_success!')
 

@@ -14,7 +14,7 @@
 		mysqli_query($link,$sql);
 		header("Location:../index/index.php");
 	}
-	$sql = "SELECT * FROM `article` ORDER BY `agree` DESC";
+	$sql = "SELECT * FROM `article` ORDER BY `agree` DESC LIMIT 20";
 	// 將一切都先初始化
 	$page = 'index';	$latest = 'false';	$hot = 'false';	$aid = 'flase';	$forum = 'all';
 	if(isset($_GET['page'])){
@@ -457,47 +457,47 @@
 				$sql = "SELECT *
 						FROM `follow` JOIN `article` JOIN `member`
 						WHERE follow.UId = \"$uid\" AND follow.AId = article.AId AND article.UId = member.UId
-						ORDER BY article.agree DESC";
+						ORDER BY article.agree DESC LIMIT 20";
 
 				if($forum != 'all'){
 					if($latest == 'true'){
 						$sql = 	"SELECT *
 								FROM `follow` JOIN `article` JOIN `member`
 								WHERE follow.UId = \"$uid\" AND follow.AId = article.AId AND article.UId = member.UId AND article.category = '$forum'
-								ORDER BY article.post_time DESC";
+								ORDER BY article.post_time DESC LIMIT 20 ";
 					}else if($hot == 'true'){
 						$sql = 	"SELECT *
 								FROM `follow` JOIN `article` JOIN `member`
 								WHERE follow.UId = \"$uid\" AND follow.AId = article.AId AND article.UId = member.UId AND article.category = '$forum'
-								ORDER BY article.agree DESC";
+								ORDER BY article.agree DESC LIMIT 20 ";
 					}
 				}else if($latest == "true"){
 					$sql = 	"SELECT *
 							FROM `follow` JOIN `article` JOIN `member`
 							WHERE follow.UId = \"$uid\" AND follow.AId = article.AId AND article.UId = member.UId 
-							ORDER BY article.post_time DESC";
+							ORDER BY article.post_time DESC LIMIT 20 ";
 				}
 				
 			}
 			// 所有文章排序
 			else if($forum == 'all'){
 				if($latest == "true"){ 
-					$sql = "SELECT * FROM `article` JOIN `member` WHERE article.UId = member.UId ORDER BY `post_time` DESC";
+					$sql = "SELECT * FROM `article` JOIN `member` WHERE article.UId = member.UId ORDER BY `post_time` DESC LIMIT 20";
 				}else if($hot == "true"){
-					$sql = "SELECT * FROM `article` JOIN `member` WHERE article.UId = member.UId ORDER BY `agree` DESC";
+					$sql = "SELECT * FROM `article` JOIN `member` WHERE article.UId = member.UId ORDER BY `agree` DESC LIMIT 20 ";
 				}else{
-					$sql = "SELECT * FROM `article` JOIN `member` WHERE article.UId = member.UId ORDER BY `agree` DESC";
+					$sql = "SELECT * FROM `article` JOIN `member` WHERE article.UId = member.UId ORDER BY `agree` DESC LIMIT 20 ";
 				}
 				
 			}
 			// 看板裡的文章排序
 			else{
 				if( $latest == 'true'){
-					$sql = "SELECT * FROM `article` JOIN `member` WHERE article.UId = member.UId AND `category` = \"$forum\" ORDER BY `post_time` DESC";
+					$sql = "SELECT * FROM `article` JOIN `member` WHERE article.UId = member.UId AND `category` = \"$forum\" ORDER BY `post_time` DESC LIMIT 20 ";
 				}else if( $hot == 'true'){
-					$sql = "SELECT * FROM `article` JOIN `member` WHERE article.UId = member.UId AND `category` = \"$forum\" ORDER BY `agree` DESC";
+					$sql = "SELECT * FROM `article` JOIN `member` WHERE article.UId = member.UId AND `category` = \"$forum\" ORDER BY `agree` DESC LIMIT 20 ";
 				}else{
-					$sql = "SELECT * FROM `article` JOIN `member` WHERE article.UId = member.UId AND `category` = \"$forum\" ORDER BY `agree` DESC";
+					$sql = "SELECT * FROM `article` JOIN `member` WHERE article.UId = member.UId AND `category` = \"$forum\" ORDER BY `agree` DESC LIMIT 20 ";
 				}
 			}
 
