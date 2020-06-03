@@ -147,7 +147,7 @@
 				}
 			}else{
 				echo 'success';
-				header("Location:../index/index.php?page=article&aid=$aid"); 
+				header("Location:../index/index.php?page=tag&tag=$tag"); 
 				exit;
 				echo 'failQQ';
 			}

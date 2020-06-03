@@ -9,18 +9,33 @@
 	if(!$link){
 		echo "no connect!";
 	}
-
-	if(isset($_GET['NId'])){
-        $sql = "UPDATE `notification` SET `is_read` = 1 WHERE `NId` = '$_GET[NId]'";
-        mysqli_query($link,$sql);
-    }
-
+	
 	#找到UId
 	include("../index/forum.php");
 	$uid = "";
 	if(isset($_SESSION['nickname'])){
 		$uid = finduid($_SESSION['nickname']);
 	}
+
+	// 收藏文章新增分類
+	if(isset($_GET['collect'])){
+		$group = $_POST['collect'];
+		session_start();
+		if(isset($_SESSION['nickname'])){
+			$uid = finduid($_SESSION['nickname']);
+		}
+		$sql = "INSERT INTO `save_group`( `UId`, `save_group`) VALUES (\"$uid\",'$group')";
+		if(mysqli_query($link,$sql)){
+			exit(json_encode(array("success"=>"OK","group"=>$group,"UId"=>$uid)));
+		}
+	}
+
+	if(isset($_GET['NId'])){
+        $sql = "UPDATE `notification` SET `is_read` = 1 WHERE `NId` = '$_GET[NId]'";
+        mysqli_query($link,$sql);
+    }
+
+	
 	#get article id
 	$aid = "";
 	if(isset($_GET['aid'])){
@@ -34,14 +49,7 @@
 		$cid = $_GET['edit'];
 	}
 
-	// 收藏文章新增分類
-	if(isset($_GET['collect'])){
-		$group = $_POST['collect'];
-		$sql = "INSERT INTO `save_group`( `UId`, `save_group`) VALUES (\"$uid\",'$group')";
-		if(mysqli_query($link,$sql)){
-			exit(json_encode(array("success"=>"OK","group"=>$group,"UId"=>$uid)));
-		}
-	}
+	
 
 	#顯示文章
 	$sql = "SELECT * FROM `article` JOIN `member` WHERE `AId` = \"$aid\" AND article.UId = member.UId";
@@ -733,7 +741,7 @@
 		});
 
 		// 收藏文章
-		$(".save_c").click(function(){
+		$("#collect_button").on("click" , ".save_c",function(){
 			var url = $(this).data("url");
 			var eq = $(".save_c").index($(this));
 			
@@ -821,7 +829,7 @@
 				console.log(data);
 				if(data['success'] == "OK"){
 					var group = data['group'];
-					var content = '<button type="button" data-url="../Article/save.php?group='+group+'" data-dismiss="modal" class="save_c btn collect-btn">'+group+'</button>';
+					var content = '<button type="button" data-url="../Article/save.php?group='+group+'"  class="save_c btn collect-btn" data-dismiss="modal">'+group+'</button>';
 					console.log(content);
 					$('#collect_button').append(content);
 				}

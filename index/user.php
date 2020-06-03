@@ -29,8 +29,10 @@
 				, `Birth_date` = '$birthdate' WHERE `UId` = '$uid'";
 
 				if(mysqli_query($link,$sql_m)){
-					header('Location:../index/index.php?page=user');
-					exit;
+					echo '<script language="javascript">';
+					echo 'alert("已修改完畢");';
+					echo "window.location.href='../index/index.php'";
+					echo '</script>';
 				}else{
 					mysqli_error();
 				}
@@ -51,7 +53,11 @@
 					
 				if(mysqli_query($link,$sql_m)){
 					$_SESSION['nickname'] = $nickname;
-					header('Location:../index/index.php?page=user');
+					echo '<script language="javascript">';
+					echo 'alert("已修改完畢");';
+					echo "window.location.href='../index/index.php'";
+					echo '</script>';
+
 					$_SESSION['nickname'] = $nickname;
 					$modifyuser = 'false';
 					exit;
