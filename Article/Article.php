@@ -414,7 +414,7 @@
 								if($row_hot['anonymous'] == 1){
 									echo '<a href="../index/index.php?page=nickname&uid='.$row['UId'].'">';	
 							?>
-								<img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic"></a>
+								<img src="data:pic/png;base64,<?=base64_encode($row["profile"]);?>" class="img-fluid rounded-circle" id="writer-pic"></a>
 							<?php
 								}else{ ?>
 									<img src="../index/image/user.png" class="img-fluid rounded-circle" id="writer-pic">
@@ -527,7 +527,7 @@
 							if($row_c['anonymous'] == 1){
 								echo '<a href="../index/index.php?page=nickname&uid='.$row['UId'].'">';	
 						?>
-							<img src="../index/image/user.png" id="writer-pic"></a>
+							<img src="data:pic/png;base64,<?=base64_encode($row["profile"]);?>" id="writer-pic"></a>
 						<?php
 							}else{ ?>
 								<img src="../index/image/user.png" id="writer-pic">
