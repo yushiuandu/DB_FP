@@ -116,6 +116,7 @@
             <!-- body -->
             <div class='con'>
                 <!-- user -->
+                <div class="row justify-content-start">
                 <?php 
                     $sql = "SELECT M.UId, M.Nickname ,M.profile
                             FROM `follow` AS F JOIN `member` AS M
@@ -124,19 +125,23 @@
                     $row = mysqli_fetch_assoc($result);
                     while($row){
                 ?>
-                <a href='../index/index.php?page=nickname&uid=<?=$row['UId'];?>' style='color:black;'>
-                    <div class='cc'>
-                        <div class="card" style="width: 9rem;">
-                            <img class="card-img-top" src="data:pic/png;base64,<?=base64_encode($row["profile"]);?>" alt="user">
-                            <div class="card-body">
-                                <p class='ss'><?php echo $row['Nickname'];?></p>
+                    <a href='../index/index.php?page=nickname&uid=<?=$row['UId'];?>' style='color:black;'>
+                        <div class='col-lg-6 col-md-6 col-sm-12 col-12 cry'>
+                            <div class="car">
+                                <div class="card-con">
+                                    <img class="card-pic" src="data:pic/png;base64,<?=base64_encode($row["profile"]);?>" alt="user">
+                                </div>
+                                <div class="card-ww">
+                                    <p class='ss'><?php echo $row['Nickname'];?></p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
+                
                 <!-- user end -->
                     <?php $row = mysqli_fetch_assoc($result);
                         }?>
+            </div>
             </div>
             <!-- body -->
             
