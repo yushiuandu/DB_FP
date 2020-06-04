@@ -25,19 +25,31 @@
         echo "window.location.href='../index/index.php?page=register'";
         echo '</script>';
     }else{
-        $sql_add = "INSERT INTO `member`(`Name`, `Account`, `Gender`, `Password`, `Email`, `Birth_date`, `Nickname`,`profile`) 
-        VALUES ('$user','$Account','$gender','$pass','$email','$birthdate','$nickname',$f)";
-        
-        if (!mysqli_query($link,$sql_add))
-            {   echo '<script language="javascript">';
-                echo 'alert("檔案大小不得超過1MB！");';
-                echo "window.location.href='../index/index.php'";
-                echo '</script>';
-                die('Error: ' . mysqli_error());}
-        else{
-            $_SESSION['user'] = $user;
-            $_SESSION['nickname'] = $nickname;
-            header("Location:../index/index.php"); }
+
+        $sql_check = "SELECT * FROM `member` WHERE `Account` = '$Account'";
+        $result = mysqli_query($link,$sql_check);
+        $num = mysqli_num_rows($result);
+
+        if($num > 0){
+            echo '<script language="javascript">';
+            echo 'alert("此帳號已有他人使用");';
+            echo "window.location.href='../index/index.php?page=register'";
+            echo '</script>';
+        }else{
+            $sql_add = "INSERT INTO `member`(`Name`, `Account`, `Gender`, `Password`, `Email`, `Birth_date`, `Nickname`,`profile`) 
+                        VALUES ('$user','$Account','$gender','$pass','$email','$birthdate','$nickname',$f)";
+            
+            if (!mysqli_query($link,$sql_add))
+                {   echo '<script language="javascript">';
+                    echo 'alert("檔案大小不得超過1MB！");';
+                    echo "window.location.href='../index/index.php'";
+                    echo '</script>';
+                    die('Error: ' . mysqli_error());}
+            else{
+                $_SESSION['user'] = $user;
+                $_SESSION['nickname'] = $nickname;
+                header("Location:../index/index.php"); }
+        }
     }
 
     // $sql = "SELECT * FROM `member`";

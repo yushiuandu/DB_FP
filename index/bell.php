@@ -158,10 +158,14 @@
         <!--配對畫面-->
         <?php
         if(isset($friendid)){
-            $sql = "SELECT COUNT(article.AId) as anum ,member.Nickname as nickname ,COUNT(`follow_id`) as follow
+            $sql = "SELECT * FROM `follow` WHERE `UId` = '$friendid' and `follow_id` != 'NULL'";
+            $result = mysqli_query($link,$sql);
+            $follow = mysqli_num_rows($result);
+
+            $sql = "SELECT COUNT(article.AId) as anum ,member.Nickname as nickname
                             ,member.profile as profile , member.Name as name, member.Fans_num as fans_num
-                    FROM `member` JOIN `article` JOIN `follow`
-                    WHERE member.UId = '$friendid' and  article.UId = '$friendid' and  follow.UId = '$friendid'  ";
+                    FROM `member` JOIN `article`
+                    WHERE member.UId = '$friendid' and  article.UId = '$friendid'";
             $result = mysqli_query($link,$sql);
             $row = mysqli_fetch_assoc($result);
         }
@@ -184,7 +188,7 @@
                                         <p class='match-ww'>姓名：　　<?=$row['name'];?></p>
                                         <p class='match-ww'>暱稱：　　<?=$row['nickname'];?></p>
                                         <p class='match-ww'>文章：　　<?=$row['anum'];?>篇</p>
-                                        <p class='match-ww'>追蹤者：　<?=$row['follow'];?>個</p>
+                                        <p class='match-ww'>追蹤者：　<?=$follow;?>個</p>
                                         <p class='match-ww'>追隨者：　<?=$row['fans_num'];?>個</p>
                                     </div>
                                 </div>
