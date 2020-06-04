@@ -56,7 +56,7 @@ body{
   background-color: #F2F2F2;
   border-radius: 10px;
   width: 100%;
-  margin:0px 0px 15px 0px;
+  margin:0px 0px 5px 0px;
 }
 .art-head{
   height:40px;
@@ -444,7 +444,7 @@ button img{
 }
 .article-word img{
   text-align: left;
-  width:90%;
+  width:40%;
   height:auto;
 }
 .pointer{
@@ -1092,6 +1092,8 @@ button img{
 }
 .match-con{
   padding:10px;
+  margin: 0px auto 0px auto;
+  text-align: center;
 }
 .match-intro{
   background-color: rgb(214, 215, 218);
@@ -1101,10 +1103,22 @@ button img{
 .match-fotter{
   margin: 10px auto 25px auto;
 }
+.sorry-con{
+  width: 100px;
+  height: 100px;
+  position: relative;
+  overflow: hidden;
+}
 .sorry-pic{
-  width: auto;
+  /* width: auto;
   height: 125px;
-  margin: 10px auto 20px auto;
+  margin: 10px auto 20px auto; */
+  max-width: 100%; 
+  max-height: 100%;
+  position: absolute; 
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%);
 }
 .no-result{
   font-family: "jf-openhuninn";
