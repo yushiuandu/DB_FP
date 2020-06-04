@@ -199,11 +199,13 @@
                                 <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#match2">下次再說...</button>
                                 <div class="modal fade bd-example-modal-sm match-ww" id="match2" aria-hidden="true" data-backdrop="static" data-keyboard="true">
                                     <div class="modal-dialog modal-dialog-centered"> <!--centered重直置中-->
-                                        <div class="modal-content match-page"> 
+                                        <div class="modal-content match-page mid"> 
                                             <!-- 配對頁面內容 -->
                                             <p class="match-title">Oh...No...</p>
                                             <div class="modal-body match-con">
-                                                <img src='../index/image/cry.png' class='sorry-pic'></img>
+                                                <div class="sorry-con">
+                                                    <img src='../index/image/cry.png' class='sorry-pic'></img>
+                                                </div>
                                                 <p class='match-ww'>你錯過進一步認識他/她的機會</p>
                                             </div>
                                             <!--下面選項-->
