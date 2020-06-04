@@ -160,21 +160,21 @@
 			if ($nhot == 'true'){
 				$sql = "SELECT * FROM `article` JOIN `member`
 				WHERE article.UID = \"$uid\" AND article.anonymous = 1 AND article.UId = member.UId
-				ORDER BY article.agree DESC";
+				ORDER BY article.agree DESC LIMIT 20";
 			}else{
 				$sql = "SELECT * FROM `article` JOIN `member`
 				WHERE article.UID = \"$uid\" AND article.anonymous = 1 AND article.UId = member.UId
-				ORDER BY article.post_time DESC";
+				ORDER BY article.post_time DESC LIMIT 20";
 			}
 		}else if($is_oneself == 0){
 			if ($nhot == 'true'){
 				$sql = "SELECT * FROM `article` JOIN `member`
 				WHERE article.UID = \"$uid\"  AND article.UId = member.UId
-				ORDER BY article.agree DESC";
+				ORDER BY article.agree DESC LIMIT 20";
 			}else{
 				$sql = "SELECT * FROM `article` JOIN `member`
 				WHERE article.UID = \"$uid\"  AND article.UId = member.UId
-				ORDER BY article.post_time DESC";
+				ORDER BY article.post_time DESC LIMIT 20";
 			}
 		}
 		$result = mysqli_query($link,$sql);

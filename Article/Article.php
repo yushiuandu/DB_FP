@@ -220,8 +220,9 @@
 					$data_address = $data_array[2];
 					echo $data_address;
 					echo '<div id="map" class="embed-responsive embed-responsive-16by9"></div>';?>
-				
+
 					<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAY6YGC3VgWJA-ZKtrOHgMe_6PKXTdM6pA&callback=initMap"></script>
+
 				<?php	}?>	
 				<!--圖片  -->
 				<?php 
