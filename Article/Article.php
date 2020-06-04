@@ -227,7 +227,7 @@
 				<!--圖片  -->
 				<?php 
 					if(!(empty($row['img']))){
-						echo '<img style="width:70%;" src="data:pic/png;base64,'.base64_encode($row["img"]).'">';
+						echo '<img style="width:30%;" src="data:pic/png;base64,'.base64_encode($row["img"]).'">';
 					}
 				?>
   				<!-- 文章tag -->
