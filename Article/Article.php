@@ -167,6 +167,13 @@
 				<!-- 文章內容 -->
 				<p class='article-word'><?php echo $row['content'];?></p>
 
+				<!--圖片  -->
+				<?php 
+					if(!(empty($row['img']))){
+						echo '<img style="width:30%;" src="data:pic/png;base64,'.base64_encode($row["img"]).'">';
+					}
+				?>
+
 				<!-- 假如有放google 地圖 -->
 				<?php if(!(empty($row['address']))){
 					
@@ -200,7 +207,7 @@
 									$data_array,
 									$latitude_data, //$data_array[0]
 									$longitude_data, //$data_array[1]
-									'<b>地址: </b> '.$data_address //$data_array[2]
+									'<br><br><b>地址: </b> '.$data_address //$data_array[2]
 								);
 			
 								return $data_array; //回傳$data_array
@@ -224,12 +231,7 @@
 					<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAY6YGC3VgWJA-ZKtrOHgMe_6PKXTdM6pA&callback=initMap"></script>
 
 				<?php	}?>	
-				<!--圖片  -->
-				<?php 
-					if(!(empty($row['img']))){
-						echo '<img style="width:30%;" src="data:pic/png;base64,'.base64_encode($row["img"]).'">';
-					}
-				?>
+				
   				<!-- 文章tag -->
 				<div style="margin:10px 10px 0px 10px; font-family: setofont; font-weight:600;">
 					<?php 
