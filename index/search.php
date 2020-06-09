@@ -239,7 +239,7 @@
 
                     <!-- if 有搜尋結果-->
                     <?php 
-                        $sql = "SELECT DISTINCT `Nickname` ,`UId`FROM `member` WHERE `Nickname` LIKE '%$key%' LIMIT 3";
+                        $sql = "SELECT `Nickname` ,`UId`FROM `member` WHERE `Nickname` LIKE '%$key%' LIMIT 3";
                         $result = mysqli_query($link, $sql);
                         if($result){
                             if((mysqli_num_rows($result)) > 0 ){

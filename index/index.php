@@ -348,9 +348,11 @@
 					<?php } //end session if?>
 
 					<?php
+						//計算現在的時間
 						$now = date ("Y-m-d H:i:s" , mktime(date('H'), date('i'), date('s'), date('m'), date('d'), date('Y'))) ;
+						//往前推算24hr
 						$yesterday = date ("Y-m-d H:i:s" , mktime(date('H'), date('i'), date('s'), date('m'), date('d')-1, date('Y'))) ;
-			
+						//只有在這個時間段的發布的story會被顯示出來
 						$sql_ig = "SELECT * FROM `instagram` WHERE `post_time` BETWEEN \"$yesterday\" AND \"$now\"";
 						$result_ig = mysqli_query($link,$sql_ig);
 						$num_ig = mysqli_num_rows($result_ig);
@@ -457,9 +459,9 @@
 				$sql = "SELECT *
 						FROM `follow` JOIN `article` JOIN `member`
 						WHERE follow.UId = \"$uid\" AND follow.AId = article.AId AND article.UId = member.UId
-						ORDER BY article.agree DESC LIMIT 20";
+						ORDER BY article.agree DESC LIMIT 20"; //一開始預設為按照熱門度排序，一頁最多20筆
 
-				if($forum != 'all'){
+				if($forum != 'all'){	//假設有進入分類看板
 					if($latest == 'true'){
 						$sql = 	"SELECT *
 								FROM `follow` JOIN `article` JOIN `member`
@@ -471,7 +473,7 @@
 								WHERE follow.UId = \"$uid\" AND follow.AId = article.AId AND article.UId = member.UId AND article.category = '$forum'
 								ORDER BY article.agree DESC LIMIT 20 ";
 					}
-				}else if($latest == "true"){
+				}else if($latest == "true"){ //假設沒有進入分類看板且分類為最新的
 					$sql = 	"SELECT *
 							FROM `follow` JOIN `article` JOIN `member`
 							WHERE follow.UId = \"$uid\" AND follow.AId = article.AId AND article.UId = member.UId 
@@ -549,7 +551,7 @@
 					<div class="col-md-2 col-sm-3 col-3 right">
 						<h7 style="display: inline;" class="count"><?php echo $row['agree'];?></h7>
 						<?php 
-							if(isset($_SESSION['nickname'])){
+							if(isset($_SESSION['nickname'])){ //假設使用者有登入
 								$sql_good = "SELECT * FROM `good` WHERE `UId` = \"$uid\" AND `AId` = \"$row[AId]\"";
 								$result_good = mysqli_query($link,$sql_good);
 								$row_good = mysqli_fetch_assoc($result_good);
@@ -557,16 +559,15 @@
 
 								$Link = "../Article/good.php?aid=".$row['AId'];
 
-								if($num > 0){
+								if($num > 0){ //使用者按讚
 										echo '<img src="../index/image/good-black.png" class="good_article img-fluid " data-url="'.$Link.'" id="good-pic">';
-								}else{
+								}else{ //使用者未按讚
 									echo '<img src="../index/image/good-white.png" class="good_article img-fluid" data-url="'.$Link.'" id="good-pic">';
 								}
-							}else{
+							}else{ //使用者未登入
 								echo '<img src="../index/image/good-white.png" class="img-fluid" id="good-pic" onclick="no();">';
 							}
 						?>
-						<!-- <img src="./image/good-white.png" class="img-fluid" id="good-pic"> -->
 					</div>
 					<!-- 按讚數 end-->
 				</div>

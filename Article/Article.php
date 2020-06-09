@@ -286,12 +286,10 @@
 							
 						if(isset($row_follow['AId'])){
 							// 已追蹤
-							//echo '<a href ="../Article/follow.php?aid='.$row['AId'].'&follow=1">';
 							echo '<img class="pointer gbb follow_bell" data-url="'.$Link.'" src="../index/image/bell-black.png" title="追蹤">';
 
 						}else{
 							// 未追蹤
-							//echo '<a href ="../Article/follow.php?aid='.$row['AId'].'&follow=0">';
 							echo '<img class="pointer gbb follow_bell"  data-url="'.$Link.'" src="../index/image/bell-white.png" title="追蹤">';
 						}
 					}else{
@@ -375,7 +373,7 @@
 			?>
 	<!-- 熱門留言區 -->
 	<?php 
-		
+			//如果留言未被刪除，且按讚數>30
 			$sql_hot = "SELECT * FROM `comment` JOIN `member`
 						WHERE comment.AId = \"$aid\" AND comment.anonymous!=2 AND comment.UId = member.UId AND comment.likeCount > 30
 						ORDER BY comment.likeCount DESC";

@@ -10,7 +10,7 @@
 
     $sql = "SELECT * 
             FROM `save` JOIN `article` JOIn `member`
-            WHERE save.AId = article.AId and save.UId = '$uid'AND article.UId = member.UId
+            WHERE save.AId = article.AId and save.UId = '$uid' AND article.UId = member.UId
             ORDER BY `SId` DESC";
     $result = mysqli_query($link,$sql);
 ?>
@@ -122,7 +122,7 @@
                                     if ($row['anonymous'] == 0){
                                         echo '匿名';
                                     }else{
-                                        echo $row['post_name'];
+                                        echo $row['Nickname'];
                                     }
                                 ?>
                                 </p>
@@ -168,7 +168,7 @@
                 <div class="con">
                     <?php 
                         $group = $row['save_group'];
-                        $sql_a = "SELECT article.AId, article.category, article.title, article.excerpt, article.anonymous, article.post_name ,member.profile 
+                        $sql_a = "SELECT article.AId, article.category, article.title, article.excerpt, article.anonymous, member.Nickname ,member.profile, article.UId 
                                 FROM `save` JOIN `article` JOIN `member`
                                 WHERE article.AId = save.AId AND save.save_group = '$group' AND save.UId = '$uid' AND article.UId = member.UId
                                 ORDER BY save.SId DESC";
@@ -202,7 +202,7 @@
                                     if ($row_a['anonymous'] == 0){
                                         echo '匿名';
                                     }else{
-                                        echo $row_a['post_name'];
+                                        echo $row_a['Nickname'];
                                     }
                                 ?>
                                 </p>

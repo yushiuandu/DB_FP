@@ -8,7 +8,10 @@
 		$uid = finduid($_SESSION['nickname']);
     }
     
-    $sql = "SELECT `AId` FROM `follow` WHERE `UId` = \"$uid\" AND `AId` != 'NULL' ORDER BY `follow_time` DESC";
+    $sql = "SELECT article.AId, article.category, article.title, article.excerpt, article.anonymous, member.Nickname ,member.profile, article.UId 
+            FROM `follow` JOIN `article` JOIN `member`
+            WHERE article.AId = follow.AId AND follow.UId = '$uid' AND article.UId = member.UId
+            ORDER BY follow.follow_time DESC";
     $result = mysqli_query($link, $sql);
 ?>
 
@@ -42,23 +45,20 @@
             <div class="con2">
                 <?php if($result){
                     while($row = mysqli_fetch_assoc($result)){
-                        $sql = "SELECT * FROM `article` WHERE `AId` = \"$row[AId]\"";
-                        $result_follow = mysqli_query($link, $sql);
-                        $row_follow = mysqli_fetch_assoc($result_follow);
                     
                 ?>
                 <!-- 文章 -->
-                <div class="bo pointer" onclick="location.href='../index/index.php?page=article&aid=<?php echo $row_follow['AId']; ?>';">
+                <div class="bo pointer" onclick="location.href='../index/index.php?page=article&aid=<?php echo $row['AId']; ?>';">
                     <!-- 文章(上) -->
                     <div class="row art-head mid">
                         <!-- 作者-->
                         <div class="col-md-10 col-sm-9 col-9 mid" style='padding:0px;'>
                             <div class='pic-container'>
                                 <?php 
-                                    if($row_follow['anonymous'] == 1){
-                                        echo '<a href="../index/index.php?page=nickname&uid='.$row_follow['UId'].'">';	
+                                    if($row['anonymous'] == 1){
+                                        echo '<a href="../index/index.php?page=nickname&uid='.$row['UId'].'">';	
                                 ?>
-                                    <img src="../index/image/user.png" id="writer-pic"></a>
+                                    <img src="data:pic/png;base64,<?=base64_encode($row["profile"]);?>" id="writer-pic"></a>
                                 <?php
                                     }else{ ?>
                                         <img src="../index/image/user.png" id="writer-pic">
@@ -70,10 +70,10 @@
                             <!-- 作者名稱 -->
                             <p style="display: inline; font-size:2vmin; margin:0px;">
                                 <?php
-								if ($row_follow['anonymous'] == 0){
+								if ($row['anonymous'] == 0){
 									echo '匿名';
 								}else{
-									echo $row_follow['post_name'];
+									echo $row['Nickname'];
 								}
 							    ?></p>
                         </div>
@@ -85,9 +85,9 @@
                     <div class="row art-body mid">
                         <!-- 標題 -->
                         <div class="col-md-11 col-sm-11 col-11 col-lg-11 text-truncate">
-                            <p class="font-weight-bold" style='font-size:3vmin; margin:0px;'><?php echo $row_follow['title'];?></p>
+                            <p class="font-weight-bold" style='font-size:3vmin; margin:0px;'><?php echo $row['title'];?></p>
                             <p style="color:gray; font-size:2vmin; margin:0px;font-family:jf-openhuninn;">
-                            <?php echo $row_follow['excerpt'];?>
+                            <?php echo $row['excerpt'];?>
                             </p>
                         </div>
                         <!-- 標題 end -->
@@ -157,7 +157,7 @@
                 <!-- tag -->
                 <?php
                     $sql_tag = "SELECT * FROM `follow` WHERE `UId` = \"$uid\" AND `Tag`!= 'NULL' 
-                    ORDER BY `follow_time` DESC";
+                                ORDER BY `follow_time` DESC";
                     $result_tag = mysqli_query($link, $sql_tag);
                     $row = mysqli_fetch_assoc($result_tag);
                     while($row){
