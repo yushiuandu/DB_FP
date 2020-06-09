@@ -17,12 +17,12 @@
 		$uid = finduid($_SESSION['nickname']);
     }
    
-    if(isset($_GET['search'])){
+    if(isset($_GET['search'])){ //假如有搜尋朋友的話
         $key = $_POST['name'];
         $sql = "SELECT M.Nickname as nickname, F.otherId as FId ,M.profile as profile
                 FROM `friend` AS F JOIN `member` AS M 
                 WHERE F.otherId = M.UId AND F.UId = \"$uid\" AND M.Nickname LIKE '%$key%'";
-    }else{
+    }else{ //沒有搜尋好友則列出所有好友
         $sql = "SELECT M.Nickname as nickname, F.otherId as FId ,M.profile as profile
                 FROM `friend` AS F JOIN `member` AS M 
                 WHERE F.otherId = M.UId AND F.UId = \"$uid\"";
@@ -56,7 +56,7 @@
                 </div>
 
                 <div row = "col-2">
-                    <button type="submit" class="btn btn-secondary btn-sm my-1">提交</button>
+                    <button type="submit" class="btn btn-secondary btn-sm my-1">搜尋</button>
                 </div>
         </div>
     </form>

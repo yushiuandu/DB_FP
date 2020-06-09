@@ -63,8 +63,8 @@
 	$row_user = mysqli_fetch_assoc($result_user);
 
 	//計算他有幾篇文章
-	if($is_oneself == 1){ //如果是非本人看
-	$sql_a = "SELECT COUNT(AId) as total FROM `article` WHERE `UId` =\"$uid\" AND `anonymous` = 1 GROUP BY `UId`";
+	if($is_oneself == 1){ //如果是非本人看，匿名與非匿名發文皆會算進去
+		$sql_a = "SELECT COUNT(AId) as total FROM `article` WHERE `UId` =\"$uid\" AND `anonymous` = 1 GROUP BY `UId`";
 	}else{
 		$sql_a = "SELECT COUNT(AId) as total FROM `article` WHERE `UId` =\"$uid\" GROUP BY `UId`";
 	}

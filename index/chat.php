@@ -109,7 +109,7 @@
 			<div style='text-align:left;'>
 				<!-- 假如回覆限時-->
 				<?php if($row['igid'] != 0){
-					$sql_ig = "SELECT * FROM `instagram`";
+					$sql_ig = "SELECT * FROM `instagram` WHERE `igid` = '$row[igid]'";
 					$result_ig = mysqli_query($link,$sql_ig);
 					$row_ig = mysqli_fetch_assoc($result_ig);
 				?>	
@@ -155,7 +155,7 @@
 
 			<!-- 假如回覆限時-->
 			<?php if($row['igid'] != 0){
-				$sql_ig = "SELECT * FROM `instagram`";
+				$sql_ig = "SELECT * FROM `instagram` WHERE `igid` = '$row[igid]'";
 				$result_ig = mysqli_query($link,$sql_ig);
 				$row_ig = mysqli_fetch_assoc($result_ig);
 			?>	

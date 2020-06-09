@@ -160,7 +160,7 @@
         if(isset($friendid)){
             $sql = "SELECT * FROM `follow` WHERE `UId` = '$friendid' and `follow_id` != 'NULL'";
             $result = mysqli_query($link,$sql);
-            $follow = mysqli_num_rows($result);
+            $follow = mysqli_num_rows($result); //追蹤多少人
 
             $sql = "SELECT COUNT(article.AId) as anum ,member.Nickname as nickname
                             ,member.profile as profile , member.Name as name, member.Fans_num as fans_num

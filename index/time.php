@@ -19,9 +19,6 @@
             $sql = "UPDATE `chat` SET `igid` = 0 WHERE `igid` = '$_GET[delete]'";
             mysqli_query($link,$sql);
 
-            // $sql = "DELETE FROM `notification` WHERE `igid` = '$_GET[delete]'";
-
-            
             header("Location:../index/index.php");
             exit;
         }
@@ -32,34 +29,47 @@
     $row = mysqli_fetch_assoc($result);
     $num = mysqli_num_rows($result);
     $head = $row['igid'];//最頭的igid
+
     // 算尾巴的igid
-    while($row = mysqli_fetch_assoc($result)){
-        $tail = $row['igid'];
+    // 如果此時間段只有一則限時動態，則尾巴的igid等於變數head
+    if($num == 1){
+        $tail = $head;
+    }else{ //假如超過一則，則開始計算最末端的限時動態的igid
+        while($row = mysqli_fetch_assoc($result)){
+            $tail = $row['igid'];
+        }
     }
 
     // 算下一個的igid
-    $right = $head;
     $sql = "SELECT * FROM `instagram` WHERE `post_time` BETWEEN \"$yesterday\" AND \"$datetime\"";
     $result = mysqli_query($link,$sql);
 
-    // 如果有下一個的話
-    while($row = mysqli_fetch_assoc($result)){
-        if($row['igid'] == $igid){
-            if( $row = mysqli_fetch_assoc($result)){
-                $right = $row['igid'];
+    // 如果此igid不為最後一則的話
+    if($igid != $tail){
+        while($row = mysqli_fetch_assoc($result)){
+            // 如果row的igid等於當前頁面的igid
+            if($row['igid'] == $igid){
+                // 則將下一則igid存入right變數
+                if( $row = mysqli_fetch_assoc($result)){
+                    $right = $row['igid'];
+                }
             }
         }
+    }else{
+        $right = $head;
     }
     
-
-    
+   
     // 算前一個igid
     $left = $head;
     $sql = "SELECT * FROM `instagram` WHERE `post_time` BETWEEN \"$yesterday\" AND \"$datetime\"";
     $result = mysqli_query($link,$sql);
     $row = mysqli_fetch_assoc($result);
+    //如果此igid並非第一個
     if($row['igid']!=$igid){
+        // 如果此列的igid等於當前頁面的igid，則停止while
         while($row["igid"] != $igid){
+            //將left不斷update
             $left = $row['igid'];
             $row = mysqli_fetch_assoc($result);
         }
@@ -84,7 +94,8 @@
         $other = $_GET['chat'];
         $content = $_SESSION['nickname']."已回復您的限時動態：<br>".$_POST['chat'];
 
-		$sql = "INSERT INTO `chat` (`UId`,`other`,`chat`,`igid`, `sendtime`) VALUES ('$_GET[chat]','$uid','$content', '$_GET[igid]' ,'$datetime')";
+		$sql = "INSERT INTO `chat` (`UId`,`other`,`chat`,`igid`, `sendtime`) VALUES 
+                ('$_GET[chat]','$uid','$content', '$_GET[igid]' ,'$datetime')";
 		if(mysqli_query($link, $sql)){
             $content = $_SESSION["nickname"]."已回復你新增的限時動態";
             $sql = "INSERT INTO `notification` (`UId`, `friendid`, `content`,`type`)
@@ -135,13 +146,16 @@
                 }
             }
 
-           function lest(){
-                done=((new Date()).getSeconds()+65)%60; //換頁秒數
-                count();
-                oh=0;
-                go();
-                i=(i-1+4)%4;
-            }
+        //    function lest(){
+        //         done=((new Date()).getSeconds()+65)%60; //換頁秒數
+        //         count();
+        //         oh=0;
+        //         go();
+        //         i=(i-1+4)%4;
+                
+        //         // document.getElementById('change').src="../index/image/test"+num[i]+".jpg";
+        //         // time=setTimeout(function(){next()},2000);
+        //     }
             function next(){
                 done=((new Date()).getSeconds()+65)%60; //換頁秒數
                 count();
@@ -169,10 +183,10 @@
                 next();
             }
             //左翻
-            function left(){
-                stop();
-                lest();
-            }
+            // function left(){
+            //     stop();
+            //     lest();
+            // }
             //剩餘秒數
             function subtraction(){
                 if(done>second){
@@ -403,8 +417,6 @@
         <script>
             $(".laugh").click(function(){
 				var url = $(this).data("url");
-				
-
 				console.log(url);
 				$.ajax({
 					type: 'POST',
