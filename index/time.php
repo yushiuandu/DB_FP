@@ -165,9 +165,7 @@
                 go();
                 i=(i+1+4)%4;
                 time = setTimeout(function(){next()},1000);
-                location.href="../index/time.php?igid=<?=$right;?>";
-                // document.getElementById('change').src="../index/image/test"+num[i]+".jpg";
-                
+                location.href="../index/time.php?igid=<?=$right;?>";  
             }
             
             function view(){
@@ -246,25 +244,20 @@
                     progressbar.progressbar({
                     value: false,
                     change: function() {
-                        
                     },
                     complete: function() {
-                        
                     }
                     });
                 
                     function progress() {
+                        var val = progressbar.progressbar( "value" ) || oh;
+                        progressbar.progressbar( "value", val + 1 );
                     
-                    var val = progressbar.progressbar( "value" ) || oh;
-                
-                    progressbar.progressbar( "value", val + 1 );
-                
-                        if ( val < 99 ) {
-                            time=setTimeout( progress, 50 );
+                            if ( val < 99 ) {
+                                time=setTimeout( progress, 50 );
+                            }
                         }
-                    }
-                
-                    time3=setTimeout( progress, 0000 );
+                        time3=setTimeout( progress, 0000 );
                 });
             }
         </script>
