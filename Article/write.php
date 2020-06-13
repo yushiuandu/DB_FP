@@ -216,7 +216,7 @@
 	</div>
 	
 	<!-- google map api -->
-	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAY6YGC3VgWJA-ZKtrOHgMe_6PKXTdM6pA&libraries=places"></script>
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=&libraries=places"></script>
 
 	<!-- 抓圖檔的資訊 -->
 	<script>

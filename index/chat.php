@@ -213,13 +213,14 @@
 		<div class="chat-fotter">
 			<form method="post" style="position: relative; left: 15px;">
 				<input id="chat" name="chat" type="text" placeholder='說點什麼吧...'>
-				<button type="submit" data-url="../index/addchat.php?send=<?php echo $other;?>" style="margin-left: 10px;" class="btn btn-secondary btn-sm my-1" id="chat_sub">傳送</button>
+				<button id="chat_sub" type="submit" data-url="../index/addchat.php?send=<?php echo $other;?>" style="margin-left: 10px;" class="btn btn-secondary btn-sm my-1">傳送</button>
 			</form>
 		</div>
 		<!-- 聊天室的尾段(輸入區) -->
 		
 		<script>
 			
+			// 不斷去跑這個function，去跟notify.php判斷是否有訊息未讀
 			$(function(){
 				setInterval(getalarm_chat,100)
 			});
@@ -234,13 +235,16 @@
 					dataType : 'json'
 				}).done(function(data) {
 					console.log(data);
+					// 假設有訊息未讀
 					if(data['success'] == "YES"){
-						var content_chat = data["content"];
+						var content_chat = data["content"];// 對方傳的訊息
 						console.log(content_chat);
 						var chat = "<div style='text-align:left;'>"+'<img src="data:pic/png;base64,<?=base64_encode($row_pic_other["profile"]);?>" class="img-fluid rounded-circle c-pic" >'+
 									'<div class="talk">'+"<pre class='talk-word'>"+content_chat+"</pre>" + "</div></div><p class='time-ww2'>"+data['date']+"</p>";
 						console.log(chat); 
+						// 在div id 為chatting 的地方加入新的聊天紀錄
 						$("#chatting").append(chat);
+						// 呼叫add function確保新訊息顯示時滾動條會在最下方
 						add();
 					}
 				});
@@ -280,19 +284,22 @@
 					dataType :"json"
 				}).done(function(data) {
 					console.log(data);
-					if(data['success'] == "OK"){
-						var chat = data['content'];
+					if(data['success'] == "OK"){ //如果傳遞成功
+						var chat = data['content']; //使用者輸入的訊息
 						var content = "<div style='text-align:right;'><div class='talk2'><pre class='talk-word'>"+chat+"</pre></div>"
 									+'<div class="u"> <p class="time-ww2">'+data['date']+'</p></div>'+
 									'<img src="data:pic/png;base64,<?=base64_encode($row_pic["profile"]);?>" class="img-fluid rounded-circle c-pic" ></div>';
 						console.log(content);
-						$("#chatting").append(content);
+						//在div id 為chatting 的地方加入新的聊天紀錄
+						$("#chatting").append(content); 
+						// 將輸入列的value清空
 						$("#chat").val('');
+						// 呼叫add function確保新訊息顯示時滾動條會在最下方
 						add();
 					}
 				});
 
-				e.preventDefault(); // avoid to execute the actual submit of the form.
+				e.preventDefault(); // 避免重複提交
 			
 			});
 		

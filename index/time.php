@@ -92,11 +92,13 @@
     if(isset($_GET['chat'])){
 
         $other = $_GET['chat'];
+        // 通知發布者的內容
         $content = $_SESSION['nickname']."已回復您的限時動態：<br>".$_POST['chat'];
-
+        // 將回覆內容新增至chat資料表
 		$sql = "INSERT INTO `chat` (`UId`,`other`,`chat`,`igid`, `sendtime`) VALUES 
                 ('$_GET[chat]','$uid','$content', '$_GET[igid]' ,'$datetime')";
 		if(mysqli_query($link, $sql)){
+            // 通知發布者有人回復你限時囉
             $content = $_SESSION["nickname"]."已回復你新增的限時動態";
             $sql = "INSERT INTO `notification` (`UId`, `friendid`, `content`,`type`)
                     VALUES ('$_GET[chat]', '$uid', '$content', 11)";
@@ -384,6 +386,7 @@
                         $sql_friend = "SELECT * FROM `friend` WHERE `UId` = '$uid' AND `otherId` = '$row[UId]'";
                         $result_friend = mysqli_query($link, $sql_friend);
                         $num_friend = mysqli_num_rows($result_friend);
+                        // 假如是朋友且此限時非匿名發布，則可以回復 
                         if($num_friend > 0 and $row['anonymous'] != 0){
                     ?>
                     <div class="row justify-content-start">

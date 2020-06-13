@@ -109,6 +109,7 @@
 					$result = mysqli_query($link,$sql);
 					$num_r = mysqli_num_rows($result);
 					if($num_r == 0){
+						$sql = "INSERT INTO `notification` (`UId`,`content`,`type`) VALUES ('$follow_uid', '$content', 1)";
 						mysqli_query($link,$sql);
 					}
 					

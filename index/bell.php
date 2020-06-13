@@ -80,7 +80,7 @@
             if($num>0){
                 while($row = mysqli_fetch_assoc($result)){
                     if($row['type'] == 1){
-                        $link_url = "../Article/Article.php?page=nickname&uid=".$row['UId']."&NId=".$row['NId'];
+                        $link_url = "../index/index.php?page=nickname";
                         $image = "../index/image/follower.png";
                     }//end type 1 
 
@@ -104,10 +104,10 @@
                         $image = "../index/image/article.png";
                     }//end type 6
                     
-                    if($row['type'] == 8 ){
-                        $link_url = "../index/index.php?page=friend&NId=".$row['NId'];
-                        $image = "../index/image/new-friend.png";
-                    }//end type 8
+                    // if($row['type'] == 8 ){
+                    //     $link_url = "../index/index.php?page=friend&NId=".$row['NId'];
+                    //     $image = "../index/image/new-friend.png";
+                    // }//end type 8
                     if($row['type'] == 9){
                         $image = "../index/image/new-friend.png";
                     }

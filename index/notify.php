@@ -19,16 +19,20 @@
     if(isset($_GET['other'])){
 
         $other = $_GET['other'];
+        // 找尋發送對象為對方、接受對象為自己的未讀訊息
         $sql = "SELECT * FROM `chat` WHERE `UId` = '$other' AND `other` = '$uid' AND `is_read` = 0 ";
         $result = mysqli_query($link,$sql);
         $num = mysqli_num_rows($result);
         $row = mysqli_fetch_assoc($result);
 
+        // 假設查詢結果為0列資料，則返回chat_No
         if($num == 0){
             exit(json_encode(array("success"=>"chat_NO")));
-        }else{
+        }else{ 
+            // 假設查詢結果>0，則將訊息變為已讀
             $sql = "UPDATE `chat` SET `is_read` = 1 WHERE `CId` = '$row[CId]'";
             mysqli_query($link,$sql);
+            // 以json回傳yes結果，並回傳訊息內容和發送時間
             exit(json_encode(array("success"=>"YES","content"=>$row['chat'],"date"=>$row['sendtime'])));
         }
     }else{
